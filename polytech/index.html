@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+    <link rel="stylesheet" href="../css/main.css" type="text/css">
     <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
 
 </head>
@@ -45,22 +46,91 @@
                     <div class="mdl-tabs__panel is-active" id="algo-panel">
                         <!-- content algo panel here -->
                         <div class="mdl-grid">
-                            <div class="mdl-cell mdl-cell--4-col">CS 4 </div>
-                            <div class="mdl-cell mdl-cell--6-col">CS 6 </div>
-                            <div class="mdl-cell mdl-cell--2-col">CS 2</div>
+                            <div class="mdl-cell mdl-cell--2-col"></div>
+                            <div class="mdl-cell mdl-cell--8-col">
+                                <h4>Action ou Fonction</h4>
+                                <h5>Introduction</h5>
+                                <p align="justify">L'algorithmie est la partie de la conception où nous devons réfléchir
+                                    à notre programme avant de le transcrire dans un vrai langage de programmation.
+                                </p>
+                                <p align="justify">Il est évident que pour créer un programme informatique complexe, le
+                                    plus simple est de
+                                    le diviser en plusieurs sous programme simple. C'est ce que nous appelons les
+                                    actions et les fonctions.
+                                </p>
+                                <h5>Action</h5>
+                                <p align="justify">
+                                    Les actions sont une des manières de diviser son programme. Elle est composé d'un
+                                    nom, est d'une suite de paramètres.
+                                </p>
+                                <pre class="highlight">
+                                    <code>
+                                        Action &#60;nom d'action&#62; (paramètres)
+                                            D : &#60;Déclaration&#62; {Signification}
+                                            R : &#60;Déclaration&#62; {Signification}
+                                            D/R : &#60;Déclaration&#62; {Signification}
+                                            VL : &#60;Déclaration&#62; {Signification}
+
+                                            &#60;Corps&#62;
+                                        FinAction
+                                    </code>
+                                </pre>
+                                <p>
+                                    L'ensemble des lettres correspondent à l'utilité des paramètres.
+                                </p>
+                                <ul class="mdl-list">
+                                    <li class="mdl-list__item">
+                                        <span class="mdl-list__item-primary-content">
+                                            Données : Information Utilisées
+                                        </span>
+                                    </li>
+                                    <li class="mdl-list__item">
+                                        <span class="mdl-list__item-primary-content">
+                                            Résultats : Informations produites
+                                        </span>
+                                    </li>
+                                    <li class="mdl-list__item">
+                                        <span class="mdl-list__item-primary-content">
+                                            Données/Résultats : Informations modifiées
+                                        </span>
+                                    </li>
+                                    <li class="mdl-list__item">
+                                        <span class="mdl-list__item-primary-content">
+                                            Variables Locales : Informations temporaires au déroulement de l'algorithme
+                                        </span>
+                                    </li>
+                                </ul>
+                                <h5>Fonctions</h5>
+                                <p align="justify">
+                                    La fonction fonctionne de la même manière qu'une action. Les principales différences sont l'ajout d'un type de retour.
+                                </p>
+                                <b>L'absence de paramètre de type Résultat ou Données/Résultat.</b>
+                                <pre class="highlight">
+                                    <code>
+                                        Fonction &#60;nom d'action&#62; (paramètres) : Type de retour
+                                            D   : &#60;Déclaration&#62; {Signification}
+                                            VL  : &#60;Déclaration&#62; {Signification}
+
+                                            &#60;Corps&#62;
+                                            Retourner &#60;variable du type indiquer&#62;
+                                        FinAction
+                                    </code>
+                                </pre>
+                            </div>
+                            <div class="mdl-cell mdl-cell--2-col"></div>
                         </div>
                     </div>
                     <div class="mdl-tabs__panel" id="bdd-panel">
                         <div class="mdl-grid">
-                            <div class="mdl-cell mdl-cell--4-col">CS 4 </div>
-                            <div class="mdl-cell mdl-cell--6-col">CS 6 </div>
+                            <div class="mdl-cell mdl-cell--2-col">CS 4</div>
+                            <div class="mdl-cell mdl-cell--8-col">CS 6</div>
                             <div class="mdl-cell mdl-cell--2-col">CS 2</div>
                         </div>
                     </div>
                     <div class="mdl-tabs__panel" id="materiel-panel">
                         <div class="mdl-grid">
-                            <div class="mdl-cell mdl-cell--4-col">CS 4 </div>
-                            <div class="mdl-cell mdl-cell--6-col">CS 6 </div>
+                            <div class="mdl-cell mdl-cell--2-col">CS 4</div>
+                            <div class="mdl-cell mdl-cell--8-col">CS 6</div>
                             <div class="mdl-cell mdl-cell--2-col">CS 2</div>
                         </div>
                     </div>
@@ -74,36 +144,36 @@
                     <div class="mdl-tabs__tab-bar">
                         <a href="#structure-panel" class="mdl-tabs__tab is-active">Structure de Données</a>
                         <a href="#lt-panel" class="mdl-tabs__tab">Language et Traducteur</a>
-                        <a href="#system-panel" class="mdl-tabs__tab">Matériel</a>
+                        <a href="#system-panel" class="mdl-tabs__tab">Système</a>
                         <a href="#ti-panel" class="mdl-tabs__tab">Technologies d'Internet</a>
                     </div>
 
                     <div class="mdl-tabs__panel is-active" id="structure-panel">
                         <!-- content algo panel here -->
                         <div class="mdl-grid">
-                            <div class="mdl-cell mdl-cell--4-col">CS 4 </div>
-                            <div class="mdl-cell mdl-cell--6-col">CS 6 </div>
+                            <div class="mdl-cell mdl-cell--2-col">CS 4</div>
+                            <div class="mdl-cell mdl-cell--8-col">CS 6</div>
                             <div class="mdl-cell mdl-cell--2-col">CS 2</div>
                         </div>
                     </div>
                     <div class="mdl-tabs__panel" id="lt-panel">
                         <div class="mdl-grid">
-                            <div class="mdl-cell mdl-cell--4-col">CS 4 </div>
-                            <div class="mdl-cell mdl-cell--6-col">CS 6 </div>
+                            <div class="mdl-cell mdl-cell--2-col">CS 4</div>
+                            <div class="mdl-cell mdl-cell--8-col">CS 6</div>
                             <div class="mdl-cell mdl-cell--2-col">CS 2</div>
                         </div>
                     </div>
                     <div class="mdl-tabs__panel" id="system-panel">
                         <div class="mdl-grid">
-                            <div class="mdl-cell mdl-cell--4-col">CS 4 </div>
-                            <div class="mdl-cell mdl-cell--6-col">CS 6 </div>
+                            <div class="mdl-cell mdl-cell--2-col">CS 4</div>
+                            <div class="mdl-cell mdl-cell--8-col">CS 6</div>
                             <div class="mdl-cell mdl-cell--2-col">CS 2</div>
                         </div>
                     </div>
                     <div class="mdl-tabs__panel" id="ti-panel">
                         <div class="mdl-grid">
-                            <div class="mdl-cell mdl-cell--4-col">CS 4 </div>
-                            <div class="mdl-cell mdl-cell--6-col">CS 6 </div>
+                            <div class="mdl-cell mdl-cell--2-col">CS 4</div>
+                            <div class="mdl-cell mdl-cell--8-col">CS 6</div>
                             <div class="mdl-cell mdl-cell--2-col">CS 2</div>
                         </div>
                     </div>
