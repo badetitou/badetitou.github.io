@@ -15,18 +15,26 @@
             <!-- Title -->
             <span class="mdl-layout-title">Benoît "badetitou" Verhaeghe</span>
         </div>
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+            <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Semestre 5</a>
+            <a href="#fixed-tab-2" class="mdl-layout__tab">Semestre 6</a>
+        </div>
     </header>
     <div class="mdl-layout__drawer">
         <span class="mdl-layout-title">Navigation</span>
         <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="project/">Projets</a>
-            <a class="mdl-navigation__link" href="polytech/">Polytech</a>
+            <a class="mdl-navigation__link" href="..">Home</a>
+            <a class="mdl-navigation__link" href="../project/">Projets</a>
         </nav>
     </div>
+
     <main class="mdl-layout__content">
-        <div class="page-content"><!-- Your content goes here -->
-            Under Construction
-        </div>
+        <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
+            <div class="page-content">Tab 1</div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="fixed-tab-2">
+            <div class="page-content">Tab 2</div>
+        </section>
     </main>
     <footer class="mdl-mini-footer">
         <div class="mdl-mini-footer__right-section">
