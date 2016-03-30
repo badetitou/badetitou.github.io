@@ -304,16 +304,83 @@
                                 </pre>
                         <h4>Structures</h4>
                         <p align="justify">Les structures permettent aux concepteurs de créer leurs propres type, les rendant ainsi plus libre dans la conception et leurs facilitant le travail pour des sujets complexe.</p>
-                                <pre class="highlight">
-                                    <code>
+                        <pre class="highlight">
+                            <code>
     type &#60;ST&#62; = structure
     &#60;Nom Variable&#62; : &#60;Type&#62;
     &#60;Nom Variable&#62; : &#60;Type&#62;
     &#60;Nom Variable&#62; : &#60;Type&#62;
     Fin
-                                    </code>
-                                </pre>
+                            </code>
+                        </pre>
 
+                        <!-- chapter 3 -->
+                        <h3>Structure de contrôle</h3>
+                        <h4>Introduction</h4>
+                        <p align="justify">Il faut toujours avoir à l'esprit que le programmeur est un fainéant.
+                            Il a donc naturellement construit des outils pour lui facilité le travail. Certains de ces outils sont sans aucun doutes les structures de contrôle. Elle permette d'utiliser un même programme dans plusieurs cas différent et de simuler l'écriture d'un nombre non calculable de ligne en seulement trois ou quatre.</p>
+                        <h4>Alternative</h4>
+                        <p align="justify">Les alternative permette de tester si une condition est vrai, et dans ce cas, exécuter ou non un certain nombre de commande. En Algorithmie nous appelons ça le SI..Fin SI
+                        </p>
+                        <p align="justify">Une Condition est en réalité une expression [booléenne](les_types.md).</p>
+                        <h5>Exemples</h5>
+                        <i>Le code suivant affiche "bleu"</i>
+                        <pre class="highlight">
+                            <code>
+    A&#60;-1
+    B&#60;-2
+    SI (A&#60;B) FAIRE
+       Afficher "bleu"
+    FinSi
+                            </code>
+                        </pre>
+                        <i>Maintenant avec un booléen</i>
+                        <pre class="highlight">
+                            <code>
+    A&#60;-1
+    B&#60;-2
+    C&#60;- FAUX
+    SI (A&#60;B ET C) FAIRE
+               Afficher "bleu"
+    FinSi
+                            </code>
+                        </pre>
+                        <p align="justify">Ici le code n'affiche rien car d'après l'algèbre de Boole : <i>VRAI ET FAUX -&#62;FAUX</i></p>
+                        <h4>Boucles</h4>
+                        <p align="justify">Les boucles sont les structures permettant de répéter plusieurs fois le même code. Elles sont divisé en deux grands groupe. Celle qui "boucle" un nombre de fois définit. Et celle qui continue tant qu'une condition est rempli.</p>
+                        <h5>Tant Que</h5>
+                        <p align="justify">La boucle tant que est celle du deuxième type. Elle entoure du code qui sera effectuer tant que une condition est rempli.</p>
+                        <pre class="highlight">
+                            <code>
+    TantQue A&#60;B Faire
+            &#60;code&#62;
+    FinTantQue
+                            </code>
+                        </pre>
+
+                        <p align="jusity">Attention. Vous devez vous assurer que la condition <i>A&#60;B</i> passe à FAUX un moment. Sinon vous créer une boucle infini.</p>
+                        <pre class="highlight">
+                            <code>
+    I<-12
+    TantQue A&#60;B ET I &#60;56Faire
+    &#60;code &#62;
+       I<-I+1
+    FinTantQue
+                            </code>
+                        </pre>
+                        <h5>Pour</h5>
+                        <p align="justify">La boucle Pour ne doit être utilisé que lorsque vous connaissez exactement le nombre de fois que vous souhaitez répéter le code</p>
+                        <pre class="highlight">
+                            <code>
+    B&#60;-1
+    A&#60;-12
+    Pour I de B à A Faire
+       Afficher "Je repete du code"
+       Afficher I
+       Afficher fois
+    FinPour
+                            </code>
+                        </pre>
                     </div>
                     <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-phone"></div>
                 </div>
