@@ -384,7 +384,45 @@
     FinPour
                             </code>
                         </pre>
+                        <!-- Chapter 4 -->
+                        <h3>Le C</h3>
+                        <p align="justify">Nous supposerons que vous avez déjà lu la partie sur l'Algorithmie. Tout ne sera donc pas décrit ici.</p>
+                        <h4>La base</h4>
+                        <p align="justify">En C tout est fonction.
+                            Cela signifie que les Actions n'existent pas. Une action sera donc représenter par une Fonction sans type de retour <i>void</i></p>
+                        <h4>Les fonctions</h4>
+                        <p align="justify">Une fonction est composé de deux grandes parties.
+                        </p>
+                        <p align="justify">Tout d'abord le prototype. Il est composé du type de retour, du nom de la fonction et enfin des paramètres.</p>
+                        <p align="justify">Puis le corps de la fonction composé de l'ensemble des instruction à exécuter. Le corps est entouré par deux accolade <i>{ &#60;corps&#62; }</i></p>
+                        <p align="justify">La fonction principal appelé au début de l'exécution du programme est le main. Elle accepte deux paramètre qui correspondent au arguments que nous donnerons à notre programme depuis notre shell.</p>
+                        <h5>Main</h5>
+                        <pre class="highlight">
+                            <code>
+    int main(int argc, char* argv[]){ &#60;corps&#62; }
+                            </code>
+                        </pre>
+                        <h5>Exemple fonction</h5>
+                        <pre class="highlight">
+                            <code>
+    int multiplication (int a, int b){ // Prototype
+        return (a*b);                  // Corps de la fonction
+    }
+                            </code>
+                        </pre>
+                        <p align="justify">Nous voyons que les fonctions ce termine par la 'commande' <i>return</i> suivit d'une variable correspondant au type de retour.</p>
+                        <h5>Exemple fonction/action</h5>
+                        <p align="justify">Comme expliqué ci-dessus. En C les actions sont représenté par une fonction sans type de retour</p>
+                        <pre class="highlight">
+                            <code>
+    void hello_world(){
+        printf("Hello World !");
+    }
+                            </code>
+                        </pre>
                     </div>
+                    <h4>Instructions</h4>
+                    <p align="justify">Une instruction est une commande à exécuter en C suivit de ses paramètres entre parenthèses et fini par un ';'.</p>
                     <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
                 </div>
             </div>
