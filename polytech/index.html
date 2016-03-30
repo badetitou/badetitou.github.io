@@ -6,378 +6,41 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
-    <link rel="stylesheet" href="../css/main.css" type="text/css">
+    <link rel="stylesheet" href="css/main.css" type="text/css">
     <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
-
 </head>
 <body>
 <!-- Always shows a header, even in smaller screens. -->
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header ">
-    <header class="mdl-layout__header ">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
             <!-- Title -->
             <span class="mdl-layout-title">Benoît "badetitou" Verhaeghe</span>
+
+            <div class="mdl-layout-spacer"></div>
+
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="semester_5/">Semestre 5</a>
+                <a class="mdl-navigation__link" href="semester_6/">Semestre 6</a>
+            </nav>
         </div>
-        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-            <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Semestre 5</a>
-            <a href="#fixed-tab-2" class="mdl-layout__tab">Semestre 6</a>
-        </div>
+
     </header>
     <div class="mdl-layout__drawer">
         <span class="mdl-layout-title">Navigation</span>
         <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="..">Home</a>
-            <a class="mdl-navigation__link" href="../project/">Projets</a>
+            <a class="mdl-navigation__link" href="#">Home</a>
+            <a class="mdl-navigation__link" href="project/">Projets</a>
             <a class="mdl-navigation__link" href="#">Polytech</a>
         </nav>
+
     </div>
-
-    <main class="mdl-layout__content"  style="flex: 1 0 auto;>
-        <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
-            <div class="page-content">
-                <!-- Semestre 5 -->
-                <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
-                    <div class="mdl-tabs__tab-bar">
-                        <a href="#algo-panel" class="mdl-tabs__tab is-active">Algo</a>
-                        <a href="#bdd-panel" class="mdl-tabs__tab">Base de Données</a>
-                        <a href="#materiel-panel" class="mdl-tabs__tab">Matériel</a>
-                    </div>
-
-                    <div class="mdl-tabs__panel is-active" id="algo-panel">
-                        <!-- content algo panel here -->
-                        <div class="mdl-grid">
-                            <div class="mdl-cell mdl-cell--2-col"></div>
-                            <div class="mdl-cell mdl-cell--8-col">
-                                <!-- Chapter 1 -->
-                                <h3>Action ou Fonction</h3>
-                                <h4>Introduction</h4>
-                                <p align="justify">L'algorithmie est la partie de la conception où nous devons réfléchir
-                                    à notre programme avant de le transcrire dans un vrai langage de programmation.
-                                </p>
-                                <p align="justify">Il est évident que pour créer un programme informatique complexe, le
-                                    plus simple est de
-                                    le diviser en plusieurs sous programme simple. C'est ce que nous appelons les
-                                    actions et les fonctions.
-                                </p>
-                                <h5>Action</h5>
-                                <p align="justify">
-                                    Les actions sont une des manières de diviser son programme. Elle est composé d'un
-                                    nom, est d'une suite de paramètres.
-                                </p>
-                                <pre class="highlight">
-                                    <code>
-                                        Action &#60;nom d'action&#62; (paramètres)
-                                            D : &#60;Déclaration&#62; {Signification}
-                                            R : &#60;Déclaration&#62; {Signification}
-                                            D/R : &#60;Déclaration&#62; {Signification}
-                                            VL : &#60;Déclaration&#62; {Signification}
-
-                                            &#60;Corps&#62;
-                                        FinAction
-                                    </code>
-                                </pre>
-                                <p>
-                                    L'ensemble des lettres correspondent à l'utilité des paramètres.
-                                </p>
-                                <ul class="mdl-list">
-                                    <li class="mdl-list__item">
-                                        <span class="mdl-list__item-primary-content">
-                                            Données : Information Utilisées
-                                        </span>
-                                    </li>
-                                    <li class="mdl-list__item">
-                                        <span class="mdl-list__item-primary-content">
-                                            Résultats : Informations produites
-                                        </span>
-                                    </li>
-                                    <li class="mdl-list__item">
-                                        <span class="mdl-list__item-primary-content">
-                                            Données/Résultats : Informations modifiées
-                                        </span>
-                                    </li>
-                                    <li class="mdl-list__item">
-                                        <span class="mdl-list__item-primary-content">
-                                            Variables Locales : Informations temporaires au déroulement de l'algorithme
-                                        </span>
-                                    </li>
-                                </ul>
-                                <h4>Fonctions</h4>
-                                <p align="justify">
-                                    La fonction fonctionne de la même manière qu'une action. Les principales différences sont l'ajout d'un type de retour.
-                                </p>
-                                <b>L'absence de paramètre de type Résultat ou Données/Résultat.</b>
-                                <pre class="highlight">
-                                    <code>
-                                        Fonction &#60;nom d'action&#62; (paramètres) : Type de retour
-                                            D   : &#60;Déclaration&#62; {Signification}
-                                            VL  : &#60;Déclaration&#62; {Signification}
-
-                                            &#60;Corps&#62;
-                                            Retourner &#60;variable du type indiquer&#62;
-                                        FinAction
-                                    </code>
-                                </pre>
-                                <!-- Chapter 2 -->
-                                <h3>Les Types</h3>
-                                <h4>Listes des types</h4>
-                                <p align="justify">
-                                    Voici une liste non exhaustive des types existant en algorithmie
-                                </p>
-                                <ul class="mdl-list">
-                                <li class="mdl-list__item">
-                                        <span class="mdl-list__item-primary-content">
-                                            Entier
-                                        </span>
-                                </li>
-                                <li class="mdl-list__item">
-                                        <span class="mdl-list__item-primary-content">
-                                            Réel
-                                        </span>
-                                </li>
-                                <li class="mdl-list__item">
-                                        <span class="mdl-list__item-primary-content">
-                                            Caractère
-                                        </span>
-                                </li>
-                                <li class="mdl-list__item">
-                                        <span class="mdl-list__item-primary-content">
-                                            Chaîne de Caractère
-                                        </span>
-                                </li>
-                                <li class="mdl-list__item">
-                                        <span class="mdl-list__item-primary-content">
-                                            Booléen (Vrai ou Faux)
-                                        </span>
-                                </li>
-                                <li class="mdl-list__item">
-                                        <span class="mdl-list__item-primary-content">
-                                            Vecteur de "Type" de taille "Entier"
-                                        </span>
-                                </li>
-                                <li class="mdl-list__item">
-                                        <span class="mdl-list__item-primary-content">
-                                            Matrice de "Type" de dimensions "Entier","Entier"
-                                        </span>
-                                </li>
-                                <li class="mdl-list__item">
-                                        <span class="mdl-list__item-primary-content">
-                                            Structures
-                                        </span>
-                                </li>
-                                </ul>
-                                <h4>Opération de base</h4>
-                                <h5>Entier, Réel, Caractère, Chaîne de caractère</h5>
-                                <p align="justify">
-                                    Ce sont ici les type de base avec lesquels nous allons le plus travailler.
-                                </p>
-                                <p>
-                                    Comme le nom l'indique les variable de type entier permette de stocker un entier dans la mémoire. De même que un réel permet de stocker un réel est une chaîne de caractère un caractère.
-                                </p>
-                                <h6>Affectation</h6>
-                                <p align="justify">Prenons A et B deux variable de type Entier. Et C de type Réel.</p>
-                                <p align="justify">Pour enregistrer une valeur dans une variable nous utiliserons la notation suivante : A<-9. Je stocke la valeur '9' dans la variable 'A'</p>
-                                <p align="justify">Nous pouvons maintenant affecter cette valeur à une autre variable : B<-A</p>
-                                <p align="justify"><i>Et si nous faisions C<-B ?</i> Alors C était une variable pour les réel. Elle convertirai 9 en un nombre de type réel.</p>
-                                <p align="justify"><i>Que ce passe-t-il si je stocke un Réel dans un Entier ?</i></p>
-                                <p align="justify">Le réel sera tronqué, ça veut dire qu'on enlève tout ce qui a après la virgule.</p>
-                                 <pre class="highlight">
-                                    <code>
-                                        C<-9.7
-                                        B<-C
-                                        Afficher B {Affiche '9'}
-                                    </code>
-                                </pre>
-                                <p>Le fonctionnement est le même pour les Chaînes de Caractères</p>
-                                <h6>Addition | Soustraction | Multiplication | Division | Modulo</h6>
-                                <p align="justify">Les variables comportant des nombres (Entier, Réel, Caractère (cf : <a href="http://www.asciitable.com/">Table ASCII</a>)) supporte l'ensemble des opération ci-dessus. Le modulo étant le reste de la division entière.</p>
-                                <b>ATTENTION : Réel/Entier->Réel ET Entier/Réel->Réel</b>
-                                <pre class="highlight">
-                                    <code>
-                                        Opérateur :
-                                        + : Addition
-                                        - : Soustraction
-                                        / : Division
-                                        * : Multiplication
-                                        % : Modulo
-
-                                        Format : A(opérateur)B
-                                    </code>
-                                </pre>
-                                <h5>Booléen</h5>
-                                <p align="justify">Les booléen (ou boolean dans la langue de shakespeare) sont des variables pouvant contenir soit VRAI soit FAUX. Il est possible de les combiner via les opération suivante :</p>
-                                <pre class="highlight">
-                                    <code>
-                                        1. ET : VRAI ET FAUX -> FAUX
-                                        2. OU : VRAI OU FAUX -> VRAI
-                                    </code>
-                                </pre>
-                                <p align="justify">Bref elles respectent <a href="https://fr.wikipedia.org/wiki/Algèbre_de_Boole_(logique)">l'Algèbre de Boole (logique)</a></p>
-                                <h6>Exemple d'affectation</h6>
-                                <p align="justify">Une affectation simple.</p>
-                                <pre class="highlight">
-                                    <code>
-                                        A<-VRAI
-                                    </code>
-                                </pre>
-                                <p align="justify">Une affectation par évaluation.</p>
-                                <pre class="highlight">
-                                    <code>
-                                        B<-5
-                                        A<- B<2
-                                        Afficher A {Affiche FAUX}
-                                        A<- B=5
-                                        Afficher A {Affiche VRAI}
-                                    </code>
-                                </pre>
-                                <h5>Vecteur et matrice</h5>
-                                <p align="justify">Les vecteurs (ou tableau) ainsi que les matrices (tableau à plusieurs dimension) sont la manière la plus simple de stocker un grand ensemble d'information.
-                                    En algorithmie la première case du table est la case 1. La dernière est la case n (=correspondant à sa dimension).</p>
-                                <p align="justify"><i>Parcours de Tableau</i></p>
-                                <pre class="highlight" >
-                                    <code>
-                                        Action affiche_element (v, n) : { Affiche les element 1 à 1 de mon vecteur}
-                                          D : v Vecteur d'entier de taille n
-                                          D : n Entier
-                                          VL: i Entier
-
-                                          Pour i de 1 à n Faire
-                                              Afficher v[i]
-                                          FinPour
-
-                                        FinAction
-                                    </code>
-                                </pre>
-                                <p align="justify"><i>Remplissage de Tableau</i></p>
-                                <pre class="highlight" >
-                                    <code>
-                                        Action affiche_element (v, n) : { Affiche les element 1 à 1 de mon vecteur}
-                                          R : v Vecteur d'entier de taille n
-                                          D : n Entier
-                                          VL: i Entier
-
-                                          Pour i de 1 à n Faire
-                                              Lire v[i]
-                                          FinPour
-
-                                        FinAction
-                                    </code>
-                                </pre>
-                                <p align="justify"><i>Parcours de Matrice</i></p>
-                                <pre class="highlight" >
-                                    <code>
-                                        Action affiche_element (n,m, Mat) : { Affiche les element 1 à 1 de mon vecteur}
-                                          D : Mat Matrice d'entier de dimension n,m
-                                          D : n Entier
-                                          D : m Entier
-                                          VL: i Entier
-                                          VL: j Entier
-
-                                          Pour i de 1 à n Faire
-                                              Pour j de 1 à m Faire
-                                                 Afficher v[i][j]
-                                              FinPour
-                                          FinPour
-
-                                        FinAction
-                                    </code>
-                                </pre>
-                                <p align="justify"><i>Remplissage de Matrice</i></p>
-                                <pre class="highlight" >
-                                    <code>
-                                        Action affiche_element (Mat, n,m) : { Affiche les element 1 à 1 de mon vecteur}
-                                          D : Mat Matrice d'entier de dimension n,m
-                                          D : n Entier
-                                          D : m Entier
-                                          VL: i Entier
-                                          VL: j Entier
-
-                                          Pour i de 1 à n Faire
-                                              Pour j de 1 à m Faire
-                                                  Lire Mat[i][j]
-                                              FinPour
-                                          FinPour
-
-                                        FinAction
-                                    </code>
-                                </pre>
-                                <h4>Structures</h4>
-                                <p align="justify">Les structures permettent aux concepteurs de créer leurs propres type, les rendant ainsi plus libre dans la conception et leurs facilitant le travail pour des sujets complexe.</p>
-                                <pre class="highlight">
-                                    <code>
-                                        type &#60;ST&#62; = structure
-                                              &#60;Nom Variable&#62; : &#60;Type&#62;
-                                              &#60;Nom Variable&#62; : &#60;Type&#62;
-                                              &#60;Nom Variable&#62; : &#60;Type&#62;
-                                            Fin
-                                    </code>
-                                </pre>
-
-                            </div>
-                            <div class="mdl-cell mdl-cell--2-col"></div>
-                        </div>
-                    </div>
-                    <div class="mdl-tabs__panel" id="bdd-panel">
-                        <div class="mdl-grid">
-                            <div class="mdl-cell mdl-cell--2-col">CS 4</div>
-                            <div class="mdl-cell mdl-cell--8-col">CS 6</div>
-                            <div class="mdl-cell mdl-cell--2-col">CS 2</div>
-                        </div>
-                    </div>
-                    <div class="mdl-tabs__panel" id="materiel-panel">
-                        <div class="mdl-grid">
-                            <div class="mdl-cell mdl-cell--2-col">CS 4</div>
-                            <div class="mdl-cell mdl-cell--8-col">CS 6</div>
-                            <div class="mdl-cell mdl-cell--2-col">CS 2</div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Fin Semestre 5 -->
-            </div>
-        </section>
-        <section class="mdl-layout__tab-panel" id="fixed-tab-2">
-            <div class="page-content">
-                <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
-                    <div class="mdl-tabs__tab-bar">
-                        <a href="#structure-panel" class="mdl-tabs__tab is-active">Structure de Données</a>
-                        <a href="#lt-panel" class="mdl-tabs__tab">Language et Traducteur</a>
-                        <a href="#system-panel" class="mdl-tabs__tab">Système</a>
-                        <a href="#ti-panel" class="mdl-tabs__tab">Technologies d'Internet</a>
-                    </div>
-
-                    <div class="mdl-tabs__panel is-active" id="structure-panel">
-                        <!-- content algo panel here -->
-                        <div class="mdl-grid">
-                            <div class="mdl-cell mdl-cell--2-col">CS 4</div>
-                            <div class="mdl-cell mdl-cell--8-col">CS 6</div>
-                            <div class="mdl-cell mdl-cell--2-col">CS 2</div>
-                        </div>
-                    </div>
-                    <div class="mdl-tabs__panel" id="lt-panel">
-                        <div class="mdl-grid">
-                            <div class="mdl-cell mdl-cell--2-col">CS 4</div>
-                            <div class="mdl-cell mdl-cell--8-col">CS 6</div>
-                            <div class="mdl-cell mdl-cell--2-col">CS 2</div>
-                        </div>
-                    </div>
-                    <div class="mdl-tabs__panel" id="system-panel">
-                        <div class="mdl-grid">
-                            <div class="mdl-cell mdl-cell--2-col">CS 4</div>
-                            <div class="mdl-cell mdl-cell--8-col">CS 6</div>
-                            <div class="mdl-cell mdl-cell--2-col">CS 2</div>
-                        </div>
-                    </div>
-                    <div class="mdl-tabs__panel" id="ti-panel">
-                        <div class="mdl-grid">
-                            <div class="mdl-cell mdl-cell--2-col">CS 4</div>
-                            <div class="mdl-cell mdl-cell--8-col">CS 6</div>
-                            <div class="mdl-cell mdl-cell--2-col">CS 2</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <main class="mdl-layout__content">
+        <div class="page-content"><!-- Your content goes here -->
+            Under Construction
+        </div>
     </main>
-    <footer class="mdl-mini-footer" >
+    <footer class="mdl-mini-footer">
         <div class="mdl-mini-footer__right-section">
             <div class="mdl-logo"> &copy; Badetitou</div>
             <ul class="mdl-mini-footer__link-list">
