@@ -1,3 +1,4 @@
+<!-- NAVIGATION HEADER START -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -8,26 +9,48 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
-    <link rel="stylesheet" href="../css/main.css" type="text/css">
+    <link rel="stylesheet" href="css/main.css" type="text/css">
     <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
 </head>
 <body>
-<!-- Always shows a header, even in smaller screens. -->
+
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
     <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
             <!-- Title -->
             <span class="mdl-layout-title">Texto</span>
+
+            <div class="mdl-layout-spacer"></div>
+
+            <nav class="mdl-navigation mdl-layout--large-screen-only">
+                <a id="menu-cour" class="mdl-navigation__link " href="#">Cour</a>
+                <a id="menu-project" class="mdl-navigation__link " href="#">Projets</a>
+
+                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect "
+                    for="menu-cour">
+                    <li class="mdl-menu__item" onclick="location.href='../../polytech/semester_5/'">Semestre 5</li>
+                    <li class="mdl-menu__item" onclick="location.href='../../polytech/semester_6/'">Semestre 6</li>
+                </ul>
+
+                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect "
+                    for="menu-project">
+                    <li class="mdl-menu__item" onclick="location.href='#'">Texto</li>
+                </ul>
+
+            </nav>
         </div>
+
     </header>
-    <div class="mdl-layout__drawer">
+    <div class=" mdl-layout--small-screen-only mdl-layout__drawer">
         <span class="mdl-layout-title">Navigation</span>
-        <nav class="mdl-navigation nav ">
-            <a class="mdl-navigation__link" href="..">Home</a>
-            <a class="mdl-navigation__link" href="#">Projets</a>
-            <a class="mdl-navigation__link" href="../polytech/">Polytech</a>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link mdl-menu__item--full-bleed-divider" href="#">Texto</a>
+            <a class="mdl-navigation__link" href="../../polytech/semester_5/">Semestre 5</a>
+            <a class="mdl-navigation__link" href="../../polytech/semester_6/">Semestre 6</a>
         </nav>
     </div>
+
+    <!-- NAVIGATION HEADER END -->
     <main class="mdl-layout__content">
         <div class="page-content"><!-- Your content goes here -->
             Under Construction
