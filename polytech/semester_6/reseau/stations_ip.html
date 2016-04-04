@@ -3,6 +3,12 @@
 <head>
     <title>Stations IP4</title>
     <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+    <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+
     <link href="reseau.css" rel="stylesheet" type="text/css">
     <link href="jquery-ui-1.11.4/jquery-ui.css" rel="stylesheet" type="text/css">
 
@@ -13,6 +19,7 @@
 </head>
 <body onLoad="init(); main();">
 <script>
+
     function init() {
         $("#formip4").load("formip4.html");
         $("#formether").load("formether.html");
@@ -20,10 +27,67 @@
         connexions = [
             {'objet1': $('#station1_interface1'), 'objet2': $('#station2_interface1')},
         ];
-    }
+    };
 </script>
 
-<button onclick="addElement('station','station3')">Boutton</button>
+<dialog class="mdl-dialog">
+    <div class="mdl-dialog__title">
+        Ajout Station
+    </div>
+    <div class="mdl-dialog__content">
+        <p>
+            Entrez l'ensemble des informations d'une station.
+        </p>
+    </div>
+    <div class="mdl-dialog__actions mdl-dialog__actions--full-width">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="ask_station_id">
+            <label class="mdl-textfield__label" for="ask_station_id">Id de la station</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="ask_station_name">
+            <label class="mdl-textfield__label" for="ask_station_name">Nom de la station</label>
+        </div>
+
+        <!-- Les adresses -->
+
+
+
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="ask_station_portIp6">
+            <label class="mdl-textfield__label" for="ask_station_portIp6">Adresse port Ip6</label>
+        </div>
+
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="ask_station_portIp4">
+            <label class="mdl-textfield__label" for="ask_station_portIp4">Adresse port Ip4</label>
+        </div>
+
+
+        <button type="button" class="mdl-button valider">Valider</button>
+        <button type="button" class="mdl-button abandon">Abandon</button>
+    </div>
+</dialog>
+
+<button type="button" class="mdl-button show-modal">Ajouter une station</button>
+
+<script>
+    var dialog = document.querySelector('dialog');
+    var showModalButton = document.querySelector('.show-modal');
+    if (! dialog.showModal) {
+        dialogPolyfill.registerDialog(dialog);
+    }
+    showModalButton.addEventListener('click', function() {
+        dialog.showModal();
+    });
+    dialog.querySelector('.abandon').addEventListener('click', function() {
+        dialog.close();
+    });
+    dialog.querySelector('valider').addEventListener('click', function () {
+        dialog.close();
+        addStation();
+    })
+</script>
 
 <div class="station" id="station1" style="bottom: 250px; left: 230px;">
     <div class="nom">Station 1</div>

@@ -2,18 +2,6 @@
  * Created by badetitou on 04/04/16.
  */
 
-
-function addElement(m_class, m_id){
-    var object = "";
-    if (m_class.localeCompare("station") == 0){
-        object = addStation(m_id, "station 3")
-    }
-    $("body").append(object);
-    elements.push($('#' + m_id));
-    connexions.push({'objet1': $('#station3_interface1'), 'objet2': $('#station2_interface1')});
-    main();
-}
-
 function addStation(m_id, m_name, m_routeAdresse, m_routeMasque, m_routePasserelle, m_ethport, m_ip4port) {
     var object = '';
     object += "<div class=\"station  ui-draggable ui-draggable-handle\" id=\"" + m_id + "\" style=\"bottom: 250px; left: 230px;\">";
@@ -37,5 +25,8 @@ function addStation(m_id, m_name, m_routeAdresse, m_routeMasque, m_routePasserel
             object += "</div>";
         object += "</div>";    
     object += "</div>";
-    return object;
+    $("body").append(object);
+    elements.push($('#' + m_id));
+    connexions.push({'objet1': $('#station3_interface1'), 'objet2': $('#station2_interface1')});
+    main();
 }
