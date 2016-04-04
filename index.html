@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-desktop-drawer-button">
     <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
             <!-- Title -->
@@ -22,20 +22,15 @@
             <div class="mdl-layout-spacer"></div>
 
             <nav class="mdl-navigation mdl-layout--large-screen-only">
-                <a id="menu-cour" class="mdl-navigation__link " href="#">Cour</a>
-                <a id="menu-project" class="mdl-navigation__link " href="#">Projets</a>
+                <a id="menu-lower-right"
+                   class="mdl-navigation__link " href="#">Cour</a>
 
                 <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect "
-                    for="menu-cour">
+                    for="menu-lower-right">
                     <li class="mdl-menu__item" onclick="location.href='polytech/semester_5/'">Semestre 5</li>
                     <li class="mdl-menu__item" onclick="location.href='polytech/semester_6/'">Semestre 6</li>
-                </ul>
 
-                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect "
-                    for="menu-project">
-                    <li class="mdl-menu__item" onclick="location.href='project/texto/'">Texto</li>
                 </ul>
-
             </nav>
         </div>
 
@@ -44,7 +39,7 @@
     <div class=" mdl-layout--small-screen-only mdl-layout__drawer">
         <span class="mdl-layout-title">Navigation</span>
         <nav class="mdl-navigation">
-            <a class="mdl-navigation__link mdl-menu__item--full-bleed-divider" href="project/texto/">Texto</a>
+            <a class="mdl-navigation__link mdl-menu__item--full-bleed-divider" href="../project/texto/">Texto</a>
             <a class="mdl-navigation__link" href="polytech/semester_5/">Semestre 5</a>
             <a class="mdl-navigation__link" href="polytech/semester_6/">Semestre 6</a>
         </nav>
