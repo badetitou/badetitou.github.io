@@ -43,6 +43,21 @@
 
         <!-- Les adresses -->
 
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="ask_station_route_address_1">
+            <label class="mdl-textfield__label" for="ask_station_portIp6">Route Adresse </label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="ask_station_route_masque_1">
+            <label class="mdl-textfield__label" for="ask_station_portIp6">Route Masque</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="ask_station_route_passerelle_1">
+            <label class="mdl-textfield__label" for="ask_station_portIp6">Route Passerelle</label>
+        </div>
+
+
+
 
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input class="mdl-textfield__input" type="text" id="ask_station_portIp6">
@@ -76,7 +91,13 @@
     });
     dialog.querySelector('.valider').addEventListener('click', function () {
         dialog.close();
-        addStation(undefined, undefined, undefined, $("#ask_station_portIp4").val(), $("#ask_station_po").val())
+        var tabRouteAdresse = [];
+        var tabRouteMasque = [];
+        var tabRoutePasserelle = [];
+        tabRouteAdresse.push($("#ask_station_route_address_1").val());
+        tabRouteMasque.push($("#ask_station_route_masque_1").val());
+        tabRoutePasserelle.push($("#ask_station_route_passerelle_1").val());
+        addStation(tabRouteAdresse, tabRouteMasque, tabRoutePasserelle, $("#ask_station_portIp4").val(), $("#ask_station_po").val())
     })
 </script>
 

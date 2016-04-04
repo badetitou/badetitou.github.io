@@ -13,11 +13,14 @@ function addStation(m_routeAdresse, m_routeMasque, m_routePasserelle, m_ethport,
         object += "<div class=\"nom\">" + m_name + "</div>";
         object += "<div class=\"cadre_titre\" onClick=\"table_toggle($('#" + m_id + "_table'));\">Table de routage</div>";
         object += "<div class=\"tableroutage\" id=\"" + m_id + "_table\">";
+        for (var i = 0;i<m_routeAdresse.length;++i)
+        {
             object += "<div class=\"route\">";
-                object += "<div class=\"route_adresse\">" + m_routeAdresse + "</div>";
-                object += "<div class=\"route_masque\">" + m_routeMasque + "</div>";
-                object += "<div class=\"route_passerelle\">"+ m_routePasserelle + "</div>";
+                object += "<div class=\"route_adresse\">" + m_routeAdresse[i] + "</div>";
+                object += "<div class=\"route_masque\">" + m_routeMasque[i] + "</div>";
+                object += "<div class=\"route_passerelle\">" + m_routePasserelle[i] + "</div>";
             object += "</div>";
+        }
         object += "</div>";
         object += "<div class=\"cadre_titre\" onClick=\"table_toggle($('#" + m_id + "_arp'));\">Cache ARP</div>";
         object += "<div class=\"cachearp\" id=\"" + m_id + "_arp\"></div>";
