@@ -40,17 +40,8 @@
         </p>
     </div>
     <div class="mdl-dialog__actions mdl-dialog__actions--full-width">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="ask_station_id">
-            <label class="mdl-textfield__label" for="ask_station_id">Id de la station</label>
-        </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="ask_station_name">
-            <label class="mdl-textfield__label" for="ask_station_name">Nom de la station</label>
-        </div>
 
         <!-- Les adresses -->
-
 
 
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -83,9 +74,9 @@
     dialog.querySelector('.abandon').addEventListener('click', function() {
         dialog.close();
     });
-    dialog.querySelector('valider').addEventListener('click', function () {
+    dialog.querySelector('.valider').addEventListener('click', function () {
         dialog.close();
-        addStation();
+        addStation(undefined, undefined, undefined, $("#ask_station_portIp4").val(), $("#ask_station_po").val())
     })
 </script>
 

@@ -779,6 +779,7 @@ redraw=function(event, ui) {
   };
 for(i=0; i<elements.length; i++){
   elements[i].draggable({drag: redraw, stop: redraw, cancel: ".fantome"});
+  
   var classes=elements[i].attr('class').split(/ +/);
   if(classes.indexOf('commutateur')>=0){ switch_cron(elements[i]); }
   if(classes.indexOf('routeur')>=0 || classes.indexOf('station')>=0){ router_cron(elements[i]); }

@@ -2,8 +2,13 @@
  * Created by badetitou on 04/04/16.
  */
 
-function addStation(m_id, m_name, m_routeAdresse, m_routeMasque, m_routePasserelle, m_ethport, m_ip4port) {
+var nbStation=2;
+
+function addStation(m_routeAdresse, m_routeMasque, m_routePasserelle, m_ethport, m_ip4port) {
+    nbStation++;
     var object = '';
+    m_id = "station" + nbStation;
+    m_name= "Station " + nbStation;
     object += "<div class=\"station  ui-draggable ui-draggable-handle\" id=\"" + m_id + "\" style=\"bottom: 250px; left: 230px;\">";
         object += "<div class=\"nom\">" + m_name + "</div>";
         object += "<div class=\"cadre_titre\" onClick=\"table_toggle($('#" + m_id + "_table'));\">Table de routage</div>";
