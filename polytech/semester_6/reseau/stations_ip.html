@@ -56,8 +56,9 @@
             <label class="mdl-textfield__label" for="ask_station_portIp6">Route Passerelle</label>
         </div>
 
-
-
+        <button class="mdl-button mdl-js-button mdl-button--primary add_route_position">
+            Ajouter
+        </button>
 
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input class="mdl-textfield__input" type="text" id="ask_station_portIp6">
@@ -70,12 +71,14 @@
         </div>
 
 
-        <button type="button" class="mdl-button valider">Valider</button>
-        <button type="button" class="mdl-button abandon">Abandon</button>
+        <button type="button" class="mdl-button mdl-js-button mdl-button--primary valider">Valider</button>
+        <button type="button" class="mdl-button mdl-js-button mdl-button--primary abandon">Abandon</button>
     </div>
 </dialog>
 
-<button type="button" class="mdl-button show-modal">Ajouter une station</button>
+<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored show-modal" style="position: fixed;right: 12px;bottom: 12px;z-index: 3">
+    <i class="material-icons">add</i>
+</button>
 
 <script>
     var dialog = document.querySelector('dialog');
@@ -84,10 +87,14 @@
         dialogPolyfill.registerDialog(dialog);
     }
     showModalButton.addEventListener('click', function() {
+        nbPort = 1;
         dialog.showModal();
     });
     dialog.querySelector('.abandon').addEventListener('click', function() {
         dialog.close();
+    });
+    dialog.querySelector('.add_route_position').addEventListener('click', function () {
+        add_route_position();
     });
     dialog.querySelector('.valider').addEventListener('click', function () {
         dialog.close();
