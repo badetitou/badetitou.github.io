@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <fieldset id="form_eth" class="formulaire_paquet" style="top: 0px; right: 0px;">
+      <legend class="formulaire_titre">Création de paquet</legend>
+      <label class="formulaire_label" for="paquet_cible">Cible du paquet</label>
+      <input class="formulaire_champ" id="paquet_cible" type="text" name="cible" onChange="match_eth_color(this);" onFocus="match_eth_color(this);"/>
+      <label class="formulaire_label" for="paquet_source">Source du paquet</label>
+      <input class="formulaire_champ" id="paquet_source" type="text" name="source" onChange="match_eth_color(this);" onFocus="match_eth_color(this);"/>
+      <label class="formulaire_label" for="paquet_texte">Contenu du paquet</label>
+      <input class="formulaire_champ" id="paquet_texte" type="text" name="contenu" />
+      <label class="formulaire_label" for="paquet_detail">Afficher le détail
+        <input class="formulaire_champ" id="paquet_detail" type="checkbox" name="detail" />
+      </label>
+      <div class="formulaire_div">
+        <button class="formulaire_bouton" type="button" onClick="send_packet_from_source(create_eth_packet_from_form($('#form_eth')));">Créer</button>
+        <button class="formulaire_bouton" type="button" onClick="addresses_exchange_eth_form($('#form_eth'));"><img src="exchange.png" /></button>
+      </div>
+    </fieldset>
+  </body>
+</html>

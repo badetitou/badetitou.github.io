@@ -1,10 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Reseau</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Simulateur réseau</title>
 </head>
 <body>
-
+  <h1> Simulateur réseau </h1>
+  <h2> Présentation </h2>
+  <p>
+    Ce simulateur de réseau permet de montrer le fonctionnement de la commutation Ethernet
+    et du routage en IPv4. Le simulateur est écrit en javascript et les animations sont assurées
+    par <a href="https://jqueryui.com/">jquery-ui</a>.
+  </p>
+  <p>
+    Au niveau commutation Ethernet, la simulation de l'auto-apprentissage des adresses Ethernet est
+    gérée. Les VLANs ne sont pas adressés.
+  </p>
+  <p>
+    Au niveau routage IPv4, une table de routage est consultée et le cache ARP est géré. Les routeurs
+génèrent des paquets ARP quand nécessaire et les routeurs et stations savent répondre à une requête
+ARP et exploiter une réponse ARP.
+et les routeurs 
+  </p>
+  <h2> Scénarios commutation Ethernet </h2>
+  Quelques scénarios de commutation Ethernet :
+  <ul>
+    <li> deux stations connectées : <a href="stations_ethernet.html">stations</a>; </li>
+    <li> un commutateur desservant 4 stations : <a href="commutateur_s1.html">un commutateur</a>; </li>
+    <li> un nuage de 3 commutateurs desservant 6 stations : <a href="commutateur_s2.html">un nuage</a>. </li>
+  </ul>
+  <h2> Scénarios routage IPv4 </h2>
+  Quelques scénarios de routage IPv4 :
+  <ul>
+    <li> deux stations connectées : <a href="stations_ip.html">stations</a>; </li>
+    <li> un routeur directement connecté à 4 stations : <a href="routeur_s1.html">un routeur</a>; </li>
+    <li> deux stations connectées via 2 routeurs : <a href="routeur_s2.html">deux routeurs</a>; </li>
+    <li> exemple complet avec 4 stations, 2 commutateur et 1 routeur : <a href="routeur_s3.html">complet</a>. </li>
+  </ul>
+  <h2> Téléchargement </h2>
+  <p>
+    Les <a href="download.php">sources du simulateur</a> peuvent être téléchargées.
+  </p>
+  <h2> Perspectives </h2>
+  <p>
+    Les paquets IPv4 sont assez mal représentés, il faudrait mieux rendre le fait que le paquet IPv4 est
+    imbriqué dans le paquet Ethernet. Cela peut se faire par un div contenant l'adresse Ethernet destination,
+    l'adresse Ethernet source et un autre div avec une bordure contenant lui l'adresse IPv4 source puis l'adresse
+    IPv4 destination.
+  </p>
+  <p>
+    Avant de continuer le développement du simulateur, vérifier que la partie HTML est bien à la norme HTML5.
+    Rendre la page compatible HTML5 le cas échéant.
+  </p>
+  <p>
+    Il serait intéressant de pouvoir créer des scénarios sans devoir taper du code HTML, juste en 
+    cliquant pour créer des éléments (stations, routeurs et commutateurs), pour ajouter ou supprimer
+    des ports, pour ajouter ou supprimer des entrées dans les tables de routage et pour connecter des
+    éléments entre eux.
+  </p>
+  <p>
+    La simulation devrait être poussée jusqu'à la gestion et la génération de paquets ICMPv4. Bien sûr
+    pour répondre à un <code>ping</code> mais aussi pour répondre par un ICMP quand un paquet ne peut pas
+    être routé pour diverses raisons.
+  </p>
+  <p>
+    Il faudrait gérer les paquets IPv6 et le routage IPv6.
+  </p>
+  <p>
+    Une ouverture vers le réseau réel est possible en connectant des machines virtuelles sur des interfaces
+    Ethernet virtuelles (interfaces <code>tap</code>) via un serveur websocket.
+  </p>
 </body>
 </html>

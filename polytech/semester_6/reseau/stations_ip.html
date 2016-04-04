@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stations IP4</title>
+    <meta charset="UTF-8">
+    <link href="reseau.css" rel="stylesheet" type="text/css">
+    <link href="jquery-ui-1.11.4/jquery-ui.css" rel="stylesheet" type="text/css">
+
+    <script src="jquery-2.2.2.min.js"></script>
+    <script src="jquery-ui-1.11.4/jquery-ui.js"></script>
+    <script src="reseau.js"></script>
+    <script src="badetitou.js"></script>
+</head>
+<body onLoad="init(); main();">
+<script>
+    function init() {
+        $("#formip4").load("formip4.html");
+        $("#formether").load("formether.html");
+        elements = [$('#station1'), $('#station2')];
+        connexions = [
+            {'objet1': $('#station1_interface1'), 'objet2': $('#station2_interface1')},
+        ];
+    }
+</script>
+
+<button onclick="addElement('station','station3')">Boutton</button>
+
+<div class="station" id="station1" style="bottom: 250px; left: 230px;">
+    <div class="nom">Station 1</div>
+    <div class="cadre_titre" onClick="table_toggle($('#station1_table'));">Table de routage</div>
+    <div class="tableroutage" id="station1_table">
+        <div class="route">
+            <div class="route_adresse">192.168.1.0</div>
+            <div class="route_masque">255.255.255.0</div>
+            <div class="route_passerelle">0.0.0.0</div>
+        </div>
+        <div class="route">
+            <div class="route_adresse">0.0.0.0</div>
+            <div class="route_masque">0.0.0.0</div>
+            <div class="route_passerelle">192.168.1.1</div>
+        </div>
+    </div>
+    <div class="cadre_titre" onClick="table_toggle($('#station1_arp'));">Cache ARP</div>
+    <div class="cachearp" id="station1_arp"></div>
+    <div class="cadre_titre" onClick="table_toggle($('#station1_paquets'));">Paquets reçus</div>
+    <div class="paquets fantome" id="station1_paquets"></div>
+    <div class="ports" id="station1_interfaces">
+        <div class="port" id="station1_interface1">
+            <div class="ethport" style="background-color: green;">00:11:11:11:11:01</div>
+            <div class="ip4port" style="background-color: limegreen;">192.168.1.100</div>
+        </div>
+    </div>
+</div>
+
+<div class="station" id="station2" style="bottom: 0px; left: 400px;">
+    <div class="nom">Station 2</div>
+    <div class="cadre_titre" onClick="table_toggle($('#station2_table'));">Table de routage</div>
+    <div class="tableroutage" id="station2_table">
+        <div class="route">
+            <div class="route_adresse">192.168.2.0</div>
+            <div class="route_masque">255.255.255.0</div>
+            <div class="route_passerelle">0.0.0.0</div>
+        </div>
+        <div class="route">
+            <div class="route_adresse">0.0.0.0</div>
+            <div class="route_masque">0.0.0.0</div>
+            <div class="route_passerelle">192.168.2.1</div>
+        </div>
+    </div>
+    <div class="cadre_titre" onClick="table_toggle($('#station2_arp'));">Cache ARP</div>
+    <div class="cachearp" id="station2_arp"></div>
+    <div class="cadre_titre" onClick="table_toggle($('#station2_paquets'));">Paquets reçus</div>
+    <div class="paquets fantome" id="station2_paquets"></div>
+    <div class="ports" id="station2_interfaces">
+        <div class="port" id="station2_interface1">
+            <div class="ethport" style="background-color: blue;">00:22:22:22:22:01</div>
+            <div class="ip4port" style="background-color: steelblue;">192.168.2.100</div>
+        </div>
+    </div>
+</div>
+
+<!-- <div id="formip4"></div>
+<div id="formether"></div> -->
+
+</body>
+</html>
