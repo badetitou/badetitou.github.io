@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
     <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.js"></script>
+
 
     <link href="reseau.css" rel="stylesheet" type="text/css">
     <link href="jquery-ui-1.11.4/jquery-ui.css" rel="stylesheet" type="text/css">
@@ -38,24 +40,18 @@
         <p>
             Entrez l'ensemble des informations d'une station.
         </p>
-    </div>
-    <div class="mdl-dialog__actions mdl-dialog__actions--full-width">
-
-        <!-- Les adresses -->
-
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input class="mdl-textfield__input" type="text" id="ask_station_route_address_1">
-            <label class="mdl-textfield__label" for="ask_station_portIp6">Route Adresse </label>
+            <label class="mdl-textfield__label" for="ask_station_route_address_1">Route Adresse </label>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input class="mdl-textfield__input" type="text" id="ask_station_route_masque_1">
-            <label class="mdl-textfield__label" for="ask_station_portIp6">Route Masque</label>
+            <label class="mdl-textfield__label" for="ask_station_route_masque_1">Route Masque</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input class="mdl-textfield__input" type="text" id="ask_station_route_passerelle_1">
-            <label class="mdl-textfield__label" for="ask_station_portIp6">Route Passerelle</label>
+            <label class="mdl-textfield__label" for="ask_station_route_passerelle_1">Route Passerelle</label>
         </div>
-
         <button class="mdl-button mdl-js-button mdl-button--primary add_route_position">
             Ajouter
         </button>
@@ -69,8 +65,8 @@
             <input class="mdl-textfield__input" type="text" id="ask_station_portIp4">
             <label class="mdl-textfield__label" for="ask_station_portIp4">Adresse port Ip4</label>
         </div>
-
-
+    </div>
+    <div class="mdl-dialog__actions">
         <button type="button" class="mdl-button mdl-js-button mdl-button--primary valider">Valider</button>
         <button type="button" class="mdl-button mdl-js-button mdl-button--primary abandon">Abandon</button>
     </div>
@@ -91,7 +87,9 @@
         dialog.showModal();
     });
     dialog.querySelector('.abandon').addEventListener('click', function() {
-        dialog.close();
+        //dialog.close();
+        remove_route_position();
+        nbPort = 1;
     });
     dialog.querySelector('.add_route_position').addEventListener('click', function () {
         add_route_position();
@@ -101,10 +99,14 @@
         var tabRouteAdresse = [];
         var tabRouteMasque = [];
         var tabRoutePasserelle = [];
-        tabRouteAdresse.push($("#ask_station_route_address_1").val());
-        tabRouteMasque.push($("#ask_station_route_masque_1").val());
-        tabRoutePasserelle.push($("#ask_station_route_passerelle_1").val());
+        for (var i = 0;i< nbPort;++i) {
+            tabRouteAdresse.push($("#ask_station_route_address_"+i+"").val());
+            tabRouteMasque.push($("#ask_station_route_masque_"+i+"").val());
+            tabRoutePasserelle.push($("#ask_station_route_passerelle_"+i+"").val());
+        }
         addStation(tabRouteAdresse, tabRouteMasque, tabRoutePasserelle, $("#ask_station_portIp4").val(), $("#ask_station_po").val())
+        remove_route_position();
+        nbPort = 1;
     })
 </script>
 
