@@ -3,7 +3,7 @@
  */
 
 var nbStation=2;
-var nbPort = 0;
+var nbPort = 1;
 
 function addStation(m_routeAdresse, m_routeMasque, m_routePasserelle, m_ethport, m_ip4port) {
     nbStation++;

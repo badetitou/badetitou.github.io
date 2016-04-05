@@ -87,7 +87,7 @@
         dialog.showModal();
     });
     dialog.querySelector('.abandon').addEventListener('click', function() {
-        //dialog.close();
+        dialog.close();
         remove_route_position();
         nbPort = 1;
     });
@@ -99,7 +99,7 @@
         var tabRouteAdresse = [];
         var tabRouteMasque = [];
         var tabRoutePasserelle = [];
-        for (var i = 0;i< nbPort;++i) {
+        for (var i = 1; i <= nbPort;++i) {
             tabRouteAdresse.push($("#ask_station_route_address_"+i+"").val());
             tabRouteMasque.push($("#ask_station_route_masque_"+i+"").val());
             tabRoutePasserelle.push($("#ask_station_route_passerelle_"+i+"").val());
