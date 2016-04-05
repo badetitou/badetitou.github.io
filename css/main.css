@@ -7,3 +7,7 @@ pre {
     overflow: auto;
 }
 
+p {
+    text-align: justify;
+    text-justify: inter-word;
+}
