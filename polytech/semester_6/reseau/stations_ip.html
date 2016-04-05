@@ -31,6 +31,7 @@
         ];
     };
 </script>
+<!-- TODO Changer IPV6 par address mac -->
 
 <dialog class="mdl-dialog">
     <div class="mdl-dialog__title">
@@ -41,29 +42,36 @@
             Entrez l'ensemble des informations d'une station.
         </p>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="ask_station_route_address_1">
+            <input class="mdl-textfield__input" type="text" id="ask_station_route_address_1" pattern="((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}">
             <label class="mdl-textfield__label" for="ask_station_route_address_1">Route Adresse </label>
+            <span class="mdl-textfield__error">Not IPV4 address</span>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="ask_station_route_masque_1">
+            <input class="mdl-textfield__input" type="text" id="ask_station_route_masque_1" pattern="((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}">
             <label class="mdl-textfield__label" for="ask_station_route_masque_1">Route Masque</label>
+            <span class="mdl-textfield__error">Not IPV4 address</span>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="ask_station_route_passerelle_1">
+            <input class="mdl-textfield__input" type="text" id="ask_station_route_passerelle_1" pattern="((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}">
             <label class="mdl-textfield__label" for="ask_station_route_passerelle_1">Route Passerelle</label>
+            <span class="mdl-textfield__error">Not IPV4 address</span>
         </div>
         <button class="mdl-button mdl-js-button mdl-button--primary add_route_position">
             Ajouter
         </button>
 
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="ask_station_portIp6">
-            <label class="mdl-textfield__label" for="ask_station_portIp6">Adresse port Ip6</label>
+            <input class="mdl-textfield__input" type="text" id="ask_station_portIp6" pattern="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$">
+            <label class="mdl-textfield__label" for="ask_station_portIp6">Not address mac</label>
+            <span class="mdl-textfield__error">Not IPV6 address</span>
+
         </div>
 
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="ask_station_portIp4">
+            <input class="mdl-textfield__input" type="text" id="ask_station_portIp4" pattern="((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}">
             <label class="mdl-textfield__label" for="ask_station_portIp4">Adresse port Ip4</label>
+            <span class="mdl-textfield__error">Not IPV4 address</span>
+
         </div>
     </div>
     <div class="mdl-dialog__actions">
@@ -104,7 +112,7 @@
             tabRouteMasque.push($("#ask_station_route_masque_"+i+"").val());
             tabRoutePasserelle.push($("#ask_station_route_passerelle_"+i+"").val());
         }
-        addStation(tabRouteAdresse, tabRouteMasque, tabRoutePasserelle, $("#ask_station_portIp4").val(), $("#ask_station_po").val())
+        addStation(tabRouteAdresse, tabRouteMasque, tabRoutePasserelle, $("#ask_station_portIp6").val(),$("#ask_station_portIp4").val());
         remove_route_position();
         nbPort = 1;
     })
@@ -164,8 +172,8 @@
     </div>
 </div>
 
-<!-- <div id="formip4"></div>
-<div id="formether"></div> -->
+<div id="formip4"></div>
+<div id="formether"></div>
 
 </body>
 </html>
