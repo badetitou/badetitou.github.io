@@ -186,5 +186,53 @@ function add_port_position(dialog) {
         window.alert("Error. Reload the webpage");
     } else {
         ++nbPort;
+
+        var object = document.createElement('div');
+        var error_eth_port = document.createElement('span');
+        object.className = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label";
+        object.id = "ask_" + dialog + "_port_eth_address_nb_" + nbRoutage;
+        var input_port_eth_address = document.createElement('input');
+        var label_port_eth_address = document.createElement('label');
+        input_port_eth_address.className = "mdl-textfield__input";
+        input_port_eth_address.id = "ask_" + dialog + "_portIp6_nb_" + nbRoutage;
+        input_port_eth_address.type = "text";
+        input_port_eth_address.pattern = "^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$";
+
+        label_port_eth_address.className = "mdl-textfield__label";
+        label_port_eth_address.for = "ask_" + dialog + "_portIp6_nb_" + nbRoutage;
+        label_port_eth_address.innerHTML = "Ethernet Adresse";
+
+        error_eth_port.className = "mdl-textfield__error";
+        error_eth_port.innerHTML = "Not Ethernet address";
+
+        object.appendChild(input_port_eth_address);
+        object.appendChild(label_port_eth_address);
+        object.appendChild(error_eth_port);
+        componentHandler.upgradeElement(object);
+        $(".add_port_position.dialog_" + dialog).before(object);
+
+        var object = document.createElement('div');
+        var error_eth_port = document.createElement('span');
+        object.className = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label";
+        object.id = "ask_" + dialog + "_port_ipv4_address_nb_" + nbRoutage;
+        var input_port_eth_address = document.createElement('input');
+        var label_port_eth_address = document.createElement('label');
+        input_port_eth_address.className = "mdl-textfield__input";
+        input_port_eth_address.id = "ask_" + dialog + "_portIp4_nb_" + nbRoutage;
+        input_port_eth_address.type = "text";
+        input_port_eth_address.pattern = "((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}";
+
+        label_port_eth_address.className = "mdl-textfield__label";
+        label_port_eth_address.for = "ask_" + dialog + "_portIp4_nb_" + nbRoutage;
+        label_port_eth_address.innerHTML = "Adresse port Ip4";
+
+        error_eth_port.className = "mdl-textfield__error";
+        error_eth_port.innerHTML = "Not IPV4 address";
+
+        object.appendChild(input_port_eth_address);
+        object.appendChild(label_port_eth_address);
+        object.appendChild(error_eth_port);
+        componentHandler.upgradeElement(object);
+        $(".add_port_position.dialog_" + dialog).before(object);
     }
 }
