@@ -74,7 +74,7 @@ function addRouteur(m_routeAdresse, m_routeMasque, m_routePasserelle, m_ethport,
     routeur += '<div class="paquets fantome" id="'+m_id+'_paquets"></div>';
 
     routeur += "<div class=\"ports\" id=\"" + m_id + "_ports\">";
-    for (var i=1;i<=nbPort;++i) {
+    for (var i=0;i<nbPort;++i) {
         routeur += "<div class=\"port\" id=\"" + m_id + "_port" + i + "\">";
         routeur += "<div class=\"ethport\">" + m_ethport[i] + "</div>";
         routeur += "<div class=\"ip4port\">" + m_ip4port[i] + "</div>";
@@ -190,16 +190,16 @@ function add_port_position(dialog) {
         var object = document.createElement('div');
         var error_eth_port = document.createElement('span');
         object.className = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label";
-        object.id = "ask_" + dialog + "_port_eth_address_nb_" + nbRoutage;
+        object.id = "ask_" + dialog + "_port_eth_address_nb_" + nbPort;
         var input_port_eth_address = document.createElement('input');
         var label_port_eth_address = document.createElement('label');
         input_port_eth_address.className = "mdl-textfield__input";
-        input_port_eth_address.id = "ask_" + dialog + "_portIp6_nb_" + nbRoutage;
+        input_port_eth_address.id = "ask_" + dialog + "_portIp6_nb_" + nbPort;
         input_port_eth_address.type = "text";
         input_port_eth_address.pattern = "^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$";
 
         label_port_eth_address.className = "mdl-textfield__label";
-        label_port_eth_address.for = "ask_" + dialog + "_portIp6_nb_" + nbRoutage;
+        label_port_eth_address.for = "ask_" + dialog + "_portIp6_nb_" + nbPort;
         label_port_eth_address.innerHTML = "Ethernet Adresse";
 
         error_eth_port.className = "mdl-textfield__error";
@@ -214,16 +214,16 @@ function add_port_position(dialog) {
         var object = document.createElement('div');
         var error_eth_port = document.createElement('span');
         object.className = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label";
-        object.id = "ask_" + dialog + "_port_ipv4_address_nb_" + nbRoutage;
+        object.id = "ask_" + dialog + "_port_ipv4_address_nb_" + nbPort;
         var input_port_eth_address = document.createElement('input');
         var label_port_eth_address = document.createElement('label');
         input_port_eth_address.className = "mdl-textfield__input";
-        input_port_eth_address.id = "ask_" + dialog + "_portIp4_nb_" + nbRoutage;
+        input_port_eth_address.id = "ask_" + dialog + "_portIp4_nb_" + nbPort;
         input_port_eth_address.type = "text";
         input_port_eth_address.pattern = "((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}";
 
         label_port_eth_address.className = "mdl-textfield__label";
-        label_port_eth_address.for = "ask_" + dialog + "_portIp4_nb_" + nbRoutage;
+        label_port_eth_address.for = "ask_" + dialog + "_portIp4_nb_" + nbPort;
         label_port_eth_address.innerHTML = "Adresse port Ip4";
 
         error_eth_port.className = "mdl-textfield__error";
@@ -234,5 +234,16 @@ function add_port_position(dialog) {
         object.appendChild(error_eth_port);
         componentHandler.upgradeElement(object);
         $(".add_port_position.dialog_" + dialog).before(object);
+    }
+}
+
+function remove_port_position(dialog) {
+    if (typeof dialog === 'undefined' || dialog === null){
+        window.alert("Error. Reload the webpage");
+    } else {
+        for (var i = nbPort; i > 0; i--) {
+            $("#ask_"+ dialog + "_port_ipv4_address_nb_" + i).remove();
+            $("#ask_" + dialog + "_port_eth_address_nb_" + i).remove();
+        }
     }
 }

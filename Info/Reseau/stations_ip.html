@@ -193,6 +193,7 @@
     dialog_routeur.querySelector('.abandon.dialog_routeur').addEventListener('click', function() {
         dialog_routeur.close();
         remove_route_position("routeur");
+        remove_port_position("routeur");
         nbRoutage = 1;
     });
     dialog_routeur.querySelector('.add_route_position.dialog_routeur').addEventListener('click', function () {
@@ -213,7 +214,9 @@
         }
         addRouteur(tabRouteAdresse, tabRouteMasque, tabRoutePasserelle, $("#ask_station_portIp6").val(),$("#ask_station_portIp4").val());
         remove_route_position("routeur");
+        remove_port_position("routeur");
         nbRoutage = 1;
+        nbPort = 1;
     })
 </script>
 
