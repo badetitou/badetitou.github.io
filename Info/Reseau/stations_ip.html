@@ -57,7 +57,7 @@
             <label class="mdl-textfield__label" for="ask_station_route_passerelle_1">Route Passerelle</label>
             <span class="mdl-textfield__error">Not IPV4 address</span>
         </div>
-        <button class="mdl-button mdl-js-button mdl-button--primary add_route_position">
+        <button class="mdl-button mdl-js-button mdl-button--primary add_route_position dialog_station">
             Ajouter
         </button>
 
@@ -76,8 +76,8 @@
         </div>
     </div>
     <div class="mdl-dialog__actions">
-        <button type="button" class="mdl-button mdl-js-button mdl-button--primary valider">Valider</button>
-        <button type="button" class="mdl-button mdl-js-button mdl-button--primary abandon">Abandon</button>
+        <button type="button" class="mdl-button mdl-js-button mdl-button--primary valider dialog_station">Valider</button>
+        <button type="button" class="mdl-button mdl-js-button mdl-button--primary abandon dialog_station">Abandon</button>
     </div>
 </dialog>
 
@@ -89,52 +89,52 @@
     </div>
     <div class="mdl-dialog__content">
         <p>
-            Entrez l'ensemble des informations d'une station.
+            Entrez l'ensemble des informations d'un Routeur.
         </p>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="ask_station_route_address_1" pattern="((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}">
-            <label class="mdl-textfield__label" for="ask_station_route_address_1">Route Adresse </label>
+            <input class="mdl-textfield__input" type="text" id="ask_routeur_route_address_1" pattern="((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}">
+            <label class="mdl-textfield__label" for="ask_routeur_route_address_1">Route Adresse </label>
             <span class="mdl-textfield__error">Not IPV4 address</span>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="ask_station_route_masque_1" pattern="((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}">
-            <label class="mdl-textfield__label" for="ask_station_route_masque_1">Route Masque</label>
+            <input class="mdl-textfield__input" type="text" id="ask_routeur_route_masque_1" pattern="((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}">
+            <label class="mdl-textfield__label" for="ask_routeur_route_masque_1">Route Masque</label>
             <span class="mdl-textfield__error">Not IPV4 address</span>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="ask_station_route_passerelle_1" pattern="((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}">
-            <label class="mdl-textfield__label" for="ask_station_route_passerelle_1">Route Passerelle</label>
+            <input class="mdl-textfield__input" type="text" id="ask_routeur_route_passerelle_1" pattern="((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}">
+            <label class="mdl-textfield__label" for="ask_routeur_route_passerelle_1">Route Passerelle</label>
             <span class="mdl-textfield__error">Not IPV4 address</span>
         </div>
-        <button class="mdl-button mdl-js-button mdl-button--primary add_route_position">
+        <button class="mdl-button mdl-js-button mdl-button--primary add_route_position dialog_routeur">
             Ajouter
         </button>
 
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="ask_station_portIp6" pattern="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$">
-            <label class="mdl-textfield__label" for="ask_station_portIp6">Not address mac</label>
+            <input class="mdl-textfield__input" type="text" id="ask_routeur_portIp6" pattern="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$">
+            <label class="mdl-textfield__label" for="ask_routeur_portIp6">Not address mac</label>
             <span class="mdl-textfield__error">Not IPV6 address</span>
 
         </div>
 
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="ask_station_portIp4" pattern="((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}">
-            <label class="mdl-textfield__label" for="ask_station_portIp4">Adresse port Ip4</label>
+            <input class="mdl-textfield__input" type="text" id="ask_routeur_portIp4" pattern="((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}">
+            <label class="mdl-textfield__label" for="ask_routeur_portIp4">Adresse port Ip4</label>
             <span class="mdl-textfield__error">Not IPV4 address</span>
 
         </div>
     </div>
     <div class="mdl-dialog__actions">
-        <button type="button" class="mdl-button mdl-js-button mdl-button--primary valider">Valider</button>
-        <button type="button" class="mdl-button mdl-js-button mdl-button--primary abandon">Abandon</button>
+        <button type="button" class="mdl-button mdl-js-button mdl-button--primary valider dialog_routeur">Valider</button>
+        <button type="button" class="mdl-button mdl-js-button mdl-button--primary abandon dialog_routeur">Abandon</button>
     </div>
 </dialog>
 
-<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect show-modal" style="position: fixed;right: 12px;bottom: 12px;z-index: 3">
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect show-modal dialog_station" style="position: fixed;right: 12px;bottom: 12px;z-index: 3">
     Ajouter Station
 </button>
 
-<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect show-modal" style="position: fixed;right: 12px;bottom: 60px;z-index: 3">
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect show-modal dialog_routeur" style="position: fixed;right: 12px;bottom: 60px;z-index: 3">
     Ajouter Routeur
 </button>
 
@@ -142,26 +142,27 @@
     Connections
 </button>
 
+<!-- Script for add station -->
 <script>
-    var dialog = document.querySelector('dialog.dialog_station');
-    var showModalButton = document.querySelector('.show-modal');
-    if (! dialog.showModal) {
-        dialogPolyfill.registerDialog(dialog);
+    var dialog_station = document.querySelector('dialog.dialog_station');
+    var showModalButton_routeur = document.querySelector('.show-modal.dialog_station');
+    if (! dialog_station.showModal) {
+        dialogPolyfill.registerDialog(dialog_station);
     }
-    showModalButton.addEventListener('click', function() {
+    showModalButton_routeur.addEventListener('click', function() {
         nbRoutage = 1;
-        dialog.showModal();
+        dialog_station.showModal();
     });
-    dialog.querySelector('.abandon').addEventListener('click', function() {
-        dialog.close();
-        remove_route_position();
+    dialog_station.querySelector('.abandon.dialog_station').addEventListener('click', function() {
+        dialog_station.close();
+        remove_route_position("station");
         nbRoutage = 1;
     });
-    dialog.querySelector('.add_route_position').addEventListener('click', function () {
-        add_route_position();
+    dialog_station.querySelector('.add_route_position.dialog_station').addEventListener('click', function () {
+        add_route_position("station");
     });
-    dialog.querySelector('.valider').addEventListener('click', function () {
-        dialog.close();
+    dialog_station.querySelector('.valider.dialog_station').addEventListener('click', function () {
+        dialog_station.close();
         var tabRouteAdresse = [];
         var tabRouteMasque = [];
         var tabRoutePasserelle = [];
@@ -171,41 +172,45 @@
             tabRoutePasserelle.push($("#ask_station_route_passerelle_"+i+"").val());
         }
         addStation(tabRouteAdresse, tabRouteMasque, tabRoutePasserelle, $("#ask_station_portIp6").val(),$("#ask_station_portIp4").val());
-        remove_route_position();
+        remove_route_position("station");
         nbRoutage = 1;
     })
 </script>
 
+<!-- Script for add routeur -->
 <script>
-    var dialog = document.querySelector('dialog.dialog_routeur');
-    var showModalButton = document.querySelector('.show-modal');
-    if (! dialog.showModal) {
-        dialogPolyfill.registerDialog(dialog);
+    var dialog_routeur = document.querySelector('dialog.dialog_routeur');
+    var showModalButton_routeur = document.querySelector('.show-modal.dialog_routeur');
+    if (! dialog_routeur.showModal) {
+        dialogPolyfill.registerDialog(dialog_routeur);
     }
-    showModalButton.addEventListener('click', function() {
+    showModalButton_routeur.addEventListener('click', function() {
         nbRoutage = 1;
-        dialog.showModal();
+        dialog_routeur.showModal();
     });
-    dialog.querySelector('.abandon').addEventListener('click', function() {
-        dialog.close();
-        remove_route_position();
+    dialog_routeur.querySelector('.abandon.dialog_routeur').addEventListener('click', function() {
+        dialog_routeur.close();
+        remove_route_position("routeur");
         nbRoutage = 1;
     });
-    dialog.querySelector('.add_route_position').addEventListener('click', function () {
-        add_route_position();
+    dialog_routeur.querySelector('.add_route_position.dialog_routeur').addEventListener('click', function () {
+        add_route_position("routeur");
     });
-    dialog.querySelector('.valider').addEventListener('click', function () {
-        dialog.close();
+    dialog_routeur.querySelector('.add_port_position.dialog_routeur').addEventListener('click', function () {
+        add_port_position("routeur");
+    });
+    dialog_routeur.querySelector('.valider.dialog_routeur').addEventListener('click', function () {
+        dialog_routeur.close();
         var tabRouteAdresse = [];
         var tabRouteMasque = [];
         var tabRoutePasserelle = [];
         for (var i = 1; i <= nbRoutage; ++i) {
-            tabRouteAdresse.push($("#ask_station_route_address_"+i+"").val());
-            tabRouteMasque.push($("#ask_station_route_masque_"+i+"").val());
-            tabRoutePasserelle.push($("#ask_station_route_passerelle_"+i+"").val());
+            tabRouteAdresse.push($("#ask_routeur_route_address_"+i+"").val());
+            tabRouteMasque.push($("#ask_routeur_route_masque_"+i+"").val());
+            tabRoutePasserelle.push($("#ask_routeur_route_passerelle_"+i+"").val());
         }
-        addStation(tabRouteAdresse, tabRouteMasque, tabRoutePasserelle, $("#ask_station_portIp6").val(),$("#ask_station_portIp4").val());
-        remove_route_position();
+        addRouteur(tabRouteAdresse, tabRouteMasque, tabRoutePasserelle, $("#ask_station_portIp6").val(),$("#ask_station_portIp4").val());
+        remove_route_position("routeur");
         nbRoutage = 1;
     })
 </script>
