@@ -39,8 +39,8 @@
       <file leaf-file-name="header.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/header.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="39">
-              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+            <state relative-caret-position="277">
+              <caret line="34" column="14" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -550,7 +550,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1468072837378</updated>
-      <workItem from="1468072842419" duration="2374000" />
+      <workItem from="1468072842419" duration="2481000" />
     </task>
     <task id="LOCAL-00001" summary="Test new headder">
       <created>1468073811374</created>
@@ -594,11 +594,18 @@
       <option name="project" value="LOCAL" />
       <updated>1468075194939</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Try new header #6">
+      <created>1468075237037</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1468075237037</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2374000" />
+    <option name="totallyTimeSpent" value="2481000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
@@ -640,7 +647,8 @@
     <MESSAGE value="Try new header #3" />
     <MESSAGE value="Try new header #4" />
     <MESSAGE value="Try new header #5" />
-    <option name="LAST_COMMIT_MESSAGE" value="Try new header #5" />
+    <MESSAGE value="Try new header #6" />
+    <option name="LAST_COMMIT_MESSAGE" value="Try new header #6" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -689,8 +697,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/header.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="39">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state relative-caret-position="277">
+          <caret line="34" column="14" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="14" />
           <folding />
         </state>
       </provider>
