@@ -24,12 +24,12 @@ a img{
 }
 
 ::-moz-selection {
-  background-color: #6ab344;
+  background-color: #FB8C00 ;
   color: #fff;
 }
 
 ::selection {
-  background-color: #6ab344;
+  background-color: #FB8C00 ;
   color: #fff;
 }
 
@@ -122,7 +122,7 @@ a img{
   }
 
     .android-navigation .mdl-navigation__link:hover {
-      border-bottom: 4px solid #8bc34a;
+      border-bottom: 4px solid #FF9800;
     }
 
   .android-search-box {
@@ -156,12 +156,12 @@ a img{
   }
 
   .android-drawer span.mdl-navigation__link.mdl-navigation__link {
-    color: #8bc34a;
+    color: #FF9800;
   }
 
   .android-drawer .mdl-layout-title {
     position: relative;
-    background: #6ab344;
+    background: #FB8C00 ;
     height: 160px;
   }
 
@@ -329,7 +329,7 @@ a img{
 
 .android-link {
   text-decoration: none;
-  color: #8bc34a !important;
+  color: #FF9800 !important;
 }
 
   .android-link:hover {
@@ -434,7 +434,7 @@ a img{
 }
 
   .android-footer a:hover {
-    color: #8bc34a;
+    color: #FF9800;
   }
 
   .android-footer .mdl-mega-footer--top-section::after {
