@@ -61,11 +61,15 @@ a img{
 }
 
 
-.android-logo-image {
-  height: 28px;
-  width: 140px;
+.android-logo-large-image {
+  height: 80%;
+  width: 80%;
 }
 
+.android-logo-image {
+  height: auto;
+  width: auto;
+}
 
 .android-header {
   overflow: visible;
