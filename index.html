@@ -29,17 +29,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.min.css">
     <link rel="stylesheet" href="css/styles.css">
-    <style>
-    #view-source {
-      position: fixed;
-      display: block;
-      right: 0;
-      bottom: 0;
-      margin-right: 40px;
-      margin-bottom: 40px;
-      z-index: 900;
-    }
-    </style>
   </head>
   <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -130,11 +119,33 @@
         <div class="android-wear-section">
           <div class="android-wear-band">
             <div class="android-wear-band-text">
-              <div class="mdl-typography--display-2 mdl-typography--font-thin">The best of Google built in</div>
-              <p class="mdl-typography--headline mdl-typography--font-thin">
-                Android works perfectly with your favourite apps like Google Maps,
-                Calendar and YouTube.
-              </p>
+              <div class="mdl-typography--display-2 mdl-typography--font-thin">Skills</div>
+              <div class="mdl-cell--12-col mdl-grid">
+                <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-desktop">
+                <p class="mdl-typography--headline mdl-typography--font-thin">
+                  Java Development : 90%
+                </p>
+                <div id="p1" class="mdl-progress mdl-js-progress"></div>
+                <script>
+                  document.querySelector('#p1').addEventListener('mdl-componentupgraded', function() {
+                    this.MaterialProgress.setProgress(90);
+                  });
+                </script>
+                </div>
+                <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-desktop">
+
+                <p class="mdl-typography--headline mdl-typography--font-thin">
+                  Web Development : 50%
+                </p>
+                <div id="p2" class="mdl-progress mdl-js-progress"></div>
+                <script>
+                  document.querySelector('#p2').addEventListener('mdl-componentupgraded', function() {
+                    this.MaterialProgress.setProgress(50);
+                  });
+                </script>
+                  </div>
+              </div>
+
               <p>
                 <a class="mdl-typography--font-regular mdl-typography--text-uppercase android-alt-link" href="">
                   See what's new in the Play Store&nbsp;<i class="material-icons">chevron_right</i>
