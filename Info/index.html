@@ -1,34 +1,45 @@
-<!-- NAVIGATION HEADER START -->
-<!DOCTYPE html>
-<html lang="fr">
+<!Doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Benoît "badetitou" Verhaeghe</title>
+    <link rel="stylesheet" href="../css/material.min.css">
+    <script src="../css/material.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
-    <link rel="stylesheet" href="/css/main.css" type="text/css">
-    <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
 </head>
-
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-
-<script>
-
-$(function(){
-        $("#header").load("/header.html");
-        $("#footer").load("/footer.html");
-    });
-</script>
 <body>
-
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--no-desktop-drawer-button">
-    <div id="header"></div>
-
-    <main class="mdl-layout__content"  style="flex: 1 0 auto;">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">Badetitou</span>
+        </div>
+        <!-- Tabs -->
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect ">
+            <a href="#scroll-tab-1" class="mdl-layout__tab is-active">Home</a>
+            <a href="#scroll-tab-2" class="mdl-layout__tab">Algorithm</a>
+            <a href="#scroll-tab-3" class="mdl-layout__tab">Tab 3</a>
+            <a href="#scroll-tab-4" class="mdl-layout__tab">Tab 4</a>
+            <a href="#scroll-tab-5" class="mdl-layout__tab">Tab 5</a>
+            <a href="#scroll-tab-6" class="mdl-layout__tab">Tab 6</a>
+        </div>
+    </header>
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Navigation</span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="..">Home</a>
+            <a class="mdl-navigation__link" href="../linux/index.html">Linux</a>
+            <a class="mdl-navigation__link" href="../project/index.html">Projects</a>
+            <a class="mdl-navigation__link mdl-navigation__link--current" href="#">Computer Science</a>
+        </nav>
+    </div>
+    <main class="mdl-layout__content">
         <section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
+            <div class="page-content">
+                <h1>
+                    This is a test web-site
+                </h1>
+            </div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="scroll-tab-2">
             <div class="page-content">
                 <div class="mdl-grid">
                     <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
@@ -49,7 +60,7 @@ $(function(){
                             Les actions sont une des manières de diviser son programme. Elle est composé d'un
                             nom, est d'une suite de paramètres.
                         </p>
-                                <pre class="highlight">
+                        <pre class="highlight">
                                     <code>
     Action &#60;nom d'action&#62; (paramètres)
     D : &#60;Déclaration&#62; {Signification}
@@ -91,7 +102,7 @@ $(function(){
                             La fonction fonctionne de la même manière qu'une action. Les principales différences sont l'ajout d'un type de retour.
                         </p>
                         <b>L'absence de paramètre de type Résultat ou Données/Résultat.</b>
-                                <pre class="highlight">
+                        <pre class="highlight">
                                     <code>
     Fonction &#60;nom d'action&#62; (paramètres) : Type de retour
     D   : &#60;Déclaration&#62; {Signification}
@@ -165,7 +176,7 @@ $(function(){
                         <p><i>Et si nous faisions C<-B ?</i> Alors C était une variable pour les réel. Elle convertirai 9 en un nombre de type réel.</p>
                         <p><i>Que ce passe-t-il si je stocke un Réel dans un Entier ?</i></p>
                         <p>Le réel sera tronqué, ça veut dire qu'on enlève tout ce qui a après la virgule.</p>
-                                 <pre class="highlight">
+                        <pre class="highlight">
                                     <code>
     C<-9.7
     B<-C
@@ -176,7 +187,7 @@ $(function(){
                         <h6>Addition | Soustraction | Multiplication | Division | Modulo</h6>
                         <p>Les variables comportant des nombres (Entier, Réel, Caractère (cf : <a href="http://www.asciitable.com/">Table ASCII</a>)) supporte l'ensemble des opération ci-dessus. Le modulo étant le reste de la division entière.</p>
                         <b>ATTENTION : Réel/Entier->Réel ET Entier/Réel->Réel</b>
-                                <pre class="highlight">
+                        <pre class="highlight">
                                     <code>
     Opérateur :
     + : Addition
@@ -190,7 +201,7 @@ $(function(){
                                 </pre>
                         <h5>Booléen</h5>
                         <p>Les booléen (ou boolean dans la langue de shakespeare) sont des variables pouvant contenir soit VRAI soit FAUX. Il est possible de les combiner via les opération suivante :</p>
-                                <pre class="highlight">
+                        <pre class="highlight">
                                     <code>
     1. ET : VRAI ET FAUX -> FAUX
     2. OU : VRAI OU FAUX -> VRAI
@@ -199,13 +210,13 @@ $(function(){
                         <p>Bref elles respectent <a href="https://fr.wikipedia.org/wiki/Algèbre_de_Boole_(logique)">l'Algèbre de Boole (logique)</a></p>
                         <h6>Exemple d'affectation</h6>
                         <p>Une affectation simple.</p>
-                                <pre class="highlight">
+                        <pre class="highlight">
                                     <code>
     A<-VRAI
                                     </code>
                                 </pre>
                         <p>Une affectation par évaluation.</p>
-                                <pre class="highlight">
+                        <pre class="highlight">
                                     <code>
     B<-5
     A<- B<2
@@ -218,7 +229,7 @@ $(function(){
                         <p>Les vecteurs (ou tableau) ainsi que les matrices (tableau à plusieurs dimension) sont la manière la plus simple de stocker un grand ensemble d'information.
                             En algorithmie la première case du table est la case 1. La dernière est la case n (=correspondant à sa dimension).</p>
                         <p><i>Parcours de Tableau</i></p>
-                                <pre class="highlight" >
+                        <pre class="highlight" >
                                     <code>
     Action affiche_element (v, n) : { Affiche les element 1 à 1 de mon vecteur}
     D : v Vecteur d'entier de taille n
@@ -233,7 +244,7 @@ $(function(){
                                     </code>
                                 </pre>
                         <p><i>Remplissage de Tableau</i></p>
-                                <pre class="highlight" >
+                        <pre class="highlight" >
                                     <code>
     Action affiche_element (v, n) : { Affiche les element 1 à 1 de mon vecteur}
     R : v Vecteur d'entier de taille n
@@ -248,7 +259,7 @@ $(function(){
                                     </code>
                                 </pre>
                         <p><i>Parcours de Matrice</i></p>
-                                <pre class="highlight" >
+                        <pre class="highlight" >
                                     <code>
     Action affiche_element (n,m, Mat) : { Affiche les element 1 à 1 de mon vecteur}
     D : Mat Matrice d'entier de dimension n,m
@@ -267,7 +278,7 @@ $(function(){
                                     </code>
                                 </pre>
                         <p><i>Remplissage de Matrice</i></p>
-                                <pre class="highlight" >
+                        <pre class="highlight" >
                                     <code>
     Action affiche_element (Mat, n,m) : { Affiche les element 1 à 1 de mon vecteur}
     D : Mat Matrice d'entier de dimension n,m
@@ -407,30 +418,19 @@ $(function(){
                 </div>
             </div>
         </section>
-        <!-- Section Base de donnée -->
-        <section class="mdl-layout__tab-panel" id="scroll-tab-2">
-            <div class="page-content">
-                <div class="mdl-grid">
-                    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
-                    <div class="mdl-cell mdl-cell--8-col mdl-cell--4-col-phone"></div>
-                    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section Matériel -->
-
         <section class="mdl-layout__tab-panel" id="scroll-tab-3">
-            <div class="page-content">
-                <div class="mdl-grid">
-                    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
-                    <div class="mdl-cell mdl-cell--8-col mdl-cell--4-col-phone"></div>
-                    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
-                </div>
-            </div>
+            <div class="page-content"><!-- Your content goes here --></div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="scroll-tab-4">
+            <div class="page-content"><!-- Your content goes here --></div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="scroll-tab-5">
+            <div class="page-content"><!-- Your content goes here --></div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="scroll-tab-6">
+            <div class="page-content"><!-- Your content goes here --></div>
         </section>
     </main>
-    <div id="footer"></div>
 </div>
 </body>
 </html>
