@@ -2,16 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5ce1d2af-12ae-4e92-a849-0be98235fb60" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/css/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/css/bower.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/css/material.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/css/material.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/css/material.min.css.map" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/css/material.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/css/material.min.js.map" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/css/package.json" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/css/main.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/css/styles.css" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
@@ -38,8 +28,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="23" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
+            <state relative-caret-position="165">
+              <caret line="22" column="38" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -657,7 +647,7 @@
       <workItem from="1469999904046" duration="3449000" />
       <workItem from="1472728615138" duration="135000" />
       <workItem from="1473710323031" duration="80000" />
-      <workItem from="1474044828658" duration="2427000" />
+      <workItem from="1474044828658" duration="2728000" />
     </task>
     <task id="LOCAL-00001" summary="Test new headder">
       <created>1468073811374</created>
@@ -960,11 +950,18 @@
       <option name="project" value="LOCAL" />
       <updated>1474047334650</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Restart">
+      <created>1474047752357</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1474047752357</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17778000" />
+    <option name="totallyTimeSpent" value="18079000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="30" width="1366" height="738" extended-state="6" />
@@ -1038,7 +1035,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Try new header #14" />
     <MESSAGE value="Try new header #15" />
     <MESSAGE value="Try new header #16" />
     <MESSAGE value="Try new header #17" />
@@ -1063,7 +1059,8 @@
     <MESSAGE value="Add beep music" />
     <MESSAGE value="Start new webpage" />
     <MESSAGE value="Add Css" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Css" />
+    <MESSAGE value="Restart" />
+    <option name="LAST_COMMIT_MESSAGE" value="Restart" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1255,8 +1252,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="23" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
+        <state relative-caret-position="165">
+          <caret line="22" column="38" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
           <folding />
         </state>
       </provider>
