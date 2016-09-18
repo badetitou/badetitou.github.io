@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5ce1d2af-12ae-4e92-a849-0be98235fb60" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ressources/images/694px-Star_Wars_Logo.svg.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/css/card_beepmusic.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/main.css" afterPath="$PROJECT_DIR$/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/linux/index.html" afterPath="$PROJECT_DIR$/linux/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/card_beepmusic.css" afterPath="$PROJECT_DIR$/css/card_beepmusic.css" />
     </list>
     <ignored path="badetitou.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,11 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/linux/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="195">
-              <caret line="49" column="79" selection-start-line="49" selection-start-column="79" selection-end-line="49" selection-end-column="79" />
+              <caret line="49" column="56" selection-start-line="49" selection-start-column="56" selection-end-line="49" selection-end-column="56" />
               <folding>
                 <element signature="n#style#0;n#h1#0;n#div#0;n#section#1;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#section#1;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -44,28 +41,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="694px-Star_Wars_Logo.svg.png" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ressources/images/694px-Star_Wars_Logo.svg.png">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/main.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="2" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
+            <state relative-caret-position="102">
+              <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="card_beepmusic.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="card_beepmusic.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/css/card_beepmusic.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="15" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="15" />
+            <state relative-caret-position="17">
+              <caret line="1" column="15" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -105,8 +95,8 @@
         <option value="$PROJECT_DIR$/Info/index.html" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/css/main.css" />
-        <option value="$PROJECT_DIR$/css/card_beepmusic.css" />
         <option value="$PROJECT_DIR$/linux/index.html" />
+        <option value="$PROJECT_DIR$/css/card_beepmusic.css" />
       </list>
     </option>
   </component>
@@ -727,14 +717,7 @@
       <workItem from="1473710323031" duration="80000" />
       <workItem from="1474044828658" duration="8515000" />
       <workItem from="1474215672443" duration="11000" />
-      <workItem from="1474215816518" duration="2611000" />
-    </task>
-    <task id="LOCAL-00005" summary="Try new header #4">
-      <created>1468074986832</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1468074986832</updated>
+      <workItem from="1474215816518" duration="3520000" />
     </task>
     <task id="LOCAL-00006" summary="Try new header #5">
       <created>1468075194939</created>
@@ -1072,11 +1055,18 @@
       <option name="project" value="LOCAL" />
       <updated>1474216222872</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="Try add star wars">
+      <created>1474218439264</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1474218439264</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26488000" />
+    <option name="totallyTimeSpent" value="27397000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1150,7 +1140,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Try new header #24" />
     <MESSAGE value="Try new header #25" />
     <MESSAGE value="Try new header #26" />
     <MESSAGE value="Try new header #27" />
@@ -1175,7 +1164,8 @@
     <MESSAGE value="Best css for page" />
     <MESSAGE value="Change css everywhere" />
     <MESSAGE value="change home page" />
-    <option name="LAST_COMMIT_MESSAGE" value="change home page" />
+    <MESSAGE value="Try add star wars" />
+    <option name="LAST_COMMIT_MESSAGE" value="Try add star wars" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1409,31 +1399,23 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="2" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/card_beepmusic.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="15" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ressources/images/694px-Star_Wars_Logo.svg.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/linux/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
-          <caret line="49" column="79" selection-start-line="49" selection-start-column="79" selection-end-line="49" selection-end-column="79" />
+          <caret line="49" column="56" selection-start-line="49" selection-start-column="56" selection-end-line="49" selection-end-column="56" />
           <folding>
             <element signature="n#style#0;n#h1#0;n#div#0;n#section#1;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#section#1;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -1441,6 +1423,14 @@
             <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#section#1;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#section#1;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/card_beepmusic.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="15" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="15" />
+          <folding />
         </state>
       </provider>
     </entry>
