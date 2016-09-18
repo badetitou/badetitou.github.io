@@ -1,0 +1,9 @@
+.starwars_card.mdl-card {
+    width: 694px;
+    height: 500px;
+}
+.starwars_card > .mdl-card__title {
+    color: #fff;
+    background:
+            url('../ressources/images/694px-Star_Wars_Logo.svg.png') bottom right 15% no-repeat #000000;
+}
