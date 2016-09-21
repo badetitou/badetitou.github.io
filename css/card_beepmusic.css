@@ -5,3 +5,19 @@
     background-size: contain;
     height: 14pc;
 }
+
+.mario_card > .mdl-card__title {
+    color: #fff;
+    background:
+            url('../ressources/images/480px-Mario_emblem.svg.png')  bottom right 50% no-repeat #FF0000;
+    background-size: contain;
+    height: 14pc;
+}
+
+.daftpunk_card > .mdl-card__title {
+    color: #000;
+    background:
+            url('../ressources/images/Daft_Punk.png')  bottom right 50% no-repeat #FFFFFF;
+    background-size: contain;
+    height: 14pc;
+}
