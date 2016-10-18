@@ -28,8 +28,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/clubInfo/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="48" column="50" selection-start-line="48" selection-start-column="50" selection-end-line="48" selection-end-column="50" />
+            <state relative-caret-position="334">
+              <caret line="77" column="45" selection-start-line="77" selection-start-column="45" selection-end-line="77" selection-end-column="45" />
               <folding>
                 <element signature="n#section#1;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
                 <element signature="n#section#2;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
@@ -603,14 +603,7 @@
       <workItem from="1474467605880" duration="1675000" />
       <workItem from="1474712119606" duration="16000" />
       <workItem from="1476808823943" duration="2715000" />
-      <workItem from="1476814231048" duration="245000" />
-    </task>
-    <task id="LOCAL-00013" summary="Try new header #12">
-      <created>1468075636167</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1468075636167</updated>
+      <workItem from="1476814231048" duration="625000" />
     </task>
     <task id="LOCAL-00014" summary="Try new header #13">
       <created>1468075784395</created>
@@ -948,11 +941,18 @@
       <option name="project" value="LOCAL" />
       <updated>1476811325424</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="update pas de mail">
+      <created>1476814484668</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1476814484669</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33336000" />
+    <option name="totallyTimeSpent" value="33716000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1366" height="741" extended-state="6" />
@@ -1026,7 +1026,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="remove useless pics" />
     <MESSAGE value="start logo" />
     <MESSAGE value="color start page" />
     <MESSAGE value="Add categories" />
@@ -1051,7 +1050,8 @@
     <MESSAGE value="Update tab" />
     <MESSAGE value="Add Daft Punk and Mario" />
     <MESSAGE value="Add git tuto" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add git tuto" />
+    <MESSAGE value="update pas de mail" />
+    <option name="LAST_COMMIT_MESSAGE" value="update pas de mail" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1313,8 +1313,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/clubInfo/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="48" column="50" selection-start-line="48" selection-start-column="50" selection-end-line="48" selection-end-column="50" />
+        <state relative-caret-position="334">
+          <caret line="77" column="45" selection-start-line="77" selection-start-column="45" selection-end-line="77" selection-end-column="45" />
           <folding>
             <element signature="n#section#1;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
             <element signature="n#section#2;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
