@@ -17,16 +17,19 @@
         </div>
         <!-- Tabs -->
         <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-            <a href="#scroll-tab-1" class="mdl-layout__tab is-active">Home</a>
+            <a href="#scroll-tab-1" class="mdl-layout__tab is-active">Presentation</a>
+            <a href="#scroll-tab-2" class="mdl-layout__tab">Installation</a>
+            <a href="#scroll-tab-3" class="mdl-layout__tab">Bases</a>
         </div>
     </header>
     <div class="mdl-layout__drawer">
         <span class="mdl-layout-title">Navigation</span>
         <nav class="mdl-navigation">
-            <a class="mdl-navigation__link mdl-navigation__link--current" href="..">Home</a>
+            <a class="mdl-navigation__link" href="..">Home</a>
             <a class="mdl-navigation__link" href="../linux/index.html">Linux</a>
             <a class="mdl-navigation__link" href="../project/index.html">Projects</a>
             <a class="mdl-navigation__link" href="../Info/index.html">Computer Science</a>
+            <a class="mdl-navigation__link mdl-navigation__link--current" href="#">Club Info (Polytech'Lille)</a>
         </nav>
     </div>
     <main class="mdl-layout__content">
@@ -35,11 +38,118 @@
                 <div class="mdl-grid">
                     <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
                     <div class="mdl-cell mdl-cell--8-col mdl-cell--4-col-phone mdl-color--white mdl-shadow--6dp mdl-color-text--grey-800">
-                        <h1>Beno&#238;t "badetitou" Verhaeghe</h1>
+                        <h1>Club Info Polytech'Lille</h1>
                         <h2>GIT</h2>
+                        <p>Git est un outil de gestion de version</p>
                         <p>
-                        export http_proxy=proxy.polytech-lille.fr:3128 ; export https_proxy=$http_proxy ; export ftp_proxy=$http_proxy ; export rsync_proxy=$http_proxy ; export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
+                            Lors du développement d'une application, il arrive souvent que plusieurs personne travail sur le
+                            même projet. Le plus grand des problèmes est donc <i>Comment vais-je faire travailler tout le monde
+                        sans pour autant tout casse ?</i> Mais aussi, si quelqu'un casse tout, comment revenir en arrière.
+                        </p>
+                        <p>
+                            C'est pour cela que git existe. Il va nous permettre de développer un projet de manière <b>propre</b>
+                        </p>
+                        <h3>Mais comment ça fonctionne ? </h3>
+                        <p>
+                            Vous avez un serveur git (local, ou en ligne). Vous avez un client git (généralement sur votre machine).
+                            Vous communiquez depuis votre client vers le serveur.
+                        </p>
+                        <p><i>Comment ?</i></p>
+                        <p>
+                            Lorsque vous créer des fichiers
+                            pour votre projet, vous dîtes à votre client de les ajoutés au projet. Ensuite, quand vous modifier
+                            un fichier, vous <b>commentez</b> vos modifications. Enfin, vous ajoutez les modifications sur le serveur.
+                        </p>
+                        <p><i>Et la collaboration ?</i></p>
+                        <p>
+                            Les personnes que vous avez autorisées peuvent télécharger le projet
+                            sur leur ordinateur avec un client git. Faire des modifications. Et envoyer des propositions de correction.
+                        </p>
+                        <p>
+                            Nous allons voir comment installer le logiciel, les commandes de base et enfin les commandes avancés.
+                        </p>
+
+                    </div>
+                    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
+                </div>
+            </div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="scroll-tab-2">
+            <div class="page-content">
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
+                    <div class="mdl-cell mdl-cell--8-col mdl-cell--4-col-phone mdl-color--white mdl-shadow--6dp mdl-color-text--grey-800">
+                        <h1>Club Info Polytech'Lille</h1>
+                        <h2>GIT</h2>
+                        <h3>Installation</h3>
+                        <p>Installation de Git chez vous</p>
+                        <h4>Linux</h4>
+                        <code>
+  apt install git
+                        </code>
+                        <h4>Windows</h4>
+                        <code>
+  <a href="http://msysgit.github.io">msysgit executable</a>
+                        </code>
+                        <h4>Mac</h4>
+                        <code>
+  <a href="http://sourceforge.net/projects/git-osx-installer/">git osx installer</a>
+                        </code>
+                        <h4>Polytech Lille</h4>
+                        <p>
+                            Git peut fonctionner grâce au protocole SSH et HTTPS. SSH ne peut pas être utilisé
+                            à Polytech (question de sécurité réseau). C'est pour cela que nous verrons l'utilisations
+                            avec HTTPS ici.
+                        </p>
+                        <p>
+                            L'utilisation de SSH reste similaire.
+                        </p>
+                        <p>
+                            Afin d'utiliser le proxy HTTPS de Polytech avec GIT vous devez executer la commande suivante
+                            dans un terminal. Vous pouvez evidemment simplifier la manipulation en ajoutant la ligne suivante
+                            dans votre ~/.bashrc.
+                        </p>
+                        <p align="center">
+                            export http_proxy=proxy.polytech-lille.fr:3128 ; export https_proxy=$http_proxy ; export ftp_proxy=$http_proxy ; export rsync_proxy=$http_proxy ; export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
                         <p/>
+                    </div>
+                    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
+                </div>
+            </div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="scroll-tab-3">
+            <div class="page-content">
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
+                    <div class="mdl-cell mdl-cell--8-col mdl-cell--4-col-phone mdl-color--white mdl-shadow--6dp mdl-color-text--grey-800">
+                        <h1>Club Info Polytech'Lille</h1>
+                        <h2>GIT</h2>
+                        <h3>Commandes de base</h3>
+                        <h4>git init</h4>
+                        <p>
+                            Permet de créer un repository sur la machine local. Contient l'ensemble du projet.
+                            C'est ce que l'on retrouve sur chaque machine possédant le projet.
+                        </p>
+                        <h4>git clone &#60;url&#62;</h4>
+                        <p>
+                            Permet de récuperer un repository distant.
+                        </p>
+                        <h4>git pull</h4>
+                        <p>
+                            Permet de mettre à jour un repository.
+                        </p>
+                        <h4>git add &#60;nom de fichier/dossier&#62;</h4>
+                        <p>
+                            Permet d'ajouter un fichier ou projet au repository.
+                        </p>
+                        <h4>git commit -m "&#60;commentaire&#62;"</h4>
+                        <p>
+                            Permet de commenter les modification effectuer et les prépares à la validation.
+                        </p>
+                        <h4>git push</h4>
+                        <p>
+                            Permet de valider les modifications effectuées.
+                        </p>
                     </div>
                     <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
                 </div>
