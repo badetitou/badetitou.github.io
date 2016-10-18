@@ -1,7 +1,7 @@
 .starwars_card > .mdl-card__title {
     color: #fff;
     background:
-            url('../ressources/images/694px-Star_Wars_Logo.svg.png')  bottom right 50% no-repeat #000000;
+            url('../ressources/images/beep_music/694px-Star_Wars_Logo.svg.png')  bottom right 50% no-repeat #000000;
     background-size: contain;
     height: 14pc;
 }
@@ -9,7 +9,7 @@
 .mario_card > .mdl-card__title {
     color: #fff;
     background:
-            url('../ressources/images/480px-Mario_emblem.svg.png')  bottom right 50% no-repeat #FF0000;
+            url('../ressources/images/beep_music/480px-Mario_emblem.svg.png')  bottom right 50% no-repeat #FF0000;
     background-size: contain;
     height: 14pc;
 }
@@ -17,7 +17,7 @@
 .daftpunk_card > .mdl-card__title {
     color: #000;
     background:
-            url('../ressources/images/Daft_Punk.png')  bottom right 50% no-repeat #FFFFFF;
+            url('../ressources/images/beep_music/Daft_Punk.png')  bottom right 50% no-repeat #FFFFFF;
     background-size: contain;
     height: 14pc;
 }
