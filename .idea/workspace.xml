@@ -3,14 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5ce1d2af-12ae-4e92-a849-0be98235fb60" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Info/index.html" afterPath="$PROJECT_DIR$/Info/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clubInfo/git.html" afterPath="$PROJECT_DIR$/clubInfo/git.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clubInfo/index.html" afterPath="$PROJECT_DIR$/clubInfo/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clubInfo/jdbi.html" afterPath="$PROJECT_DIR$/clubInfo/jdbi.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clubInfo/spring.html" afterPath="$PROJECT_DIR$/clubInfo/spring.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/linux/index.html" afterPath="$PROJECT_DIR$/linux/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/index.html" afterPath="$PROJECT_DIR$/project/index.html" />
     </list>
     <ignored path="badetitou.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,21 +26,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="spring.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="spring.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/clubInfo/spring.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="7" lean-forward="true" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
+            <state relative-caret-position="459">
+              <caret line="27" column="65" lean-forward="false" selection-start-line="27" selection-start-column="65" selection-end-line="27" selection-end-column="65" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/clubInfo/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="15" column="39" lean-forward="true" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
+            <state relative-caret-position="238">
+              <caret line="17" column="31" lean-forward="true" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -752,14 +746,7 @@
       <workItem from="1474215672443" duration="11000" />
       <workItem from="1474215816518" duration="4808000" />
       <workItem from="1474467605880" duration="1802000" />
-      <workItem from="1481403387616" duration="2275000" />
-    </task>
-    <task id="LOCAL-00018" summary="Try new header #17">
-      <created>1468076060743</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1468076060743</updated>
+      <workItem from="1481403387616" duration="2352000" />
     </task>
     <task id="LOCAL-00019" summary="Try new header #18">
       <created>1468076109557</created>
@@ -1097,11 +1084,18 @@
       <option name="project" value="LOCAL" />
       <updated>1481405576188</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="Correct page order">
+      <created>1481405679583</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1481405679583</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32762000" />
+    <option name="totallyTimeSpent" value="32839000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
@@ -1182,7 +1176,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Start new webpage" />
     <MESSAGE value="Add Css" />
     <MESSAGE value="Restart" />
     <MESSAGE value="Restart 2" />
@@ -1207,7 +1200,8 @@
     <MESSAGE value="try something 2" />
     <MESSAGE value="try something 3" />
     <MESSAGE value="Correct bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correct bug" />
+    <MESSAGE value="Correct page order" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correct page order" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1634,18 +1628,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/clubInfo/spring.html">
+    <entry file="file://$PROJECT_DIR$/clubInfo/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="7" lean-forward="true" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
+        <state relative-caret-position="238">
+          <caret line="17" column="31" lean-forward="true" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/clubInfo/index.html">
+    <entry file="file://$PROJECT_DIR$/clubInfo/spring.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="15" column="39" lean-forward="true" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
+        <state relative-caret-position="459">
+          <caret line="27" column="65" lean-forward="false" selection-start-line="27" selection-start-column="65" selection-end-line="27" selection-end-column="65" />
           <folding />
         </state>
       </provider>
