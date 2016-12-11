@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header ">
     <header class="mdl-layout__header mdl-layout__header--waterfall">
         <div class="mdl-layout__header-row">
             <!-- Title -->
@@ -30,13 +30,16 @@
     </header>
     <div class="mdl-layout__drawer">
         <span class="mdl-layout-title">Navigation</span>
-        <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="..">Home</a>
-            <a class="mdl-navigation__link" href="../linux/index.html">Linux</a>
-            <a class="mdl-navigation__link" href="../project/index.html">Projects</a>
-            <a class="mdl-navigation__link" href="../Info/index.html">Computer Science</a>
-            <a class="mdl-navigation__link mdl-navigation__link--current" href="#">Club Info (Polytech'Lille)</a>
-        </nav>
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">Navigation</span>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link mdl-navigation__link--current" href="/">Home</a>
+                <a class="mdl-navigation__link" href="/linux/index.html">Linux</a>
+                <a class="mdl-navigation__link" href="/project/index.html">Projects</a>
+                <a class="mdl-navigation__link" href="/Info/index.html">Computer Science</a>
+                <a class="mdl-navigation__link" href="/clubInfo/index.html">Club Info (Polytech'Lille)</a>
+            </nav>
+        </div>
     </div>
     <main class="mdl-layout__content">
         <section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
