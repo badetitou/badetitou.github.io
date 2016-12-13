@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="5ce1d2af-12ae-4e92-a849-0be98235fb60" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clubInfo/git.html" afterPath="$PROJECT_DIR$/clubInfo/git.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clubInfo/index.html" afterPath="$PROJECT_DIR$/clubInfo/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clubInfo/jdbi.html" afterPath="$PROJECT_DIR$/clubInfo/jdbi.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clubInfo/spring.html" afterPath="$PROJECT_DIR$/clubInfo/spring.html" />
     </list>
     <ignored path="badetitou.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,11 +35,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="spring.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="spring.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/clubInfo/spring.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="12" column="69" lean-forward="true" selection-start-line="12" selection-start-column="69" selection-end-line="12" selection-end-column="69" />
+            <state relative-caret-position="-450">
+              <caret line="12" column="4" lean-forward="true" selection-start-line="12" selection-start-column="4" selection-end-line="56" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/clubInfo/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="554">
+              <caret line="56" column="10" lean-forward="false" selection-start-line="56" selection-start-column="10" selection-end-line="56" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -47,8 +58,18 @@
       <file leaf-file-name="jdbi.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/clubInfo/jdbi.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2268">
-              <caret line="135" column="18" lean-forward="false" selection-start-line="135" selection-start-column="18" selection-end-line="135" selection-end-column="18" />
+            <state relative-caret-position="554">
+              <caret line="56" column="10" lean-forward="false" selection-start-line="56" selection-start-column="10" selection-end-line="56" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="git.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/clubInfo/git.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="932">
+              <caret line="56" column="10" lean-forward="false" selection-start-line="56" selection-start-column="10" selection-end-line="56" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -88,13 +109,13 @@
         <option value="$PROJECT_DIR$/css/card_beepmusic.css" />
         <option value="$PROJECT_DIR$/static/navigation.html" />
         <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/clubInfo/index.html" />
         <option value="$PROJECT_DIR$/Info/index.html" />
         <option value="$PROJECT_DIR$/linux/index.html" />
         <option value="$PROJECT_DIR$/project/index.html" />
-        <option value="$PROJECT_DIR$/clubInfo/git.html" />
         <option value="$PROJECT_DIR$/clubInfo/spring.html" />
+        <option value="$PROJECT_DIR$/clubInfo/index.html" />
         <option value="$PROJECT_DIR$/clubInfo/jdbi.html" />
+        <option value="$PROJECT_DIR$/clubInfo/git.html" />
       </list>
     </option>
   </component>
@@ -636,14 +657,7 @@
       <workItem from="1481486572850" duration="484000" />
       <workItem from="1481620239321" duration="797000" />
       <workItem from="1481625508510" duration="2400000" />
-      <workItem from="1481632563279" duration="4794000" />
-    </task>
-    <task id="LOCAL-00023" summary="Try new header #22">
-      <created>1468076583659</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1468076583659</updated>
+      <workItem from="1481632563279" duration="5243000" />
     </task>
     <task id="LOCAL-00024" summary="Try new header #23">
       <created>1468076716970</created>
@@ -981,11 +995,18 @@
       <option name="project" value="LOCAL" />
       <updated>1481635430561</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="JDBI start annotations&#10;+ Exemple détaillé tab">
+      <created>1481637580608</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1481637580609</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41314000" />
+    <option name="totallyTimeSpent" value="41763000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1366" height="768" extended-state="6" />
@@ -1066,7 +1087,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Update all menu" />
     <MESSAGE value="support mobile" />
     <MESSAGE value="Waterfall" />
     <MESSAGE value="Try css" />
@@ -1091,7 +1111,8 @@
     <MESSAGE value="correct navigation" />
     <MESSAGE value="Quick tuto spring v1" />
     <MESSAGE value="Good nav for Sprint" />
-    <option name="LAST_COMMIT_MESSAGE" value="Good nav for Sprint" />
+    <MESSAGE value="JDBI start annotations&#10;+ Exemple détaillé tab" />
+    <option name="LAST_COMMIT_MESSAGE" value="JDBI start annotations&#10;+ Exemple détaillé tab" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1305,32 +1326,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/clubInfo/git.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="16" column="49" lean-forward="false" selection-start-line="16" selection-start-column="49" selection-end-line="16" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/clubInfo/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="738">
-          <caret line="41" column="14" lean-forward="false" selection-start-line="41" selection-start-column="14" selection-end-line="41" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/clubInfo/jdbi.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2268">
-          <caret line="135" column="18" lean-forward="false" selection-start-line="135" selection-start-column="18" selection-end-line="135" selection-end-column="18" />
+        <state relative-caret-position="554">
+          <caret line="56" column="10" lean-forward="false" selection-start-line="56" selection-start-column="10" selection-end-line="56" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/clubInfo/spring.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="69" lean-forward="true" selection-start-line="12" selection-start-column="69" selection-end-line="12" selection-end-column="69" />
+        <state relative-caret-position="-450">
+          <caret line="12" column="4" lean-forward="true" selection-start-line="12" selection-start-column="4" selection-end-line="56" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/clubInfo/jdbi.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="554">
+          <caret line="56" column="10" lean-forward="false" selection-start-line="56" selection-start-column="10" selection-end-line="56" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/clubInfo/git.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="932">
+          <caret line="56" column="10" lean-forward="false" selection-start-line="56" selection-start-column="10" selection-end-line="56" selection-end-column="10" />
           <folding />
         </state>
       </provider>

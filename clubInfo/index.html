@@ -16,7 +16,7 @@
             <span class="mdl-layout-title">Badetitou - CI</span>
             <div class="mdl-layout-spacer"></div>
             <!-- Navigation -->
-            <nav class="mdl-navigation">
+            <nav class="mdl-navigation mdl-layout--large-screen-only">
                 <a class="mdl-navigation__link" href="index.html">Presentation</a>
                 <a class="mdl-navigation__link" href="git.html">Git</a>
                 <a class="mdl-navigation__link" href="spring.html">Spring</a>
@@ -26,20 +26,34 @@
         <!-- Tabs -->
         <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
             <a href="#scroll-tab-1" class="mdl-layout__tab is-active">Presentation</a>
+            <a href="#scroll-tab-2" class="mdl-layout__tab">Annotations</a>
+            <a href="#scroll-tab-3" class="mdl-layout__tab">Exemple détaillé</a>
         </div>
     </header>
     <div class="mdl-layout__drawer">
         <span class="mdl-layout-title">Navigation</span>
-        <div class="mdl-layout__drawer">
-            <span class="mdl-layout-title">Navigation</span>
-            <nav class="mdl-navigation">
-                <a class="mdl-navigation__link mdl-navigation__link--current" href="/">Home</a>
-                <a class="mdl-navigation__link" href="/linux/index.html">Linux</a>
-                <a class="mdl-navigation__link" href="/project/index.html">Projects</a>
-                <a class="mdl-navigation__link" href="/Info/index.html">Computer Science</a>
-                <a class="mdl-navigation__link" href="/clubInfo/index.html">Club Info (Polytech'Lille)</a>
-            </nav>
-        </div>
+        <nav class="mdl-navigation mdl-layout--large-screen-only">
+            <a class="mdl-navigation__link" href="/">Home</a>
+            <a class="mdl-navigation__link" href="/linux/index.html">Linux</a>
+            <a class="mdl-navigation__link" href="/project/index.html">Projects</a>
+            <a class="mdl-navigation__link" href="/Info/index.html">Computer Science</a>
+            <a class="mdl-navigation__link" href="/clubInfo/index.html">Club Info (Polytech'Lille)</a>
+        </nav>
+        <nav class="mdl-navigation mdl-layout--small-screen-only">
+            <a class="mdl-navigation__link" href="/">Home</a>
+            <a class="mdl-navigation__link" href="/linux/index.html">Linux</a>
+            <a class="mdl-navigation__link" href="/project/index.html">Projects</a>
+            <a class="mdl-navigation__link" href="/Info/index.html">Computer Science</a>
+            <span class="mdl-navigation__link">
+                    Club Info (Polytech'Lille)
+            </span>
+            <ul class="mdl-layout--small-screen-only">
+                <li class="mdl-navigation__link"><a class="mdl-navigation__link" href="index.html">Presentation</a></li>
+                <li class="mdl-navigation__link"><a class="mdl-navigation__link" href="git.html">Git</a></li>
+                <li class="mdl-navigation__link"><a class="mdl-navigation__link" href="spring.html">Spring</a></li>
+                <li class="mdl-navigation__link"><a class="mdl-navigation__link" href="jdbi.html">Jdbi</a></li>
+            </ul>
+        </nav>
     </div>
     <main class="mdl-layout__content">
         <section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
