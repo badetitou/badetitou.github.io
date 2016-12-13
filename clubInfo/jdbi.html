@@ -26,6 +26,8 @@
         <!-- Tabs -->
         <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
             <a href="#scroll-tab-1" class="mdl-layout__tab is-active">Presentation</a>
+            <a href="#scroll-tab-2" class="mdl-layout__tab">Annotations</a>
+            <a href="#scroll-tab-3" class="mdl-layout__tab">Exemple détaillé</a>
         </div>
     </header>
     <div class="mdl-layout__drawer">
@@ -44,8 +46,89 @@
                 <div class="mdl-grid">
                     <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
                     <div class="mdl-cell mdl-cell--8-col mdl-cell--4-col-phone mdl-color--white mdl-shadow--6dp mdl-color-text--grey-800">
-                        <h1>Club Info</h1>
-                        <p>Cette zone est utilisé pour partagé des connaissances au sein d'un groupe d'étudiant à l'université.</p>
+                        <h1>JDBI</h1>
+                        <h2>Objectifs</h2>
+                        <p>
+                            L'objectif de jdbi est de simplifier l'accès au base de donner en offrant un niveau
+                            d'abstraction supplémentaire à jdbc.
+                        </p>
+                        <p>
+                            Cette bibliothèque permet de se connecter à une base de données, effectuer des requetes sql sécurisées,
+                            et de convertir automatiquement les résultats en objet.
+                        </p>
+                        <p>
+                            Vous trouverez ici quelques outils pour mieux comprendre jdbi.
+                        </p>
+                    </div>
+                    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
+                </div>
+            </div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="scroll-tab-2">
+            <div class="page-content">
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
+                    <div class="mdl-cell mdl-cell--8-col mdl-cell--4-col-phone mdl-color--white mdl-shadow--6dp mdl-color-text--grey-800">
+                        <h1>Annotations</h1>
+                        <ul class="mdl-list">
+                            <li class="mdl-list__item mdl-list__item--three-line">
+                                <span class="mdl-list__item-primary-content">
+                                    <span>@SqlQuery(String myRequest)</span>
+                                    <span class="mdl-list__item-text-body">
+                                        A mettre au dessus du nom de la fonction voulu (pour une interface).
+                                        Execute la requete de type Select defini" dans "myRequest".
+                                    </span>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item mdl-list__item--three-line">
+                                <span class="mdl-list__item-primary-content">
+                                    <span>@SqlUpdate(String myRequest)</span>
+                                    <span class="mdl-list__item-text-body">
+                                        A mettre au dessus du nom de la fonction voulu (pour une interface).
+                                        Execute la requete de type Update (tout sauf les Select et les Procedures stockées) definit dans "myRequest".
+                                    </span>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item mdl-list__item--three-line">
+                                <span class="mdl-list__item-primary-content">
+                                    <span>@SqlUpdate(String myRequest)</span>
+                                    <span class="mdl-list__item-text-body">
+                                        A mettre au dessus du nom de la fonction voulu (pour une interface).
+                                        Execute la requete de type Update (tout sauf les Select et les Procedures stockées) definit dans "myRequest".
+                                    </span>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item mdl-list__item--three-line">
+                                <span class="mdl-list__item-primary-content">
+                                    <span>@RegisterMapperFactory(BeanMapperFactory.class)</span>
+                                    <span class="mdl-list__item-text-body">
+                                        A mettre au dessus du nom de la fonction voulu (pour une interface).
+                                        Permet de retourner l'objet correspondant au type de retour de la fonction. La correspondance se fait
+                                        autmatiquement, l'object doit cependant avoir les même attributs que les colonnes retourner par la requete.
+                                    </span>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item mdl-list__item--three-line">
+                                <span class="mdl-list__item-primary-content">
+                                    <span>@GetGeneratedKeys</span>
+                                    <span class="mdl-list__item-text-body">
+                                        A mettre au dessus du nom de la fonction voulu (pour une interface).
+                                        Permet de récuperer la clef primaire générée lors d'une insertion.
+                                    </span>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
+                </div>
+            </div>
+        </section>
+        <section class="mdl-layout__tab-panel" id="scroll-tab-3">
+            <div class="page-content">
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
+                    <div class="mdl-cell mdl-cell--8-col mdl-cell--4-col-phone mdl-color--white mdl-shadow--6dp mdl-color-text--grey-800">
+                        <h1>Work in Progress</h1>
                     </div>
                     <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
                 </div>
