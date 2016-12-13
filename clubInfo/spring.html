@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>
-        $(function() {
+        $(function () {
             $("#naviga").load("/static/navigation.html");
         });
     </script>
@@ -32,7 +32,7 @@
         <!-- Tabs -->
         <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
             <a href="#scroll-tab-1" class="mdl-layout__tab is-active">Presentation</a>
-            <a href="#scroll-tab-2" class="mdl-layout__tab">Configuration</a>
+            <a href="#scroll-tab-2" class="mdl-layout__tab">Annotations</a>
         </div>
     </header>
     <div class="mdl-layout__drawer">
@@ -58,7 +58,8 @@
                             un serveur partout en se basant sur la JAVA machine.
                         </p>
                         <p>
-                            Avec Spring vous pouvez créer le serveur et le tester. le lancer n'importe où. Tout cela avec avec un model <a href="https://fr.wikipedia.org/wiki/Representational_state_transfer">REST</a>.
+                            Avec Spring vous pouvez créer le serveur et le tester. le lancer n'importe où. Tout cela
+                            avec avec un model <a href="https://fr.wikipedia.org/wiki/Representational_state_transfer">REST</a>.
                         </p>
                         <p>Vous trouverez ici une partie des annotations SPRING et comment les utiliser</p>
                     </div>
@@ -72,7 +73,51 @@
                     <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
                     <div class="mdl-cell mdl-cell--8-col mdl-cell--4-col-phone mdl-color--white mdl-shadow--6dp mdl-color-text--grey-800">
                         <h1>Annotations</h1>
-                        <p>Under construction</p>
+                        <ul class="mdl-list">
+                            <li class="mdl-list__item mdl-list__item--three-line">
+                                <span class="mdl-list__item-primary-content">
+                                    <span>@SpringBootApplication</span>
+                                    <span class="mdl-list__item-text-body">
+                                        Classe de démarrage de Spring. C'est une compilation d'annotation. Elle
+                                        permet entre autres de detecter les classes du même package définit comme
+                                        controller Spring.
+                                    </span>
+                                </span>
+                            </li>
+
+                            <li class="mdl-list__item mdl-list__item--three-line">
+                                <span class="mdl-list__item-primary-content">
+                                    <span>@EnableAutoConfiguration</span>
+                                    <span class="mdl-list__item-text-body">
+                                        Auto-configuration de Spring
+                                    </span>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item mdl-list__item--three-line">
+                                <span class="mdl-list__item-primary-content">
+                                    <span>@Controller</span>
+                                    <span class="mdl-list__item-text-body">
+                                        Definit une classe comme controller de Spring
+                                    </span>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item mdl-list__item--three-line">
+                                <span class="mdl-list__item-primary-content">
+                                    <span>@RestController</span>
+                                    <span class="mdl-list__item-text-body">
+                                    Definit une classe comme controller Spring pour faire du REST.
+                                    </span>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item mdl-list__item--three-line">
+                                <span class="mdl-list__item-primary-content">
+                                    <span>@RestMapping</span>
+                                    <span class="mdl-list__item-text-body">
+                                    Definit le chemin vers un élement d'une classe REST.
+                                    </span>
+                                </span>
+                            </li>
+                        </ul>
                     </div>
                     <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
                 </div>
