@@ -1,0 +1,46 @@
+body {
+    background-color: #353535;
+    height: 50vh;
+    width: 70%;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    font-family: 'Roboto', serif;
+}
+
+input {
+    background: none;
+    border: none;
+    border-bottom: 1px solid #ff5722;
+    color: rgb(255, 87, 34);
+    margin: 0.8em;
+    padding: 1em;
+    outline: none;
+
+}
+
+.material-icons.md-48 { font-size: 48px; }
+
+.material-icons.md-light:hover { color: rgba(255, 255, 255, 1); }
+
+.material-icons.md-light { color: rgba(255, 255, 255, 0.3); }
+
+a {
+    margin: 10px;
+}
+
+img {
+    position: relative;
+    top: -6px;
+    height: 35px;
+    width: 35px;
+    filter:invert(40%);
+}
+
+img:hover {
+    filter:invert(100%);
+}
