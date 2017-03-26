@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5ce1d2af-12ae-4e92-a849-0be98235fb60" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clubInfo/index.html" afterPath="$PROJECT_DIR$/clubInfo/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clubInfo/jdbi.html" afterPath="$PROJECT_DIR$/clubInfo/jdbi.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clubInfo/spring.html" afterPath="$PROJECT_DIR$/clubInfo/spring.html" />
     </list>
     <ignored path="badetitou.github.io.iws" />
@@ -59,8 +57,8 @@
       <file leaf-file-name="spring.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/clubInfo/spring.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="67" column="23" lean-forward="false" selection-start-line="67" selection-start-column="23" selection-end-line="67" selection-end-column="23" />
+            <state relative-caret-position="170">
+              <caret line="73" column="80" lean-forward="false" selection-start-line="73" selection-start-column="80" selection-end-line="73" selection-end-column="80" />
               <folding />
             </state>
           </provider>
@@ -694,14 +692,7 @@
       <workItem from="1490366790533" duration="1951000" />
       <workItem from="1490385029116" duration="75000" />
       <workItem from="1490519176548" duration="4715000" />
-      <workItem from="1490531799089" duration="2992000" />
-    </task>
-    <task id="LOCAL-00028" summary="Try new header #27">
-      <created>1468077385199</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1468077385199</updated>
+      <workItem from="1490531799089" duration="3043000" />
     </task>
     <task id="LOCAL-00029" summary="Restart.... template could be a good idea">
       <created>1469888997167</created>
@@ -1039,11 +1030,18 @@
       <option name="project" value="LOCAL" />
       <updated>1490533813933</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="Update Spring and JDBI">
+      <created>1490534803866</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1490534803866</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48010000" />
+    <option name="totallyTimeSpent" value="48061000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1133,7 +1131,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Waterfall" />
     <MESSAGE value="Try css" />
     <MESSAGE value="Best css for page" />
     <MESSAGE value="Change css everywhere" />
@@ -1158,7 +1155,8 @@
     <MESSAGE value="Add kilobits projects" />
     <MESSAGE value="Add CI menu" />
     <MESSAGE value="Update git section" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update git section" />
+    <MESSAGE value="Update Spring and JDBI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update Spring and JDBI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1272,8 +1270,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/clubInfo/spring.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="67" column="23" lean-forward="false" selection-start-line="67" selection-start-column="23" selection-end-line="67" selection-end-column="23" />
+        <state relative-caret-position="170">
+          <caret line="73" column="80" lean-forward="false" selection-start-line="73" selection-start-column="80" selection-end-line="73" selection-end-column="80" />
           <folding />
         </state>
       </provider>
