@@ -1,150 +1,158 @@
 <!Doctype html>
 <html>
+
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/material.min.css">
-    <link rel="stylesheet" type="text/css" href="../css/main.css">
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
-    <script src="../css/material.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <meta charset="UTF-8">
+    <title>Club Info Polytech Lille</title>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../css/materialize.css"  media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".button-collapse").sideNav();
+            $('.scrollspy').scrollSpy();
+            $(".dropdown-button").dropdown();
+            $('.collapsible').collapsible();
+        });
+    </script>
 </head>
 <body>
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <header class="mdl-layout__header mdl-layout__header--waterfall">
-        <div class="mdl-layout__header-row">
-            <!-- Title -->
-            <span class="mdl-layout-title">Badetitou - CI</span>
-            <div class="mdl-layout-spacer"></div>
-            <!-- Navigation -->
-            <nav class="mdl-navigation mdl-layout--large-screen-only">
-                <a class="mdl-navigation__link" href="index.html">Presentation</a>
-                <a class="mdl-navigation__link" href="git.html">Git</a>
-                <a class="mdl-navigation__link" href="spring.html">Spring</a>
-                <a class="mdl-navigation__link" href="jdbi.html">Jdbi</a>
-            </nav>
-        </div>
-        <!-- Tabs -->
-        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-            <a href="#scroll-tab-1" class="mdl-layout__tab is-active">Presentation</a>
-            <a href="#scroll-tab-2" class="mdl-layout__tab">Annotations</a>
-            <a href="#scroll-tab-3" class="mdl-layout__tab">Exemple détaillé</a>
-        </div>
-    </header>
-    <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">Navigation</span>
-        <nav class="mdl-navigation mdl-layout--large-screen-only">
-            <a class="mdl-navigation__link" href="/">Home</a>
-            <a class="mdl-navigation__link" href="/linux/index.html">Linux</a>
-            <a class="mdl-navigation__link" href="/project/index.html">Projects</a>
-            <a class="mdl-navigation__link" href="/Info/index.html">Computer Science</a>
-            <a class="mdl-navigation__link" href="/clubInfo/index.html">Club Info (Polytech'Lille)</a>
-        </nav>
-        <nav class="mdl-navigation mdl-layout--small-screen-only">
-            <a class="mdl-navigation__link" href="/">Home</a>
-            <a class="mdl-navigation__link" href="/linux/index.html">Linux</a>
-            <a class="mdl-navigation__link" href="/project/index.html">Projects</a>
-            <a class="mdl-navigation__link" href="/Info/index.html">Computer Science</a>
-            <span class="mdl-navigation__link">
-                    Club Info (Polytech'Lille)
-            </span>
-            <ul class="mdl-layout--small-screen-only">
-                <li class="mdl-navigation__link"><a class="mdl-navigation__link" href="index.html">Presentation</a></li>
-                <li class="mdl-navigation__link"><a class="mdl-navigation__link" href="git.html">Git</a></li>
-                <li class="mdl-navigation__link"><a class="mdl-navigation__link" href="spring.html">Spring</a></li>
-                <li class="mdl-navigation__link"><a class="mdl-navigation__link" href="jdbi.html">Jdbi</a></li>
-            </ul>
-        </nav>
-    </div>
-    <main class="mdl-layout__content">
-        <section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
-            <div class="page-content">
-                <div class="mdl-grid">
-                    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
-                    <div class="mdl-cell mdl-cell--8-col mdl-cell--4-col-phone mdl-color--white mdl-shadow--6dp mdl-color-text--grey-800">
-                        <h1>Spring</h1>
-                        <h2>Objectifs</h2>
-                        <p>
-                            L'objectif de Spring est de fournir un ensemble d'outils permettant de compiler et déployer
-                            un serveur partout en se basant sur la JAVA machine.
-                        </p>
-                        <p>
-                            Avec Spring vous pouvez créer le serveur et le tester. le lancer n'importe où. Tout cela
-                            avec avec un model <a href="https://fr.wikipedia.org/wiki/Representational_state_transfer">REST</a>.
-                        </p>
-                        <p>Vous trouverez ici une partie des annotations SPRING et comment les utiliser</p>
-                    </div>
-                    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
-                </div>
-            </div>
-        </section>
-        <section class="mdl-layout__tab-panel" id="scroll-tab-2">
-            <div class="page-content">
-                <div class="mdl-grid">
-                    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
-                    <div class="mdl-cell mdl-cell--8-col mdl-cell--4-col-phone mdl-color--white mdl-shadow--6dp mdl-color-text--grey-800">
-                        <h1>Annotations</h1>
-                        <ul class="mdl-list">
-                            <li class="mdl-list__item mdl-list__item--three-line">
-                                <span class="mdl-list__item-primary-content">
-                                    <span>@SpringBootApplication</span>
-                                    <span class="mdl-list__item-text-body">
-                                        Classe de démarrage de Spring. C'est une compilation d'annotation. Elle
-                                        permet entre autres de detecter les classes du même package définit comme
-                                        controller Spring.
-                                    </span>
-                                </span>
-                            </li>
+<header>
 
-                            <li class="mdl-list__item mdl-list__item--three-line">
-                                <span class="mdl-list__item-primary-content">
-                                    <span>@EnableAutoConfiguration</span>
-                                    <span class="mdl-list__item-text-body">
-                                        Auto-configuration de Spring
-                                    </span>
-                                </span>
+    <!-- Dropdown Structure Club Info -->
+    <ul id="dropdown_ci" class="dropdown-content">
+        <li><a href="/clubInfo">Presentation</a></li>
+        <li><a href="/clubInfo/git.html">Git</a></li>
+        <li><a href="/clubInfo/spring.html">Spring</a></li>
+        <li><a href="/clubInfo/jdbi.html">JDBI</a></li>
+    </ul>
+
+    <nav>
+        <div class="nav-wrapper">
+            <a href="/" class="brand-logo">Le Club Info</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a class="dropdown-button" href="#!" data-activates="dropdown_ci">Le Club Info<i class="material-icons right">arrow_drop_down</i></a></li>
+            </ul>
+            <ul class="side-nav" id="mobile-demo">
+                <li class="no-padding">
+                    <ul class="collapsible collapsible-accordion">
+                        <li>
+                            <a class="collapsible-header">Le Club Info<i class="material-icons">arrow_drop_down</i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li><a href="/clubInfo">Presentation</a></li>
+                                    <li><a href="/clubInfo/git.html">Git</a></li>
+                                    <li><a href="/clubInfo/spring.html">Spring</a></li>
+                                    <li><a href="/clubInfo/jdbi.html">JDBI</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m9 l10">
+                <h3>Spring</h3>
+                <div class="section scrollspy row" id="objectifs">
+                    <h4>Objectifs</h4>
+                    <p>
+                        L'objectif de Spring est de fournir un ensemble d'outils permettant de compiler et déployer
+                        un serveur partout en se basant sur la JAVA machine.
+                    </p>
+                    <p>
+                        Avec Spring vous pouvez créer le serveur et le tester. le lancer n'importe où. Tout cela
+                        avec avec un model <a href="https://fr.wikipedia.org/wiki/Representational_state_transfer">REST</a>.
+                    </p>
+                    <p>Vous trouverez ici une partie des annotations SPRING et comment les utiliser</p>
+                </div>
+                <div class="section scrollspy row" id="annotations">
+                    <h4>Annotations</h4>
+                    <table class="striped">
+                        <thead>
+                        <tr>
+                            <th>
+                                Annotations
+                            </th>
+                            <th>
+                                Définitions
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>@SpringBootApplication</td>
+                            <td>
+                                Classe de démarrage de Spring. C'est une compilation d'annotation. Elle
+                                permet entre autres de detecter les classes du même package définit comme
+                                controller Spring.
+                            </td>
                             </li>
-                            <li class="mdl-list__item mdl-list__item--three-line">
-                                <span class="mdl-list__item-primary-content">
-                                    <span>@Controller</span>
-                                    <span class="mdl-list__item-text-body">
-                                        Definit une classe comme controller de Spring
-                                    </span>
-                                </span>
-                            </li>
-                            <li class="mdl-list__item mdl-list__item--three-line">
-                                <span class="mdl-list__item-primary-content">
-                                    <span>@RestController</span>
-                                    <span class="mdl-list__item-text-body">
-                                    Definit une classe comme controller Spring pour faire du REST.
-                                    </span>
-                                </span>
-                            </li>
-                            <li class="mdl-list__item mdl-list__item--three-line">
-                                <span class="mdl-list__item-primary-content">
-                                    <span>@RestMapping</span>
-                                    <span class="mdl-list__item-text-body">
-                                    Definit le chemin vers un élement d'une classe REST.
-                                    </span>
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
+                        </tr>
+                        <tr>
+                            <td>@EnableAutoConfiguration</td>
+                            <td>
+                                Auto-configuration de Spring
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@Controller</td>
+                            <td>
+                                Definit une classe comme controller de Spring
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@RestController</td>
+                            <td>
+                                Definit une classe comme controller Spring pour faire du REST.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@RestMapping</td>
+                            <td>
+                                Definit le chemin vers un élement d'une classe REST.
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </section>
-        <section class="mdl-layout__tab-panel" id="scroll-tab-3">
-            <div class="page-content">
-                <div class="mdl-grid">
-                    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
-                    <div class="mdl-cell mdl-cell--8-col mdl-cell--4-col-phone mdl-color--white mdl-shadow--6dp mdl-color-text--grey-800">
-                        <h1>Work in Progress</h1>
-                    </div>
-                    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone"></div>
+            <div class="col hide-on-small-only m3 l2">
+                <div class="pinned">
+                    <ul class="section table-of-contents">
+                        <li><a href="#objectifs">Objectifs</a></li>
+                        <li><a href="#annotations">Annotations</a></li>
+                    </ul>
                 </div>
             </div>
-        </section>
-    </main>
-</div>
+        </div>
+    </div>
+</main>
+<footer class="page-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Liens</h5>
+                <ul>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container right">
+            <a class="grey-text text-lighten-4 right" href="https://fr.wikipedia.org/wiki/WTFPL">© 2017 WTFPL</a>
+        </div>
+    </div>
+</footer>
 </body>
 </html>
