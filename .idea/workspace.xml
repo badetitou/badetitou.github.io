@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5ce1d2af-12ae-4e92-a849-0be98235fb60" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/materialize.css" afterPath="$PROJECT_DIR$/css/materialize.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/clubInfo/index.html" afterPath="$PROJECT_DIR$/clubInfo/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
     <ignored path="badetitou.github.io.iws" />
@@ -35,11 +35,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="73" column="44" lean-forward="true" selection-start-line="73" selection-start-column="44" selection-end-line="73" selection-end-column="44" />
+            <state relative-caret-position="306">
+              <caret line="18" column="45" lean-forward="false" selection-start-line="18" selection-start-column="45" selection-end-line="18" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/clubInfo/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="394">
+              <caret line="50" column="87" lean-forward="false" selection-start-line="50" selection-start-column="87" selection-end-line="50" selection-end-column="87" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="git.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/clubInfo/git.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-153">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -84,7 +104,6 @@
         <option value="$PROJECT_DIR$/linux/index.html" />
         <option value="$PROJECT_DIR$/static/navigation.html" />
         <option value="$PROJECT_DIR$/clubInfo/spring.html" />
-        <option value="$PROJECT_DIR$/clubInfo/index.html" />
         <option value="$PROJECT_DIR$/startpages/startpage.html" />
         <option value="$PROJECT_DIR$/startpage/startpage.html" />
         <option value="$PROJECT_DIR$/startpage/homepage.css" />
@@ -92,6 +111,7 @@
         <option value="$PROJECT_DIR$/startpage/homepage.html" />
         <option value="$PROJECT_DIR$/css/materialize.css" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/clubInfo/index.html" />
       </list>
     </option>
   </component>
@@ -168,21 +188,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="img" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="badetitou.github.io" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="badetitou.github.io" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
+              <option name="myItemId" value="clubInfo" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -674,14 +680,7 @@
       <workItem from="1490366504495" duration="238000" />
       <workItem from="1490366790533" duration="1951000" />
       <workItem from="1490385029116" duration="75000" />
-      <workItem from="1490519176548" duration="3061000" />
-    </task>
-    <task id="LOCAL-00024" summary="Try new header #23">
-      <created>1468076716970</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1468076716970</updated>
+      <workItem from="1490519176548" duration="4473000" />
     </task>
     <task id="LOCAL-00025" summary="Try new header #24">
       <created>1468076908555</created>
@@ -1019,11 +1018,18 @@
       <option name="project" value="LOCAL" />
       <updated>1490521337499</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="Add kilobits projects">
+      <created>1490522250385</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1490522250385</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43364000" />
+    <option name="totallyTimeSpent" value="44776000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1113,7 +1119,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add navigation" />
     <MESSAGE value="Update all menu" />
     <MESSAGE value="support mobile" />
     <MESSAGE value="Waterfall" />
@@ -1138,7 +1143,8 @@
     <MESSAGE value="AGAIN" />
     <MESSAGE value="Restart ... Yes Again but it's fun ^^" />
     <MESSAGE value="Add projects" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add projects" />
+    <MESSAGE value="Add kilobits projects" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add kilobits projects" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1195,13 +1201,6 @@
     <entry file="file://$PROJECT_DIR$/ressources/images/480px-Mario_emblem.svg.png" />
     <entry file="file://$PROJECT_DIR$/ressources/images/Daft_Punk.png" />
     <entry file="file://$PROJECT_DIR$/linux/index.html" />
-    <entry file="file://$PROJECT_DIR$/clubInfo/git.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/clubInfo/jdbi.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1226,13 +1225,6 @@
     <entry file="file://$PROJECT_DIR$/ressources/images/clubInfo_git/git.png" />
     <entry file="file://$PROJECT_DIR$/project/index.html" />
     <entry file="file://$PROJECT_DIR$/Info/index.html" />
-    <entry file="file://$PROJECT_DIR$/clubInfo/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
-          <caret line="57" column="19" lean-forward="true" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/img/Logo.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -1240,16 +1232,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/css/materialize.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="448">
-          <caret line="8589" column="21" lean-forward="false" selection-start-line="8589" selection-start-column="21" selection-end-line="8589" selection-end-column="21" />
+        <state relative-caret-position="1769">
+          <caret line="6965" column="10" lean-forward="false" selection-start-line="6965" selection-start-column="10" selection-end-line="6965" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/clubInfo/git.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-153">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="73" column="44" lean-forward="true" selection-start-line="73" selection-start-column="44" selection-end-line="73" selection-end-column="44" />
+        <state relative-caret-position="306">
+          <caret line="18" column="45" lean-forward="false" selection-start-line="18" selection-start-column="45" selection-end-line="18" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/clubInfo/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="394">
+          <caret line="50" column="87" lean-forward="false" selection-start-line="50" selection-start-column="87" selection-end-line="50" selection-end-column="87" />
           <folding />
         </state>
       </provider>
