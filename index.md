@@ -2,7 +2,7 @@
 layout: default
 ---
 
-Introduction 
+Introduction
 ------------
 
 Je suis étudiant à l'Université de Lille 1 - Science et Technologies à
@@ -24,8 +24,6 @@ un client OPC UA.
 ### Etunicorn
 Etunicorn est un projet de paiement par carte que j'ai fait avec Le Club
 Info de Polytech Lille en temps que chef de projet et président du club.
-
-Le code source n'est pas disponnible pour des questions de licence.
 
 ### ProLab
 ProLab est un site web permettant de faire du suivi de projet depuis un
