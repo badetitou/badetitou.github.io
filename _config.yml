@@ -1,15 +1,15 @@
 # Site settings
-title: Clean Blog
+title: Benoit Verhaeghe
 header-img: img/home-bg.jpg
-email: your-email@yourdomain.com
-copyright_name: Your/Project/Corporate Name
+email: badetitou@gmail.com
+copyright_name: WebSite
 description: "Write your site description here. It will be used as your sites meta description as well!"
-baseurl: "/startbootstrap-clean-blog-jekyll"
-url: "http://yourdomain.com"
-twitter_username: SBootstrap
-github_username:  davidtmiller
-facebook_username:  StartBootstrap
-email_username:  your-email@yourdomain.com
+baseurl: ""
+url: "http://badetitou.github.io"
+twitter_username: badetitou
+github_username:  badetitou
+facebook_username:  Benoit Verhqeghe
+email_username:  badetitou@gmail.com
 
 # Google Analytics
 # To enable google analytics, uncomment below line with a valid Google Tracking ID
