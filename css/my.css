@@ -6,3 +6,11 @@
         margin-top: $spacing-unit / 3;
     }
 }
+
+p {
+  text-align: justify;
+}
+
+li {
+  text-align: justify;
+}
