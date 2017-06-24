@@ -1,14 +1,14 @@
 # Site settings
-title: Benoit Verhaeghe
+title: Benoît Verhaeghe
 header-img: img/home-bg.jpg
 email: badetitou@gmail.com
-copyright_name: WebSite
-description: "Write your site description here. It will be used as your sites meta description as well!"
+copyright_name: badetitou
+description: "Presentation of Benoît \"badetitou\" Verhaeghe"
 baseurl: ""
 url: "http://badetitou.github.io"
 twitter_username: badetitou
 github_username:  badetitou
-facebook_username:  Benoit Verhqeghe
+facebook_username:  badetitou
 email_username:  badetitou@gmail.com
 
 # Google Analytics
