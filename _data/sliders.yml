@@ -1,0 +1,20 @@
+
+- selector: CO_79
+  bullets: true
+  captions: true
+  images:
+    - src: /img/CRHL/CO/79/01.jpg
+      alt: Remise des prix
+    - src: img/CRHL/CO/79/02.jpg
+      alt: Jeux
+    - src: img/CRHL/CO/79/03.jpg
+      alt: L’heure du repas a sonné
+    - src: img/CRHL/CO/79/04.jpg
+      alt: Spectacle
+    - src: img/CRHL/CO/79/05.jpg
+      alt: La ronde
+    - src: img/CRHL/CO/79/06.jpg
+      alt:  En file indienne
+  settings:
+    height: "'auto'"
+    effect: "'fade'"
