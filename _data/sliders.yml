@@ -1,4 +1,21 @@
 
+- selector: CO_79_2
+  bullets: true
+  captions: true
+  images:
+    - src: /img/CRHL/CO/79/2_01.jpg
+      alt: Exposition des photos de classe
+    - src: img/CRHL/CO/79/2_02.jpg
+      alt: Exposition des photos de classe
+    - src: img/CRHL/CO/79/2_03.jpg
+    - src: img/CRHL/CO/79/2_04.jpg
+      alt: Participation des enfants et parents à la recherche des noms d'élèves
+    - src: img/CRHL/CO/79/2_05.jpg
+      alt: Signature du livre d’or par Mme Hallo. Dernière année d’activité en tant qu’ATSEM à l’école maternelle
+  settings:
+    height: "'auto'"
+    effect: "'fade'"
+
 - selector: CO_79
   bullets: true
   captions: true

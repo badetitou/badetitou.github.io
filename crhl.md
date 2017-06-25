@@ -2,6 +2,7 @@
 layout: page
 title: "CRHL"
 description: "Cercle de Recherche Historique de Lezennes."
+header-img: "img/Lezennes_eglise_st_eloi_cote.jpg"
 ---
 
 Le Cercle de Recherche Historique de Lezennes est une association loi 1901 dont je
