@@ -11,6 +11,6 @@ Le Cercle de Recherche Historique de Lezennes est une association loi 1901 dont 
 Nous faisons des expositions sur des événements historique (les anciens bar, la guerre, ... ).
 Nous éditons entre autres le coup d’œil. Un petit journal sur un élément de notre ville.
 
-{% for post in site.posts %}
+{% for post in site.categories.CRHL-CO %}
 - [{{ post.title }}]({{ post.url}})
 {% endfor %}

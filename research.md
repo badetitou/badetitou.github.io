@@ -1,9 +1,10 @@
 ---
 layout: page
-description: "Software Engineer"
+title: "Research"
+description: ""
 ---
 
-# Recent posts
+You can find here the post I did relative to my work in research area.
 
 {% for post in site.categories.research %}
 - [{{ post.title }}]({{ post.url}})
