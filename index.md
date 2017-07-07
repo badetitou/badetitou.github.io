@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Benoît "badetitou" Verhaeghe
+title: Benoît Verhaeghe
 description: "Software Engineer"
 ---
 
