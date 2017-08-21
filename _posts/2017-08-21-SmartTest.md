@@ -1,19 +1,16 @@
 ---
 author: Benoît "badetitou" Verhaeghe
 layout: post
-title:  "CORA - Tutorial"
-date:   2017-07-05 17:53:00 +200
+title:  "SmartTest - Tutorial"
+date:   2017-08-21 14:58:00 +200
 categories: research smalltalk
 ---
 
-/!\ THE PROJECT IS NOW CALLED SmartTest. You can find it [here]({% post_url 2017-08-21-SmartTest %}) /!\
+## What is SmartTest ?
 
+SmartTest is a plugin developed in [Pharo](http://pharo.org/). It is an Add-On for Quality Assistant by [Yuriy Tymchuk](http://yuriy.tymch.uk/) and provides new rules and critiques.
 
-## What is CORA ?
-
-CORA is a plugin developed in [Pharo](http://pharo.org/). It is an Add-On for Quality Assistant by [Yuriy Tymchuk](http://yuriy.tymch.uk/) and provides new rules and critiques.
-
-The goal of CORA is to provide to the developers the list of tests they should run after they modify their code.
+The goal of SmartTest is to provide to the developers the list of tests they should run after they modify their code.
 With this plugin installed, developers will save time and will develop in a better way (hopefully).
 
 ## Installation
@@ -22,7 +19,7 @@ With this plugin installed, developers will save time and will develop in a bett
 
 I supposed you already install Pharo. If not, please [install it](http://pharo.org/download).
 
-To install CORA. The easiest way is to execute the following code in a Playground.
+To install SmartTest. The easiest way is to execute the following code in a Playground.
 
 ```st
 Metacello new
@@ -32,7 +29,7 @@ Metacello new
 ```
 
 From the version 7 of Pharo. Developers use Calypso as Pharo browser.
-So we provide this command to install CORA with the compatibility mode for Calypso.
+So we provide this command to install SmartTest with the compatibility mode for Calypso.
 It will also install the last version of Calypso !!!
 
 ```st
@@ -42,12 +39,12 @@ Metacello new
   load: 'calypso'.
 ```
 
-The installation can take few minutes because CORA needs to use the Sista Compiler.
+The installation can take few minutes because SmartTest needs to use the Sista Compiler.
 So I need to recompile all the code.
 
 ### With Continuous Integration (jenkins)
 
-If you'd like to use a preconfigured image with CORA and optimize for your work.
+If you'd like to use a preconfigured image with SmartTest and optimize for your work.
 You can use the integration with Jenkins I've made.
 You only have to add these lines into your configuration.
 
@@ -65,11 +62,11 @@ You only have to add these lines into your configuration.
 ```
 
 You have to change the last line by replacing `#('CORA')` by list of packages corresponding to your project.
-You should change `$VERSION` by `master` if you want to work only with the stable version of CORA. Or by `development` for the development version of CORA.
+You should change `$VERSION` by `master` if you want to work only with the stable version of SmartTest. Or by `development` for the development version of SmartTest.
 
 ### Help us
 
-I'm also working on test usage habit. If you'd like to use CORA and in the same time help us (because it's awesome ;) ).
+I'm also working on test usage habit. If you'd like to use SmartTest and in the same time help us (because it's awesome ;) ).
 Please use this command :
 
 
@@ -80,7 +77,7 @@ Metacello new
   load.
 ```
 
-It will install a spy that will record data for analysis (No data divulgation, don't worry) and CORA for Nautilus.
+It will install a spy that will record data for analysis (No data divulgation, don't worry) and SmartTest for Nautilus.
 If you want to install the version for Calypso in the same time.
 
 ```st
@@ -92,7 +89,7 @@ Metacello new
 
 ## Utilisation
 
-Once you install CORA, it is auto-activated (it can take a few seconds, but you will not notice them).
+Once you install SmartTest, it is auto-activated (it can take a few seconds, but you will not notice them).
 
 Each time you select a method or a class. Two rules can be activated.
 
@@ -128,15 +125,15 @@ If there are errors or fails, the button will turn red or yellow (but the debugg
             title="AutoTestSelection"
 %}
 
-This window displays the list of tests CORA has found.
+This window displays the list of tests SmartTest has found.
 You're able to run each run by clicking on the #testNotRun icon.
 The tests will be run in debug mode (errors will be displayed).
 By clicking on the "Run all test" button, you will run all the tests displays in debug mode.
 
 ## Options
 
-Many options are available to custom your experience with CORA.
-You should read this part to use CORA at the maximum of its possibilities.
+Many options are available to custom your experience with SmartTest.
+You should read this part to use SmartTest at the maximum of its possibilities.
 You can extend each option and so create your own experience.
 
 ### Testing strategy
@@ -146,16 +143,16 @@ You can extend each option and so create your own experience.
             title="Testing strategy"
 %}
 
-CORA provides four strategies for testing.
+SmartTest provides four strategies for testing.
 
 - *Never* will only display the button as describe previously.
-- *Always* will execute all the test CORA finds as soon as it finds the tests.
-If you change a method A then select a method B before end the research of relative tests, CORA will continue to search and run the tests as soon as it finds them.
-- *Every 5 Minutes* will collect the tests CORA find during a duration of 5 minutes.
-Then CORA will run the tests and, if a test fails, CORA will display a window with the test suite it ran.
-- *Each modification* will run the tests CORA find each time you modify your code.
+- *Always* will execute all the test SmartTest finds as soon as it finds the tests.
+If you change a method A then select a method B before end the research of relative tests, SmartTest will continue to search and run the tests as soon as it finds them.
+- *Every 5 Minutes* will collect the tests SmartTest find during a duration of 5 minutes.
+Then SmartTest will run the tests and, if a test fails, SmartTest will display a window with the test suite it ran.
+- *Each modification* will run the tests SmartTest find each time you modify your code.
 This is the default strategy.
-As for always strategy, if you change a method A and select a method B before the end of the research of relative tests, then CORA will continue to search and run the tests as soon as it finds them.
+As for always strategy, if you change a method A and select a method B before the end of the research of relative tests, then SmartTest will continue to search and run the tests as soon as it finds them.
 
 You're able to extend *CORATestingStrategy* if you'd like to create your own testing strategy.
 
@@ -166,7 +163,7 @@ You're able to extend *CORATestingStrategy* if you'd like to create your own tes
             title="finder"
 %}
 
-The finder contains the implementation of how CORA will find test relative to a method.
+The finder contains the implementation of how SmartTest will find test relative to a method.
 The default will work as follow, for
 - a method, it will use the current change impact strategy (see Change Impact strategy).
 - a class, it will search the method that use the variables of the class.
@@ -186,7 +183,7 @@ You're able to extend *CIPackagesFilter* if you'd like to create your own strate
 Because we're using ChangeImpact.
 You can also define filter for the finder strategy to optimize our tool.
 Currently we are filtering test relative to the method package.
-That include all the class in our package, the package with the same base name ("CORA-Patate" and "CORA-Frite-Poulet" are two packages with the same base name "Cora").
+That include all the class in our package, the package with the same base name ("SmartTest-Patate" and "SmartTest-Frite-Poulet" are two packages with the same base name "SmartTest").
 And the package that call our method class ("MyClass>>#hello" is in the package A. In the package B, there is at least a method that calls "MyClass". So, the methods inside the package B are **not** rejected).
 
 (working on schema)
@@ -201,8 +198,8 @@ You're able to extend *CIPackagesFilter* if you'd like to create your own strate
 %}
 
 
-Currently, CORA uses Change Impact by [Julien Delplanque](https://juliendelplanque.be/) to explore the code.
-The implementation of CORA is simple.
+Currently, SmartTest uses Change Impact by [Julien Delplanque](https://juliendelplanque.be/) to explore the code.
+The implementation of SmartTest is simple.
 We simply research the senders of the method you select and the senders of the senders ...
 Each time, it verify that the senders are not filtered by the filter.
 
@@ -216,7 +213,7 @@ You're able to extend *CIStrategy* if you'd like to create your own strategy to 
 %}
 
 
-The runner is the part of CORA which run the tests provided by the finder.
+The runner is the part of SmartTest which run the tests provided by the finder.
 By default the SmartRunner is used.
 - If you click on "run button" of the critique, it will run the found tests and change its color depending of the result (green, yellow or red).
 - On the "Run All Button" or on the method button, the test will be run in debug mode (so if they fail, or raise an error, the debugger will open).
@@ -227,7 +224,7 @@ The notice one works as the debug one but it **never** opens the debugger.
 
 ## Uninstall
 
-To uninstall CORA, it's a bit hard currently. You have to follow this instruction:
+To uninstall SmartTest, it's a bit hard currently. You have to follow this instruction:
 
 - (Disable TUA in the settings)
 - (Unload TUA)
