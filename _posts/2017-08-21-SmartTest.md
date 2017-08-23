@@ -9,6 +9,7 @@ categories: research smalltalk
 ## What is SmartTest ?
 
 SmartTest is a plugin developed in [Pharo](http://pharo.org/). It is an Add-On for Quality Assistant by [Yuriy Tymchuk](http://yuriy.tymch.uk/) and provides new rules and critiques.
+But it has also is own implementation of feedback about testing
 
 The goal of SmartTest is to provide to the developers the list of tests they should run after they modify their code.
 With this plugin installed, developers will save time and will develop in a better way (hopefully).
@@ -22,7 +23,7 @@ I supposed you already install Pharo. If not, please [install it](http://pharo.o
 To install SmartTest. The easiest way is to use the catalog browser.
 
 {% include image.html
-            img="/img/CORA/install_smartTest.png"
+            img="/img/SmartTest/install_smartTest.png"
 %}
 
 ### With Continuous Integration (jenkins)
@@ -53,19 +54,27 @@ I'm also working on test usage habit. If you'd like to use SmartTest and in the 
 
 
 {% include image.html
-            img="/img/CORA/install_tua.png"
+            img="/img/SmartTest/install_tua.png"
 %}
 
-## Utilisation
+## Utilisation - Reneraku Integration
 
 Once you install SmartTest, it is auto-activated (it can take a few seconds, but you will not notice them).
+
+You can disable this way of utilisation in the setting.
+To do that, you only have to toggle the corresponding button in the settings.
+
+{% include image.html
+            img="/img/SmartTest/renerakuintegration.png"
+            title="Activate QualityAssistant Integration"
+%}
 
 Each time you select a method or a class. Two rules can be activated.
 
 ### Should write tests
 
 {% include image.html
-            img="/img/CORA/shouldWriteTest.png"
+            img="/img/SmartTest/shouldWriteTest.png"
             title="shouldWrtieTest"
 %}
 
@@ -79,7 +88,7 @@ The plugin offer you to create it quickly (from a template).
 ### Should run tests
 
 {% include image.html
-            img="/img/CORA/shouldRunTest.png"
+            img="/img/SmartTest/shouldRunTest.png"
             title="shouldRunTest"
 %}
 
@@ -90,7 +99,7 @@ If there are errors or fails, the button will turn red or yellow (but the debugg
 - By clicking on the #smallWindow icon, the plugin will open a new window with the test it's found.
 
 {% include image.html
-            img="/img/CORA/AutoTestSelection.png"
+            img="/img/SmartTest/AutoTestSelection.png"
             title="AutoTestSelection"
 %}
 
@@ -105,10 +114,25 @@ Many options are available to custom your experience with SmartTest.
 You should read this part to use SmartTest at the maximum of its possibilities.
 You can extend each option and so create your own experience.
 
+### Enable/Disable research
+
+You can enable or disable the research of tests for method or for class only.
+To do that, you only have to toggle the corresponding button in the settings.
+
+{% include image.html
+            img="/img/SmartTest/MethodActivated.png"
+            title="Method Activation"
+%}
+
+{% include image.html
+            img="/img/SmartTest/ClassActivated.png"
+            title="Class Activation"
+%}
+
 ### Testing strategy
 
 {% include image.html
-            img="/img/CORA/testing.png"
+            img="/img/SmartTest/testingStrategy.png"
             title="Testing strategy"
 %}
 
@@ -128,7 +152,7 @@ You're able to extend *CORATestingStrategy* if you'd like to create your own tes
 ### Finder
 
 {% include image.html
-            img="/img/CORA/finder.png"
+            img="/img/SmartTest/finder.png"
             title="finder"
 %}
 
@@ -145,7 +169,7 @@ You're able to extend *CIPackagesFilter* if you'd like to create your own strate
 ### Filter
 
 {% include image.html
-            img="/img/CORA/filter.png"
+            img="/img/SmartTest/filter.png"
             title="filter"
 %}
 
@@ -162,7 +186,7 @@ You're able to extend *CIPackagesFilter* if you'd like to create your own strate
 ### Change Impact strategy
 
 {% include image.html
-            img="/img/CORA/change_impact_strategy.png"
+            img="/img/SmartTest/ChangeImpact.png"
             title="change_impact_strategy"
 %}
 
@@ -177,7 +201,7 @@ You're able to extend *CIStrategy* if you'd like to create your own strategy to 
 ### Runner
 
 {% include image.html
-            img="/img/CORA/runner.png"
+            img="/img/SmartTest/runner.png"
             title="runner"
 %}
 
@@ -189,6 +213,25 @@ By default the SmartRunner is used.
 
 The Debug one will open the debugger if an error appears (don't depend of the button you click on).
 The notice one works as the debug one but it **never** opens the debugger.
+
+## Utilisation - Own implementation
+
+You can activate the own implementation of SmartTest by enabling it in the settings menu.
+
+{% include image.html
+            img="/img/SmartTest/collectButton.png"
+            title="runner"
+%}
+
+Then the Test Button will appear.
+Each time you modify a method.
+The Button will save the tests link to this method.
+When you click on the button, those tests are run, and the button provide you a feedback.
+
+{% include image.html
+            img="/img/SmartTest/relative_test_button.png"
+            title="Relative Test Button"
+%}
 
 
 ## Uninstall
