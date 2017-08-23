@@ -19,28 +19,11 @@ With this plugin installed, developers will save time and will develop in a bett
 
 I supposed you already install Pharo. If not, please [install it](http://pharo.org/download).
 
-To install SmartTest. The easiest way is to execute the following code in a Playground.
+To install SmartTest. The easiest way is to use the catalog browser.
 
-```st
-Metacello new
-  githubUser: 'badetitou' project: 'CORA' commitish: 'master' path: '.';
-  baseline: 'CORA';
-  load.
-```
-
-From the version 7 of Pharo. Developers use Calypso as Pharo browser.
-So we provide this command to install SmartTest with the compatibility mode for Calypso.
-It will also install the last version of Calypso !!!
-
-```st
-Metacello new
-  githubUser: 'badetitou' project: 'CORA' commitish: 'master' path: '.';
-  baseline: 'CORA';
-  load: 'calypso'.
-```
-
-The installation can take few minutes because SmartTest needs to use the Sista Compiler.
-So I need to recompile all the code.
+{% include image.html
+            img="/img/CORA/install_smartTest.png"
+%}
 
 ### With Continuous Integration (jenkins)
 
@@ -51,41 +34,27 @@ You only have to add these lines into your configuration.
 ```
 ./pharo $PROJECT_NAME.image eval --save "
   Metacello new  
-    baseline: #CORA;
-    githubUser: 'badetitou' project: 'CORA' commitish: '$VERSION' path: '.';
+    configuration: #SmartTest;
+    githubUser: 'badetitou' project: 'SmartTest' commitish: '$VERSION' path: '.';
     onWarningLog;
     load".
 
 ./pharo $PROJECT_NAME.image eval --save "
-	CORATestCoverageTestFinderStrategy prepareInJenkinsForPackagesNamed: #('CORA')
+	SmTTestCoverageTestFinderStrategy prepareInJenkinsForPackagesNamed: #('SmartTest')
   ".
 ```
 
-You have to change the last line by replacing `#('CORA')` by list of packages corresponding to your project.
+You have to change the last line by replacing `#('SmartTest')` by list of packages corresponding to your project.
 You should change `$VERSION` by `master` if you want to work only with the stable version of SmartTest. Or by `development` for the development version of SmartTest.
 
 ### Help us
 
 I'm also working on test usage habit. If you'd like to use SmartTest and in the same time help us (because it's awesome ;) ).
-Please use this command :
 
 
-```st
-Metacello new
-  githubUser: 'badetitou' project: 'TestsUsageAnalyser-CORAExtends' commitish: 'master' path: '.';
-  baseline: 'TestsUsageAnalyserCORAExtends';
-  load.
-```
-
-It will install a spy that will record data for analysis (No data divulgation, don't worry) and SmartTest for Nautilus.
-If you want to install the version for Calypso in the same time.
-
-```st
-Metacello new
-  githubUser: 'badetitou' project: 'TestsUsageAnalyser-CORAExtends' commitish: 'master' path: '.';
-  baseline: 'TestsUsageAnalyserCORAExtends';
-  load: 'calypso'.
-```
+{% include image.html
+            img="/img/CORA/install_tua.png"
+%}
 
 ## Utilisation
 
@@ -243,23 +212,11 @@ And you can do pull request too.
 
 ### Development version
 
-We're migrating on github.
-Currently only the development version is present on github.
-You can test it by running this command in a Playground.
-
 ```st
 Metacello new
-  githubUser: 'badetitou' project: 'CORA' commitish: 'development' path: '.';
-  baseline: 'CORA';
+  githubUser: 'badetitou' project: 'SmartTest' commitish: 'development' path: '.';
+  configuration: 'SmartTest';
   load.
 ```
 
-
-To download the version with Calypso.
-
-```st
-Metacello new
-  githubUser: 'badetitou' project: 'CORA' commitish: 'development' path: '.';
-  baseline: 'CORA';
-  load: 'calypso'
-```
+You can also use iceberg to clone the project.
