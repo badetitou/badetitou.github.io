@@ -229,7 +229,7 @@ The Button will save the tests link to this method.
 When you click on the button, those tests are run, and the button provide you a feedback.
 
 {% include image.html
-            img="/img/SmartTest/relative_test_button.png"
+            img="/img/SmartTest/relative_tests_button.png"
             title="Relative Test Button"
 %}
 
