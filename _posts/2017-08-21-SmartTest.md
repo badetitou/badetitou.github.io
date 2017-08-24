@@ -259,6 +259,7 @@ And you can do pull request too.
 Metacello new
   githubUser: 'badetitou' project: 'SmartTest' commitish: 'development' path: '.';
   configuration: 'SmartTest';
+  version: #development;
   load.
 ```
 
