@@ -14,7 +14,7 @@ But it has also is own implementation of feedback about testing
 The goal of SmartTest is to provide to the developers the list of tests they should run after they modify their code.
 With this plugin installed, developers will save time and will develop in a better way (hopefully).
 
-{% youtube jAvfdN2z5-s %}
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jAvfdN2z5-s" frameborder="0" allowfullscreen></iframe>
 
 ## Installation
 
