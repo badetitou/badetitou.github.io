@@ -36,9 +36,13 @@ You only have to add these lines into your configuration.
 
 ```
 ./pharo $PROJECT_NAME.image eval --save "
-  Metacello new  
-    configuration: #SmartTest;
-    githubUser: 'badetitou' project: 'SmartTest' commitish: '$VERSION' path: '.';
+  Metacello
+  new
+    baseline: #SmartTest;
+    githubUser: 'badetitou'
+      project: 'SmartTest'
+      commitish: 'master'
+      path: '.';
     onWarningLog;
     load".
 
@@ -149,7 +153,7 @@ Then SmartTest will run the tests and, if a test fails, SmartTest will display a
 This is the default strategy.
 As for always strategy, if you change a method A and select a method B before the end of the research of relative tests, then SmartTest will continue to search and run the tests as soon as it finds them.
 
-You're able to extend *CORATestingStrategy* if you'd like to create your own testing strategy.
+You're able to extend *SmTTestingStrategy* if you'd like to create your own testing strategy.
 
 ### Finder
 
@@ -259,10 +263,10 @@ And you can do pull request too.
 
 ```st
 Metacello new
+  baseline: #SmartTest;
   githubUser: 'badetitou' project: 'SmartTest' commitish: 'development' path: '.';
-  configuration: 'SmartTest';
-  version: #development;
-  load.
+  onWarningLog;
+  load
 ```
 
 You can also use iceberg to clone the project.
