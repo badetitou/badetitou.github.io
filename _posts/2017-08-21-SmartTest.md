@@ -246,7 +246,7 @@ To uninstall SmartTest, it's a bit hard currently. You have to follow this instr
 
 - (Disable TUA in the settings)
 - (Unload TUA)
-- Unload CORA
+- Unload SmartTest
 - Run this command in a playground `ReRuleManager cleanUp`
 - ReLoad Kernel
 - Reload SUnit-Core
@@ -255,7 +255,7 @@ To uninstall SmartTest, it's a bit hard currently. You have to follow this instr
 
 ## Links
 
-The projects is present on [github](https://github.com/badetitou/CORA).
+The projects is present on [github](https://github.com/badetitou/SmartTest).
 So you can report issues (or features you want to see implemented).
 And you can do pull request too.
 
