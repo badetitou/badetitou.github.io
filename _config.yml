@@ -26,3 +26,5 @@ gems:
   - jekyll-paginate
   - jekyll-feed
   - jekyll-sitemap
+  - jekyll-avatar
+  - jemoji
