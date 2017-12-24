@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: page
 title: "Research"
 description: "My research publication"
 ---
