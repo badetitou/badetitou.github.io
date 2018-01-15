@@ -1,37 +1,30 @@
 #!/bin/bash
 
-# Enable error reporting to the console.
+#!/bin/bash
+
+# skip if build is triggered by pull request
+if [ $TRAVIS_PULL_REQUEST == "true" ]; then
+  echo "this is PR, exiting"
+  exit 0
+fi
+
+# enable error reporting to the console
 set -e
 
-# Install bundles if needed.
-bundle check || bundle install
+# cleanup "_site"
+rm -rf _site
+mkdir _site
 
-# NPM install if needed.
-. $HOME/.nvm/nvm.sh && nvm install 6.1 && nvm use 6.1
-npm install
-
-
-bundle exec jekyll build
-bundle exec htmlproofer ./_site
-
-# Checkout `master` and remove everything.
+# clone remote repo to "_site"
 git clone https://${GH_TOKEN}@github.com/badetitou/badetitou.github.io.git ../badetitou.github.io.master
-cd ../badetitou.github.io.master
-git checkout master
-rm -rf *
 
-# Copy generated HTML site from source branch in original repository.
-# Now the `master` branch will contain only the contents of the _site directory.
-cp -R ../badetitou.github.io/_site/* .
+# build with Jekyll into "_site"
+bundle exec jekyll build
 
-# Make sure we have the updated .travis.yml file so tests won't run on master.
-cp ../badetitou.github.io/.travis.yml .
+# push
+cd _site
 git config user.email ${GH_EMAIL}
 git config user.name "badetitou-bot"
-
-# Commit and push generated content to `master` branch.
-git status
-git add -A .
-git status
+git add --all
 git commit -a -m "Travis #$TRAVIS_BUILD_NUMBER"
-git push --quiet origin `master` > /dev/null 2>&1
+git push --force origin `master`
