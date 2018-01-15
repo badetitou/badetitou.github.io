@@ -3,7 +3,7 @@
 # enable error reporting to the console
 set -e
 
-gem update --system
+rvm use 2.3.3 --install --binary --fuzzy
 gem install bundler
 bundle check || bundle install
 bundle exec jekyll build
