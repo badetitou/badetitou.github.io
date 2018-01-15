@@ -9,3 +9,7 @@ group :jekyll_plugins do
   gem 'jekyll'
   gem 'jekyll-scholar'
 end
+
+group :test do
+  gem "rake"
+end
