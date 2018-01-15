@@ -6,5 +6,4 @@ group :jekyll_plugins do
   gem "jemoji"
   gem 'jekyll-avatar'
   gem "jekyll"
-  gem "html-proofer"
 end
