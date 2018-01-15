@@ -10,8 +10,9 @@ bundle check || bundle install
 . $HOME/.nvm/nvm.sh && nvm install 6.1 && nvm use 6.1
 npm install
 
-# Build the site.
-jekyll build
+
+bundle exec jekyll build
+bundle exec htmlproofer ./_site
 
 # Checkout `master` and remove everything.
 git clone https://${GH_TOKEN}@github.com/badetitou/badetitou.github.io.git ../badetitou.github.io.master
