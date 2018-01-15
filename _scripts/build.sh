@@ -3,15 +3,7 @@
 # enable error reporting to the console
 set -e
 
-# Install bundles if needed.
-bundle check || bundle install
-
-# NPM install if needed.
-. $HOME/.nvm/nvm.sh && nvm install 6.1 && nvm use 6.1
-npm install
-
-# Build the site.
-gulp
+bundle exec jekyll build
 
 # Checkout `master` and remove everything.
 git clone https://${GH_TOKEN}@github.com/savaslabs/badetitou.github.io.git ../badetitou.github.io.master
