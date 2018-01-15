@@ -3,7 +3,8 @@
 # enable error reporting to the console
 set -e
 
-rvm use 2.3.3 --install --binary --fuzzy
+PATH="${TRAVIS_BUILD_DIR}/bin:$PATH"
+
 gem install bundler
 bundle check || bundle install
 bundle exec jekyll build
