@@ -3,7 +3,7 @@
 # enable error reporting to the console
 set -e
 
-
+gem update --system
 gem install bundler
 bundle check || bundle install
 bundle exec jekyll build
