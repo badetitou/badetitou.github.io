@@ -7,7 +7,7 @@ bundle install
 bundle exec jekyll build
 
 # Checkout `master` and remove everything.
-git clone https://${GH_TOKEN}@github.com/savaslabs/badetitou.github.io.git ../badetitou.github.io.master
+git clone https://${GH_TOKEN}@github.com/badetitou/badetitou.github.io.git ../badetitou.github.io.master
 cd ../badetitou.github.io.master
 git checkout master
 rm -rf *
