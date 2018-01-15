@@ -3,6 +3,7 @@
 # enable error reporting to the console
 set -e
 
+bundle install
 bundle exec jekyll build
 
 # Checkout `master` and remove everything.
