@@ -3,10 +3,7 @@
 # enable error reporting to the console
 set -e
 
-echo "bundle install script"
 bundle install
-
-echo "bundle exec jekyll build script"
 bundle exec jekyll build
 
 
