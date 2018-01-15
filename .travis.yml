@@ -27,6 +27,6 @@ env:
 deploy:
   provider: script
   script: "./_scripts/build.sh"
-  skip_cleanup: false
+  skip_cleanup: true
   on:
     branch: source
