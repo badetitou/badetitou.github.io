@@ -11,7 +11,7 @@ bundle check || bundle install
 npm install
 
 # Build the site.
-gulp
+jekyll build
 
 # Checkout `master` and remove everything.
 git clone https://${GH_TOKEN}@github.com/badetitou/badetitou.github.io.git ../badetitou.github.io.master
