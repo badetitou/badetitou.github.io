@@ -6,8 +6,8 @@ set -e
 PATH="${TRAVIS_BUILD_DIR}/bin:$PATH"
 
 gem install bundler
-bundle check || bundle install
-bundle exec jekyll build
+rvm "$TRAVIS_RUBY_VERSION" do bundle install
+rvm "$TRAVIS_RUBY_VERSION" do bundle exec jekyll build
 
 
 # Checkout `master` and remove everything.
