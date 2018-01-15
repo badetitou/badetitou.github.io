@@ -4,6 +4,8 @@ before_script:
    - chmod +x ./_scripts/build.sh
 node_js:
  - '6.1'
+rvm:
+    - 2.3
 before_install:
   - if [[ `npm -v` != 3* ]]; then npm i -g npm@3; fi
   - rvm install 2.3
