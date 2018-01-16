@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Research"
-description: "My research publication"
+header-img: "img/contact-bg.jpg"
 ---
 
 You can find below all my publications.

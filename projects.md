@@ -1,8 +1,7 @@
 ---
 layout: page
 title: "Projects"
-description: "This is the complete collection of my works."
-header-img: "img/about-bg.jpg"
+header-img: "img/project.jpg"
 ---
 
 ### Work in progress
