@@ -13,7 +13,8 @@ email_username:  badetitou@gmail.com
 
 # Google Analytics
 # To enable google analytics, uncomment below line with a valid Google Tracking ID
-# google_tracking_id:
+google_tracking_id: UA-112714614-1
+
 
 # Build settings
 markdown: kramdown
