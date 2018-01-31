@@ -6,7 +6,7 @@ date:   2017-08-21 14:58:00 +200
 categories: research smalltalk
 ---
 
-## What is SmartTest ?
+## What is SmartTest?
 
 SmartTest is a plugin developed in [Pharo](http://pharo.org/). It is an Add-On for Quality Assistant by [Yuriy Tymchuk](http://yuriy.tymch.uk/) and provides new rules and critiques.
 But it has also is own implementation of feedback about testing
@@ -32,7 +32,7 @@ To install SmartTest. The easiest way is to use the catalog browser.
 
 If you'd like to use a preconfigured image with SmartTest and optimize for your work.
 You can use the integration with Jenkins I've made.
-You only have to add these lines into your configuration.
+You only have to add these lines to your configuration.
 
 ```
 ./pharo $PROJECT_NAME.image eval --save "
@@ -47,16 +47,16 @@ You only have to add these lines into your configuration.
     load".
 
 ./pharo $PROJECT_NAME.image eval --save "
-	SmTTestCoverageTestFinderStrategy prepareInJenkinsForPackagesNamed: #('SmartTest')
+    SmTTestCoverageTestFinderStrategy prepareInJenkinsForPackagesNamed: #('SmartTest')
   ".
 ```
 
-You have to change the last line by replacing `#('SmartTest')` by list of packages corresponding to your project.
+You have to change the last line by replacing `#('SmartTest')` by a list of packages corresponding to your project.
 You should change `$VERSION` by `master` if you want to work only with the stable version of SmartTest. Or by `development` for the development version of SmartTest.
 
 ### Help us
 
-I'm also working on test usage habit. If you'd like to use SmartTest and in the same time help us (because it's awesome ;) ).
+I'm also working on test usage habit. If you'd like to use SmartTest and at the same time help us (because it's awesome ;) ).
 
 
 {% include image.html
@@ -67,7 +67,7 @@ I'm also working on test usage habit. If you'd like to use SmartTest and in the 
 
 Once you install SmartTest, it is auto-activated (it can take a few seconds, but you will not notice them).
 
-You can disable this way of utilisation in the setting.
+You can disable this way of utilization in the setting.
 To do that, you only have to toggle the corresponding button in the settings.
 
 {% include image.html
@@ -89,7 +89,7 @@ Normally, it means you didn't write a test for this method.
 So it advises you to create a test (because yes... It's essential !!!).
 
 If you click on the fix button.
-The plugin offer you to create it quickly (from a template).
+The plugin offers you to create it quickly (from a template).
 
 ### Should run tests
 
@@ -122,7 +122,7 @@ You can extend each option and so create your own experience.
 
 ### Enable/Disable research
 
-You can enable or disable the research of tests for method or for class only.
+You can enable or disable the research of tests for a method or for class only.
 To do that, you only have to toggle the corresponding button in the settings.
 
 {% include image.html
@@ -144,9 +144,9 @@ To do that, you only have to toggle the corresponding button in the settings.
 
 SmartTest provides four strategies for testing.
 
-- *Never* will only display the button as describe previously.
+- *Never* will only display the button as described previously.
 - *Always* will execute all the test SmartTest finds as soon as it finds the tests.
-If you change a method A then select a method B before end the research of relative tests, SmartTest will continue to search and run the tests as soon as it finds them.
+If you change a method A then select a method B before the end of the research of relative tests, SmartTest will continue to search and run the tests as soon as it finds them.
 - *Every 5 Minutes* will collect the tests SmartTest find during a duration of 5 minutes.
 Then SmartTest will run the tests and, if a test fails, SmartTest will display a window with the test suite it ran.
 - *Each modification* will run the tests SmartTest find each time you modify your code.
@@ -165,7 +165,7 @@ You're able to extend *SmTTestingStrategy* if you'd like to create your own test
 The finder contains the implementation of how SmartTest will find test relative to a method.
 The default will work as follow, for
 - a method, it will use the current change impact strategy (see Change Impact strategy).
-- a class, it will search the method that use the variables of the class.
+- a class, it will search the method that uses the variables of the class.
 - a test method, it will provide the test method
 - a setup, it will provide all the tests concerning by this setup
 - a teardown, it will provide all the tests concerning by this teardown
@@ -180,10 +180,10 @@ You're able to extend *CIPackagesFilter* if you'd like to create your own strate
 %}
 
 Because we're using ChangeImpact.
-You can also define filter for the finder strategy to optimize our tool.
-Currently we are filtering test relative to the method package.
-That include all the class in our package, the package with the same base name ("SmartTest-Patate" and "SmartTest-Frite-Poulet" are two packages with the same base name "SmartTest").
-And the package that call our method class ("MyClass>>#hello" is in the package A. In the package B, there is at least a method that calls "MyClass". So, the methods inside the package B are **not** rejected).
+You can also define a filter for the finder strategy to optimize our tool.
+Currently, we are filtering test relative to the method package.
+That includes all the class in our package, the package with the same base name ("SmartTest-Patate" and "SmartTest-Frite-Poulet" are two packages with the same base name "SmartTest").
+And the package that calls our method class ("MyClass>>#hello" is in the package A. In the package B, there is at least a method that calls "MyClass". So, the methods inside the package B are **not** rejected).
 
 (working on schema)
 
@@ -200,7 +200,7 @@ You're able to extend *CIPackagesFilter* if you'd like to create your own strate
 Currently, SmartTest uses Change Impact by [Julien Delplanque](https://juliendelplanque.be/) to explore the code.
 The implementation of SmartTest is simple.
 We simply research the senders of the method you select and the senders of the senders ...
-Each time, it verify that the senders are not filtered by the filter.
+Each time, it verifies that the senders are not filtered by the filter.
 
 You're able to extend *CIStrategy* if you'd like to create your own strategy to find tests.
 
@@ -213,11 +213,11 @@ You're able to extend *CIStrategy* if you'd like to create your own strategy to 
 
 
 The runner is the part of SmartTest which run the tests provided by the finder.
-By default the SmartRunner is used.
-- If you click on "run button" of the critique, it will run the found tests and change its color depending of the result (green, yellow or red).
+By default, the SmartRunner is used.
+- If you click on "run button" of the critique, it will run the found tests and change its color depending on the result (green, yellow or red).
 - On the "Run All Button" or on the method button, the test will be run in debug mode (so if they fail, or raise an error, the debugger will open).
 
-The Debug one will open the debugger if an error appears (don't depend of the button you click on).
+The Debug one will open the debugger if an error appears (don't depend on the button you click on).
 The notice one works as the debug one but it **never** opens the debugger.
 
 ## Utilisation - Own implementation
@@ -232,7 +232,7 @@ You can activate the own implementation of SmartTest by enabling it in the setti
 Then the Test Button will appear.
 Each time you modify a method.
 The Button will save the tests link to this method.
-When you click on the button, those tests are run, and the button provide you a feedback.
+When you click on the button, those tests are run, and the button provides you a feedback.
 
 {% include image.html
             img="/img/SmartTest/relative_tests_button.png"
@@ -255,7 +255,7 @@ To uninstall SmartTest, it's a bit hard currently. You have to follow this instr
 
 ## Links
 
-The projects is present on [github](https://github.com/badetitou/SmartTest).
+The projects are present on [github](https://github.com/badetitou/SmartTest).
 So you can report issues (or features you want to see implemented).
 And you can do pull request too.
 
