@@ -23,3 +23,11 @@ La _main_ et le _deck_ sont en réalité des **Cartes**.
 Chaque **Carte** peut être d'un type qui est, soit **Carte Montre**, soit **Carte Magique**.
 Les **Cartes** infligent dans une première version des _dégats_ directement au point de vie du
   **Joueur** adverse.
+
+Un tour se déroulera alors de la manière suivante:
+- Un **Joueur** pioche
+- Effectue une action(poser un monstre sur le terrain, ou utiliser une carte magique)
+- Attaque avec ses monstres
+- Fini son tour
+
+Il vous reste plus qu'à programmer le combat entre deux **Joueurs** :happy:
