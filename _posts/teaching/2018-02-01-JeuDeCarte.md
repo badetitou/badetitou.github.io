@@ -30,4 +30,4 @@ Un tour se déroulera alors de la manière suivante:
 - Attaque avec ses monstres
 - Fini son tour
 
-Il vous reste plus qu'à programmer le combat entre deux **Joueurs** :happy:
+Il vous reste plus qu'à programmer le combat entre deux **Joueurs** :+1:
