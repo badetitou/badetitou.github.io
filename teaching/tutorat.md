@@ -1,6 +1,7 @@
 ---
 layout: page
 title: "Tutorat"
+categories: teaching
 ---
 
 ## Ressources
