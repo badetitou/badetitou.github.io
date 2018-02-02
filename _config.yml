@@ -32,4 +32,4 @@ gems:
   - jekyll-scholar
 
 scholar:
-  bibliography_template: bib
+   style: mla
