@@ -1,16 +1,20 @@
 ---
 ---
 <div>
-  {% if entry.year %}
-    <p>{{ entry.year }}</p>
-  {% endif %}
   {% if entry.author %}
-    <p>{{ entry.author }}</p>
+    {{ entry.author }},
   {% endif %}
   {% if entry.title %}
-    <p>{{ entry.title }}</p>
+    <b>{{ entry.title }}</b>,
+  {% endif %}
+  {% if entry.booktitle %}
+    <i>{{ entry.booktitle }}</i>,
+  {% endif %}
+  {% if entry.year %}
+    {{ entry.year }},
   {% endif %}
   {% if entry.url %}
-    <p>{{ entry.url }}</p>
+    <a href={{ entry.pdf }}>PDF</a>
   {% endif %}
+
 </div>
