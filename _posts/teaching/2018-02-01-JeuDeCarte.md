@@ -12,9 +12,7 @@ categories: teaching preel
 L'objectif de cet exercice est de manipuler les objets.
 Pour cela nous allons construire un jeu de carte avec ces derniers.
 
-## Règles
-
-### 1er version
+## 1er version
 
 Pour commencer nous allons créer un jeu simple.
 Deux **Joueurs** vont s'affronter.
@@ -34,7 +32,7 @@ Un tour se déroulera alors de la manière suivante:
 
 Il vous reste plus qu'à programmer le combat entre deux **Joueurs** :+1:
 
-### 2ème version
+## 2ème version
 
 Maintenant que l'on sait faire combattre deux **Joueurs**, on va pouvoir commencer la création de **Tournoi**.
 Un tournoi va se faire confronter des **Joueurs** (dit _participants_).
@@ -42,5 +40,3 @@ Un tournoi va donc faire s’exécuter plusieurs **Match** entre deux **Joueurs*
 A la fin de chaque match il y aura un _gagnant_.
 
 Let's go !!!
-
-## Aide
