@@ -13,7 +13,6 @@ Vous trouverez ci-dessous des ressources pour vous aider !!!
 Vous trouverez ci-dessous les sujets que nous avons traité en TP.
 
 {% for post in site.categories.preel %}
-<div class="post-preview">
     <a href="{{ post.url | prepend: site.baseurl }}">
         <h3 class="post-title">            {{ post.title }}
         </h3>
@@ -23,6 +22,5 @@ Vous trouverez ci-dessous les sujets que nous avons traité en TP.
         </h4>
         {% endif %}
     </a>
-</div>
 <hr>
 {% endfor %}
