@@ -29,3 +29,7 @@ gems:
   - jekyll-sitemap
   - jekyll-avatar
   - jemoji
+  - jekyll-scholar
+
+scholar:
+  bibliography_template: bib
