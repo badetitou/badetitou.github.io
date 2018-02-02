@@ -2,6 +2,10 @@
 ---
 {{ reference }}
 
+{% if entry.author %}
+<p>{{ entry.author }}</p>
+{% endif %}
+
 {% if entry.abstract %}
 <p>{{ entry.abstract }}</p>
 {% endif %}
