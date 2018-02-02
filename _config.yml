@@ -30,6 +30,3 @@ gems:
   - jekyll-avatar
   - jemoji
   - jekyll-scholar
-
-scholar:
-   style: mla
