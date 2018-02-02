@@ -1,17 +1,16 @@
 ---
 ---
-{{ reference }}
-
-{% if entry.author %}
-<p>{{ entry.author }}</p>
-{% endif %}
-
-{% if entry.URL %}
-<p>{{ entry.URL }}</p>
-{% endif %}
-
-{% if entry.abstract %}
-<p>{{ entry.abstract }}</p>
-{% endif %}
-
-<pre>{{ entry.bibtex }}</pre>
+<div>
+  {% if entry.year %}
+    <p>{{ entry.year }}</p>
+  {% endif %}
+  {% if entry.author %}
+    <p>{{ entry.author }}</p>
+  {% endif %}
+  {% if entry.title %}
+    <p>{{ entry.title }}</p>
+  {% endif %}
+  {% if entry.url %}
+    <p>{{ entry.url }}</p>
+  {% endif %}
+</div>
