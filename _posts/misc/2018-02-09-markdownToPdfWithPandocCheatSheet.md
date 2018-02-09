@@ -14,7 +14,9 @@ I'd like to create a cheat sheet for my main uses with pandoc when I write a doc
 
 - Write comment: `[//]: # My comment`
 - Add bibliography: `\@name`
-- Two figures with caption ```
+- Two figures with caption
+
+```
 \begin{figure}
     \centering
     \begin{minipage}{0.45\textwidth}
@@ -27,4 +29,5 @@ I'd like to create a cheat sheet for my main uses with pandoc when I write a doc
         \includegraphics[width=0.9\textwidth]{ScreenShot/Code.png} % second figure itself
         \caption{\label{code} Page d'accueil code JAVA}
     \end{minipage}
-\end{figure}```
+\end{figure}
+```
