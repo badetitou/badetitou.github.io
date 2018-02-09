@@ -2,7 +2,7 @@
 author: Benoît "badetitou" Verhaeghe
 layout: post
 title:  "Cheat sheet Pandoc Md to pdf"
-date:   2017-08-21 14:58:00 +200
+date:   2018-02-09 16:42:10 +200
 categories: misc pandoc
 ---
 
