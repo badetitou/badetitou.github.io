@@ -15,4 +15,4 @@ Vous trouverez ci-dessous des ressources pour vous aider !!!
 
 Vous trouverez ci-dessous les sujets que nous avons traité en TP.
 
-[JeuDeCarte](Jeux de Carte)
+[Jeu De Carte](JeudeCarte)
