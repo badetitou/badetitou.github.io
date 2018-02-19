@@ -40,3 +40,7 @@ Un tournoi va donc faire s’exécuter plusieurs **Match** entre deux **Joueurs*
 A la fin de chaque match il y aura un _gagnant_.
 
 Let's go !!!
+
+## Solution
+
+[Solution](../files/jeuDeCarte.zip)
