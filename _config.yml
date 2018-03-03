@@ -33,7 +33,6 @@ plugins:
 
 scholar:
   bibliography_template: bib
-  style: ieee
   sort_by: year
   order: descending
   group_by: type
