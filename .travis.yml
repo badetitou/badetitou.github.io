@@ -2,7 +2,6 @@ language: ruby
 sudo: required
 rvm:
   - 2.3.3
-script: "./_scripts/run-tests.sh"
 branches:
   except:
   - master
