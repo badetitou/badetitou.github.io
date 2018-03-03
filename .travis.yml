@@ -1,5 +1,8 @@
 language: ruby
 sudo: required
+before_install:
+  - gem update --system
+  - gem --version
 before_script:
    - chmod +x ./_scripts/build.sh
    - chmod +x ./_scripts/run-tests.sh
