@@ -7,8 +7,9 @@ PATH="${TRAVIS_BUILD_DIR}/bin:$PATH"
 
 gem install bundler
 rvm "$TRAVIS_RUBY_VERSION" do bundle install
+echo "INSTALL DONE"
 rvm "$TRAVIS_RUBY_VERSION" do bundle exec jekyll build
-
+echo "BUILD DONE"
 
 # Checkout `master` and remove everything.
 git clone https://${GH_TOKEN}@github.com/badetitou/badetitou.github.io.git ../badetitou.github.io.master
