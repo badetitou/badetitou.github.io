@@ -27,6 +27,14 @@ section,
 summary {
   display: block;
 }
+
+article > .container, body > .container > .row > .col-lg-8{
+  background-color: #fff;
+  box-shadow: 1px 1px 5px;
+  padding: 1em 3em 1em 3em;
+  border-radius: 2px 5px 10px 5px;
+}
+
 audio,
 canvas,
 progress,
