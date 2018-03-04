@@ -4,4 +4,4 @@ title: "curriculum vitae"
 header-img: "img/about-bg.jpg"
 ---
 
-![CV](https://raw.githubusercontent.com/badetitou/AltaCV/master/cv.png)
+![CV](http://github.com/badetitou/AltaCV/raw/master/cv.png)
