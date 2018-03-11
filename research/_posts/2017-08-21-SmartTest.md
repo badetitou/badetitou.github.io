@@ -8,6 +8,8 @@ categories: research smalltalk
 
 ## What is SmartTest?
 
+![SmartTest innovation award](/img/SmartTest/Medalles2017silver-small.png)
+
 SmartTest is a plugin developed in [Pharo](http://pharo.org/). It is an Add-On for Quality Assistant by [Yuriy Tymchuk](http://yuriy.tymch.uk/) and provides new rules and critiques.
 But it has also is own implementation of feedback about testing
 
