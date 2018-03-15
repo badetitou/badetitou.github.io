@@ -28,18 +28,6 @@ summary {
   display: block;
 }
 
-article > .container, main > .container > .row > .col-lg-8{
-  background-color: #fff;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
-  padding: 1em 3em 1em 3em;
-  border-radius: 2px 5px 10px 5px;
-  transition: 0.3s;
-}
-
-article > .container:hover,main > .container > .row > .col-lg-8:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
 audio,
 canvas,
 progress,
