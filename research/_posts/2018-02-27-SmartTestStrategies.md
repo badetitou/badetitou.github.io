@@ -3,7 +3,7 @@ author: Benoît "badetitou" Verhaeghe
 layout: post
 title:  "SmartTest - strategies"
 date:   2018-02-27 22:31:00 +200
-last_modified_at: 2018-02-27 22:31:00 +200
+last_modified_at: 2018-03-20 18:31:00 +200
 categories: research smalltalk
 ---
 
