@@ -25,7 +25,7 @@ The finder remove those methods of the next research.
 
 Because it could be too long to look for all the senders,
   SmartTest implements filters.
-The filters restraine the scope of research.
+The filters restrain the scope of research.
 There are described here (WIP).
 
 {% include image.html
@@ -35,7 +35,7 @@ There are described here (WIP).
 
 ## Dynamic
 
-The dynamic strategy is faster and more precise but, it need a cache to be really used.
+The dynamic strategy is faster and more precise but, it needs a cache to be really used.
 
 There are two dynamic approaches
 
@@ -74,7 +74,7 @@ The proxy will, when the test is executed,
 
 This second proxy will,
 
-- Add a relation between the futur executed method and the test
+- Add a relation between the future executed method and the test
 - Add the same proxy before all call in the AST of the method
 
 Before installing a proxy, the finder checks that it doesn't have done the
