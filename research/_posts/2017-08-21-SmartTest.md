@@ -137,8 +137,6 @@ The default will work as follow, for
 - a setup, it will provide all the tests concerning by this setup
 - a teardown, it will provide all the tests concerning by this teardown
 
-You're able to extend *CIPackagesFilter* if you'd like to create your own strategy to filter tests.
-
 ### Filter
 
 {% include image.html
@@ -146,7 +144,6 @@ You're able to extend *CIPackagesFilter* if you'd like to create your own strate
             title="filter"
 %}
 
-Because we're using ChangeImpact.
 You can also define a filter for the finder strategy to optimize our tool.
 Currently, we are filtering test relative to the method package.
 That includes all the class in our package, the package with the same base name ("SmartTest-Patate" and "SmartTest-Frite-Poulet" are two packages with the same base name "SmartTest").
@@ -154,22 +151,7 @@ And the package that calls our method class ("MyClass>>#hello" is in the package
 
 (working on schema)
 
-You're able to extend *CIPackagesFilter* if you'd like to create your own strategy to filter tests.
-
-### Change Impact strategy
-
-{% include image.html
-            img="/img/SmartTest/ChangeImpact.png"
-            title="change_impact_strategy"
-%}
-
-
-Currently, SmartTest uses Change Impact by [Julien Delplanque](https://juliendelplanque.be/) to explore the code.
-The implementation of SmartTest is simple.
-We simply research the senders of the method you select and the senders of the senders ...
-Each time, it verifies that the senders are not filtered by the filter.
-
-You're able to extend *CIStrategy* if you'd like to create your own strategy to find tests.
+You're able to extend *SmTFilterStrategy* if you'd like to create your own strategy to filter tests.
 
 ### Runner
 
