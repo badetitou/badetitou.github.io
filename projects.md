@@ -14,12 +14,12 @@ The source code could be in JAVA-GWT (but it would be easy to use the tool with 
 
 ![SmartTest innovation award](/img/SmartTest/Medalles2017silver-small.png)
 
-SmartTest is an application written in Pharo.
+[SmartTest]({% post_url research/2017-08-21-SmartTest%}) is an application written in Pharo.
 The aim is to provide a tool that will help the developer to run the "good" tests during their code session.
 
 # TestsUsageAnalyser
 
-TUA is a tool developed in Pharo.
+[TUA]({% post_url research/2017-08-08-TUA%}) is a tool developed in Pharo.
 It offers you a way to collect much information about how developer work.
 
 # FactoryInterface
