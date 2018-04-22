@@ -3,7 +3,7 @@ author: Benoît "badetitou" Verhaeghe
 layout: post
 title:  "SmartTest - Tutorial"
 date:   2017-08-21 14:58:00 +200
-last_modified_at: 2018-22-04 19:30:00 +200
+last_modified_at: 2018-04-22 19:30:00 +200
 categories: research smalltalk
 ---
 
