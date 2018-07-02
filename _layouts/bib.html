@@ -14,7 +14,10 @@
     {{ entry.year }},
   {% endif %}
   {% if entry.url %}
-    <a href="{{ entry.pdf }}" >PDF</a>
+    <a href="{{ entry.pdf }}" >PDF</a>,
+  {% endif %}
+  {% if entry.doi %}
+    <a href="https://www.doi.org/{{ entry.doi }}" >DOI</a>
   {% endif %}
 
 </div>
