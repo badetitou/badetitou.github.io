@@ -14,7 +14,7 @@ layout: default
                     {% endif %}
                     <span class="meta">Posted by {% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif %} on {{ page.date | date: "%B %-d, %Y" }}</span>
                     <span class="post-meta">
-                      {% if post.last_modified_at %}
+                      {% if page.last_modified_at %}
                         (Updated: {{ page.last_modified_at | date: "%b %-d, %Y" }})
                       {% endif %}
                     </span>

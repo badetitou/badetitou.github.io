@@ -3,6 +3,7 @@ author: Benoît "badetitou" Verhaeghe
 layout: post
 title:  "SmartTest - Tutorial"
 date:   2017-08-21 14:58:00 +200
+last_modified_at: 2018-04-22 19:30:00 +200
 categories: research smalltalk
 ---
 
@@ -20,9 +21,7 @@ With this plugin installed, developers will save time and will develop in a bett
 
 ## Installation
 
-### In an old image
-
-I supposed you already install Pharo. If not, please [install it](http://pharo.org/download).
+I supposed you have already installed Pharo. If not, please [install it](http://pharo.org/download).
 
 To install SmartTest. The easiest way is to use the catalog browser.
 
@@ -30,40 +29,6 @@ To install SmartTest. The easiest way is to use the catalog browser.
             img="/img/SmartTest/install_smartTest.png"
 %}
 
-### With Continuous Integration (jenkins)
-
-If you'd like to use a preconfigured image with SmartTest and optimize for your work.
-You can use the integration with Jenkins I've made.
-You only have to add these lines to your configuration.
-
-```
-./pharo $PROJECT_NAME.image eval --save "
-  Metacello
-  new
-    baseline: #SmartTest;
-    githubUser: 'badetitou'
-      project: 'SmartTest'
-      commitish: 'master'
-      path: '.';
-    onWarningLog;
-    load".
-
-./pharo $PROJECT_NAME.image eval --save "
-    SmTTestCoverageTestFinderStrategy prepareInJenkinsForPackagesNamed: #('SmartTest')
-  ".
-```
-
-You have to change the last line by replacing `#('SmartTest')` by a list of packages corresponding to your project.
-You should change `$VERSION` by `master` if you want to work only with the stable version of SmartTest. Or by `development` for the development version of SmartTest.
-
-### Help us
-
-I'm also working on test usage habit. If you'd like to use SmartTest and at the same time help us (because it's awesome ;) ).
-
-
-{% include image.html
-            img="/img/SmartTest/install_tua.png"
-%}
 
 ## Utilisation - Reneraku Integration
 
@@ -172,8 +137,6 @@ The default will work as follow, for
 - a setup, it will provide all the tests concerning by this setup
 - a teardown, it will provide all the tests concerning by this teardown
 
-You're able to extend *CIPackagesFilter* if you'd like to create your own strategy to filter tests.
-
 ### Filter
 
 {% include image.html
@@ -181,7 +144,6 @@ You're able to extend *CIPackagesFilter* if you'd like to create your own strate
             title="filter"
 %}
 
-Because we're using ChangeImpact.
 You can also define a filter for the finder strategy to optimize our tool.
 Currently, we are filtering test relative to the method package.
 That includes all the class in our package, the package with the same base name ("SmartTest-Patate" and "SmartTest-Frite-Poulet" are two packages with the same base name "SmartTest").
@@ -189,22 +151,7 @@ And the package that calls our method class ("MyClass>>#hello" is in the package
 
 (working on schema)
 
-You're able to extend *CIPackagesFilter* if you'd like to create your own strategy to filter tests.
-
-### Change Impact strategy
-
-{% include image.html
-            img="/img/SmartTest/ChangeImpact.png"
-            title="change_impact_strategy"
-%}
-
-
-Currently, SmartTest uses Change Impact by [Julien Delplanque](https://juliendelplanque.be/) to explore the code.
-The implementation of SmartTest is simple.
-We simply research the senders of the method you select and the senders of the senders ...
-Each time, it verifies that the senders are not filtered by the filter.
-
-You're able to extend *CIStrategy* if you'd like to create your own strategy to find tests.
+You're able to extend *SmTFilterStrategy* if you'd like to create your own strategy to filter tests.
 
 ### Runner
 
@@ -246,8 +193,6 @@ When you click on the button, those tests are run, and the button provides you a
 
 To uninstall SmartTest, it's a bit hard currently. You have to follow this instruction:
 
-- (Disable TUA in the settings)
-- (Unload TUA)
 - Unload SmartTest
 - Run this command in a playground `ReRuleManager cleanUp`
 - ReLoad Kernel
@@ -263,6 +208,10 @@ And you can do pull request too.
 
 ### Development version
 
+*The best way since Pharo7 is to use iceberg !!*
+
+You can also execute this script
+
 ```st
 Metacello new
   baseline: #SmartTest;
@@ -270,5 +219,3 @@ Metacello new
   onWarningLog;
   load
 ```
-
-You can also use iceberg to clone the project.
