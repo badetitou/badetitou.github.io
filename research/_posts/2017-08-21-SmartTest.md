@@ -188,7 +188,6 @@ When you click on the button, those tests are run, and the button provides you a
             title="Relative Test Button"
 %}
 
-
 ## Uninstall
 
 To uninstall SmartTest, it's a bit hard currently. You have to follow this instruction:
@@ -219,3 +218,7 @@ Metacello new
   onWarningLog;
   load
 ```
+
+## Some Contributors
+
+- [Eleonore Wald](https://www.linkedin.com/in/eleonorewald/)
