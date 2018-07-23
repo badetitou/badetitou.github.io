@@ -359,7 +359,7 @@ form .row:first-child .floating-label-form-group {
   letter-spacing: 1px;
   padding: 10px 5px;
   background-color: white;
-  border-radius: 0;
+  border-radius: 50em;
 }
 @media only screen and (min-width: 768px) {
   .pager li > a,
