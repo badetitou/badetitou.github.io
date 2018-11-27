@@ -20,7 +20,7 @@ Vous trouverez ci-dessous des ressources pour vous aider !!!
 
 Vous trouverez ci-dessous les sujets que nous avons traité en TP.
 
-[Jeu De Carte](JeuDeCarte)
+[Jeu De Carte](lille/JeuDeCarte)
 
 ## Université de Montpellier
 
@@ -32,4 +32,4 @@ Vous trouverez ci-dessous les sujets que nous avons traité en TP.
 
 #### TP
 
-[Ressources TP RCA](MTPVisuRCA)
+[Ressources TP RCA](mtp/VisuRCA)
