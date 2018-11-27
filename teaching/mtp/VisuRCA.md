@@ -49,5 +49,4 @@ Quelques question pour cette dernière partie:
 * Quel sont les classes les plus importantes (en terme de ligne de code ? de complexité ?) ?
 * Est ce que l'on si attend ?
 * Que pensez-vous de l'adhérence entre _cern::colt_ et RCA ?
-* Si demain (imaginons) les développeurs décident d'abandonner colt, pouvez-vous leurs indiquer où le framework est utilisé, et la complexité de supprimer colt pour chacun des endroits détecté ? 
-
+* Si demain (imaginons) les développeurs décident d'abandonner colt, pouvez-vous leurs indiquer où le framework est utilisé, et la complexité de supprimer colt pour chacun des endroits détectés ?
