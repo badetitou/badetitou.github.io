@@ -1,6 +1,6 @@
 ---
 author: Benoît "badetitou" Verhaeghe
-layout: page
+layout: post
 title:  "Visualisation de RCA"
 date:   2018-11-27 12:00:00 +200
 categories: teaching mtp _ignore
