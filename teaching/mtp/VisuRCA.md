@@ -19,7 +19,7 @@ Pour cela, vous avez à votre disposition le code source de l'application RCA,
 ## Pour commencer
 
 1. Charger le _.mse_ dans Moose (si vous avez pris l'image depuis les Ressources, il est possible que cela soit déjà fait).
-2. Créer un nouveau paquetage nommé "Analyse-RCA" et une classe à l'intérieur dans laquelle vous pourrez enregistrer votre code.
+2. Créer un nouveau paquetage nommé "RCA-Analyse" et une classe à l'intérieur dans laquelle vous pourrez enregistrer votre code.
 
 ## Recherche possible
 
@@ -47,6 +47,26 @@ Voici une liste d'idée à explorer.
 Quelques question pour cette dernière partie:
 
 * Quel sont les classes les plus importantes (en terme de ligne de code ? de complexité ?) ?
-* Est ce que l'on si attend ?
+  * Est ce que l'on si attend ?
 * Que pensez-vous de l'adhérence entre _cern::colt_ et RCA ?
 * Si demain (imaginons) les développeurs décident d'abandonner colt, pouvez-vous leurs indiquer où le framework est utilisé, et la complexité de supprimer colt pour chacun des endroits détectés ?
+
+### Pour finir
+
+* Ouvrez Iceberg dans pharo (Ctrl+O, Ctrl+I)
+* Ajouter un repository (add)
+* Dans "Clone From github.com" entrer comme information
+  * Owner name : **badetitou**
+  * Project name : **ExperimentalStuff**
+* Valider, et charger le paquetage dans votre image Pharo.
+
+Vous devriez maintenant avoir un paquetage _"RCA-Explore"_ dans votre image avec au moins la classe _"RCACriticsVisu"_.
+Cette classe contient de nombreuses méthodes pour effectuer des requêtes sur le modèle.
+
+## Fin du TP
+
+Si vous avez des questions ou si **vous recherchez un stage** n'hésitez pas à me contacter par **[mail](mailto:badetitou@gmail.com)**
+
+Sujets de stage disponible (il y en a d'autres) :
+
+[Migration d'interface graphique](https://berger-levrault-career.talent-soft.com/offre-de-emploi/emploi-stage-developpement-d-un-gui-builder-h-f_59.aspx)
