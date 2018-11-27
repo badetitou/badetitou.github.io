@@ -28,7 +28,7 @@ Vous trouverez ci-dessous les sujets que nous avons traité en TP.
 
 #### Visualisations Cours
 
-![Diapo du cour](https://docs.google.com/presentation/d/1Cxd9_dQRRNADM4vjfNBpIEfyF-CYolzEFSpmeh9efVo/edit?usp=sharing)
+[Diapo du cour](https://docs.google.com/presentation/d/1Cxd9_dQRRNADM4vjfNBpIEfyF-CYolzEFSpmeh9efVo/edit?usp=sharing)
 
 #### TP
 
