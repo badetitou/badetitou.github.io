@@ -16,7 +16,7 @@ Pour cela, vous avez à votre disposition le code source de l'application RCA,
 
 ## Ressources
 
-[RCA Image + mse + Source code](../../files/rcaexplore.zip)
+[RCA Image + mse + Source code](../../../files/rcaexplore.zip)
 
 ## Pour commencer
 
