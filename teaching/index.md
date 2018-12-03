@@ -2,6 +2,7 @@
 layout: page
 title: "Teaching"
 categories: teaching
+header-img: "img/bg/keyboard.jpg"
 ---
 
 ## Université de Lille
