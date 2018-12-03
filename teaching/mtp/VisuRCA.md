@@ -2,7 +2,8 @@
 author: Benoît "badetitou" Verhaeghe
 layout: post
 title:  "Visualisation de RCA"
-date:   2018-11-27 12:00:00 +200
+date:   2018-11-27 12:00:00 +100
+last_modified_at: 2018-12-04 10:35:00 +100
 categories: teaching mtp _ignore
 ---
 
@@ -21,6 +22,15 @@ Pour cela, vous avez à votre disposition le code source de l'application RCA,
 1. Charger le _.mse_ dans Moose (si vous avez pris l'image depuis les Ressources, il est possible que cela soit déjà fait).
 2. Créer un nouveau paquetage nommé "RCA-Analyse" et une classe à l'intérieur dans laquelle vous pourrez enregistrer votre code.
 
+Pour charger le _.mse_ dans Moose exécuter le code suivant dans un playground :
+
+```st
+mooseModel := MooseModel importFromMSEStream: '..\verveinej\rca.mse' asFileReference readStream.
+mooseModel name: 'rca'. 
+mooseModel rootFolder: '..\rcaexplore'.
+mooseModel install.
+```
+
 ## Recherche possible
 
 Notre objectif est de trouver des éléments que l'on pourrait améliorer dans l'application RCA.
@@ -31,23 +41,23 @@ Voici une liste d'idée à explorer.
 
 * Diagramme de classes
 * God classes et lazy classes
-* Code mort (Toutes les méthodes qui ne sont pas invoqué ?)
+* Code mort (toutes les méthodes qui ne sont pas invoquées ?)
 * La complexité cyclomatique des méthodes (il y a déjà un outil qui fait le calcul dans Moose)
 * Méthodes dépréciées
 
-### Faire des analyses plus avancé
+### Faire des analyses plus avancées
 
 * Hiérarchie de paquetage avec pour chaque paquetage
   * Nombre de classes en largeur
   * Nombre de méthodes en hauteur
 * Hiérarchie de paquetage avec les classes à l'intérieur des paquetages dans la visualisation
-  * La taille de chaque classe correspondra à son nombre de ligne de code.
-* Calcul de l'adherence entre le project RCA et les autres framework
+  * La taille de chaque classe correspondra à son nombre de ligne de code
+* Calcul de l'adhérence entre le projet RCA et les autres frameworks
 
-Quelques question pour cette dernière partie:
+Quelques questions pour cette dernière partie :
 
-* Quel sont les classes les plus importantes (en terme de ligne de code ? de complexité ?) ?
-  * Est ce que l'on si attend ?
+* Quelles sont les classes les plus importantes (en termes de ligne de code ? de complexité ?) ?
+  * Est-ce que l'on si attend ?
 * Que pensez-vous de l'adhérence entre _cern::colt_ et RCA ?
 * Si demain (imaginons) les développeurs décident d'abandonner colt, pouvez-vous leurs indiquer où le framework est utilisé, et la complexité de supprimer colt pour chacun des endroits détectés ?
 
