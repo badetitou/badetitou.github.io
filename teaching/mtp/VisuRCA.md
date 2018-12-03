@@ -17,6 +17,8 @@ Pour cela, vous avez à votre disposition le code source de l'application RCA,
 
 ## Ressources
 
+[RCA Image + mse + Source code](../../../files/rcaexplore.zip)
+
 ## Pour commencer
 
 1. Charger le _.mse_ dans Moose (si vous avez pris l'image depuis les Ressources, il est possible que cela soit déjà fait).
