@@ -50,13 +50,24 @@ Si un widget existe dans le langage source et cible mais n'existe pas dans Casin
     il suffira d'ajouter une classe dans le projet Casino qui permettra de faire le lien entre le widget source et le widget cible,
     cette action ne requiert aucune connaissance en Pharo ou Moose.
 
-Voici un tableau récapitulant les widgets et attributs présent dans la version actuel de Casino (la liste peut évoluer pour une migration précise) :
+Voici un schema montrant l'ensemble des widgets et attributs disponible le 13 décembre 2018 : [schema](https://www.lucidchart.com/documents/view/e9fa7fef-f06f-4307-b5e8-bbb702164e75)
 
-| Widget | Attribut |
-| ------ | -------- |
-| Page   | Height   |
+## Stratégie de migration
 
-## Explication du processus de migration
+Voici un schema présentant les étapes de migration implémenté par Casino.
 
+![Processus de migration](img/migrationProcessFR.png)
 
-## Résultat actuel (13 décembre 2018)
+## Résultats courant
+
+Voici des exemples des résultats obtenus pour la migration d'application GWT vers Angular
+
+| Application Source (GWT)                | Application Cible (Angular)                     |
+| --------------------------------------- | ----------------------------------------------- |
+| ![Home GWT](img/cmp/gwt/home.png)       | ![Home Angular](img/cmp/angular/home.png)       |
+| ![Libelle GWT](img/cmp/gwt/libelle.png) | ![Libelle Angular](img/cmp/angular/libelle.png) |
+| ![Nav2 GWT](img/cmp/gwt/nav2.png)       | ![Nav2 Angular](img/cmp/angular/nav2.png)       |
+
+## Contact
+
+N'hésitez pas à me [contacter](mailto:badetitou@gmail.com) pour plus d'informations.
