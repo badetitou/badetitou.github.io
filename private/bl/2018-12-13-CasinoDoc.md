@@ -43,9 +43,9 @@ Cela facilite grandement la création d'un nouvel importeur ou exporteur.
 
 Afin d'être compatible avec le plus de langage source et cible possible,
     Casino définit un ensemble de widget et attributs (applicable à ces widgets) commun.
-Il est possible qu'un widget existe dans un des deux langages mais pas dans l'autre,
+Il est possible qu'un widget existe dans l'un des deux langages mais pas dans l'autre,
     dans ce cas, il faudra soit recréer le widget dans le langage cible,
-    soit le récréer par une combinaison de widgets dans la phase d'importation.
+    soit le recréer par une combinaison de widgets dans la phase d'importation.
 Si un widget existe dans le langage source et cible mais n'existe pas dans Casino,
     il suffira d'ajouter une classe dans le projet Casino qui permettra de faire le lien entre le widget source et le widget cible,
     cette action ne requiert aucune connaissance en Pharo ou Moose.
