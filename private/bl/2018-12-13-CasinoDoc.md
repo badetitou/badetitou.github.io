@@ -56,7 +56,7 @@ Voici un schema montrant l'ensemble des widgets et attributs disponible le 13 d�
 
 Voici un schema présentant les étapes de migration implémentées par Casino.
 
-![Processus de migration](../img/migrationProcessFR.png)
+![Processus de migration](../img/migrationProcessFR.png){: .center-image }
 
 ## Résultats courant
 
