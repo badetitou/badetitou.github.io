@@ -68,6 +68,18 @@ Voici des exemples des résultats obtenus pour la migration d'application GWT ve
 | [![Libelle GWT](../img/cmp/gwt/libelle.png)](../img/cmp/gwt/libelle.png) | [![Libelle Angular](../img/cmp/angular/libelle.png)](../img/cmp/angular/libelle.png) |
 | [![Nav2 GWT](../img/cmp/gwt/nav2.png)](../img/cmp/gwt/nav2.png)          | [![Nav2 Angular](../img/cmp/angular/nav2.png)](../img/cmp/angular/nav2.png)          |
 
+## Liens utiles
+
+Le core du projet (avec l'importeur GWT et l'exporteur GWT) est disponible sur [github](https://github.com/badetitou/BL-ToolKit).
+On retrouve aussi
+
+* [Importeur Swing](https://github.com/badetitou/Casino-Swing-Importer)
+* [Importeur Spec](https://github.com/badetitou/Casino-Spec-Importer)
+* [Exporteur Spec](https://github.com/badetitou/Casino-Spec-Exporter)
+* [Exporteur Seaside](https://github.com/badetitou/BL-Model-Seaside-Exporter)
+
+Afin de charger le projet, vous devez utiliser une image [Pharo](https://github.com/pharo-project/pharo) et utiliser [Iceberg](https://github.com/pharo-vcs/iceberg).
+
 ## Contact
 
 N'hésitez pas à me [contacter](mailto:badetitou@gmail.com) pour plus d'informations.
