@@ -78,7 +78,7 @@ On retrouve aussi
 * [Exporteur Spec](https://github.com/badetitou/Casino-Spec-Exporter)
 * [Exporteur Seaside](https://github.com/badetitou/BL-Model-Seaside-Exporter)
 
-Afin de charger le projet, vous devez utiliser une image [Pharo](https://github.com/pharo-project/pharo) et utiliser [Iceberg](https://github.com/pharo-vcs/iceberg).
+Afin de charger le projet, vous devez utiliser une image [Pharo 7 (avec Famix/Moose)](https://github.com/pharo-project/pharo) et utiliser [Iceberg](https://github.com/pharo-vcs/iceberg).
 
 ## Contact
 
