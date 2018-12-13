@@ -56,7 +56,7 @@ Voici un schema montrant l'ensemble des widgets et attributs disponible le 13 d�
 
 Voici un schema présentant les étapes de migration implémenté par Casino.
 
-![Processus de migration](img/migrationProcessFR.png)
+![Processus de migration](../img/migrationProcessFR.png)
 
 ## Résultats courant
 
@@ -64,9 +64,9 @@ Voici des exemples des résultats obtenus pour la migration d'application GWT ve
 
 | Application Source (GWT)                | Application Cible (Angular)                     |
 | --------------------------------------- | ----------------------------------------------- |
-| ![Home GWT](img/cmp/gwt/home.png)       | ![Home Angular](img/cmp/angular/home.png)       |
-| ![Libelle GWT](img/cmp/gwt/libelle.png) | ![Libelle Angular](img/cmp/angular/libelle.png) |
-| ![Nav2 GWT](img/cmp/gwt/nav2.png)       | ![Nav2 Angular](img/cmp/angular/nav2.png)       |
+| ![Home GWT](../img/cmp/gwt/home.png)       | ![Home Angular](../img/cmp/angular/home.png)       |
+| ![Libelle GWT](../img/cmp/gwt/libelle.png) | ![Libelle Angular](../img/cmp/angular/libelle.png) |
+| ![Nav2 GWT](../img/cmp/gwt/nav2.png)       | ![Nav2 Angular](../img/cmp/angular/nav2.png)       |
 
 ## Contact
 
