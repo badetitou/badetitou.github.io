@@ -35,7 +35,7 @@ Le méta-modèle d'interface graphique est déjà implémenté dans Casino.
 Il existe déjà des importeurs pour Java (GWT et Swing) et Spec, et des exporteurs vers Angular, Spec et Seaside.
 
 Si le langage source ou cible est différent, il sera nécessaire de créer l'importeur ou exporteur correspondant.
-Nous précisons que Casino est implémenté en [Pharo](http://pharo.org) en utilisant [Moose](http://http://www.moosetechnology.org/).
+Nous précisons que Casino est implémenté en [Pharo](http://pharo.org) en utilisant [Moose](http://www.moosetechnology.org/).
 Moose est une plateforme qui permet l'analyse d'application quelqu'elle soit.
 Cela facilite grandement la création d'un nouvel importeur ou exporteur.
 
