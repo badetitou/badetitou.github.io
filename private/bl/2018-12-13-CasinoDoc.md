@@ -54,7 +54,7 @@ Voici un schema montrant l'ensemble des widgets et attributs disponible le 13 d�
 
 ## Stratégie de migration
 
-Voici un schema présentant les étapes de migration implémenté par Casino.
+Voici un schema présentant les étapes de migration implémentées par Casino.
 
 ![Processus de migration](../img/migrationProcessFR.png)
 
@@ -62,11 +62,11 @@ Voici un schema présentant les étapes de migration implémenté par Casino.
 
 Voici des exemples des résultats obtenus pour la migration d'application GWT vers Angular
 
-| Application Source (GWT)                | Application Cible (Angular)                     |
-| --------------------------------------- | ----------------------------------------------- |
-| ![Home GWT](../img/cmp/gwt/home.png)       | ![Home Angular](../img/cmp/angular/home.png)       |
-| ![Libelle GWT](../img/cmp/gwt/libelle.png) | ![Libelle Angular](../img/cmp/angular/libelle.png) |
-| ![Nav2 GWT](../img/cmp/gwt/nav2.png)       | ![Nav2 Angular](../img/cmp/angular/nav2.png)       |
+| Application Source (GWT)                                                 | Application Cible (Angular)                                                          |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| [![Home GWT](../img/cmp/gwt/home.png)](../img/cmp/gwt/home.png)          | [![Home Angular](../img/cmp/angular/home.png)](../img/cmp/angular/home.png)          |
+| [![Libelle GWT](../img/cmp/gwt/libelle.png)](../img/cmp/gwt/libelle.png) | [![Libelle Angular](../img/cmp/angular/libelle.png)](../img/cmp/angular/libelle.png) |
+| [![Nav2 GWT](../img/cmp/gwt/nav2.png)](../img/cmp/gwt/nav2.png)          | [![Nav2 Angular](../img/cmp/angular/nav2.png)](../img/cmp/angular/nav2.png)          |
 
 ## Contact
 
