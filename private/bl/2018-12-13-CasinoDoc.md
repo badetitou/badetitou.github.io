@@ -50,7 +50,7 @@ Si un widget existe dans le langage source et cible mais n'existe pas dans Casin
     il suffira d'ajouter une classe dans le projet Casino qui permettra de faire le lien entre le widget source et le widget cible,
     cette action ne requiert aucune connaissance en Pharo ou Moose.
 
-Voici un schema montrant l'ensemble des widgets et attributs disponible le 13 décembre 2018 : [schema](https://www.lucidchart.com/documents/view/e9fa7fef-f06f-4307-b5e8-bbb702164e75)
+Voici un schema montrant l'ensemble des widgets et attributs disponible le 13 décembre 2018 : [schema](https://www.lucidchart.com/documents/view/e9fa7fef-f06f-4307-b5e8-bbb702164e75) (onglet : *"Model V7.5 - W3C full"*)
 
 ## Stratégie de migration
 
