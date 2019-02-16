@@ -1,0 +1,34 @@
+<div class="col l6 m6 s12">
+    <div class="card">
+        {% if include.imgSrc %}
+        <div class="card-image waves-effect waves-block waves-light">
+            <img class="activator" src="{{ include.imgSrc }}">
+        </div>
+        {% endif %}
+        <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">{{ include.title }}<i class="material-icons right">more_vert</i></span>
+        </div>
+        <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">{{ include.title }}<i class="material-icons right">close</i></span>
+            <p>{{ include.description }}</p>
+        </div>
+        <div class="card-action">
+                {% if include.githubLink %}
+                    <a href="{{ include.githubLink }}">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                {% endif %}
+                {% if include.docLink %}
+                    <a href="{{ include.docLink }}">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fas fa-book-open fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                {% endif %}
+        </div>
+    </div>
+</div>

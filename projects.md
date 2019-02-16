@@ -1,37 +1,35 @@
 ---
 layout: page
 title: "Projects"
-header-img: "img/project.jpg"
 ---
 
-# BL-ToolKit
+{% include card.html
+    title="Casino"
+    githubLink="https://github.com/badetitou/Casino"
+    description="This tool (in Pharo) helps developer when they want to analyze their website's source code. It gives information about the structure and the different widget of each web page. The source code could be in JAVA-GWT (but it would be easy to use the tool with another language)." 
+    docLink='/projects/Casino/Casino/'
+%}
 
-This tool (in Pharo) helps developer when they want to analyze their website's source code.
-It gives information about the structure and the different widget of each web page.
-The source code could be in JAVA-GWT (but it would be easy to use the tool with another language).
+{% include card.html
+    title="SmartTest"
+    githubLink="https://github.com/badetitou/SmartTest"
+    description='SmartTest is an application written in Pharo.
+The aim is to provide a tool that will help the developer to run the "good" tests during their code session.' 
+    docLink='/projects/SmartTest/SmartTest/'
+%}
 
-[project link](https://github.com/badetitou/BL-ToolKit)
+{% include card.html
+    title="TestsUsageAnalyser"
+    githubLink="https://github.com/badetitou/TestsUsageAnalyser"
+    description='TestUsageAnalyser is a tool developed in Pharo.
+It offers you a way to collect much information about how developer work.'
+    docLink='/projects/TUA/TUA/'
+%}
 
-# SmartTest
-
-![SmartTest innovation award](/img/SmartTest/Medalles2017silver-small.png)
-
-[SmartTest]({% post_url research/2017-08-21-SmartTest%}) is an application written in Pharo.
-The aim is to provide a tool that will help the developer to run the "good" tests during their code session.
-
-[project link](https://github.com/badetitou/SmartTest)
-
-# TestsUsageAnalyser
-
-[TUA]({% post_url research/2017-08-08-TUA%}) is a tool developed in Pharo.
-It offers you a way to collect much information about how developer work.
-
-[project link](https://github.com/badetitou/TestsUsageAnalyser)
-
-# FactoryInterface
-
-FI is an interface written in JAVA.
+{% include card.html
+    title="FactoryInterface"
+    description='FI is an interface written in JAVA.
 It can help to connect everything with an OPC-UA server.
-FI converts all the data from the server and sends to everyone wants the data in a JSON format.
-
-[project link](https://github.com/badetitou/factoryInterface)
+FI converts all the data from the server and sends to everyone wants the data in a JSON format.'
+    githubLink='https://github.com/badetitou/factoryInterface'
+%}
