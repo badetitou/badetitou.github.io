@@ -9,7 +9,7 @@ categories: research smalltalk _ignore
 
 ## What is SmartTest?
 
-![SmartTest innovation award](/img/SmartTest/Medalles2017silver-small.png)
+![SmartTest innovation award](../img//Medalles2017silver-small.png)
 
 SmartTest is a plugin developed in [Pharo](http://pharo.org/). It is an Add-On for Quality Assistant by [Yuriy Tymchuk](http://yuriy.tymch.uk/) and provides new rules and critiques.
 But it has also is own implementation of feedback about testing
@@ -26,9 +26,8 @@ I supposed you have already installed Pharo. If not, please [install it](http://
 To install SmartTest. The easiest way is to use the catalog browser.
 
 {% include image.html
-            img="/img/SmartTest/install_smartTest.png"
+            img="../img/install_smartTest.png"
 %}
-
 
 ## Utilisation - Reneraku Integration
 
@@ -38,7 +37,7 @@ You can disable this way of utilization in the setting.
 To do that, you only have to toggle the corresponding button in the settings.
 
 {% include image.html
-            img="/img/SmartTest/renerakuintegration.png"
+            img="../img/renerakuintegration.png"
             title="Activate QualityAssistant Integration"
 %}
 
@@ -47,7 +46,7 @@ Each time you select a method or a class. Two rules can be activated.
 ### Should write tests
 
 {% include image.html
-            img="/img/SmartTest/shouldWriteTest.png"
+            img="../img/shouldWriteTest.png"
             title="shouldWrtieTest"
 %}
 
@@ -61,7 +60,7 @@ The plugin offers you to create it quickly (from a template).
 ### Should run tests
 
 {% include image.html
-            img="/img/SmartTest/shouldRunTest.png"
+            img="../img/shouldRunTest.png"
             title="shouldRunTest"
 %}
 
@@ -72,7 +71,7 @@ If there are errors or fails, the button will turn red or yellow (but the debugg
 - By clicking on the #smallWindow icon, the plugin will open a new window with the test it's found.
 
 {% include image.html
-            img="/img/SmartTest/AutoTestSelection.png"
+            img="../img/AutoTestSelection.png"
             title="AutoTestSelection"
 %}
 
@@ -93,19 +92,19 @@ You can enable or disable the research of tests for a method or for class only.
 To do that, you only have to toggle the corresponding button in the settings.
 
 {% include image.html
-            img="/img/SmartTest/MethodActivated.png"
+            img="../img/MethodActivated.png"
             title="Method Activation"
 %}
 
 {% include image.html
-            img="/img/SmartTest/ClassActivated.png"
+            img="../img/ClassActivated.png"
             title="Class Activation"
 %}
 
 ### Testing strategy
 
 {% include image.html
-            img="/img/SmartTest/testingStrategy.png"
+            img="../img/testingStrategy.png"
             title="Testing strategy"
 %}
 
@@ -125,12 +124,13 @@ You're able to extend *SmTTestingStrategy* if you'd like to create your own test
 ### Finder
 
 {% include image.html
-            img="/img/SmartTest/finder.png"
+            img="../img/finder.png"
             title="finder"
 %}
 
 The finder contains the implementation of how SmartTest will find test relative to a method.
 The default will work as follow, for
+
 - a method, it will use the current change impact strategy (see Change Impact strategy).
 - a class, it will search the method that uses the variables of the class.
 - a test method, it will provide the test method
@@ -140,7 +140,7 @@ The default will work as follow, for
 ### Filter
 
 {% include image.html
-            img="/img/SmartTest/filter.png"
+            img="../img/filter.png"
             title="filter"
 %}
 
@@ -156,13 +156,13 @@ You're able to extend *SmTFilterStrategy* if you'd like to create your own strat
 ### Runner
 
 {% include image.html
-            img="/img/SmartTest/runner.png"
+            img="../img/runner.png"
             title="runner"
 %}
 
-
 The runner is the part of SmartTest which run the tests provided by the finder.
 By default, the SmartRunner is used.
+
 - If you click on "run button" of the critique, it will run the found tests and change its color depending on the result (green, yellow or red).
 - On the "Run All Button" or on the method button, the test will be run in debug mode (so if they fail, or raise an error, the debugger will open).
 
@@ -174,7 +174,7 @@ The notice one works as the debug one but it **never** opens the debugger.
 You can activate the own implementation of SmartTest by enabling it in the settings menu.
 
 {% include image.html
-            img="/img/SmartTest/collectButton.png"
+            img="../img/collectButton.png"
             title="runner"
 %}
 
@@ -184,7 +184,7 @@ The Button will save the tests link to this method.
 When you click on the button, those tests are run, and the button provides you a feedback.
 
 {% include image.html
-            img="/img/SmartTest/relative_tests_button.png"
+            img="../img/relative_tests_button.png"
             title="Relative Test Button"
 %}
 
