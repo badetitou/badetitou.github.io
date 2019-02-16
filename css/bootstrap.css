@@ -4510,6 +4510,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-default .navbar-text {
   color: #777;
 }
+
+.navbar-default .navbar-nav {
+  background-color: transparent;
+}
+
 .navbar-default .navbar-nav > li > a {
   color: #777;
 }
@@ -4554,6 +4559,12 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
     color: #777;
   }
+
+  .navbar-default .navbar-nav {
+    background-color: white;
+  }
+  
+
   .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
   .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
     color: #333;

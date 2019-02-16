@@ -24,10 +24,3 @@ li {
 .z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-small, .btn-floating, .dropdown-content, .collapsible, .sidenav {
     box-shadow: 0 0px 0px 0;
 }
-
-@media screen and (max-width: 768px) {    
-    nav ul li {
-        background-color: white;
-        float: none;
-    }
-}
