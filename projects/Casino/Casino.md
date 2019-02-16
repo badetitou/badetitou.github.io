@@ -1,6 +1,6 @@
 ---
 author: Benoît "badetitou" Verhaeghe
-layout: post
+layout: project
 title:  "Documentation du projet Casino"
 date:   2018-12-13 11:27:00 +100
 categories: casino _ignore
