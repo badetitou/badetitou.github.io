@@ -221,4 +221,6 @@ Metacello new
 
 ## Some Contributors
 
+- [Anne Etien](http://www.lifl.fr/~etien/)
+- [Nicolas Anquetil](http://researchers.lille.inria.fr/~nanqueti/nicolasAnquetil.html)
 - [Eleonore Wald](https://www.linkedin.com/in/eleonorewald/)
