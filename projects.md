@@ -40,5 +40,5 @@ FI converts all the data from the server and sends to everyone wants the data in
 It enables humane assessment (method for solving real problems without reading code), agile visualization and moldable development for Pharo.'
     githubLink='https://github.com/moosetechnology/Moose'
     docLink='http://moosetechnology.org/'
-    imgSrc='http://moosetechnology.org/pictures/moose-icon.png'
+    imgSrc='/img/projectsLogo/moose-icon.png'
 %}
