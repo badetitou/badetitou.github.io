@@ -24,3 +24,8 @@ li {
 .z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-small, .btn-floating, .dropdown-content, .collapsible, .sidenav {
     box-shadow: 0 0px 0px 0;
 }
+
+.project-resize-image{
+    max-width: 100%;
+    height: auto;
+}
