@@ -70,7 +70,7 @@ Voici des exemples des résultats obtenus pour la migration d'application GWT ve
 
 ## Liens utiles
 
-Le core du projet (avec l'importeur GWT et l'exporteur GWT) est disponible sur [github](https://github.com/badetitou/BL-ToolKit).
+Le core du projet (avec l'importeur GWT et l'exporteur Angular) est disponible sur [github](https://github.com/badetitou/BL-ToolKit).
 On retrouve aussi
 
 * [Importeur Swing](https://github.com/badetitou/Casino-Swing-Importer)
