@@ -3,6 +3,8 @@ layout: page
 title: "Projects"
 ---
 
+## My projects
+
 {% include card.html
     title="Casino"
     githubLink="https://github.com/badetitou/Casino"
@@ -33,6 +35,8 @@ It can help to connect everything with an OPC-UA server.
 FI converts all the data from the server and sends to everyone wants the data in a JSON format.'
     githubLink='https://github.com/badetitou/factoryInterface'
 %}
+
+## Contributing
 
 {% include card.html
     title="Moose"
