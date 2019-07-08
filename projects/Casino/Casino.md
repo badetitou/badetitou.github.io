@@ -66,7 +66,11 @@ Voici des exemples des résultats obtenus pour la migration d'application GWT ve
 | :----------------------------------------------------------------------: | :----------------------------------------------------------------------------------: |
 |     [![Home GWT](../img/cmp/gwt/home.png)](../img/cmp/gwt/home.png)      |     [![Home Angular](../img/cmp/angular/home.png)](../img/cmp/angular/home.png)      |
 | [![Libelle GWT](../img/cmp/gwt/libelle.png)](../img/cmp/gwt/libelle.png) | [![Libelle Angular](../img/cmp/angular/libelle.png)](../img/cmp/angular/libelle.png) |
+|     [![Nav GWT](../img/cmp/gwt/nav.png)](../img/cmp/gwt/nav.png)      |     [![Nav Angular](../img/cmp/angular/nav.png)](../img/cmp/angular/nav.png)      |
 |     [![Nav2 GWT](../img/cmp/gwt/nav2.png)](../img/cmp/gwt/nav2.png)      |     [![Nav2 Angular](../img/cmp/angular/nav2.png)](../img/cmp/angular/nav2.png)      |
+|     [![Onglet GWT](../img/cmp/gwt/onglet.png)](../img/cmp/gwt/onglet.png)      |     [![Onglet Angular](../img/cmp/angular/onglet.png)](../img/cmp/angular/onglet.png)      |
+|     [![uiDesk GWT](../img/cmp/gwt/uiDesk.png)](../img/cmp/gwt/uiDesk.png)      |     [![uiDesk Angular](../img/cmp/angular/uiDesk.png)](../img/cmp/angular/uiDesk.png)      |
+
 
 ## Liens utiles
 
