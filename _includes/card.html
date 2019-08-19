@@ -29,6 +29,22 @@
                         </span>
                     </a>
                 {% endif %}
+                {% if include.slides %}
+                <a href="{{ include.slides }}">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fas fa-chalkboard fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+                {% endif %}
+                {% if include.tp %}
+                <a href="{{ include.tp }}">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fas fa-terminal fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
+                {% endif %}
         </div>
     </div>
 </div>
