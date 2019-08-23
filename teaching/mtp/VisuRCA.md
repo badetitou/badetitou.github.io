@@ -41,36 +41,36 @@ Voici une liste d'idée à explorer.
 
 ### Pour s'échauffer
 
-* Diagramme de classes
-* God classes et lazy classes
-* Code mort (toutes les méthodes qui ne sont pas invoquées ?)
-* La complexité cyclomatique des méthodes (il y a déjà un outil qui fait le calcul dans Moose)
-* Méthodes dépréciées
+- Diagramme de classes
+- God classes et lazy classes
+- Code mort (toutes les méthodes qui ne sont pas invoquées ?)
+- La complexité cyclomatique des méthodes (il y a déjà un outil qui fait le calcul dans Moose)
+- Méthodes dépréciées
 
 ### Faire des analyses plus avancées
 
-* Hiérarchie de paquetage avec pour chaque paquetage
-  * Nombre de classes en largeur
-  * Nombre de méthodes en hauteur
-* Hiérarchie de paquetage avec les classes à l'intérieur des paquetages dans la visualisation
-  * La taille de chaque classe correspondra à son nombre de ligne de code
-* Calcul de l'adhérence entre le projet RCA et les autres frameworks
+- Hiérarchie de paquetage avec pour chaque paquetage
+  - Nombre de classes en largeur
+  - Nombre de méthodes en hauteur
+- Hiérarchie de paquetage avec les classes à l'intérieur des paquetages dans la visualisation
+  - La taille de chaque classe correspondra à son nombre de ligne de code
+- Calcul de l'adhérence entre le projet RCA et les autres frameworks
 
 Quelques questions pour cette dernière partie :
 
-* Quelles sont les classes les plus importantes (en termes de ligne de code ? de complexité ?) ?
-  * Est-ce que l'on si attend ?
-* Que pensez-vous de l'adhérence entre _cern::colt_ et RCA ?
-* Si demain (imaginons) les développeurs décident d'abandonner colt, pouvez-vous leurs indiquer où le framework est utilisé, et la complexité de supprimer colt pour chacun des endroits détectés ?
+- Quelles sont les classes les plus importantes (en termes de ligne de code ? de complexité ?) ?
+  - Est-ce que l'on si attend ?
+- Que pensez-vous de l'adhérence entre _cern::colt_ et RCA ?
+- Si demain (imaginons) les développeurs décident d'abandonner colt, pouvez-vous leurs indiquer où le framework est utilisé, et la complexité de supprimer colt pour chacun des endroits détectés ?
 
 ### Pour finir
 
-* Ouvrez Iceberg dans pharo (Ctrl+O, Ctrl+I)
-* Ajouter un repository (add)
-* Dans "Clone From github.com" entrer comme information
-  * Owner name : **badetitou**
-  * Project name : **ExperimentalStuff**
-* Valider, et charger le paquetage dans votre image Pharo.
+- Ouvrez Iceberg dans pharo (Ctrl+O, Ctrl+I)
+- Ajouter un repository (add)
+- Dans "Clone From github.com" entrer comme information
+  - Owner name : **badetitou**
+  - Project name : **ExperimentalStuff**
+- Valider, et charger le paquetage dans votre image Pharo.
 
 Vous devriez maintenant avoir un paquetage _"RCA-Explore"_ dans votre image avec au moins la classe _"RCACriticsVisu"_.
 Cette classe contient de nombreuses méthodes pour effectuer des requêtes sur le modèle.

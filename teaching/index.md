@@ -7,30 +7,22 @@ header-img: "img/bg/keyboard.jpg"
 
 ## Université de Lille
 
-### Polytech Lille
+{% include card.html
+    title="Polytech Lille"
+    description="Voici des ressources pour les étudiants de Polytech Lille"
+%}
 
-WIP
-
-### Preel
-
-#### Ressources
-
-Vous trouverez ci-dessous des ressources pour vous aider !!!
-
-#### Sujet
-
-Vous trouverez ci-dessous les sujets que nous avons traité en TP.
-
-[Jeu De Carte](lille/JeuDeCarte)
+{% include card.html
+    title="Preel"
+    description="Voici des ressources pour les étudiants Prell"
+    tp='lille/JeuDeCarte'
+%}
 
 ## Université de Montpellier
 
-### Évolution et restructuration de logiciels - M2
-
-#### Visualisations Cours
-
-[Diapo du cours](https://docs.google.com/presentation/d/1Cxd9_dQRRNADM4vjfNBpIEfyF-CYolzEFSpmeh9efVo/edit?usp=sharing)
-
-#### TP
-
-[Ressources TP RCA](mtp/VisuRCA)
+{% include card.html
+    title="M2 - Évolution et restructuration de logiciels"
+    description="Voici l'enseignement à propos de Moose"
+    tp='mtp/VisuRCA'
+    slides='https://docs.google.com/presentation/d/1Cxd9_dQRRNADM4vjfNBpIEfyF-CYolzEFSpmeh9efVo/edit?usp=sharing'
+%}
