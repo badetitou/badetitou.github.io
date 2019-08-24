@@ -54,9 +54,9 @@ FI converts all the data from the server and sends to everyone wants the data in
     githubLink='https://github.com/badetitou/factoryInterface'
 %}
 
- <br/>
-
-## Contributing
+<div class="col s12 l12 m12">
+	<h2 id="Contributing">Contributing</h2>
+</div>
 
 {% include card.html
     title="Moose"
