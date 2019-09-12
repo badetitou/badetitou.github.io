@@ -34,10 +34,13 @@ model install.
 ## Installation
 
 My scripts are available on github.
-You can easily install them by executing the following on a playground:
+You can easily install them by executing the following line in a playground:
 
 ```st
-my script
+Metacello new
+    githubUser: 'badetitou' project: 'OOAnalysis' commitish: 'master' path: '.';
+    baseline: 'OOAnalysis';
+    load
 ```
 
 ## The analysis
