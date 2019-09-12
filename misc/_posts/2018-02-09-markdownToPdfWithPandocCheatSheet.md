@@ -2,13 +2,11 @@
 author: Benoît "badetitou" Verhaeghe
 layout: post
 title:  "Cheat sheet Pandoc Md to pdf"
-date:   2018-02-09 16:42:10 +200
+subtitle: "I present some commands I use with pandoc to create pdf file"
+date: 2018-02-09 16:42:10 +200
+last_modified_at: 2019-09-12 16:42:10 +200
 categories: misc pandoc
 ---
-
-## What is this page ?
-
-I'd like to create a cheat sheet for my main uses with pandoc when I write a doc and want to convert it into a pdf.
 
 ## Write tips
 
