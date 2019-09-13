@@ -45,4 +45,9 @@ Metacello new
 
 ## The analysis
 
+Once the tool is installed, open the System Browser and check the class `OOAnalysis`.
+You can execute from the browser the methods by clicking on the methods icon.
+Each method will execute a common analyse on the loaded model.
+
+In the following, I describe the analysis.
 
