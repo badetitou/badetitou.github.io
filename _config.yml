@@ -28,7 +28,6 @@ plugins:
   - jekyll-paginate
   - jekyll-feed
   - jekyll-sitemap
-  - jekyll-avatar
   - jemoji
   - jekyll-scholar
 
