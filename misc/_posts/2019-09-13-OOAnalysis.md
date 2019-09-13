@@ -2,7 +2,7 @@
 author: Benoît "badetitou" Verhaeghe
 layout: post
 title:  "Analyze OO project"
-subtitle: "I present a tool to quickly get information about your Java project With Moose"
+subtitle: "I present a tool that does a quick analyze of Java projects With Moose"
 date:   2019-09-13 12:00:00 +200
 categories: moose pharo
 ---
