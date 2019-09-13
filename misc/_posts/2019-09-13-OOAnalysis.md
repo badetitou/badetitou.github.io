@@ -3,6 +3,7 @@ author: Benoît "badetitou" Verhaeghe
 layout: post
 title:  "Analyze OO project"
 subtitle: "I present a tool that does a quick analyze of Java projects With Moose"
+header-img: "misc/img-2019-09-13-OOAnalysis/background.jpg"
 date:   2019-09-13 12:00:00 +200
 categories: moose pharo
 ---
@@ -134,4 +135,4 @@ b shape rectangle
 
 First, it defines how an element should be displayed.
 Then , it adds the namespaces (packages) as nodes and connect them with the `#parentScope` keyword.
-Finally, it defines the layout as a tree. 
+Finally, it defines the layout as a tree.
