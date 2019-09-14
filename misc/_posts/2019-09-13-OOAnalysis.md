@@ -21,8 +21,8 @@ You can download Traccar.
 Once the application is downloaded, we generate a _.mse_ file thanks to [VerveineJ](https://github.com/moosetechnology/VerveineJ).
 Please refer to the [VerveineJ documentation](https://moosetechnology.github.io/moose-wiki/projects/parsers/VerveineJ.html) for more details.
 
-The analysis is done with [Moose](github moose wiki).
-First of all, we need to [download a Moose 8 image](tuto begin moose wiki).
+The analysis is done with [Moose](https://moosetechnology.github.io/moose-wiki/).
+First of all, we need to [download a Moose 8 image](https://moosetechnology.github.io/moose-wiki/Beginners/InstallMoose.html).
 
 Finally, we load the _.mse_ file in Moose.
 
