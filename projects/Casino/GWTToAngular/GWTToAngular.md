@@ -23,7 +23,7 @@ It is downloadable at [https://pharo.org](https://pharo.org).
 Once the Pharo Launcher is downloaded, we have to create an image from the latest build of Moose 7.0.
 
 ![Install Moose](../img/mooseInstall.png){: .center-image }
- 
+
 Select the image, and press the green arrow to run Pharo.
 
 ## Download Casino
