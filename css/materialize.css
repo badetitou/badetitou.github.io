@@ -4902,6 +4902,7 @@ small {
 }
 
 .card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating):hover {
+  text-decoration: none;
   color: #ffd8a6;
 }
 
