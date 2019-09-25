@@ -2,7 +2,7 @@
 author: Benoît "badetitou" Verhaeghe
 layout: post
 title:  "Analyze OO project"
-subtitle: "I present a tool that does a quick analyze of Java projects With Moose"
+subtitle: "I present a tool that does a quick analysis of Java projects With Moose"
 header-img: "misc/img-2019-09-13-OOAnalysis/background.jpg"
 date:   2019-09-13 12:00:00 +200
 categories: moose pharo
@@ -49,10 +49,10 @@ Metacello new
 ## The analysis
 
 Once the tool is installed, open the System Browser and check the class `OOCriticsVisu` with the protocol `software visualization`.
-You can execute from the browser the methods by clicking on the methods icon.
-Each method will execute a common analyze on the loaded model.
+You can execute the methods from the browser by clicking on the methods icon.
+Each method will execute a common analysis on the loaded model.
 
-In the following, I describe the analysis.
+In the following section, I describe the analysis.
 
 ### Queries
 
@@ -66,27 +66,27 @@ Probably some are used for testing.
 
 #### God classes by lines
 
-`#godClassesByLines` computes the classes with more than 150 lines of code.
+`#godClassesByLines` returns the classes with more than 150 lines of code.
 In Traccar, it founds 36 classes.
 
 ```st
 model allModelClasses select: [ :each | each numberOfLinesOfCode > 150 ]
 ```
 
-First, it asks the model all the model classes (the classes that are part of Traccar and nor of its dependencies).
-Then, it select classes with a number of line of code superior than 150.
+First, it asks the model all the model classes (the classes that are part of Traccar, excluding the classes from its dependencies).
+Then, it select classes with a number of line of code superior to 150.
 
 #### God classes by methods
 
-`#godClassesByMethods` computes the classes with more than 50 methods.
-In Traccar, there are 4 god classes by methods.
+`#godClassesByMethods` returns the classes with more than 50 methods.
+In Traccar, there are 4 god classes with more than 50 methods.
 
 ```st
 model allModelClasses select: [ :each | each numberOfMethods > 50 ]
 ```
 
-First, it asks the model all the model classes (the classes that are part of Traccar and nor of its dependencies).
-Then, it selects classes with a number of methods superior than 50.
+First, it asks the model all the model classes (the classes that are part of Traccar, excluding the classes from its dependencies).
+Then, it selects classes with a number of methods superior to 50.
 
 ### Visualizations
 
@@ -106,8 +106,8 @@ b build.
 ```
 
 First, it creates a mondrian.
-Then, it defines the nodes of the visualization, in our case it is all the classes of the model.
-It connects the nodes by asking the `#superclass`.
+Then, it defines the nodes of the visualization, in our case, it is all the classes of the model.
+It connects the nodes by asking for the `#superclass`.
 Finally, it defines the layout as a tree.
 
 #### Packages hierarchy with complexity
