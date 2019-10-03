@@ -1,31 +1,24 @@
 ---
 layout: page
-title: Posts
-background: '/img/bg-post.jpg'
+title: HLIN303
 categories: _ignore
 ---
 
-{% for post in site.hlin303 %}
-
+{% for tp in site.tps %}
+{% if tp.categories contains 'future' %}
+{%else%}
+{% if tp.categories contains 'HLIN303' %}
 <article class="post-preview">
-  <a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">
-    <h2 class="post-title">{{ post.title }}</h2>
-    {% if post.subtitle %}
-    <h3 class="post-subtitle">{{ post.subtitle }}</h3>
-    {% else %}
-    <h3 class="post-subtitle">{{ post.excerpt | strip_html | truncatewords: 15 }}</h3>
-    {% endif %}
-  </a>
-  <p class="post-meta">Posted by
-    {% if post.author %}
-    {{ post.author }}
-    {% else %}
-    {{ site.author }}
-    {% endif %}
-    on
-    {{ post.date | date: '%B %d, %Y' }} &middot; {% include read_time.html content=post.content %}</p>
+    <a href="{{ tp.url | prepend: site.baseurl | replace: '//', '/' }}">
+        <h2 class="post-title">{{ tp.title }}</h2>
+        {% if tp.subtitle %}
+        <h3 class="post-subtitle">{{ tp.subtitle }}</h3>
+        {% endif %}
+    </a>
 </article>
 
 <hr>
 
+{% endif %}
+{% endif %}
 {% endfor %}

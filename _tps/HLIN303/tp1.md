@@ -4,7 +4,7 @@ layout: tp
 title:  "Introduction, source, objet, compilation"
 subtitle: "TP1 - Correction"
 date:   2019-10-03 12:00:00 +100
-categories: teaching mtp hlin303
+categories: HLIN303
 ---
 
 ## TP1 - Introduction, source, objet, compilation
