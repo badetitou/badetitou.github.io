@@ -24,7 +24,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-
+    <link rel="stylesheet" href="{{ "/reveal.js/css/reset.css" | prepend: site.baseurl }}">
     <link rel="stylesheet" href="{{ "/reveal.js/css/reveal.css" | prepend: site.baseurl }}"/>
     {%if page.theme %}
       <link rel="stylesheet" href="{{ "/reveal.js/css/theme/" | prepend: site.baseurl | append: page.theme | append: '.css' }}" id="theme"/>
@@ -61,7 +61,6 @@
       </div>
     </div>
 
-    <script src="{{ "/reveal.js/lib/js/head.min.js" | prepend: site.baseurl }}"></script>
     <script src="{{ "/reveal.js/js/reveal.js" | prepend: site.baseurl }}"></script>
     <script>
       // Full list of configuration options available at:
