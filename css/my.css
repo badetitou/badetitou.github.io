@@ -37,3 +37,12 @@ li {
         top: 65px;
     }
 }
+
+.table-of-contents {
+    padding-top: 64px;
+    list-style-type: none;
+}
+
+.table-of-contents a {
+    text-decoration: none;
+}

@@ -1,5 +1,5 @@
 <!-- Footer -->
-<footer>
+<footer class="footer">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -78,4 +78,19 @@
      $(document).ready(function(){
     $('.materialboxed').materialbox();
   });
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $('.pushpin').pushpin({
+            top: $('.pushpin').offset().top,
+            bottom: $('.footer').offset().top
+        });
+        console.log( $('.footer').offset().top);
+        $('article > h1,h2:not(.subheading),h3,h4').scrollSpy();
+        $('article > h1,h2:not(.subheading),h3,h4').each(function (el) {
+            $(".table-of-contents").append("<li><a href=\"#" + this.id + "\">" + jQuery(this).text() + "</a></li>");
+        })
+    });
 </script>
