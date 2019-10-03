@@ -16,6 +16,9 @@ linkedin_username: benoitverhaeghe
 # To enable google analytics, uncomment below line with a valid Google Tracking ID
 # google_tracking_id: UA-112714614-1
 
+collections:
+  tps:
+    output: true
 
 # Build settings
 markdown: kramdown

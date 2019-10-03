@@ -26,3 +26,9 @@ header-img: "img/bg/keyboard.jpg"
     tp='mtp/VisuRCA'
     slides='https://docs.google.com/presentation/d/1Cxd9_dQRRNADM4vjfNBpIEfyF-CYolzEFSpmeh9efVo/edit?usp=sharing'
 %}
+
+{% include card.html
+    title="HLIN303 - Systèmes d'exploitation"
+    description="Je vous propose ici une correction au fur et à mesure des tps"
+    tp='mtp/HLIN303'
+%}
