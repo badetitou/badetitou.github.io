@@ -29,3 +29,11 @@ li {
     max-width: 100%;
     height: auto;
 }
+
+@media only screen and (min-width:800px) {
+    .btn-cv {
+        position: absolute;
+        right: 20px;
+        top: 65px;
+    }
+}
