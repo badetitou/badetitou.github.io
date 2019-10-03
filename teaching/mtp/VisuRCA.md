@@ -5,6 +5,7 @@ title:  "Visualisation de RCA"
 date:   2018-11-27 12:00:00 +100
 last_modified_at: 2018-12-04 10:35:00 +100
 categories: teaching mtp _ignore
+header-img: "img/bg/keyboard.jpg"
 ---
 
 # Visualisation de RCA
