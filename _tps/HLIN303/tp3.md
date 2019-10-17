@@ -1,8 +1,8 @@
 ---
 author: Benoît "badetitou" Verhaeghe
 layout: tp
-title:  "Types de données, compilation séparée"
-subtitle: "TP2 - Correction"
+title:  "Code de Huffman"
+subtitle: "TP3 - Correction"
 date:   2019-10-03 12:00:00 +100
 categories: HLIN303
 ---
