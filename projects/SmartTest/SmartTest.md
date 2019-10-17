@@ -38,7 +38,7 @@ To do that, you only have to toggle the corresponding button in the settings.
 
 {% include image.html
             img="../img/renerakuintegration.png"
-            title="Activate QualityAssistant Integration"
+            caption="Activate QualityAssistant Integration"
 %}
 
 Each time you select a method or a class. Two rules can be activated.
@@ -47,7 +47,7 @@ Each time you select a method or a class. Two rules can be activated.
 
 {% include image.html
             img="../img/shouldWriteTest.png"
-            title="shouldWrtieTest"
+            caption="shouldWriteTest"
 %}
 
 This critique indicates that the plugin didn't find any test related to the method you've selected.
@@ -61,7 +61,7 @@ The plugin offers you to create it quickly (from a template).
 
 {% include image.html
             img="../img/shouldRunTest.png"
-            title="shouldRunTest"
+            caption="shouldRunTest"
 %}
 
 This critique indicates that the plugin has found test(s) related to the method you've selected.
@@ -72,7 +72,7 @@ If there are errors or fails, the button will turn red or yellow (but the debugg
 
 {% include image.html
             img="../img/AutoTestSelection.png"
-            title="AutoTestSelection"
+            caption="AutoTestSelection"
 %}
 
 This window displays the list of tests SmartTest has found.
@@ -93,19 +93,19 @@ To do that, you only have to toggle the corresponding button in the settings.
 
 {% include image.html
             img="../img/MethodActivated.png"
-            title="Method Activation"
+            caption="Method Activation"
 %}
 
 {% include image.html
             img="../img/ClassActivated.png"
-            title="Class Activation"
+            caption="Class Activation"
 %}
 
 ### Testing strategy
 
 {% include image.html
             img="../img/testingStrategy.png"
-            title="Testing strategy"
+            caption="Testing strategy"
 %}
 
 SmartTest provides four strategies for testing.
@@ -141,7 +141,7 @@ The default will work as follow, for
 
 {% include image.html
             img="../img/filter.png"
-            title="filter"
+            caption="filter"
 %}
 
 You can also define a filter for the finder strategy to optimize our tool.
@@ -157,7 +157,7 @@ You're able to extend *SmTFilterStrategy* if you'd like to create your own strat
 
 {% include image.html
             img="../img/runner.png"
-            title="runner"
+            caption="runner"
 %}
 
 The runner is the part of SmartTest which run the tests provided by the finder.
@@ -175,7 +175,7 @@ You can activate the own implementation of SmartTest by enabling it in the setti
 
 {% include image.html
             img="../img/collectButton.png"
-            title="runner"
+            caption="runner"
 %}
 
 Then the Test Button will appear.
@@ -185,7 +185,7 @@ When you click on the button, those tests are run, and the button provides you a
 
 {% include image.html
             img="../img/relative_tests_button.png"
-            title="Relative Test Button"
+            caption="Relative Test Button"
 %}
 
 ## Uninstall

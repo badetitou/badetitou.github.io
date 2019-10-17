@@ -1,2 +1,2 @@
 <!-- _includes/image.html -->
-<img class="materialboxed" data-caption="{{ include.caption }}" width="auto" src="{{ include.img }}">
+<img class="materialboxed center-image" data-caption="{{ include.caption }}" {% if include.width %}width="{{include.width}}"{% endif %} src="{{ include.img }}">
