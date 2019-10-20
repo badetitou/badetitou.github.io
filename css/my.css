@@ -46,3 +46,7 @@ li {
 .table-of-contents a {
     text-decoration: none;
 }
+
+.emoji {
+    display: inline-block;
+}
