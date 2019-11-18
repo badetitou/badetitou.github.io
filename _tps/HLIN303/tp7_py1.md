@@ -4,7 +4,7 @@ layout: tp
 title:  "Apéritifs"
 subtitle: "Python - TP1"
 date:   2019-11-19 10:00:00 +100
-categories: HLIN303 future
+categories: HLIN303
 ---
 
 ## Apéritifs
