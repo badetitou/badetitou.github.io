@@ -12,19 +12,20 @@ reveal_transition: fade
 <section>
 
 <section data-markdown>
-
+<st>
 # Métamodélisation
 
 ## Benoît Verhaeghe
 
-Ph.D. student @ Inria Lille - RMod
+<fragment /> Ph.D. student @ Inria Lille - RMod
 
-R&D Engineer @ Berger-Levrault
+<fragment /> R&D Engineer @ Berger-Levrault
 
 ---
 
 benoit.verhaeghe@berger-levrault.com
 
+</st>
 </section>
 
 <section data-markdown>
@@ -302,14 +303,14 @@ Il peut être abstrait et considéré comme un modèle
     </section>
 
     <section data-markdown data-background="/teachings/img/HLIN306/metamodelisation/londonFirst.png">
-        <script type="text/template">    
+        <st>    
 1932<!-- .element: style="position:fixed;top:10%;left:10%;color:blue" -->
-        </script>
+        </st>
     </section>
     <section data-markdown data-background="/teachings/img/HLIN306/metamodelisation/londonSecond.png">
-        <script type="text/template">  
+        <st>  
 1933<!-- .element: style="position:fixed;top:10%;left:10%;color:blue" -->
-        </script>
+        </st>
     </section>
     <section data-markdown>
 

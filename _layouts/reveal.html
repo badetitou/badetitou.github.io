@@ -44,7 +44,6 @@
 		<div class="reveal">
 
 			<div class="slides">
-					
 
 				 
 
@@ -54,8 +53,10 @@
 						for line in lines
 %}{% 
 							assign processed_line = line
+								| replace:'<st>','<script type="text/template">'
+								| replace:'</st>','</script>'
 								| replace:'<section />','<!--section -->'
-								| replace:'<fragment/>','<!-- .element: class="fragment" -->'
+								| replace:'<fragment />','<!-- .element: class="fragment" -->'
 								| replace:'<background>','<!-- .slide: data-background="'
 								| replace:'</background>','" -->'
 								| replace:'<backgroundimage>','<!-- .slide: data-background="'
