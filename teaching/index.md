@@ -24,7 +24,7 @@ header-img: "img/bg/keyboard.jpg"
     title="M2 - Évolution et restructuration de logiciels"
     description="Voici l'enseignement à propos de Moose"
     tp='mtp/VisuRCA'
-    slides='https://docs.google.com/presentation/d/1Cxd9_dQRRNADM4vjfNBpIEfyF-CYolzEFSpmeh9efVo/edit?usp=sharing'
+    slides='mtp/HLIN306/teaching'
 %}
 
 {% include card.html
