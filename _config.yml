@@ -43,7 +43,7 @@ reveal_path: /reveal.js/
 reveal_theme: black.css
 
 # The Reveal transition
-reveal_transition: default
+reveal_transition: fade
 
 # Path to the used theme (defaults to the Reveal.js standard theme path)
 reveal_theme_path: /reveal.js/css/theme/ 
@@ -52,7 +52,7 @@ reveal_theme_path: /reveal.js/css/theme/
 extra_css: 
 
 # Custom CSS for highlighting (defaults to reveal.js/lib/css/zenburn.css)
-highlight_style_sheet: 
+highlight_style_sheet: /reveal.js/lib/css/zenburn.css
 
 # Embed Server-side speaker notes?
 reveal_notes_server: false

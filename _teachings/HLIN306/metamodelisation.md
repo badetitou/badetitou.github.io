@@ -5,6 +5,7 @@ title: "Métamodélisation"
 subtitle: "Comment qu'on représente des trucs"
 date:   2019-10-03 12:00:00 +100
 categories: HLIN306
+reveal_transition: fade
 ---
 
 <!-- Hello -->
@@ -301,10 +302,14 @@ Il peut être abstrait et considéré comme un modèle
     </section>
 
     <section data-markdown data-background="/teachings/img/HLIN306/metamodelisation/londonFirst.png">
-> 1932
+        <script type="text/template">    
+1932<!-- .element: style="position:fixed;top:10%;left:10%;color:blue" -->
+        </script>
     </section>
     <section data-markdown data-background="/teachings/img/HLIN306/metamodelisation/londonSecond.png">
-> 1933
+        <script type="text/template">  
+1933<!-- .element: style="position:fixed;top:10%;left:10%;color:blue" -->
+        </script>
     </section>
     <section data-markdown>
 
