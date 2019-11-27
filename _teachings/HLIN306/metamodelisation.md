@@ -224,6 +224,38 @@ Il peut être abstrait et considéré comme un modèle
 
     </section>
 
+    <section data-markdown>
+
+## Comprendre un logiciel
+
+- Concepts manipulés
+- Problèmes potentiels
+
+    </section>
+
+    <section data-markdown>
+
+## Problèmes architecturaux
+
+- Documentation insufficiente = non-existante ou pas à jour.
+- Nivellation (layering) impropre = trop ou pas assez de niveaux
+- Cycle dans les packages = difficulté pour établir un ordre de chargement
+- Manque de modularité = fort couplage
+- Duplication de code = copier, coller et édition de code
+- Duplication de fonctionnalités = fonctionnalités similaires par différentes équipes
+
+    </section>
+
+    <section data-markdown>
+
+## Opportunités de refactoring
+
+- Mauvaise utilisation de l’héritage = réutilisation de code vs polymorphisme
+- Manque d’héritage = duplication, case statements
+- God classes = séparation des préoccupations
+
+    </section>
+
 </section>
 
 <section>
@@ -231,6 +263,63 @@ Il peut être abstrait et considéré comme un modèle
     <section data-markdown>
 
 # Modèle
+
+    </section>
+
+    <section data-markdown>
+
+## Modèle
+
+- Différence entre spécification et description
+  - Spécification d'un système à construire
+  - Description d'un système existant
+- Relation entre un système et un modèle
+  - ReprésentationDe (notée μ)
+
+![Représente](/teachings/img/HLIN306/metamodelisation/represente.png)
+
+    </section>
+
+    <section data-markdown>
+
+## Modèle
+
+- Un modèle représente un système modélisé
+  - De manière générale, pas que dans un contexte de génie logiciel ou d'informatique
+  - Un modèle peut aussi avoir le rôle de système modélisé dans une autre relation de représentation
+
+![Modèle XML de la carte de la France administrative qui est un modèle de la France « réelle »](/teachings/img/HLIN306/metamodelisation/representeXML.png)
+
+    </section>
+
+    <section data-markdown>
+
+## Modèles - contextes - vues
+
+- Une France, mais plusieurs modèles de la France chacun représentant un point de vue du même système complexe
+
+    </section>
+
+    <section data-markdown data-background="/teachings/img/HLIN306/metamodelisation/londonFirst.png">
+> 1932
+    </section>
+    <section data-markdown data-background="/teachings/img/HLIN306/metamodelisation/londonSecond.png">
+> 1933
+    </section>
+    <section data-markdown>
+
+## Modèles
+
+- Un modèle est écrit dans un langage qui peut être
+  - Non ou peu formalisé, la langue naturelle
+    - Le français, un dessin ...
+  - Formel et bien défini, non ambigu
+    - Syntaxe, grammaire, sémantique
+    - On parle de méta-modèle pour ce type de langage de modèle
+- Pour les modèles définis dans un langage bien précis
+  - Relation de conformité
+    - Un modèle est conforme à son méta-modèle
+    - Relation EstConformeA (notée χ)
 
     </section>
 
@@ -243,15 +332,180 @@ Il peut être abstrait et considéré comme un modèle
 # Méta-Modèle
 
     </section>
+    
+    <section data-markdown>
+
+## Méta-Modèle
+
+- Un modèle est conforme à son méta-modèle
+
+![Modèle conforme](/teachings/img/HLIN306/metamodelisation/conforme.png)
+    </section>
+
+    <section data-markdown>
+
+## Méta-Modèle
+
+- Cette relation de conformité est essentielle
+  - Base de l’IDM pour développer les outils capables de manipuler des modèles
+  - Un métamodèle est une entité de première classe
+- Mais pas nouvelle
+  - Un texte écrit est conforme à une orthographe et une grammaire
+  - Un programme Java est conforme à la syntaxe et la grammaire du langage Java
+  - Un fichier XML est conforme à sa DTD
+  - Une carte doit être conforme à une légende
+  - Un modèle UML est conforme au métamodèle UML
+
+    </section>
+
+    <section data-markdown>
+
+## Spécification de méta-modèle
+
+- But : définir un type de modèle avec tous ses types d'éléments et leurs contraintes
+- Plusieurs approches possibles
+  - Définir un métamodèle nouveau à partir de « rien », sans base de départ
+  - Modifier un métamodèle existant : ajout, suppression, modification d'éléments et des contraintes sur leurs relations
+  - Spécialiser un métamodèle existant en rajoutant des éléments et des contraintes (sans en enlever)
+  - Correspond par exemple au mécanisme de profil UML
+
+    </section>
+
+    <section data-markdown>
+
+### Exemple : bases de données relationnelles
+
+Employé :
+
+| NoEmp | Nom | Année | NoDep |
+| --- | --- | --- | --- |
+| 2067 | Dupont | 1965 | 06 |
+| 0456 | Martin | 1981 | 03 |
+
+Département :
+
+| NoDep | Intitulé | Taille |
+| --- | --- | --- |
+| 03 | Comptabilité | 6 |
+| 06 | Informatique | 10 |
+
+    </section>
+
+    <section data-markdown>
+
+### Méta-modèle de BDR
+
+![Modèle conforme](/teachings/img/HLIN306/metamodelisation/metaBDR.png)
+
+    </section>
+    
+    <section data-markdown>
+
+### Méta-metamodèle
+
+![Modèle conforme](/teachings/img/HLIN306/metamodelisation/metameta.png)
+
+    </section>
 
 </section>
-
 
 <section>
 
     <section data-markdown>
 
 # Reverse Engineering
+
+    </section>
+
+    <section data-markdown>
+
+## Moose
+
+![Modèle conforme](/teachings/img/HLIN306/metamodelisation/mooseProcess.png)
+
+    </section>
+
+    <section data-markdown>
+
+## Etape préparatoire
+
+- Définir le méta-modèle
+  - Dans notre cas:
+    - Etendre le métamodèle FAMIX
+
+    </section>
+
+    <section data-markdown>
+
+![Famix metamodel](/teachings/img/HLIN306/metamodelisation/famixMetamodel.png)
+
+    </section>
+
+    <section data-markdown>
+
+## AppSI : SI du laboratoire CRIStAL
+
+- Développer un SI autour d'une base de données
+- Environnement hétérogène
+  - plusieurs applications
+  - plusieurs langage de programmation
+- La base de données est le référentiel
+  - Choix / puissance de PostgreSQL
+  - Règles de gestion dans la base
+  - Génération d'une partie des applications (moins de code à écrire, délai de livraison plus court)
+
+    </section>
+
+    <section data-markdown>
+
+## AppSI en images
+
+    </section>
+
+    <section data-markdown>
+
+## AppSI en chiffres
+
+- Dump de 8400 lignes environ
+- Nombre de tables : 165
+- Nombre de vues : 63
+- Nombre de colonnes : 1151
+- Nombre de triggers : 21
+- Nombre de fonctions : 93
+
+    </section>
+
+    <section data-markdown>
+
+## Exemple d’extension
+
+![Famix SQL metamodel](/teachings/img/HLIN306/metamodelisation/sqlExtension.png)
+
+    </section>
+
+    <section data-markdown>
+
+## Exemple de visualisation
+
+![Famix SQL metamodel](/teachings/img/HLIN306/metamodelisation/exampleVisu.png)
+
+    </section>
+
+    <section data-markdown>
+
+## DB Critics
+
+- Exemple de règles :
+  - Upper case in a column name or a table name
+  - Foreign key referencing a non primary column
+  - Table without primary key
+  - Stub entities
+  - Unused function
+  - Unused primary key
+  - View using another view
+  - View using only one table
+  - High and low number of columns in a table
+  - ...
 
     </section>
 
