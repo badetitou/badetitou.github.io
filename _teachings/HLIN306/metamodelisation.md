@@ -97,5 +97,172 @@ mondofacto.com/facts/dictionary
 ![Complexité courbes](/teachings/img/HLIN306/metamodelisation/complexiteCourbes.jpg)
 
     </section>
+    
+    <section data-markdown>
+
+#### Problème d’intégration d’outils
+
+- Réingénierie vs. forward ingénierie
+  - Les outils de forward ingénierie sont choisis délibérément
+  - Les outils de réingénierie doivent intégrer ce qui existe déjà.
+- L’intégration d’outils est plus difficile en réingénierie
+- Les outils doivent travailler ensemble :
+- Données partagées ⇒ entrepôt de données
+- Activités synchronisées⇒ API
+- Différents vendeurs ⇒ interopérabilité des standards
+
+    </section>
+
+    <section data-markdown>
+
+## Solution alternative
+
+Une autre solution qui permette :
+
+- Prendre du recul
+- Conforme à la réalité
+- D'aller plus vite
+- Dans le but de :
+  - Comprendre le logiciel
+  - Identifier les problèmes
+  - Proposer des solutions / évolutions
+
+    </section>
+
+    <section data-markdown>
+
+## Principe
+
+Le code n’est pas seulement du texte.
+
+Il peut être abstrait et considéré comme un modèle
+
+    </section>
+
+    <section data-markdown>
+
+## Les choses et leurs représentation
+
+- Les choses
+  - Réelles, virtuelles
+  - Rares, chères, fragiles, dangereuses, inaccessibles, lointaines, trop nombreuses…
+- Les concepts pour penser les choses
+  - Plus facile, moins cher, moins dangereux
+
+    </section>
+
+    <section data-markdown>
+
+## Besoin de modèle
+
+- Abstraction
+- Réutilisation
+- Meilleur compréhension
+- Rapidité de développement
+- Modularité
+- Interopérabilité
+- Indépendance vis-à-vis des outils
+
+    </section>
+
+    <section data-markdown>
+
+## Besoin de modèle
+
+- Un modèle est une description, une spécification partielle d'un système
+  - Abstraction de ce qui est intéressant pour un contexte et dans un but donné
+  - Vue subjective et simplifiée d'un système
+- But d'un modèle
+  - Faciliter la compréhension d'un système
+  - Simuler le fonctionnement d'un système
+- Exemples
+  - Modèle économique
+  - Modèle démographique
+  - Modèle météorologique
+
+    </section>
+
+    <section data-markdown>
+
+> Le développement comme la rétro ingénierie utilisent des modèles.
+
+    </section>
+
+    <section data-markdown>
+
+## Principes de l’IDM
+
+- IDM : Ingénierie Dirigée par les Modèles
+- Séparation des préoccupations
+  - 2 principales préoccupations
+    - Métier : le cœur de l'application, sa logique
+    - Plate-forme de mise en œuvre 
+  - Mais plusieurs autres préoccupations possibles
+    - Sécurité
+    - Interface utilisateur
+    - Qualité de service
+    - ...
+  - Chaque préoccupation est modélisée par un ... modèle
+  - Intégration des préoccupations
+    - Par transformation/fusion/tissage de modèles
+    - Conception orientée aspect
+
+    </section>
+
+    <section data-markdown>
+
+## Remarques
+
+- La modélisation n'est pas une discipline récente en génie logiciel
+- Les processus de développement logiciel non plus
+  - RUP, Merise ...
+- C'est l'usage de ces modèles qui change
+- Le but de l’IDM est
+  - De passer d'une vision plutôt **contemplative** des modèles
+    - but de documentation, spécification, communication
+  - A une vision réellement **productive**
+
+    </section>
+
+</section>
+
+<section>
+
+    <section data-markdown>
+
+# Modèle
+
+    </section>
+
+</section>
+
+<section>
+
+    <section data-markdown>
+
+# Méta-Modèle
+
+    </section>
+
+</section>
+
+
+<section>
+
+    <section data-markdown>
+
+# Reverse Engineering
+
+    </section>
+
+</section>
+
+<section>
+
+    <section data-markdown>
+
+# A vous de jouer
+
+    </section>
 
 </section>
