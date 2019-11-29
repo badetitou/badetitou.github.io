@@ -109,9 +109,9 @@ mondofacto.com/facts/dictionary
   - Les outils de réingénierie doivent intégrer ce qui existe déjà<!-- .element: style="font-size: smaller;" -->
 - L’intégration d’outils est plus difficile en réingénierie
 - Les outils doivent travailler ensemble :
-- Données partagées ⇒ entrepôt de données
-- Activités synchronisées⇒ API
-- Différents vendeurs ⇒ interopérabilité des standards
+  - Données partagées ⇒ entrepôt de données
+  - Activités synchronisées⇒ API
+  - Différents vendeurs ⇒ interopérabilité des standards
 </st>
     </section>
 
