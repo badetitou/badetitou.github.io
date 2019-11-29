@@ -12,7 +12,7 @@ rvm "$TRAVIS_RUBY_VERSION" do bundle exec jekyll build
 echo "BUILD DONE"
 
 # Checkout `master` and remove everything.
-git clone https://${GH_TOKEN}@github.com/badetitou/badetitou.github.io.git ../badetitou.github.io.master
+git clone https://${GH_TRAVIS2}@github.com/badetitou/badetitou.github.io.git ../badetitou.github.io.master
 cd ../badetitou.github.io.master
 git checkout master
 rm -rf *
