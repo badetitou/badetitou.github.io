@@ -17,9 +17,9 @@ reveal_transition: fade
 
 ## Benoît Verhaeghe
 
-Ph.D. student @ Inria Lille - RMod<!-- .element: class="fragment" -->
+Ph.D. student @ Inria Lille - RMod
 
-R&D Engineer @ Berger-Levrault<!-- .element: class="fragment" -->
+R&D Engineer @ Berger-Levrault
 
 ---
 
@@ -381,8 +381,9 @@ Il peut être abstrait et considéré comme un modèle
     </section>
 
     <section data-markdown>
+<st>
 
-### Exemple : bases de données relationnelles
+##### Exemple : bases de données relationnelles
 
 Employé :
 
@@ -398,6 +399,7 @@ Département :
 | 03 | Comptabilité | 6 |
 | 06 | Informatique | 10 |
 
+</st>
     </section>
 
     <section data-markdown>
