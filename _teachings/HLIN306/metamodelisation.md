@@ -17,9 +17,9 @@ reveal_transition: fade
 
 ## Benoît Verhaeghe
 
-<fragment /> Ph.D. student @ Inria Lille - RMod
+Ph.D. student @ Inria Lille - RMod<!-- .element: class="fragment" -->
 
-<fragment /> R&D Engineer @ Berger-Levrault
+R&D Engineer @ Berger-Levrault<!-- .element: class="fragment" -->
 
 ---
 
@@ -101,18 +101,18 @@ mondofacto.com/facts/dictionary
     </section>
     
     <section data-markdown>
-
+<st>
 #### Problème d’intégration d’outils
 
 - Réingénierie vs. forward ingénierie
-  - Les outils de forward ingénierie sont choisis délibérément
-  - Les outils de réingénierie doivent intégrer ce qui existe déjà.
+  - Les outils de forward ingénierie sont choisis délibérément<!-- .element: style="font-size: smaller;" -->
+  - Les outils de réingénierie doivent intégrer ce qui existe déjà<!-- .element: style="font-size: smaller;" -->
 - L’intégration d’outils est plus difficile en réingénierie
 - Les outils doivent travailler ensemble :
 - Données partagées ⇒ entrepôt de données
 - Activités synchronisées⇒ API
 - Différents vendeurs ⇒ interopérabilité des standards
-
+</st>
     </section>
 
     <section data-markdown>
@@ -168,20 +168,20 @@ Il peut être abstrait et considéré comme un modèle
     </section>
 
     <section data-markdown>
-
+<st>
 ## Besoin de modèle
 
 - Un modèle est une description, une spécification partielle d'un système
-  - Abstraction de ce qui est intéressant pour un contexte et dans un but donné
-  - Vue subjective et simplifiée d'un système
+  - Abstraction de ce qui est intéressant pour un contexte et dans un but donné<!-- .element: style="font-size: smaller;" -->
+  - Vue subjective et simplifiée d'un système<!-- .element: style="font-size: smaller;" -->
 - But d'un modèle
-  - Faciliter la compréhension d'un système
-  - Simuler le fonctionnement d'un système
+  - Faciliter la compréhension d'un système<!-- .element: style="font-size: smaller;" -->
+  - Simuler le fonctionnement d'un système<!-- .element: style="font-size: smaller;" -->
 - Exemples
-  - Modèle économique
-  - Modèle démographique
-  - Modèle météorologique
-
+  - Modèle économique<!-- .element: style="font-size: smaller;" -->
+  - Modèle démographique<!-- .element: style="font-size: smaller;" -->
+  - Modèle météorologique<!-- .element: style="font-size: smaller;" -->
+</st>
     </section>
 
     <section data-markdown>
@@ -191,39 +191,39 @@ Il peut être abstrait et considéré comme un modèle
     </section>
 
     <section data-markdown>
-
+<st>
 ## Principes de l’IDM
 
-- IDM : Ingénierie Dirigée par les Modèles
-- Séparation des préoccupations
-  - 2 principales préoccupations
-    - Métier : le cœur de l'application, sa logique
-    - Plate-forme de mise en œuvre 
-  - Mais plusieurs autres préoccupations possibles
-    - Sécurité
-    - Interface utilisateur
-    - Qualité de service
-    - ...
-  - Chaque préoccupation est modélisée par un ... modèle
-  - Intégration des préoccupations
-    - Par transformation/fusion/tissage de modèles
-    - Conception orientée aspect
-
+- IDM : Ingénierie Dirigée par les Modèles<!-- .element: style="font-size: smaller;" -->
+- Séparation des préoccupations<!-- .element: style="font-size: smaller;" -->
+  - 2 principales préoccupations<!-- .element: style="font-size: smaller;" -->
+    - Métier : le cœur de l'application, sa logique<!-- .element: style="font-size: smaller;" -->
+    - Plate-forme de mise en œuvre<!-- .element: style="font-size: smaller;" -->
+  - Mais plusieurs autres préoccupations possibles<!-- .element: style="font-size: smaller;" -->
+    - Sécurité<!-- .element: style="font-size: smaller;" -->
+    - Interface utilisateur<!-- .element: style="font-size: smaller;" -->
+    - Qualité de service<!-- .element: style="font-size: smaller;" -->
+    - ...<!-- .element: style="font-size: smaller;" -->
+  - Chaque préoccupation est modélisée par un ... modèle<!-- .element: style="font-size: smaller;" -->
+  - Intégration des préoccupations<!-- .element: style="font-size: smaller;" -->
+    - Par transformation/fusion/tissage de modèles<!-- .element: style="font-size: smaller;" -->
+    - Conception orientée aspect<!-- .element: style="font-size: smaller;" -->
+</st>
     </section>
 
     <section data-markdown>
-
+<st>
 ## Remarques
 
 - La modélisation n'est pas une discipline récente en génie logiciel
 - Les processus de développement logiciel non plus
-  - RUP, Merise ...
+  - RUP, Merise ...<!-- .element: style="font-size: smaller;" -->
 - C'est l'usage de ces modèles qui change
 - Le but de l’IDM est
-  - De passer d'une vision plutôt **contemplative** des modèles
-    - but de documentation, spécification, communication
-  - A une vision réellement **productive**
-
+  - De passer d'une vision plutôt **contemplative** des modèles<!-- .element: style="font-size: smaller;" -->
+    - but de documentation, spécification, communication<!-- .element: style="font-size: smaller;" -->
+  - A une vision réellement **productive**<!-- .element: style="font-size: smaller;" -->
+</st>
     </section>
 
     <section data-markdown>
@@ -236,16 +236,19 @@ Il peut être abstrait et considéré comme un modèle
     </section>
 
     <section data-markdown>
+<st>
 
 ## Problèmes architecturaux
 
-- Documentation insufficiente = non-existante ou pas à jour.
-- Nivellation (layering) impropre = trop ou pas assez de niveaux
-- Cycle dans les packages = difficulté pour établir un ordre de chargement
-- Manque de modularité = fort couplage
-- Duplication de code = copier, coller et édition de code
-- Duplication de fonctionnalités = fonctionnalités similaires par différentes équipes
 
+- Documentation insuffisante = non-existante ou pas à jour.<!-- .element: style="font-size: smaller;" -->
+- Nivellation (layering) impropre = trop ou pas assez de niveaux<!-- .element: style="font-size: smaller;" -->
+- Cycle dans les packages = difficulté pour établir un ordre de chargement<!-- .element: style="font-size: smaller;" -->
+- Manque de modularité = fort couplage<!-- .element: style="font-size: smaller;" -->
+- Duplication de code = copier, coller et édition de code<!-- .element: style="font-size: smaller;" -->
+- Duplication de fonctionnalités = fonctionnalités similaires par différentes équipes<!-- .element: style="font-size: smaller;" -->
+
+</st>
     </section>
 
     <section data-markdown>
@@ -313,20 +316,20 @@ Il peut être abstrait et considéré comme un modèle
         </st>
     </section>
     <section data-markdown>
-
+<st>
 ## Modèles
 
 - Un modèle est écrit dans un langage qui peut être
-  - Non ou peu formalisé, la langue naturelle
-    - Le français, un dessin ...
-  - Formel et bien défini, non ambigu
-    - Syntaxe, grammaire, sémantique
-    - On parle de méta-modèle pour ce type de langage de modèle
+  - Non ou peu formalisé, la langue naturelle<!-- .element: style="font-size: smaller;" -->
+    - Le français, un dessin ...<!-- .element: style="font-size: smaller;" -->
+  - Formel et bien défini, non ambigu<!-- .element: style="font-size: smaller;" -->
+    - Syntaxe, grammaire, sémantique<!-- .element: style="font-size: smaller;" -->
+    - On parle de méta-modèle pour ce type de langage de modèle<!-- .element: style="font-size: smaller;" -->
 - Pour les modèles définis dans un langage bien précis
-  - Relation de conformité
-    - Un modèle est conforme à son méta-modèle
-    - Relation EstConformeA (notée χ)
-
+  - Relation de conformité<!-- .element: style="font-size: smaller;" -->
+    - Un modèle est conforme à son méta-modèle<!-- .element: style="font-size: smaller;" -->
+    - Relation EstConformeA (notée χ)<!-- .element: style="font-size: smaller;" -->
+</st>
     </section>
 
 </section>
@@ -349,32 +352,32 @@ Il peut être abstrait et considéré comme un modèle
     </section>
 
     <section data-markdown>
-
+<st>
 ## Méta-Modèle
 
 - Cette relation de conformité est essentielle
-  - Base de l’IDM pour développer les outils capables de manipuler des modèles
-  - Un métamodèle est une entité de première classe
+  - Base de l’IDM pour développer les outils capables de manipuler des modèles<!-- .element: style="font-size: smaller;" -->
+  - Un méta-modèle est une entité de première classe<!-- .element: style="font-size: smaller;" -->
 - Mais pas nouvelle
-  - Un texte écrit est conforme à une orthographe et une grammaire
-  - Un programme Java est conforme à la syntaxe et la grammaire du langage Java
-  - Un fichier XML est conforme à sa DTD
-  - Une carte doit être conforme à une légende
-  - Un modèle UML est conforme au métamodèle UML
-
+  - Un texte écrit est conforme à une orthographe et une grammaire<!-- .element: style="font-size: smaller;" -->
+  - Un programme Java est conforme à la syntaxe et la grammaire du langage Java<!-- .element: style="font-size: smaller;" -->
+  - Un fichier XML est conforme à sa DTD<!-- .element: style="font-size: smaller;" -->
+  - Une carte doit être conforme à une légende<!-- .element: style="font-size: smaller;" -->
+  - Un modèle UML est conforme au méta-modèle UML<!-- .element: style="font-size: smaller;" -->
+</st>
     </section>
 
     <section data-markdown>
-
+<st>
 ## Spécification de méta-modèle
 
 - But : définir un type de modèle avec tous ses types d'éléments et leurs contraintes
 - Plusieurs approches possibles
-  - Définir un métamodèle nouveau à partir de « rien », sans base de départ
-  - Modifier un métamodèle existant : ajout, suppression, modification d'éléments et des contraintes sur leurs relations
-  - Spécialiser un métamodèle existant en rajoutant des éléments et des contraintes (sans en enlever)
-  - Correspond par exemple au mécanisme de profil UML
-
+  - Définir un métamodèle nouveau à partir de « rien », sans base de départ<!-- .element: style="font-size: smaller;" -->
+  - Modifier : ajout, suppression, modification d'éléments et des contraintes sur leurs relations<!-- .element: style="font-size: smaller;" -->
+  - Spécialiser un métamodèle existant en rajoutant des éléments et des contraintes (sans en enlever)<!-- .element: style="font-size: smaller;" -->
+  - Correspond par exemple au mécanisme de profil UML<!-- .element: style="font-size: smaller;" -->
+</st>
     </section>
 
     <section data-markdown>
@@ -398,11 +401,11 @@ Département :
     </section>
 
     <section data-markdown>
-
+<st>
 ### Méta-modèle de BDR
 
-![Modèle conforme](/teachings/img/HLIN306/metamodelisation/metaBDR.png)
-
+![Modèle conforme](/teachings/img/HLIN306/metamodelisation/metaBDR.png)<!-- .element: style="height: -webkit-fill-available;" -->
+</st>
     </section>
     
     <section data-markdown>
@@ -448,18 +451,20 @@ Département :
     </section>
 
     <section data-markdown>
+<st>
 
 ## AppSI : SI du laboratoire CRIStAL
 
 - Développer un SI autour d'une base de données
 - Environnement hétérogène
-  - plusieurs applications
-  - plusieurs langage de programmation
+  - plusieurs applications<!-- .element: style="font-size: smaller;" -->
+  - plusieurs langage de programmation<!-- .element: style="font-size: smaller;" -->
 - La base de données est le référentiel
-  - Choix / puissance de PostgreSQL
-  - Règles de gestion dans la base
-  - Génération d'une partie des applications (moins de code à écrire, délai de livraison plus court)
+  - Choix / puissance de PostgreSQL<!-- .element: style="font-size: smaller;" -->
+  - Règles de gestion dans la base<!-- .element: style="font-size: smaller;" -->
+  - Génération d'une partie des applications (moins de code à écrire, délai de livraison plus court)<!-- .element: style="font-size: smaller;" -->
 
+</st>
     </section>
 
     <section data-markdown>
