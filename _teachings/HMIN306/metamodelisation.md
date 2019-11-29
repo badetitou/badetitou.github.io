@@ -4,7 +4,7 @@ layout: reveal
 title: "Métamodélisation"
 subtitle: "Comment qu'on représente des trucs"
 date:   2019-10-03 12:00:00 +100
-categories: HLIN306
+categories: HMIN306
 reveal_transition: fade
 ---
 
@@ -75,7 +75,7 @@ mondofacto.com/facts/dictionary
 
 ## Complexité des logiciels
 
-![Complexité des logiciels](/teachings/img/HLIN306/metamodelisation/complexite.png)
+![Complexité des logiciels](/teachings/img/HMIN306/metamodelisation/complexite.png)
 
     </section>
     <section data-markdown>
@@ -96,7 +96,7 @@ mondofacto.com/facts/dictionary
 
 ## Complexité des logiciels
 
-![Complexité courbes](/teachings/img/HLIN306/metamodelisation/complexiteCourbes.jpg)
+![Complexité courbes](/teachings/img/HMIN306/metamodelisation/complexiteCourbes.jpg)
 
     </section>
     
@@ -281,7 +281,7 @@ Il peut être abstrait et considéré comme un modèle
 - Relation entre un système et un modèle
   - ReprésentationDe (notée μ)
 
-![Représente](/teachings/img/HLIN306/metamodelisation/represente.png)
+![Représente](/teachings/img/HMIN306/metamodelisation/represente.png)
 
     </section>
 
@@ -293,7 +293,7 @@ Il peut être abstrait et considéré comme un modèle
   - De manière générale, pas que dans un contexte de génie logiciel ou d'informatique
   - Un modèle peut aussi avoir le rôle de système modélisé dans une autre relation de représentation
 
-![Modèle XML de la carte de la France administrative qui est un modèle de la France « réelle »](/teachings/img/HLIN306/metamodelisation/representeXML.png)
+![Modèle XML de la carte de la France administrative qui est un modèle de la France « réelle »](/teachings/img/HMIN306/metamodelisation/representeXML.png)
 
     </section>
 
@@ -305,12 +305,12 @@ Il peut être abstrait et considéré comme un modèle
 
     </section>
 
-    <section data-markdown data-background="/teachings/img/HLIN306/metamodelisation/londonFirst.png">
+    <section data-markdown data-background="/teachings/img/HMIN306/metamodelisation/londonFirst.png">
         <st>    
 1932<!-- .element: style="position:fixed;top:10%;left:10%;color:blue" -->
         </st>
     </section>
-    <section data-markdown data-background="/teachings/img/HLIN306/metamodelisation/londonSecond.png">
+    <section data-markdown data-background="/teachings/img/HMIN306/metamodelisation/londonSecond.png">
         <st>  
 1933<!-- .element: style="position:fixed;top:10%;left:10%;color:blue" -->
         </st>
@@ -348,7 +348,7 @@ Il peut être abstrait et considéré comme un modèle
 
 - Un modèle est conforme à son méta-modèle
 
-![Modèle conforme](/teachings/img/HLIN306/metamodelisation/conforme.png)
+![Modèle conforme](/teachings/img/HMIN306/metamodelisation/conforme.png)
     </section>
 
     <section data-markdown>
@@ -404,7 +404,7 @@ Département :
 <st>
 ### Méta-modèle de BDR
 
-![Modèle conforme](/teachings/img/HLIN306/metamodelisation/metaBDR.png)<!-- .element: style="height: -webkit-fill-available;" -->
+![Modèle conforme](/teachings/img/HMIN306/metamodelisation/metaBDR.png)<!-- .element: style="height: -webkit-fill-available;" -->
 </st>
     </section>
     
@@ -412,7 +412,7 @@ Département :
 
 ### Méta-metamodèle
 
-![Modèle conforme](/teachings/img/HLIN306/metamodelisation/metameta.png)
+![Modèle conforme](/teachings/img/HMIN306/metamodelisation/metameta.png)
 
     </section>
 
@@ -430,7 +430,7 @@ Département :
 
 ## Moose
 
-![Modèle conforme](/teachings/img/HLIN306/metamodelisation/mooseProcess.png)
+![Modèle conforme](/teachings/img/HMIN306/metamodelisation/mooseProcess.png)
 
     </section>
 
@@ -446,7 +446,7 @@ Département :
 
     <section data-markdown>
 
-![Famix metamodel](/teachings/img/HLIN306/metamodelisation/famixMetamodel.png)
+![Famix metamodel](/teachings/img/HMIN306/metamodelisation/famixMetamodel.png)
 
     </section>
 
@@ -490,7 +490,7 @@ Département :
 
 ## Exemple d’extension
 
-![Famix SQL metamodel](/teachings/img/HLIN306/metamodelisation/sqlExtension.png)
+![Famix SQL metamodel](/teachings/img/HMIN306/metamodelisation/sqlExtension.png)
 
     </section>
 
@@ -498,7 +498,7 @@ Département :
 
 ## Exemple de visualisation
 
-![Famix SQL metamodel](/teachings/img/HLIN306/metamodelisation/exampleVisu.png)
+![Famix SQL metamodel](/teachings/img/HMIN306/metamodelisation/exampleVisu.png)
 
     </section>
 
