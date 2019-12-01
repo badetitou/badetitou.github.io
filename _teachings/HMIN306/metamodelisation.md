@@ -159,7 +159,7 @@ Il peut être abstrait et considéré comme un modèle
 
 - Abstraction
 - Réutilisation
-- Meilleur compréhension
+- Meilleure compréhension
 - Rapidité de développement
 - Modularité
 - Interopérabilité
