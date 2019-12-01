@@ -62,6 +62,8 @@
 								| replace:'</backgroundimage>','" --> '
 								| replace:'<backgroundimageopacity>','<!-- .slide: data-background-opacity="'
 								| replace:'</backgroundimageopacity>','" -->'
+								| replace:'<notes>','<aside class="notes">'
+								| replace:'</notes>','</aside>'
 %}{%
 							assign first_char = line | strip
 								| slice: 0,1

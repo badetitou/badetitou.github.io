@@ -1,7 +1,7 @@
 ---
 author: Benoît "badetitou" Verhaeghe
 layout: reveal
-title: "Métamodélisation"
+title: "Méta-modélisation"
 subtitle: "Comment qu'on représente des trucs"
 date:   2019-10-03 12:00:00 +100
 categories: HMIN306
@@ -13,7 +13,7 @@ reveal_transition: fade
 
 <section data-markdown>
 <st>
-# Métamodélisation
+# Méta-modélisation
 
 ## Benoît Verhaeghe
 
@@ -57,7 +57,7 @@ ISO/IEC 14764:2006 Software Engineering — Software Life Cycle Processes — Ma
 
 > Legacy software: A system which continues to be used because of the cost of replacing or redesigning it and often despite its poor competitiveness and compatibility with modern equivalents. The implication is that the system is large, monolithic and difficult to modify. 
 
-mondofacto.com/facts/dictionary
+http://mondofacto.com/facts/dictionary
 
     </section>
 
@@ -186,7 +186,14 @@ Il peut être abstrait et considéré comme un modèle
 
     <section data-markdown>
 
-> Le développement comme la rétro ingénierie utilisent des modèles.
+> Le développement comme la rétro ingénierie utilisent des modèles
+
+    </section>
+
+
+    <section data-markdown>
+
+![Modeling](/teachings/img/HMIN306/metamodelisation/modeling.png)
 
     </section>
 
@@ -220,10 +227,16 @@ Il peut être abstrait et considéré comme un modèle
   - RUP, Merise ...<!-- .element: style="font-size: smaller;" -->
 - C'est l'usage de ces modèles qui change
 - Le but de l’IDM est
-  - De passer d'une vision plutôt **contemplative** des modèles<!-- .element: style="font-size: smaller;" -->
+  - De passer d'une vision plutôt **contemplative** des modèles
     - but de documentation, spécification, communication<!-- .element: style="font-size: smaller;" -->
-  - A une vision réellement **productive**<!-- .element: style="font-size: smaller;" -->
+  - A une vision réellement **productive**
 </st>
+    </section>
+
+    <section data-markdown>
+
+![Reverse](/teachings/img/HMIN306/metamodelisation/reverse.png)
+
     </section>
 
     <section data-markdown>
@@ -298,12 +311,22 @@ Il peut être abstrait et considéré comme un modèle
     </section>
 
     <section data-markdown>
+<st>
+#### Modèles - contextes - vues
 
-## Modèles - contextes - vues
+![Frances](/teachings/img/HMIN306/metamodelisation/frances.png)
 
-- Une France, mais plusieurs modèles de la France chacun représentant un point de vue du même système complexe
+Une France, mais plusieurs modèles de la France chacun représentant un point de vue du même système complexe<!-- .element: style="font-size: smaller;" -->
 
-    </section>
+<notes>
+
+- Langue regional
+- orage
+- carte routière
+- Département
+- Je ne sais plus (numéro de tel sûrement)
+</notes>
+   </st> </section>
 
     <section data-markdown data-background="/teachings/img/HMIN306/metamodelisation/londonFirst.png">
         <st>    
@@ -429,11 +452,11 @@ Département :
     </section>
 
     <section data-markdown>
-
+<st>
 ## Moose
 
-![Modèle conforme](/teachings/img/HMIN306/metamodelisation/mooseProcess.png)
-
+![Modèle conforme](/teachings/img/HMIN306/metamodelisation/mooseProcess.png)<!-- .element: style="background: white;" -->
+</st>
     </section>
 
     <section data-markdown>
@@ -447,9 +470,11 @@ Département :
     </section>
 
     <section data-markdown>
+    <st>
 
-![Famix metamodel](/teachings/img/HMIN306/metamodelisation/famixMetamodel.png)
+![Famix metamodel](/teachings/img/HMIN306/metamodelisation/famixMetamodel.png)<!-- .element: style="background: white;" -->
 
+</st>
     </section>
 
     <section data-markdown>
@@ -489,11 +514,11 @@ Département :
     </section>
 
     <section data-markdown>
-
+<st>
 ## Exemple d’extension
 
-![Famix SQL metamodel](/teachings/img/HMIN306/metamodelisation/sqlExtension.png)
-
+![Famix SQL metamodel](/teachings/img/HMIN306/metamodelisation/sqlExtension.png)<!-- .element: style="background: white;" -->
+</st>
     </section>
 
     <section data-markdown>
@@ -526,10 +551,186 @@ Département :
 
 <section>
 
-    <section data-markdown>
+<section data-markdown>
 
 # A vous de jouer
 
-    </section>
+</section>
+
+<section data-markdown>
+<st>
+## Exercice
+
+Conception d'un méta-modèle d'interface graphique HTML
+
+<notes>
+
+Finir cours avec ça puis passage en mode TP pour l'implémentation
+
+</notes>
+</st>
+</section>
+
+<section data-markdown>
+<st>
+## En pratique
+
+- Concevoir le méta-modèle
+- Télécharger Moose
+- Décrire le méta-modèle dans moose
+- Générer le méta-modèle
+- Importer les données
+
+</st>
+</section>
+
+<section data-markdown>
+<st>
+
+### Concevoir le méta-modèle
+
+</st>
+</section>
+
+<section data-markdown>
+<st>
+
+### Concevoir le méta-modèle
+
+![GUI Meta-modèle](/teachings/img/HMIN306/metamodelisation/guiMetamodel.png)<!-- .element: style="background: white;" -->
+
+</st>
+</section>
+
+<section data-markdown>
+<st>
+
+### Télécharger Moose
+
+Le plus simple est d'utiliser le [pharo-launcher](http://pharo.org/)
+
+</st>
+</section>
+
+<section data-markdown>
+<st>
+
+### Décrire le méta-modèle
+
+```st
+FamixMetamodelGenerator subclass: #GUIMetamodelGenerator​
+    instanceVariableNames: ''​
+    classVariableNames: ''​
+    package: 'GUI-Metamodel-Generator'​
+```
+
+</st>
+</section>
+
+
+<section data-markdown>
+<st>
+
+### Configuration
+
+```st
+packageName
+
+    ^ #'GUI-Model'
+```
+
+```st
+prefix
+
+    ^ #'GUI'
+```
+
+</st>
+</section>
+
+
+<section data-markdown>
+<st>
+
+### Classes
+
+```st
+defineClasses
+    super defineClasses.
+    widget := builder newClassNamed: 'Widget'.
+    attribute := builder newClassNamed: 'Attribute'.​
+    container := builder newClassNamed: 'Container'.
+    leaf := builder newClassNamed: 'Leaf'.
+```
+
+</st>
+</section>
+
+<section data-markdown>
+
+### Hierarchy
+
+```st
+defineHierarchy
+    super defineHierarchy.
+    container --|> widget.
+    leaf --|> widget.
+```
+
+</section>
+
+<section data-markdown>
+
+### Relations
+
+```st
+defineRelations
+    super defineRelations.
+    container <>-* widget.
+```
+
+</section>
+
+<section data-markdown>
+
+### Properties
+
+```st
+defineProperties
+    super defineProperties.
+    (widget property: #name type: #String) 
+        comment: 'The name of the entity'.
+```
+
+</section>
+
+<section data-markdown>
+<st>
+
+### Générer le meta-model
+
+```st
+GUIMetamodelGenerator​ generate
+```
+
+</st>
+</section>
+
+<section data-markdown>
+<st>
+
+### Importer
+
+Et si on essayer le parser XML !
+
+```st
+Metacello new
+   baseline: 'XMLParser';
+   repository: 'github://svenvc/XML-Support-Pharo';
+   load.
+```
+
+</st>
+</section>
 
 </section>
