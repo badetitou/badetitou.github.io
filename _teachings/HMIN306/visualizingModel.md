@@ -1,0 +1,479 @@
+---
+author: Benoît "badetitou" Verhaeghe
+layout: reveal
+title: "Visualizing models"
+subtitle: "Comment qu'on visualise des trucs"
+date:   2019-12-01 12:00:00 +100
+categories: HMIN306
+reveal_transition: fade
+---
+
+<!-- Hello -->
+<section>
+
+<section data-markdown>
+<st>
+# Visualizing models
+
+## Benoît Verhaeghe
+
+Ph.D. student @ Inria Lille - RMod
+
+R&D Engineer @ Berger-Levrault
+
+---
+
+badetitou@gmail.com
+
+</st>
+</section>
+
+<section data-markdown>
+
+## Merci
+
+Ces diapos sont inspirés de ceux de
+
+- Anne Etien
+- Nicolas Anquetil
+
+</section>
+<section data-markdown>
+
+## Plan
+
+- Pharo
+- Visualisation (Mondrian)
+- Famix (Moose)
+- Exemple
+  - Qualité Logicielle
+  - Interface Graphique
+- Bonus - Stage
+
+</section>
+
+</section>
+
+<section>
+
+<section data-markdown>
+
+## Pharo ?
+
+</section>
+
+<section data-markdown>
+<st>
+
+## Only Objects<!-- .element: class="highlight-green" -->
+
+</st>
+</section>
+
+<section data-markdown>
+
+### Messages
+
+- Unary
+  - Sans argument
+- Binary
+  - Avec un seul argument
+- Keywords
+  - Avec un ou plusieurs arguments
+
+</section>
+
+<section data-markdown>
+
+### From Java to Pharo
+
+```java
+String function(int param1, int param2){
+    this.otherFunction(param1, param2);
+    return “Hello World”;
+}
+```
+
+</section>
+
+<section data-markdown>
+
+### From Java to Pharo
+
+```st
+String function int param1 int param2
+    this otherFunction param1 param2
+    return “Hello World”
+}
+```
+
+> Enlever parenthèses, point, virgule, point-virgule
+
+</section>
+
+<section data-markdown>
+
+### From Java to Pharo
+
+```st
+function param1 param2
+    this otherFunction param1 param2
+    return “Hello World”
+
+```
+
+> Enlever les indicateurs de types
+
+</section>
+
+<section data-markdown>
+
+### From Java to Pharo
+
+```st
+function param1 param2
+    self otherFunction param1 param2
+    ^ 'Hello World'
+```
+
+> Remplacer par la nouvelle syntaxe
+
+this → self
+
+return → ^
+
+“” → ‘’
+
+</section>
+
+<section data-markdown>
+
+### From Java to Pharo
+
+```st
+function: param1 with:param2
+    self otherFunction: param1 with: param2.
+    ^ ‘Hello World’
+```
+
+> Ajouter mot-clefs pour les fonctions et les points en fin de lignes
+
+</section>
+
+<section data-markdown>
+
+### Résultat
+
+```java
+String function(int param1, int param2){
+    this.otherFunction(param1, param2);
+    return “Hello World”;
+}
+```
+
+```st
+function: param1 with:param2
+    self otherFunction: param1 with: param2.
+    ^ ‘Hello World’
+```
+
+</section>
+
+<section data-markdown>
+
+### Résumé
+
+- Enlever parenthèses, points, virgule, point-virgule 
+- Enlever les indicateurs des types
+- Remplacer par la nouvelle syntaxe
+- Ajouter mot-clefs pour les fonctions et les points en fin de lignes
+
+</section>
+
+</section>
+
+<section>
+
+<section data-markdown>
+
+## Visualisation
+
+----
+
+#### L'outil Mondrian
+
+</section>
+
+<section data-markdown>
+
+## Mondrian
+
+- DSL
+- Permet de créer des visualisation
+- Simple à utiliser
+
+</section>
+
+<section data-markdown>
+
+### Créer une view
+
+```st
+view := RTMondrian new
+^ view
+```
+
+</section>
+
+<section data-markdown>
+
+### Ajouter des noeuds
+
+```st
+view := RTMondrian new.
+view nodes: { 1. 2. 3. 4. 5. }.
+^ view
+```
+
+</section>
+
+<section data-markdown>
+
+### Ajouter des liens
+
+```st
+view := RTMondrian new.
+view nodes: { 1. 2. 3. 4. 5. }.
+view edges useAssociations: { 1->2. 3->2. 4->3. 5->3 }.
+^ view
+```
+
+</section>
+
+<section data-markdown>
+
+### Disposer les éléments
+
+```st
+view := RTMondrian new.
+view nodes: { 1. 2. 3. 4. 5. }.
+view edges useAssociations: { 1->2. 3->2. 4->3. 5->3 }.
+view layout tree.
+^ view
+```
+
+</section>
+
+<section data-markdown>
+
+### Forme des liens
+
+```st
+view := RTMondrian new.
+view nodes: { 1. 2. 3. 4. 5. }.
+view shape line arrowedLine shape head baseSize: 5.0; 
+    size: 8.
+view edges useAssociations: { 1->2. 3->2. 4->3. 5->3 }.
+view layout tree.
+^ view
+```
+
+</section>
+
+<section data-markdown>
+
+### Forme des noeuds
+
+```st
+view := RTMondrian new.
+view shape circle color: Color red.
+view nodes: { 1. 2. 3. 4. 5. }.
+view shape line arrowedLine shape head baseSize: 5.0; 
+    size: 8.
+view edges useAssociations: { 1->2. 3->2. 4->3. 5->3 }.
+view layout tree.
+^ view
+```
+
+</section>
+
+<section data-markdown>
+
+### Forme des noeuds
+
+```st
+view := RTMondrian new.
+view shape rectangle;
+    height: [:class | class methods size];
+    width: [:class | class methods sum: #numberOfLinesOfCode];
+    withTextAbove: #name.
+view nodes: {RTCalendarBuilder. RTMondrian.}.
+^ view
+
+```
+
+</section>
+
+</section>
+
+<section>
+
+<section data-markdown>
+
+## Famix Model
+
+----
+
+#### Java
+
+</section>
+
+</section>
+
+<section>
+
+<section data-markdown>
+
+## Qualité Logicielle
+
+----
+
+#### RCA
+
+</section>
+
+<section data-markdown>
+
+#### Que pouvons nous etudier ?
+
+- Nb de packages
+- Nb de classes
+- Nb de méthodes
+- Nb d'attributs
+- Code Mort
+- Tests
+- Méthodes dépréciées
+- Complexité cyclomatique
+- Hierarchie de package
+- Diagramme de classes
+- Cycles entre packages
+- Répartition classes/package
+- God classes (LOC et nb de méthode)
+- Lazy classes (LOC et nb de méthode)
+
+</section>
+
+<section data-markdown>
+
+## Import
+
+mooseModel := FamixJavaModel importFromMSEStream:
+    msePath asFileReference readStream.
+mooseModel rootFolder: rootFolderPath.
+mooseModel name: 'rca'.
+mooseModel install.
+
+</section>
+
+<section data-markdown>
+
+## Paquetages/Classes/Méthodes
+
+```st
+mooseModel allModelNamespaces.
+mooseModel allModelClasses.
+mooseModel allModelMethods.
+
+
+mooseModel allX
+```
+
+</section>
+
+<section data-markdown>
+
+## Compter le nombre d’éléments
+
+```st
+“Nombre de classes”
+mooseModel allModelClasses size. “180”
+
+“Nombre de lignes de code”
+mooseModel allModelClasses sum: #numberOfLinesOfCode. “11613”
+
+“Nombre de lignes de code - aussi”
+mooseModel allModelClasses sum:
+    [ :class | class numberOfLinesOfCode]. “11613”
+```
+
+</section>
+
+<section data-markdown>
+
+## Chercher des annotations
+
+```st
+“Sélectionner les classes avec une annotation”
+mooseModel allModelClasses
+    select: [:class | class annotationInstances isNotEmpty ].
+
+“Sélectionner les classes dépréciées”
+(mooseModel allModelClasses select: [:class |
+    class annotationInstances isNotEmpty
+      and: [ class annotationTypes anySatisfy:
+        [:type | type name = ‘Deprecated’ ]]).
+```
+
+</section>
+
+<section data-markdown>
+
+## Hiérarchies de paquetages
+
+```st
+| b |
+b := RTMondrian new.
+b nodes: mooseModel allModelNamespaces.
+b edgesFrom: #parentScope.
+b layout tree.
+b build.
+b view
+```
+
+</section>
+
+<section data-markdown>
+
+## Relations classes/paquetages
+
+```st
+| b |
+b := RTMondrian new.
+b shape rectangle.
+b nodes: model allModelNamespaces forEach: [ :p | 
+    b nodes: p classes.
+    b edges connectFrom: #superclass.
+    b layout tree ].
+b edgesFrom: #parentScope.
+b layout tree.
+b build.
+^ b view
+```
+
+</section>
+
+</section>
+
+<section>
+
+<section data-markdown>
+
+## GUI Example
+
+----
+
+#### oui oui, c'est mon travail
+
+</section>
+
+</section>
