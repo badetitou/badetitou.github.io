@@ -17,7 +17,7 @@ reveal:
 <st>
 # Visualizing models
 
-## Benoît Verhaeghe
+### Benoît Verhaeghe
 
 Ph.D. student @ Inria Lille - RMod
 
@@ -275,42 +275,54 @@ view layout tree.
 </st>
 </section>
 
-<section data-markdown>
-<st>
-### Forme des liens
-
+<section>
+    <h3> Forme des liens</h3>
+    <div class="container">
+        <div class="col" data-markdown>
 ```st
 view := RTMondrian new.
 view nodes: { 1. 2. 3. 4. 5. }.
-view shape line arrowedLine shape head baseSize: 5.0; 
+view shape line arrowedLine shape head 
+    baseSize: 5.0; 
     size: 8.
-view edges useAssociations: { 1->2. 3->2. 4->3. 5->3 }.
+view edges 
+    useAssociations: { 1->2. 3->2. 4->3. 5->3 }.
 view layout tree.
 ^ view
 ```
-
+        </div>
+        <div class= col data-markdown>
+            <st>
 ![Some links options](/teachings/img/HMIN306/visualizingModel/node4.png)<!-- .element: style="background: white;" -->
-
-</st>
+            </st>
+        </div>
+    </div>
 </section>
 
-<section data-markdown>
-<st>
-### Forme des noeuds
+<section>
 
+    <h3>Forme des noeuds</h3>
+    <div class="container">
+        <div class="col" data-markdown>
 ```st
 view := RTMondrian new.
 view shape circle color: Color red.
 view nodes: { 1. 2. 3. 4. 5. }.
-view shape line arrowedLine shape head baseSize: 5.0; 
+view shape line arrowedLine shape head 
+    baseSize: 5.0; 
     size: 8.
-view edges useAssociations: { 1->2. 3->2. 4->3. 5->3 }.
+view edges 
+    useAssociations: { 1->2. 3->2. 4->3. 5->3 }.
 view layout tree.
 ^ view
 ```
-
+        </div>
+        <div class="col" data-markdown>
+            <st>
 ![Some nodes options](/teachings/img/HMIN306/visualizingModel/node5.png)<!-- .element: style="background: white;" -->
-</st>
+            </st>
+        </div>
+    </div>
 </section>
 
 <section data-markdown>

@@ -39,9 +39,6 @@ plugins:
 # Reveal.js subdirectory
 reveal_path: /reveal.js/
 
-# The Reveal theme
-reveal_theme: black.css
-
 # Path to the used theme (defaults to the Reveal.js standard theme path)
 reveal_theme_path: /reveal.js/css/theme/ 
 
@@ -96,4 +93,4 @@ defaults:
         viewDistance: 3
         parallaxBackgroundImage:
         parallaxBackgroundSize:
-        theme: black.css
+        theme: night.css
