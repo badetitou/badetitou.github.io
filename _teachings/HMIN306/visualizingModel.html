@@ -92,7 +92,7 @@ Ces diapos sont inspirés de ceux de
 ```java
 String function(int param1, int param2){
     this.otherFunction(param1, param2);
-    return “Hello World”;
+    return "Hello World";
 }
 ```
 
@@ -105,7 +105,7 @@ String function(int param1, int param2){
 ```st
 String function int param1 int param2
     this otherFunction param1 param2
-    return “Hello World”
+    return "Hello World"
 }
 ```
 
@@ -120,7 +120,7 @@ String function int param1 int param2
 ```st
 function param1 param2
     this otherFunction param1 param2
-    return “Hello World”
+    return "Hello World"
 
 ```
 
@@ -144,7 +144,7 @@ this → self
 
 return → ^
 
-“” → ‘’
+"" → ‘’
 
 </section>
 
@@ -169,7 +169,7 @@ function: param1 with:param2
 ```java
 String function(int param1, int param2){
     this.otherFunction(param1, param2);
-    return “Hello World”;
+    return "Hello World";
 }
 ```
 
@@ -377,10 +377,13 @@ view nodes: {RTCalendarBuilder. RTMondrian.}.
 
 </section>
 
-<section data-markdown>
 
-#### Que pouvons nous etudier ?
+<section>
+<h4> Que pouvons nous etudier ?</h4>
 
+<div class="container">
+
+    <div class="col" data-markdown>
 - Nb de packages
 - Nb de classes
 - Nb de méthodes
@@ -389,12 +392,21 @@ view nodes: {RTCalendarBuilder. RTMondrian.}.
 - Tests
 - Méthodes dépréciées
 - Complexité cyclomatique
+    </div>
+
+    <div class="col" data-markdown>
 - Hierarchie de package
 - Diagramme de classes
 - Cycles entre packages
 - Répartition classes/package
 - God classes (LOC et nb de méthode)
 - Lazy classes (LOC et nb de méthode)
+    </div>
+        
+</div>
+
+
+
 
 </section>
 
@@ -432,15 +444,15 @@ mooseModel allX
 ## Compter le nombre d’éléments
 
 ```st
-“Nombre de classes”
-mooseModel allModelClasses size. “180”
+"Nombre de classes"
+mooseModel allModelClasses size. "180"
 
-“Nombre de lignes de code”
-mooseModel allModelClasses sum: #numberOfLinesOfCode. “11613”
+"Nombre de lignes de code"
+mooseModel allModelClasses sum: #numberOfLinesOfCode. "11613"
 
-“Nombre de lignes de code - aussi”
+"Nombre de lignes de code - aussi"
 mooseModel allModelClasses sum:
-    [ :class | class numberOfLinesOfCode]. “11613”
+    [ :class | class numberOfLinesOfCode]. "11613"
 ```
 
 </section>
@@ -450,15 +462,15 @@ mooseModel allModelClasses sum:
 ## Chercher des annotations
 
 ```st
-“Sélectionner les classes avec une annotation”
+"Sélectionner les classes avec une annotation"
 mooseModel allModelClasses
     select: [:class | class annotationInstances isNotEmpty ].
 
-“Sélectionner les classes dépréciées”
+"Sélectionner les classes dépréciées"
 (mooseModel allModelClasses select: [:class |
     class annotationInstances isNotEmpty
       and: [ class annotationTypes anySatisfy:
-        [:type | type name = ‘Deprecated’ ]]).
+        [:type | type name = 'Deprecated' ]]).
 ```
 
 </section>

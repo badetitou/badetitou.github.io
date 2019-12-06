@@ -18,6 +18,7 @@
 
 		<link rel="stylesheet" href="{{ site.reveal_path }}css/reveal.css">
 		<link rel="stylesheet" href="{{ site.reveal_theme_path }}{{ site.reveal_theme }}" id="theme">
+		<link rel="stylesheet" href="{{ "/css/my-revealjs.css" | prepend: site.baseurl }}">
 {% if site.extra_css %}
 	{% for css_file in site.extra_css %}
 		<link rel="stylesheet" href="{{ css_file }}">
