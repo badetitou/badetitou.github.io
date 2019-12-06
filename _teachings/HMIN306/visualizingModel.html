@@ -257,22 +257,27 @@ view edges useAssociations: { 1->2. 3->2. 4->3. 5->3 }.
 </st>
 </section>
 
-<section data-markdown>
-<st>
-
-### Disposer les éléments
-
+<section>
+<h3>Disposer les éléments</h3>
+<div class="container">
+    <div class="col" data-markdown>
+        <st>
 ```st
 view := RTMondrian new.
 view nodes: { 1. 2. 3. 4. 5. }.
-view edges useAssociations: { 1->2. 3->2. 4->3. 5->3 }.
+view edges 
+    useAssociations: { 1->2. 3->2. 4->3. 5->3 }.
 view layout tree.
 ^ view
 ```
-
+        </st>
+    </div>
+    <div class="col" data-markdown>
+        <st>
 ![Some layout](/teachings/img/HMIN306/visualizingModel/node3.png)<!-- .element: style="background: white;" -->
-
-</st>
+        </st>
+    </div>
+</div>
 </section>
 
 <section>
