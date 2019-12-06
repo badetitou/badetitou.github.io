@@ -42,9 +42,6 @@ reveal_path: /reveal.js/
 # The Reveal theme
 reveal_theme: black.css
 
-# The Reveal transition
-reveal_transition: fade
-
 # Path to the used theme (defaults to the Reveal.js standard theme path)
 reveal_theme_path: /reveal.js/css/theme/ 
 
@@ -68,3 +65,35 @@ scholar:
   sort_by: year
   order: descending
   group_by: type
+
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: reveal
+      reveal:
+        controls: true
+        progress: true
+        slideNumber: false
+        history: true
+        keyboard: true
+        overview: true
+        center: true
+        touch: true
+        loop: false
+        rtl: false
+        fragments: true
+        embedded: false
+        autoSlide: false
+        autoSlideStoppable: true
+        mouseWheel: false
+        hideAddressBar: true
+        previewLinks: false
+        transition: fade
+        transitionSpeed: default
+        backgroundTransition: default
+        viewDistance: 3
+        parallaxBackgroundImage:
+        parallaxBackgroundSize:
+        theme: black.css
