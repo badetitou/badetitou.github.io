@@ -204,14 +204,16 @@ function: param1 with:param2
 
 </section>
 
-<section data-markdown>
+<section data-markdown data-background="/teachings/img/HMIN306/visualizingModel/roassal.png">
+<st>
 
-## Mondrian
+## Mondrian <!-- .element: style="color:black" -->
 
-- DSL
-- Permet de créer des visualisation
-- Simple à utiliser
+- DSL <!-- .element: style="color:black" -->
+- Permet de créer des visualisation <!-- .element: style="color:black" -->
+- Simple à utiliser <!-- .element: style="color:black" -->
 
+</st>
 </section>
 
 <section data-markdown>
@@ -235,6 +237,8 @@ view nodes: { 1. 2. 3. 4. 5. }.
 ^ view
 ```
 
+![Some nodes](/teachings/img/HMIN306/visualizingModel/node1.png)
+
 </section>
 
 <section data-markdown>
@@ -247,6 +251,8 @@ view nodes: { 1. 2. 3. 4. 5. }.
 view edges useAssociations: { 1->2. 3->2. 4->3. 5->3 }.
 ^ view
 ```
+
+![Some links](/teachings/img/HMIN306/visualizingModel/node2.png)
 
 </section>
 
@@ -261,6 +267,8 @@ view edges useAssociations: { 1->2. 3->2. 4->3. 5->3 }.
 view layout tree.
 ^ view
 ```
+
+![Some layout](/teachings/img/HMIN306/visualizingModel/node3.png)
 
 </section>
 
@@ -277,6 +285,8 @@ view edges useAssociations: { 1->2. 3->2. 4->3. 5->3 }.
 view layout tree.
 ^ view
 ```
+
+![Some links options](/teachings/img/HMIN306/visualizingModel/node4.png)
 
 </section>
 
@@ -295,6 +305,9 @@ view layout tree.
 ^ view
 ```
 
+
+![Some nodes options](/teachings/img/HMIN306/visualizingModel/node5.png)
+
 </section>
 
 <section data-markdown>
@@ -312,6 +325,8 @@ view nodes: {RTCalendarBuilder. RTMondrian.}.
 
 ```
 
+![Some other nodes options](/teachings/img/HMIN306/visualizingModel/node6.png)
+
 </section>
 
 </section>
@@ -325,6 +340,22 @@ view nodes: {RTCalendarBuilder. RTMondrian.}.
 ----
 
 #### Java
+
+</section>
+
+<section data-markdown>
+
+## Main model
+
+![Java meta](/teachings/img/HMIN306/visualizingModel/javaMeta.png)
+
+</section>
+
+<section data-markdown>
+
+## Les invocations
+
+![Invocations meta](/teachings/img/HMIN306/visualizingModel/invocationsMeta.png)
 
 </section>
 
@@ -367,11 +398,13 @@ view nodes: {RTCalendarBuilder. RTMondrian.}.
 
 ## Import
 
+```st
 mooseModel := FamixJavaModel importFromMSEStream:
     msePath asFileReference readStream.
 mooseModel rootFolder: rootFolderPath.
 mooseModel name: 'rca'.
 mooseModel install.
+```
 
 </section>
 
@@ -427,6 +460,7 @@ mooseModel allModelClasses
 </section>
 
 <section data-markdown>
+<st>
 
 ## Hiérarchies de paquetages
 
@@ -440,6 +474,9 @@ b build.
 b view
 ```
 
+![Packages hierarchy](/teachings/img/HMIN306/visualizingModel/hierarchy.png)<!-- .element: style="background: white;" -->
+
+</st>
 </section>
 
 <section data-markdown>
@@ -450,7 +487,7 @@ b view
 | b |
 b := RTMondrian new.
 b shape rectangle.
-b nodes: model allModelNamespaces forEach: [ :p | 
+b nodes: model allModelNamespaces forEach: [ :p |
     b nodes: p classes.
     b edges connectFrom: #superclass.
     b layout tree ].
@@ -459,6 +496,14 @@ b layout tree.
 b build.
 ^ b view
 ```
+
+</section>
+
+<section data-markdown>
+
+## Relations classes/paquetages
+
+![Packages hierarchy](/teachings/img/HMIN306/visualizingModel/class-packages.png)
 
 </section>
 
@@ -474,6 +519,37 @@ b build.
 
 #### oui oui, c'est mon travail
 
+</section>
+
+<section data-markdown>
+
+### Visualiser une UI
+
+```st
+| b |
+b := RTMondrian new.
+b shape circle color: [ :cl | cl color ].
+b nodes: (aBLModel allBLWidget , aBLModel allBLService) asSet
+    asOrderedCollection.
+(b shape line arrowedLine
+    headOffset: 1.0;) shape head
+    baseSize: 5.0;
+    size: 8.
+b edges useAssociations:
+    (aBLModel allBLWidget collect: #allAssociations) flatten.
+b layout force strength: 0.4.
+b view pushBackEdges.
+^ b
+```
+
+</section>
+
+<section data-markdown>
+<st>
+
+![UIs](/teachings/img/HMIN306/visualizingModel/uis.png)<!-- .element: style="background: white;" -->
+
+</st>
 </section>
 
 </section>
