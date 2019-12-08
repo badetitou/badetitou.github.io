@@ -3,7 +3,7 @@ author: Benoît "badetitou" Verhaeghe
 layout: post
 title:  "Visualisation de RCA"
 date:   2018-11-27 12:00:00 +100
-last_modified_at: 2018-12-04 10:35:00 +100
+last_modified_at: 2019-12-08 22:00:00 +100
 categories: teaching mtp _ignore
 header-img: "img/bg/keyboard.jpg"
 ---
@@ -29,7 +29,7 @@ Pour charger le _.mse_ dans Moose exécuter le code suivant dans un playground :
 
 ```st
 mooseModel := MooseModel importFromMSEStream: '..\verveinej\rca.mse' asFileReference readStream.
-mooseModel name: 'rca'. 
+mooseModel name: 'rca'.
 mooseModel rootFolder: '..\rcaexplore'.
 mooseModel install.
 ```
@@ -70,16 +70,8 @@ Quelques questions pour cette dernière partie :
 - Ajouter un repository (add)
 - Dans "Clone From github.com" entrer comme information
   - Owner name : **badetitou**
-  - Project name : **ExperimentalStuff**
+  - Project name : **OOAnalysis**
 - Valider, et charger le paquetage dans votre image Pharo.
 
-Vous devriez maintenant avoir un paquetage _"RCA-Explore"_ dans votre image avec au moins la classe _"RCACriticsVisu"_.
+Vous devriez maintenant avoir un paquetage _OOAnalysis_ dans votre image avec au moins la classe _OOCriticsVisu_.
 Cette classe contient de nombreuses méthodes pour effectuer des requêtes sur le modèle.
-
-## Fin du TP
-
-Si vous avez des questions ou si **vous recherchez un stage** n'hésitez pas à me contacter par **[mail](mailto:badetitou@gmail.com)**
-
-Sujets de stage disponible (il y en a d'autres) :
-
-[Migration d'interface graphique](https://berger-levrault-career.talent-soft.com/offre-de-emploi/emploi-stage-developpement-d-un-gui-builder-h-f_59.aspx)
