@@ -1,0 +1,47 @@
+---
+layout: default
+header-img: "img/bg/book.jpg"
+---
+
+<!-- Post Header -->
+<header class="intro-header"
+    style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}img/bg/book.jpg{% endif %}')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>{{ page.title }}</h1>
+                    {% if page.subtitle %}
+                    <h2 class="subheading">{{ page.subtitle }}</h2>
+                    {% endif %}
+                    <span class="meta">Posted by
+                        {% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif %} on
+                        {{ page.date | date: "%B %-d, %Y" }}</span>
+                    <span class="post-meta">
+                        {% if page.last_modified_at %}
+                        (Updated: {{ page.last_modified_at | date: "%b %-d, %Y" }})
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="row">
+        <div class="col offset-l2 s12 m9 l8">
+
+            {{ content }}
+
+        </div>
+        <div class="col hide-on-small-only m3 l2">
+            <ul class="table-of-contents pushpin">
+
+            </ul>
+        </div>
+    </div>
+</article>
+
+<hr>
