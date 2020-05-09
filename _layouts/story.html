@@ -29,17 +29,13 @@ header-img: "img/bg/book.jpg"
 </header>
 
 <!-- Post Content -->
-<article>
-    <div class="row">
-        <div class="col offset-l2 s12 m9 l8">
+<article class="mdc-layout-grid">
+    <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell--span-2"></div>
+        <div class="mdc-layout-grid__cell--span-8">
 
             {{ content }}
 
-        </div>
-        <div class="col hide-on-small-only m3 l2">
-            <ul class="table-of-contents pushpin">
-
-            </ul>
         </div>
     </div>
 </article>

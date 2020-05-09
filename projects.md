@@ -5,6 +5,8 @@ title: "Projects"
 
 ## My projects
 
+<div class="mdc-layout-grid__inner">
+
 {% include card.html
     title="Casino"
     githubLink="https://github.com/badetitou/Casino"
@@ -54,9 +56,11 @@ FI converts all the data from the server and sends to everyone wants the data in
     githubLink='https://github.com/badetitou/factoryInterface'
 %}
 
+</div>
 <div class="col s12 l12 m12">
 	<h2 id="Contributing">Contributing</h2>
 </div>
+<div class="mdc-layout-grid__inner">
 
 {% include card.html
     title="Moose"
@@ -89,3 +93,5 @@ It comes with a metamodel and a metamodel generator'
     githubLink='https://github.com/moosetechnology/FAST-Pharo'
     docLink='https://moosetechnology.github.io/moose-wiki/'
 %}
+
+</div>
