@@ -32,14 +32,14 @@ There is no official API for GPM service, however, a the [gmusicapi](https://uno
 This API allows us to access every element of our GPM library.
 
 I'm not that good in Python, but I know it is possible to control python over Pharo.
-So I decided to use the [pybridge](https://github.com/aranega/pybridge) project of Vincent Aranega.
+So I decided to use the [pybridge](https://github.com/aranega/pybridge) project of [Vincent Aranega](https://github.com/aranega).
 
-Pybridge allows us to use python language in Pharo.
+PyBridge allows us to use python language in Pharo.
 So, I'll use it to load and use the unofficial GPM API.
 
 #### Set up PyBridge
 
-PyBridge asks a bit of a SetUp.
+PyBridge is currently a work in progress and consequently asks a bit of a SetUp.
 One needs to download the server project and the Pharo client project.
 
 For the [Pharo client project](https://github.com/aranega/pybridge), it is super easy.
@@ -53,13 +53,14 @@ Metacello new
 ```
 
 For the [Server project](https://github.com/aranega/pybridge), the project is inside the `python` branch of the git repository.
-So clone it in another folder and do:
+It requires [`pipenv`](https://pypi.org/project/pipenv/) to simply setup python virtual environments.
+So clone it in another folder and create a virtualenv by doing a simple:
 
 ```sh
 $ pipenv install
 ```
 
-Then to run the server execute the following commands:
+Then, install the `gmusicapi` and run the server by executing the following commands:
 
 ```sh
 $ pipenv shell
@@ -67,12 +68,13 @@ $ pipenv shell
 (pybridge) $ python server.py
 ```
 
-You have correctly set up PyBridge to use the gmusicapi library !
+Congratulations! You have correctly set up `PyBridge` to use the `gmusicapi` library!
 
 ### Log in GPM
 
 Before using the library, I need to log in inside GPM.
-To do so, I will use gmusicapi.
+To do so, I will use `gmusicapi`.
+The usage of the python library in Pharo is pretty forward as PyBridge exposes python objects in a Smalltalk fashion.
 
 ```st
 | mobileClient api |
