@@ -21,6 +21,8 @@ collections:
     output: true
   teachings:
     output: true
+  stories:
+    output: true
 
 # Build settings
 markdown: kramdown

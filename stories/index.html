@@ -1,0 +1,24 @@
+---
+layout: page
+title: Stories
+categories: _ignore
+header-img: "img/bg/book.jpg"
+---
+
+{% for story in site.stories %}
+{% if story.categories contains 'draft' %}
+{%else%}
+
+<article class="post-preview">
+    <a href="{{ story.url | prepend: site.baseurl | replace: '//', '/' }}">
+        <h2 class="post-title">{{ story.title }}</h2>
+        {% if story.subtitle %}
+        <h3 class="post-subtitle">{{ story.subtitle }}</h3>
+        {% endif %}
+        <div class="post-short">{{ story.content |truncatehtml | truncatewords: 60 }}</div>
+    </a>
+</article>
+
+<hr>
+{% endif %}
+{% endfor %}

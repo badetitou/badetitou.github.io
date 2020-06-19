@@ -1,18 +1,13 @@
-<div class="col l6 m12 s12">
-    <div class="card">
-        {% if include.imgSrc %}
-        <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator center-image project-resize-image" src="{{ include.imgSrc }}">
+<div class="mdc-layout-grid__cell--span-6">
+    <div class="mdc-card my-card-content">
+        <div class="my-card__title">
+        {{ include.title }}
         </div>
-        {% endif %}
-        <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">{{ include.title }}<i class="material-icons right">more_vert</i></span>
-        </div>
-        <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">{{ include.title }}<i class="material-icons right">close</i></span>
-            <p>{{ include.description }}</p>
-        </div>
-        <div class="card-action">
+        {{ include.description }}
+
+
+        
+        <div class="mdc-card__actions">
                 {% if include.githubLink %}
                     <a href="{{ include.githubLink }}">
                         <span class="fa-stack fa-lg">

@@ -231,6 +231,21 @@ hr.small {
   font-weight: 300;
   margin-bottom: 10px;
 }
+
+.post-preview > a > .post-short {
+  text-decoration: none;
+  color: #808080;
+  font-size: 20px;
+  font-style: italic;
+  margin-top: 0;
+}
+
+.post-preview > a:hover > .post-short,
+.post-preview > a:focus > .post-short {
+  text-decoration: none;
+  color: #0085a199;
+}
+
 .post-preview > .post-meta {
   color: #808080;
   font-size: 18px;
@@ -239,7 +254,7 @@ hr.small {
 }
 .post-preview > .post-meta > a {
   text-decoration: none;
-  color: #404040;
+  color: hsl(0, 0%, 25%);
 }
 .post-preview > .post-meta > a:hover,
 .post-preview > .post-meta > a:focus {

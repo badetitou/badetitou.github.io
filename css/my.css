@@ -50,3 +50,19 @@ li {
 .emoji {
     display: inline-block;
 }
+
+.my-card__title {
+    font-family: Roboto, sans-serif;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-size: 2.2rem;
+    line-height: 3rem;
+    font-weight: bold;
+    letter-spacing: .0125em;
+    text-decoration: bold;
+    text-transform: inherit;
+}
+
+.my-card-content {
+    padding: 16px;
+}
