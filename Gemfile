@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'jekyll', '~> 4.1.0'
-gem 'coderay', '~> 1.1.0'
+gem 'jekyll'
 
 group :jekyll_plugins do
   gem "jekyll-paginate"
@@ -9,7 +8,6 @@ group :jekyll_plugins do
   gem "jemoji"
   gem 'jekyll-avatar'
   gem 'jekyll-sitemap'
-  gem 'jekyll'
   gem 'jekyll-scholar'
 end
 
