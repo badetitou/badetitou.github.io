@@ -5,7 +5,7 @@ title:  "La lumière de l'océan"
 date:   2020-05-17 10:00:00 +100
 ---
 
-Un jeune enfant était entrain de se baigner dans le calme océan.
+Un jeune enfant était en train de se baigner dans le calme océan.
 Il prenait plaisir, sur le bord, à sentir l'eau venir s'écraser sur son torse.
 Prendre du sable déjà mouillé, faire une petite colline avec le sable.
 Colline qui s'effondrera à la prochaine, inévitable, attaque de l'océan sur la terre.
