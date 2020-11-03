@@ -28,9 +28,9 @@ Pour cela, vous avez à votre disposition le code source de l'application RCA,
 Pour charger le _.mse_ dans Moose exécuter le code suivant dans un playground :
 
 ```st
-mooseModel := MooseModel importFromMSEStream: '..\verveinej\rca.mse' asFileReference readStream.
+mooseModel := FAMIXModel importFromMSEStream: './verveinej/rca.mse' asFileReference readStream.
 mooseModel name: 'rca'.
-mooseModel rootFolder: '..\rcaexplore'.
+mooseModel rootFolder: './rcaexplore'.
 mooseModel install.
 ```
 
