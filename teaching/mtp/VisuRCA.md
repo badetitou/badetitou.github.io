@@ -22,8 +22,11 @@ Pour cela, vous avez à votre disposition le code source de l'application RCA,
 
 ## Pour commencer
 
-1. Charger le _.mse_ dans Moose (si vous avez pris l'image depuis les Ressources, il est possible que cela soit déjà fait).
-2. Créer un nouveau paquetage nommé "RCA-Analyse" et une classe à l'intérieur dans laquelle vous pourrez enregistrer votre code.
+1. Télécharger le [Pharo Launcher](pharo.org)
+2. Désarchiver le zip
+3. Lancer localement l'image téléchargé
+4. Charger le _.mse_ dans Moose (si vous avez pris l'image depuis les Ressources, il est possible que cela soit déjà fait).
+5. Créer un nouveau paquetage nommé "RCA-Analyse" et une classe à l'intérieur dans laquelle vous pourrez enregistrer votre code.
 
 Pour charger le _.mse_ dans Moose exécuter le code suivant dans un playground :
 
