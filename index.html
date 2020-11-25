@@ -3,84 +3,94 @@ layout: page
 description: "PHD Student"
 ---
 
-<div style="padding-bottom: 5px; border: 0px; border-bottom: 2px; border-style: dashed">
-    <h2 style="margin: auto; display: block; width: max-content;">
-        About me
-    </h2>
-</div>
+<div class="mdc-layout-grid__inner">
 
-My name is Benoît "badetitou" Verhaeghe.
-I work on migration tools and on tests.
-You can find all my public projects on Github.
-
-I also wrote some short french stories.
-<a class="fa-stack fa-lg" href="/stories">    
-    <i class="fa fa-circle fa-stack-2x"></i>
-    <i class="fas fa-book fa-stack-1x fa-inverse"></i>
-</a>
-
-<div class="mdc-touch-target-wrapper">
-    <a href="https://github.com/badetitou/AltaCV/releases/download/latest/cv.pdf"  class="mdc-button mdc-button--raised">
-        <div class="mdc-button__ripple"></div>
-        <span class="mdc-button__label">Download my CV</a>
-        <div class="mdc-button__touch"></div>
-    </a>
-</div>
-
-<div style="margin-top: 20px; padding-bottom: 5px; border: 0px; border-bottom: 2px; border-style: dashed">
-    <h2 style="margin: auto; display: block; width: max-content;">
-        Experience
-    </h2>
-</div>
-
-{% for experience in site.data.experience %}
-
-<div class="mdc-layout-grid">
-    <div class="mdc-layout-grid__inner">
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
-            <h3 style="margin-top: 0px;">{{ experience.company }}</h3>
-            <a style="font-style: italic" target="_blank" href="{{ experience.link }}">{{ experience.link }}</a>
-            <div>{{ experience.dates }}</div>
+    <div class="mdc-layout-grid__cell--span-12">
+        <div class="mdc-card my-card-content mdc-card--outlined">
+            <div class="my-card__title">
+                About me
+            </div>
+            <div class="mdc-card__content">
+                My name is Benoît "badetitou" Verhaeghe.
+                I work on migration tools and on tests.
+                You can find all my public projects on Github.
+                I also wrote some short french stories.
+            </div>
+            <div class="mdc-card__actions mdc-card__actions--full-bleed">
+                <a class="mdc-button mdc-card__action mdc-card__action--button" href="/stories">
+                    <div class="mdc-button__ripple"></div>
+                    <span class="mdc-button__label">French Stories</span>
+                </a>
+                <a class="mdc-button mdc-card__action mdc-card__action--button mdc-button--raised" href="https://github.com/badetitou/AltaCV/releases/download/latest/cv.pdf" >
+                    <div class="mdc-button__ripple"></div>
+                    <span class="mdc-button__label">Download my CV</a>
+                    <div class="mdc-button__touch"></div>
+                </a>
+            </div>
         </div>
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8">
-            
+    </div>
 
-            {% for description in experience.description %}
-                {{ description | markdownify }}
-            {% endfor %}
+    <div class="mdc-layout-grid__cell--span-12">
+        <div class="mdc-card my-card-content mdc-card--outlined">
+            <div class="my-card__title">
+                Experience
+            </div>
+        <div class="mdc-card__content">
+                {% for experience in site.data.experience %}
+
+                <div class="mdc-layout-grid">
+                    <div class="mdc-layout-grid__inner">
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                            <h4 style="margin-top: 0px;">{{ experience.company }}</h3>
+                            <a style="font-style: italic" target="_blank" href="{{ experience.link }}">{{ experience.link }}</a>
+                            <div>{{ experience.dates }}</div>
+                        </div>
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8">
+                            
+                
+                            {% for description in experience.description %}
+                                {{ description | markdownify }}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="mdc-layout-grid__cell--span-12">
+        <div class="mdc-card my-card-content mdc-card--outlined">
+            <div class="my-card__title">
+                Education
+            </div>
+        <div class="mdc-card__content">
+                {% for education in site.data.education %}
+
+                <div class="mdc-layout-grid">
+                    <div class="mdc-layout-grid__inner">
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                            <h4 style="margin-top: 0px;">{{ education.name }}</h3>
+                            <a style="font-style: italic" target="_blank" href="{{ education.link }}">{{ education.link }}</a>
+                            <div>{{ education.dates }}</div>
+                        </div>
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8">
+                            
+
+                            {% for description in education.description %}
+                                {{ description | markdownify }}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                {% if forloop.last == false %}
+                    <div style="margin-top: 15px; padding-bottom: 5px; border: 0px; border-bottom: 2px; border-style: dotted"></div>
+                {% endif %}
+
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>
-
-{% endfor %}
-
-<div style="margin-top: 20px; padding-bottom: 5px; border: 0px; border-bottom: 2px; border-style: dashed">
-    <h2 style="margin: auto; display: block; width: max-content;">
-        Education
-    </h2>
-</div>
-
-{% for education in site.data.education %}
-
-<div class="mdc-layout-grid">
-    <div class="mdc-layout-grid__inner">
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
-            <h3 style="margin-top: 0px;">{{ education.name }}</h3>
-            <a style="font-style: italic" target="_blank" href="{{ education.link }}">{{ education.link }}</a>
-            <div>{{ education.dates }}</div>
-        </div>
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8">
-            
-
-            {% for description in education.description %}
-                {{ description | markdownify }}
-            {% endfor %}
-        </div>
-    </div>
-</div>
-
-{% if forloop.last == false %}
-    <div style="margin-top: 15px; padding-bottom: 5px; border: 0px; border-bottom: 2px; border-style: dotted"></div>
-{% endif %}
-
-{% endfor %}
