@@ -1,6 +1,15 @@
 [
     {
+        "name": "Agnular"
+    },
+    {
         "name": "Pharo"
+    },
+    {
+        "name": "Moose"
+    },
+    {
+        "name": "GWT"
     },
     {
         "name": "C"
@@ -8,16 +17,4 @@
     {
         "name": "Spring"
     },
-    {
-        "name": "Moose"
-    },
-    {
-        "name": "Angular"
-    },
-    {
-        "name": "GWT"
-    },
-    {
-        "name": "Spring"
-    }
 ]
