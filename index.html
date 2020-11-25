@@ -1,30 +1,26 @@
 ---
 layout: page
-description: "PHD Student"
+description: 'PHD Student'
 ---
 
 <div class="mdc-layout-grid__inner">
-
     <div class="mdc-layout-grid__cell--span-12">
         <div class="mdc-card my-card-content mdc-card--outlined">
-            <div class="my-card__title">
-                About me
-            </div>
+            <div class="my-card__title">About me</div>
             <div class="mdc-card__content">
-                My name is Benoît "badetitou" Verhaeghe.
-                I work on migration tools and on tests.
-                You can find all my public projects on Github.
-                I also wrote some short french stories.
+                My name is Benoît "badetitou" Verhaeghe. I work on migration tools and
+                on tests. You can find all my public projects on Github. I also wrote
+                some short french stories.
             </div>
             <div class="mdc-card__actions mdc-card__actions--full-bleed">
                 <a class="mdc-button mdc-card__action mdc-card__action--button" href="/stories">
                     <div class="mdc-button__ripple"></div>
                     <span class="mdc-button__label">French Stories</span>
                 </a>
-                <a class="mdc-button mdc-card__action mdc-card__action--button mdc-button--raised" href="https://github.com/badetitou/AltaCV/releases/download/latest/cv.pdf" >
+                <a class="mdc-button mdc-card__action mdc-card__action--button mdc-button--raised"
+                    href="https://github.com/badetitou/AltaCV/releases/download/latest/cv.pdf">
                     <div class="mdc-button__ripple"></div>
-                    <span class="mdc-button__label">Download my CV</a>
-                    <div class="mdc-button__touch"></div>
+                    <span class="mdc-button__label">Download my CV</span>
                 </a>
             </div>
         </div>
@@ -32,30 +28,26 @@ description: "PHD Student"
 
     <div class="mdc-layout-grid__cell--span-12">
         <div class="mdc-card my-card-content mdc-card--outlined">
-            <div class="my-card__title">
-                Experience
-            </div>
-        <div class="mdc-card__content">
+            <div class="my-card__title">Experience</div>
+            <div class="mdc-card__content">
                 {% for experience in site.data.experience %}
 
                 <div class="mdc-layout-grid">
                     <div class="mdc-layout-grid__inner">
                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
-                            <h4 style="margin-top: 0px;">{{ experience.company }}</h3>
+                            <h4 style="margin-top: 0px">{{ experience.company }}</h4>
                             <div>{{ experience.job_title }}</div>
-                            <a style="font-style: italic" target="_blank" href="{{ experience.link }}">{{ experience.link }}</a>
+                            <a style="font-style: italic" target="_blank"
+                                href="{{ experience.link }}">{{ experience.link }}</a>
                             <div>{{ experience.dates }}</div>
                         </div>
                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8">
-                            
-                
-                            {% for description in experience.description %}
-                                {{ description | markdownify }}
-                            {% endfor %}
+                            {% for description in experience.description %} {{ description |
+              markdownify }} {% endfor %}
                         </div>
                     </div>
                 </div>
-                
+
                 {% endfor %}
             </div>
         </div>
@@ -63,72 +55,88 @@ description: "PHD Student"
 
     <div class="mdc-layout-grid__cell--span-12">
         <div class="mdc-card my-card-content mdc-card--outlined">
-            <div class="my-card__title">
-                Education
-            </div>
-        <div class="mdc-card__content">
+            <div class="my-card__title">Education</div>
+            <div class="mdc-card__content">
                 {% for education in site.data.education %}
 
                 <div class="mdc-layout-grid">
                     <div class="mdc-layout-grid__inner">
                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
-                            <h4 style="margin-top: 0px;">{{ education.name }}</h3>
+                            <h4 style="margin-top: 0px">{{ education.name }}</h4>
                             <div>{{ education.qualification }}</div>
-                            <a style="font-style: italic" target="_blank" href="{{ education.link }}">{{ education.link }}</a>
+                            <a style="font-style: italic" target="_blank"
+                                href="{{ education.link }}">{{ education.link }}</a>
                             <div>{{ education.dates }}</div>
                         </div>
                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8">
-                            
-
-                            {% for description in education.description %}
-                                {{ description | markdownify }}
-                            {% endfor %}
+                            {% for description in education.description %} {{ description |
+              markdownify }} {% endfor %}
                         </div>
                     </div>
                 </div>
 
                 {% if forloop.last == false %}
-                    <div style="margin-top: 15px; padding-bottom: 5px; border: 0px; border-bottom: 2px; border-style: dotted"></div>
-                {% endif %}
-
-                {% endfor %}
+                <div style="
+            margin-top: 15px;
+            padding-bottom: 5px;
+            border: 0px;
+            border-bottom: 2px;
+            border-style: dotted;
+          "></div>
+                {% endif %} {% endfor %}
             </div>
         </div>
     </div>
 
-
-    <div class="mdc-layout-grid__cell--span-6">
+    <div class="mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
         <div class="mdc-card my-card-content mdc-card--outlined">
-            <div class="my-card__title">
-                Languages Skill
-            </div>
-        <div class="mdc-card__content">
-            French: native speaker
-            <div role="progressbar" class="mdc-linear-progress">
-                <div class="mdc-linear-progress__buffering-dots"></div>
-                <div class="mdc-linear-progress__buffer"></div>
-                <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar" style="transform: scaleX(1);">
-                    <span class="mdc-linear-progress__bar-inner"></span>
+            <div class="my-card__title">Languages Skill</div>
+            <div class="mdc-card__content">
+                French: native speaker
+                <div role="progressbar" class="mdc-linear-progress">
+                    <div class="mdc-linear-progress__buffering-dots"></div>
+                    <div class="mdc-linear-progress__buffer"></div>
+                    <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar" style="transform: scaleX(1)">
+                        <span class="mdc-linear-progress__bar-inner"></span>
+                    </div>
+                    <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+                        <span class="mdc-linear-progress__bar-inner"> </span>
+                    </div>
                 </div>
-                <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
-                    <span class="mdc-linear-progress__bar-inner">
-                    </span>
-                </div>
-            </div>
 
-            English: 80%
-            <div role="progressbar" class="mdc-linear-progress">
-                <div class="mdc-linear-progress__buffering-dots"></div>
-                <div class="mdc-linear-progress__buffer"></div>
-                <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar" style="transform: scaleX(0.8);">
-                    <span class="mdc-linear-progress__bar-inner"></span>
-                </div>
-                <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
-                    <span class="mdc-linear-progress__bar-inner">
-                    </span>
+                English: 80%
+                <div role="progressbar" class="mdc-linear-progress">
+                    <div class="mdc-linear-progress__buffering-dots"></div>
+                    <div class="mdc-linear-progress__buffer"></div>
+                    <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar"
+                        style="transform: scaleX(0.8)">
+                        <span class="mdc-linear-progress__bar-inner"></span>
+                    </div>
+                    <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+                        <span class="mdc-linear-progress__bar-inner"> </span>
+                    </div>
                 </div>
             </div>
-            
         </div>
+    </div>
 
+    <div class="mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
+        <div class="mdc-card my-card-content mdc-card--outlined">
+            <div class="my-card__title">Skills</div>
+            <div class="mdc-card__content">
+                <div class="mdc-chip-set" role="grid">
+                    {% for skill in site.data.skills %}
+                    <div class="mdc-chip" role="row">
+                        <div class="mdc-chip__ripple"></div>
+                        <span role="gridcell">
+                            <span role="button" tabindex="0" class="mdc-chip__primary-action">
+                                <span style="font-size: 18px;" class="mdc-chip__text">{{ skill.name }}</span>
+                            </span>
+                        </span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
