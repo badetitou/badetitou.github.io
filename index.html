@@ -3,8 +3,11 @@ layout: page
 description: "PHD Student"
 ---
 
-<h1>Who am I?</h1>
-
+<div style="padding-bottom: 5px; border: 0px; border-bottom: 2px; border-style: dashed">
+    <h2 style="margin: auto; display: block; width: max-content;">
+        About me
+    </h2>
+</div>
 
 My name is Benoît "badetitou" Verhaeghe.
 I work on migration tools and on tests.
@@ -23,3 +26,61 @@ I also wrote some short french stories.
         <div class="mdc-button__touch"></div>
     </a>
 </div>
+
+<div style="margin-top: 15px; padding-bottom: 5px; border: 0px; border-bottom: 2px; border-style: dashed">
+    <h2 style="margin: auto; display: block; width: max-content;">
+        Experience
+    </h2>
+</div>
+
+{% for experience in site.data.experience %}
+
+<div class="mdc-layout-grid">
+    <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+            <h3 style="margin-top: 0px;">{{ experience.company }}</h3>
+            <a style="font-style: italic" target="_blank" href="{{ experience.link }}">{{ experience.link }}</a>
+            <div>{{ experience.dates }}</div>
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8">
+            
+
+            {% for description in experience.description %}
+                {{ description | markdownify }}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+<div style="margin-top: 15px; padding-bottom: 5px; border: 0px; border-bottom: 2px; border-style: dashed">
+    <h2 style="margin: auto; display: block; width: max-content;">
+        Education
+    </h2>
+</div>
+
+{% for education in site.data.education %}
+
+<div class="mdc-layout-grid">
+    <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+            <h3 style="margin-top: 0px;">{{ education.name }}</h3>
+            <a style="font-style: italic" target="_blank" href="{{ education.link }}">{{ education.link }}</a>
+            <div>{{ education.dates }}</div>
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8">
+            
+
+            {% for description in education.description %}
+                {{ description | markdownify }}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% if forloop.last == false %}
+    <div style="margin-top: 15px; padding-bottom: 5px; border: 0px; border-bottom: 2px; border-style: dotted"></div>
+{% endif %}
+
+{% endfor %}

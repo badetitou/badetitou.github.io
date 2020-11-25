@@ -1,0 +1,14 @@
+[
+    {
+        "company": "Berger-Levrault",
+        "link": "https://berger-levrault.com",
+        "job_title": "R&D Engineer",
+        "dates": "February 2018 - Present",
+        "quote": "Modernizing application",
+        "description": [
+            "- Migrating GWT application to Angular",
+            "- Set up hybrid architecture",
+            "- Writing research papers"
+        ]
+    }
+]
