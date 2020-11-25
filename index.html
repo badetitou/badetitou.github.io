@@ -42,6 +42,7 @@ description: "PHD Student"
                     <div class="mdc-layout-grid__inner">
                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
                             <h4 style="margin-top: 0px;">{{ experience.company }}</h3>
+                            <div>{{ experience.job_title }}</div>
                             <a style="font-style: italic" target="_blank" href="{{ experience.link }}">{{ experience.link }}</a>
                             <div>{{ experience.dates }}</div>
                         </div>
@@ -72,6 +73,7 @@ description: "PHD Student"
                     <div class="mdc-layout-grid__inner">
                         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
                             <h4 style="margin-top: 0px;">{{ education.name }}</h3>
+                            <div>{{ education.qualification }}</div>
                             <a style="font-style: italic" target="_blank" href="{{ education.link }}">{{ education.link }}</a>
                             <div>{{ education.dates }}</div>
                         </div>
