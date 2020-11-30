@@ -179,4 +179,4 @@ I have used Zinc, VLC, and Python with a Python library to download musics for G
 It shows how easy it is to use Pharo with other programming languages
     and I hope it will help you to create many super cool projects.
 
-> **I REMIND YOU THAT THIS WORK MIGHT NOT LEGAL SO CONSIDER IT ONLY AS AN EXAMPLE!**
+> **I REMIND YOU THAT THIS WORK MIGHT NOT BE LEGAL SO CONSIDER IT ONLY AS AN EXAMPLE!**
