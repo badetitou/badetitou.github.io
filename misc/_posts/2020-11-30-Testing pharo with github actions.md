@@ -2,6 +2,7 @@
 author: Benoît "badetitou" Verhaeghe
 layout: post
 title: "Testing and releasing Pharo with GitHub actions"
+subtitle: "How to use GitHub to test my project?"
 date:   2020-11-30 18:00:00 +200
 categories: pharo
 ---

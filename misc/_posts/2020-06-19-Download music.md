@@ -2,7 +2,7 @@
 author: Benoît "badetitou" Verhaeghe
 layout: post
 title: "Download musics from Google Play Music"
-subtitle: "Or how to use Pharo to control Python and VLC library"
+subtitle: "Or how to use Pharo to control Python and VLC library?"
 date:   2020-06-19 12:00:00 +200
 categories: pharo ffi
 ---
