@@ -80,27 +80,4 @@
 <!-- Custom Theme JavaScript -->
 <script src="{{ "/js/clean-blog.min.js" | prepend: site.baseurl }}"></script>
 
-<!-- Material js -->
-<script src="{{ "/js/materialize.min.js" | prepend: site.baseurl }}"></script>
-
-<!-- image.html dependance -->
-<script>
-     $(document).ready(function(){
-    $('.materialboxed').materialbox();
-  });
-</script>
-
-
-<script>
-    $(document).ready(function () {
-        $('.pushpin').pushpin({
-            top: $('.pushpin').offset().top,
-            bottom: $('.footer').offset().top
-        });
-        console.log( $('.footer').offset().top);
-        $('article > h1,h2:not(.subheading),h3,h4').scrollSpy();
-        $('article > h1,h2:not(.subheading),h3,h4').each(function (el) {
-            $(".table-of-contents").append("<li><a href=\"#" + this.id + "\">" + jQuery(this).text() + "</a></li>");
-        })
-    });
-</script>
+<script src="{{ "/js/my-drawer.js" | prepend: site.baseurl }}"></script>
