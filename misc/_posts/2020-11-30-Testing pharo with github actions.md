@@ -28,8 +28,9 @@ To do so it:
 1. checkouts your project
 2. runs Smalltalk CI on your project
 
-To create the GitHub action, you need first to create a file at `<git root>/.github/workflows/test.yml`.
-Since the action is to test to project, I decided to name it "test.yml" but any other name work.
+To create the GitHub action, you need first to create a file under the folder `<git root>/.github/workflows`.
+Since the action is to test to project, I decided to name it `test.yml` but any other name work.
+So in my git repository I have a file in: `<git root>/.github/workflows/test.yml`
 
 In the file write:
 
