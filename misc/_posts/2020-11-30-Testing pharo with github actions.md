@@ -39,6 +39,9 @@ In the file write:
 ```yml
 name: CI
 
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the development branch
 on:
