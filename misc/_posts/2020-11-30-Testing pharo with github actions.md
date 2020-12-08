@@ -301,4 +301,6 @@ The three files: *test*, *release*, and *continuous* can be found in the [Moose 
 
 ## Thanks
 
-I'd like to thanks the authors of [smalltalkCI](https://github.com/hpi-swa/smalltalkCI) for their incredible work! :banana:
+I'd like to thanks the authors of [smalltalkCI](https://github.com/hpi-swa/smalltalkCI) for their incredible work! 
+
+Thanks [C. Fuhrman](https://github.com/fuhrmanator) for the typos fixes. :banana:
