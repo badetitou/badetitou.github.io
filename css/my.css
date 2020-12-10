@@ -71,7 +71,7 @@ li {
     padding: 16px;
 }
 
-.my-top-app-bar {
+nav {
     background-color: transparent;
     position: absolute;
 }
@@ -81,19 +81,6 @@ li {
     font-size: 12px;
     font-weight: 800;
     letter-spacing: 1px;
-}
-
-
-@media screen and (max-width: 840px) {
-    .mdc-top-app-bar__section--align-end {
-        display: none;
-    }
-}
-
-@media screen and (min-width: 840px) {
-    .mdc-top-app-bar__navigation-icon {
-        display: none;
-    }
 }
 
 .list-inline > li {

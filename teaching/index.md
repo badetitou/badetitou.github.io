@@ -7,7 +7,7 @@ header-img: "img/bg/keyboard.jpg"
 
 ## Université de Lille
 
-<div class="mdc-layout-grid__inner">
+<div class="row">
 
 {% include card.html
     title="Polytech Lille"
@@ -24,7 +24,7 @@ header-img: "img/bg/keyboard.jpg"
 
 ## Université de Montpellier
 
-<div class="mdc-layout-grid__inner">
+<div class="row">
 
 {% include card.html
     title="M2 - Évolution et restructuration de logiciels"

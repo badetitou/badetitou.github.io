@@ -5,7 +5,7 @@ title: "Projects"
 
 ## My projects
 
-<div class="mdc-layout-grid__inner">
+<div class="row">
 
 {% include card.html
     title="Casino"
@@ -60,7 +60,7 @@ FI converts all the data from the server and sends to everyone wants the data in
 <div class="col s12 l12 m12">
 	<h2 id="Contributing">Contributing</h2>
 </div>
-<div class="mdc-layout-grid__inner">
+<div class="row">
 
 {% include card.html
     title="Moose"

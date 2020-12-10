@@ -28,31 +28,25 @@ layout: default
 </header>
 
 <!-- Post Content -->
-<article class="main-content mdc-layout-grid">
-    <div class="mdc-layout-grid__inner">
-        <div class="mdc-layout-grid__cell--span-2"></div>
-        <div class="mdc-layout-grid__cell--span-8">
+<article class="container">
 
-            {{ content }}
+    {{ content }}
 
-            <div class="space"></div>
+    <div class="space"></div>
 
-            <ul class="pager list-inline">
-                {% if page.previous.url %}
-                <li class="previous">
-                    <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip"
-                        data-placement="top" data-tooltip="{{page.previous.title}}">&larr;
-                        Previous Post</a>
-                </li>
-                {% endif %}
-                {% if page.next.url %}
-                <li class="next">
-                    <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip"
-                        data-placement="top" data-tooltip="{{page.next.title}}">Next Post &rarr;</a>
-                </li>
-                {% endif %}
-            </ul>
-
-        </div>
-    </div>
+    <ul class="pager list-inline">
+        {% if page.previous.url %}
+        <li class="previous">
+            <a href="{{ page.previous.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip"
+                data-placement="top" data-tooltip="{{page.previous.title}}">&larr;
+                Previous Post</a>
+        </li>
+        {% endif %}
+        {% if page.next.url %}
+        <li class="next">
+            <a href="{{ page.next.url | prepend: site.baseurl | replace: '//', '/' }}" data-toggle="tooltip"
+                data-placement="top" data-tooltip="{{page.next.title}}">Next Post &rarr;</a>
+        </li>
+        {% endif %}
+    </ul>
 </article>

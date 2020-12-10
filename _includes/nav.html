@@ -1,41 +1,23 @@
-<header class="mdc-top-app-bar my-top-app-bar">
-    <div class="mdc-top-app-bar__row">
-        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-            <button class="mdc-top-app-bar__navigation-icon mdc-icon-button material-icons" href="#">menu</button>
-            <a class="mdc-top-app-bar__title my-nav-label" href="/" style="color: inherit;">Benoît Verhaeghe</a>
-        </section>
-        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
-                {% for page in site.pages %}{% if page.title %}
-                {% if page.url == '/404.html' or page.categories contains '_ignore'%}
-                {% else %}
-                    <a style="color: inherit;" class="mdc-button" href="{{ page.url | prepend: site.baseurl }}">
-                        <div class="mdc-button__ripple"></div>
-                        <span style="color: inherit;" class="mdc-button__label my-nav-label">{{ page.title }}</span>
-                    </a>
-				{% endif %}
-                {% endif %}{% endfor %}
-        </section>
-    </div>
-</header>
-
-<aside class="mdc-drawer mdc-drawer--modal">
-<div class="mdc-drawer__content">
-    <nav class="mdc-list">
+<nav>
+    <div class="nav-wrapper">
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <a href="/" style="margin-left: 20px;"> Benoît Verhaeghe</a>
+        <ul class="right hide-on-med-and-down">
         {% for page in site.pages %}{% if page.title %}
-                {% if page.url == '/404.html' or page.categories contains '_ignore'%}
-                {% else %}
-                    <a class="mdc-list-item" href="{{ page.url | prepend: site.baseurl }}" aria-current="page" tabindex="0">
-                        <span class="mdc-list-item__ripple"></span>
-                        <span class="mdc-list-item__text my-nav-label">{{ page.title }}</span>
-                    </a>
-				{% endif %}
-            {% endif %}
-        {% endfor %}
-  
-    </nav>
-</div>
-</aside>
+        {% if page.url == '/404.html' or page.categories contains '_ignore'%}
+        {% else %}
+            <li><a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a></li>
+        {% endif %}
+        {% endif %}{% endfor %}
+        </ul>
+    </div>
+</nav>
 
-<div class="mdc-drawer-scrim"></div>
-
-
+<ul class="sidenav" id="mobile-demo">
+    {% for page in site.pages %}{% if page.title %}
+        {% if page.url == '/404.html' or page.categories contains '_ignore'%}
+        {% else %}
+            <li><a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a></li>
+        {% endif %}
+    {% endif %}{% endfor %}
+</ul>

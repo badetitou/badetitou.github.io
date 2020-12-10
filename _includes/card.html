@@ -1,28 +1,29 @@
-<div class="mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone">
-    <div class="mdc-card my-card-content mdc-card--outlined">
-        <div class="my-card__title">
-        {{ include.title }}
-        </div>
-        {{ include.description }}
+<div class="col s12 m6">
+    <div class="card darken-1">
+        <div class="card-content">
+            <div class="card-title my-card__title">
+                {{ include.title }}
+            </div>
+            {{ include.description }}
 
 
-        
-        <div class="mdc-card__actions">
+
+            <div class="card-action">
                 {% if include.githubLink %}
-                    <a href="{{ include.githubLink }}">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
+                <a href="{{ include.githubLink }}">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
                 {% endif %}
                 {% if include.docLink %}
-                    <a href="{{ include.docLink }}">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fas fa-book-open fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
+                <a href="{{ include.docLink }}">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fas fa-book-open fa-stack-1x fa-inverse"></i>
+                    </span>
+                </a>
                 {% endif %}
                 {% if include.slides %}
                 <a href="{{ include.slides }}">
@@ -40,6 +41,7 @@
                     </span>
                 </a>
                 {% endif %}
+            </div>
         </div>
     </div>
 </div>

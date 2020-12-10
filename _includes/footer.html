@@ -1,9 +1,8 @@
 <!-- Footer -->
 <footer class="footer">
-    <div class="mdc-layout-grid">
-        <div class="mdc-layout-grid__inner">
-            <div class="mdc-layout-grid__cell--span-2 mdc-layout-grid__cell--span-2-tablet"></div> 
-            <div class="mdc-layout-grid__cell--span-8 mdc-layout-grid__cell--span-8-tablet">
+    <div class="container">
+        <div class="row">
+            <div class="col m12">
                 <ul class="list-inline text-center">
                     {% if site.twitter_username %}
                     <li>
@@ -66,7 +65,8 @@
                     </li>
                     {% endif %}
                 </ul>
-                <p class="copyright text-muted">Copyright &copy; {{ site.copyright_name }} {{ site.time | date: '%Y' }}</p>
+                <p class="copyright text-muted">Copyright &copy; {{ site.copyright_name }} {{ site.time | date: '%Y' }}
+                </p>
             </div>
         </div>
     </div>
@@ -74,6 +74,15 @@
 
 <!-- jQuery -->
 <script src="{{ "/js/jquery.min.js" | prepend: site.baseurl }}"></script>
+
+<!-- Materialize -->
+<script src="{{ "/js/materialize.min.js" | prepend: site.baseurl }}"></script>
+
+<script>
+$(document).ready(function(){
+    $('.sidenav').sidenav();
+});
+</script>
 
 <!-- Custom Theme JavaScript -->
 <script src="{{ "/js/clean-blog.min.js" | prepend: site.baseurl }}"></script>
