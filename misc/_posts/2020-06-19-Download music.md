@@ -161,14 +161,12 @@ Inside the previous script, I insert the code to set metadata using VLC.
 First, I create a reference to the mp3 file for VLC, then I set the metadata using VLC API.
 
 ```st
-...
 | media |
 media := vlc createMediaFromPath: fileRef fullName. "create mp3 reference for VLC"
 media setMeta: VLCMetaT libvlc_meta_Album with: (music at: #album) literalValue asString.
 media setMeta: VLCMetaT libvlc_meta_Title with: (music at: #title) literalValue asString.
 media saveMeta.
 media release.
-...
 ```
 
 In the example, I only set "album" and "title" attribute but it is possible to set [more metadata](https://unofficial-google-music-api.readthedocs.io/en/latest/reference/mobileclient.html#songs).

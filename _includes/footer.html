@@ -1,8 +1,9 @@
 <!-- Footer -->
 <footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+    <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell--span-2 mdc-layout-grid__cell--span-2-tablet"></div> 
+            <div class="mdc-layout-grid__cell--span-8 mdc-layout-grid__cell--span-8-tablet">
                 <ul class="list-inline text-center">
                     {% if site.twitter_username %}
                     <li>
@@ -73,9 +74,6 @@
 
 <!-- jQuery -->
 <script src="{{ "/js/jquery.min.js" | prepend: site.baseurl }}"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="{{ "/js/bootstrap.min.js" | prepend: site.baseurl }}"></script>
 
 <!-- Custom Theme JavaScript -->
 <script src="{{ "/js/clean-blog.min.js" | prepend: site.baseurl }}"></script>
