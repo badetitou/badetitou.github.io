@@ -293,7 +293,7 @@ Then, with a filter pattern, it creates a beautiful list inside the Pharo Launch
 
 To adapt the piece of code for your project, you need to change the `name:` and `url:` method parameters.
 
-![Pharo Launcher with linkg to GitHub actions](/misc/img-2020-11-30-GithubActions/pharo-launcher.png)
+![Pharo Launcher with linkg to GitHub actions](/misc/img-2020-11-30-GithubActions/pharo-launcher.png){: .responsive-img}
 
 ## Resources
 
