@@ -56,7 +56,7 @@ The hover popup supports markdown. So it can be use to print nice comment from P
 We used the completion engine of Pharo to compute the entries.
 Not that for keywords with several symbols, it is possible to use the `<Tab>` key to move from one argument to another.
 
-![Auto-Completion](https://raw.githubusercontent.com/badetitou/vscode-pharo/main/docs/img/Auto-completion.png){: .center-image}
+![Auto-Completion](https://raw.githubusercontent.com/badetitou/vscode-pharo/main/docs/img/Auto-completion.gif){: .center-image}
 
 ### Additional feature
 
