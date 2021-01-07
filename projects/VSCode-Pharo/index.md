@@ -6,7 +6,7 @@ date:   2021-01-07 11:00:00 +200
 categories: vscode pharo _ignore
 ---
 
-VSCode Pharo is an extension that enables the support of the Pharo programming language in [Visual Studio Code](https://code.visualstudio.com/).
+[VSCode Pharo](https://marketplace.visualstudio.com/items?itemName=badetitou.pharo-language-server) is an extension that enables the support of the Pharo programming language in [Visual Studio Code](https://code.visualstudio.com/).
 
 > This page is announcing the creation of the extension, it might not be up-to-date. Please see the [GitHub repository](https://github.com/badetitou/vscode-pharo) for more information.
 
