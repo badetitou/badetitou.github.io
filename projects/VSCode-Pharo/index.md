@@ -4,6 +4,7 @@ layout: project
 title:  "VSCode - Pharo"
 date:   2021-01-07 11:00:00 +200
 categories: vscode pharo _ignore
+description: "A VSCode extension for the Pharo programming language"
 ---
 
 [VSCode Pharo](https://marketplace.visualstudio.com/items?itemName=badetitou.pharo-language-server) is an extension that enables the support of the Pharo programming language in [Visual Studio Code](https://code.visualstudio.com/).
