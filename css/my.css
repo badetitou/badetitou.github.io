@@ -15,17 +15,13 @@ p {
   text-align: justify;
 }
 
-li {
-  text-align: justify;
-}
-
 .center-image
 {
     margin: 0 auto;
     display: block;
 }
 
-.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-small, .btn-floating, .dropdown-content, .collapsible, .sidenav {
+.z-depth-1, nav, .card-panel, .toast, .btn, .btn-large, .btn-small, .btn-floating, .dropdown-content, .collapsible, .sidenav {
     box-shadow: 0 0px 0px 0;
 }
 
@@ -132,4 +128,8 @@ a {
 
 .pager .next {
     list-style: none;
+}
+
+.intro-header {
+    margin-bottom: 25px;
 }
