@@ -1,14 +1,12 @@
+---
+---
+
 html {
     font-family: sans-serif;
 }
 
 .image-wrapper {
     text-align: center;
-}
-
-.image-wrapper .image-caption {
-    color: $grey-color;
-    margin-top: $spacing-unit / 3;
 }
 
 p {
@@ -28,14 +26,6 @@ p {
 .project-resize-image{
     max-width: 100%;
     height: auto;
-}
-
-@media only screen and (min-width:800px) {
-    .btn-cv {
-        position: absolute;
-        right: 20px;
-        top: 65px;
-    }
 }
 
 .table-of-contents {
@@ -100,8 +90,7 @@ body {
     margin-top: 15px;
     padding-bottom: 5px;
     border: 0px;
-    border-bottom: 2px;
-    border-style: dotted;
+    border-bottom: 1px solid var(--warm-gray-30,#e6e9ec);
 }
 
 .space {
@@ -132,4 +121,11 @@ a {
 
 .intro-header {
     margin-bottom: 25px;
+}
+
+@media only screen and (max-width: 992px)
+{
+    .container {
+        width: 100%;
+    }
 }
