@@ -121,3 +121,87 @@ a {
         width: 100%;
     }
 }
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --dark: #000000;
+        --primary: #262626;
+        --light: #4e4e4e;
+        --primary-text: #ffffff;
+
+
+        --secondary-dark: #a70f24;
+        --secondary: #df4c4c;
+        --secondary-light: #ff7e78;
+        --secondary-text: #000000
+    }
+    body {
+        
+        background-color: var(--dark);
+        color: var(--primary-text);
+        
+        .card {
+            background-color: var(--primary);
+        }
+
+        .collection {
+            .collection-item {
+                background-color: var(--primary);
+            }
+        }
+
+        .post-preview {
+            a {
+                color: var(--primary-text)
+            }
+        }
+
+        .highlight {
+            background-color: var(--primary);
+        }
+
+        .card .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating) {
+            color: var(--secondary);
+            transition: color .3s ease;
+        }
+
+        .card .card-action a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
+            color: var(--secondary-dark);
+            transition: color .3s ease;    
+        }
+
+        a {
+            color: var(--secondary);
+            transition: color .3s ease;
+        }
+
+        a:hover, a:focus {
+            color: var(--secondary-dark);
+            transition: color .3s ease;
+        }
+
+        .pager li > a:hover, .pager li > a:focus {
+            border: 1px solid var(--secondary-dark);
+            background-color: var(--secondary-dark);
+            transition: color .3s ease;
+            transition: background-color .3s ease;
+        }
+
+
+        .pager li > a, .pager li > span {
+            border: 1px solid var(--secondary-dark);
+            background-color: var(--dark);
+            color: var(--secondary-dark);
+            transition: color .3s ease;
+            transition: background-color .3s ease;
+        }
+
+        .sidenav {
+            background-color: var(--primary);
+        }
+
+        .sidenav li>a {
+            color: var(--primary-text);
+        }
+    }
+}
