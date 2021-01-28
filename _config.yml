@@ -45,3 +45,6 @@ scholar:
   sort_by: year
   order: descending
   group_by: type
+
+sass:
+  style: compressed

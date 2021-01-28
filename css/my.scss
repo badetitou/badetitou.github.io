@@ -1,6 +1,8 @@
 ---
 ---
 
+@import "materialize";
+
 html {
     font-family: sans-serif;
 }
@@ -17,10 +19,6 @@ p {
 {
     margin: 0 auto;
     display: block;
-}
-
-.z-depth-1, nav, .card-panel, .toast, .btn, .btn-large, .btn-small, .btn-floating, .dropdown-content, .collapsible, .sidenav {
-    box-shadow: 0 0px 0px 0;
 }
 
 .project-resize-image{
@@ -60,13 +58,7 @@ p {
 nav {
     background-color: transparent;
     position: absolute;
-}
-
-.my-nav-label {
-    text-transform: uppercase;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 1px;
+    box-shadow: 0 0px 0px 0;
 }
 
 .list-inline > li {
