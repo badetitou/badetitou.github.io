@@ -203,5 +203,10 @@ a {
         .sidenav li>a {
             color: var(--primary-text);
         }
+
+        .post-preview > a:hover, .post-preview > a:focus {
+            text-decoration: none;
+            color: var(--primary-text);;
+        }
     }
 }
