@@ -208,5 +208,33 @@ a {
             text-decoration: none;
             color: var(--secondary-dark);
         }
+
+        // Chip
+        .chip {
+            background-color: var(--secondary);
+            color: var(--secondary-text);
+            transition: background-color .3s ease;
+        }
+
+        .chip:hover {
+            background-color: var(--secondary-dark);
+            transition: background-color .3s ease;
+        }
+
+        // badge
+
+        span.badge {
+            background-color: var(--secondary) !important;
+            color: var(--secondary-text);
+            transition: background-color .3s ease;
+        }
+
+        span.badge:hover {
+            background-color: var(--secondary-dark) !important;
+            transition: background-color .3s ease;
+        }
+
+        
+
     }
 }
