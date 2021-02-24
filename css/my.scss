@@ -248,3 +248,13 @@ article .article-content ul {
     }
 
 }
+
+// mermaid
+
+.mermaid .actor {
+    fill: #a70f24;
+}
+
+mermaid.flowchartConfig {
+    width: 100%
+}

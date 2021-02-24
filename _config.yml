@@ -38,6 +38,11 @@ plugins:
   - jekyll-sitemap
   - jemoji
   - jekyll-scholar
+  - jekyll-mermaid
+
+mermaid:
+  src: '/js/mermaid.min.js'
+  src_config: '/js/mermaid_config.js'
 
 
 scholar:
