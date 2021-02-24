@@ -81,16 +81,14 @@ When started:
 
 1. The `PLSServer` looks for its methods with the pragma `jrpc` to define the method that will be accessible by the extension.
 For instance the following method is called when the client execute the method `initialize`.
-
 ```st
 onInitializeTrace: trace processId: processId clientInfo: clientInfo rootPath: rootPath workspaceFolders: workspaceFolders capabilities: capabilities rootUri: rootUri
     <jrpc: #initialize>
     ^ PLSInitializeResult new
 ```
-
-2. It creates a TCP socket that listens to port 4000 (default value).
-3. The VSCode client connects to the server TCP port
-4. Client and server exchanges their capabilities
+1. It creates a TCP socket that listens to port 4000 (default value).
+2. The VSCode client connects to the server TCP port
+3. Client and server exchanges their capabilities
 
 ## Main loop
 
