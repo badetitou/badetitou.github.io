@@ -237,6 +237,40 @@ a {
         
 
     }
+
+    
+    .mermaid {
+        .actor {
+            fill: var(--secondary-dark) !important;
+        }
+
+        text.actor >tspan {
+            fill: var(--primary-text) !important;
+        }
+
+        .actor-line {
+            stroke: var(--secondary-light) !important;
+        }
+
+        line {
+            stroke: var(--primary-text) !important;
+        }
+
+        .messageText {
+            color: var(--primary-text) !important;
+            fill: var(--primary-text) !important;
+            stroke: var(--primary-text) !important;
+            stroke-width: 0.5;
+        }
+
+        #arrowhead path {
+            
+            color: var(--primary-text) !important;
+            fill: var(--primary-text) !important;
+            stroke: var(--primary-text) !important;
+        }
+    }
+
 }
 
 article .article-content ul {
@@ -249,11 +283,6 @@ article .article-content ul {
 
 }
 
-// mermaid
-
-.mermaid .actor {
-    fill: #a70f24;
-}
 
 mermaid.flowchartConfig {
     width: 100%

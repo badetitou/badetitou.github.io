@@ -108,7 +108,7 @@ A request consists of a header, and a content.
 
 The header is first extracted by Pharo.
 
-```txt
+```
 Content-Length: ...\r\n
 \r\n
 ```
