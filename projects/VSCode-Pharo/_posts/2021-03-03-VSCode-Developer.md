@@ -3,7 +3,7 @@ author: Benoît "badetitou" Verhaeghe
 layout: post
 title: "Dev - Pharo Language Server"
 subtitle: "Description of the Language Server Protocol for Pharo"
-date:   2021-02-17 12:00:00 +200
+date:   2021-03-03 12:00:00 +200
 categories: pharo vscode
 ---
 
@@ -62,7 +62,7 @@ sequenceDiagram
     deactivate Pharo
 {% endmermaid %}
 
-When a `.st` file is opened VSCode launch that vscode-pharo extension, that, in turn, start the server by executing the following piece of code.
+When a `.st` file is opened VSCode launch that vscode-pharo extension, which, in turn, starts the server by executing the following piece of code.
 
 ```st
 | server |
@@ -88,21 +88,21 @@ onInitializeTrace: trace processId: processId clientInfo: clientInfo rootPath: r
 ```
 1. It creates a TCP socket that listens to port 4000 (default value).
 2. The VSCode client connects to the server TCP port
-3. Client and server exchanges their capabilities
+3. Client and server exchange their capabilities
 
 ## Main loop
 
 Once the VSCode client and the Pharo server are connected, the main loop of the protocol begins.
-Here, I will detail how information are handle by the server part.
+Here, I will detail how information is handle by the server part.
 For information about the client, you should have a look at the VSCode documentation.
 
 ### Receiving request
 
-The server is always in listening mode, waiting for request from the client.
+The server is always in listening mode, waiting for a request from the client.
 When it receives data, it first `#extractRequestFrom` the socket.
 
-The extraction consists in waiting data from the client.
-A request consists of a header, and a content.
+The extraction consists of waiting data from the client.
+A request consists of a header and content.
 
 The header is first extracted by Pharo.
 
@@ -126,7 +126,7 @@ Then, it extracts into the buffer the content.
 }
 ```
 
-The content consists of the jsonrpc protocol version, an idea used to identify the request, the method called, and the params for the methods.
+The content consists of the JSON-RPC protocol version, an idea used to identify the request, the method called, and the params for the methods.
 Handling the request, and dispatching to the correct method in the server is made by incredible [JRPC implementation of Julien](https://github.com/juliendelplanque/JRPC).
 
 ### Handling request
@@ -135,7 +135,7 @@ When extracted, the request is dispatched to the method with the pragma correspo
 
 ![Example communication](https://microsoft.github.io/language-server-protocol/overviews/lsp/img/language-server-sequence.png).
 
-The method analysis the parameter, performs some Pharo code, and then answer with the expected LSP structure.
+The method analysis the parameter, performs some Pharo code, and then answers with the expected LSP structure.
 
 #### Example of code completion
 
@@ -177,12 +177,12 @@ PLSCompletion>>#entries
 ```
 
 The completion tool uses the existing Pharo tool `CompletionContext` for the completion.
-We created a specific engine named `PLSCompletionEngine` that extends default `CompletionEngine` of Pharo, and define the context as scripting.
+We created a specific engine named `PLSCompletionEngine` that extends the default `CompletionEngine` of Pharo, and defines the context as scripting.
 
 ### How to extend and improve the project
 
-There is still lot of work to do to improve the Pharo Language Server, implementing structure, and adding method.
+There is still a lot of work to do to improve the Pharo Language Server, implementing structure, and adding method.
 Using the existing architecture, it is easy to improve the code.
-Please consider adding your next super feature or creates issue so we can priorize our work.
+Please consider adding your next super feature or creates issues so we can prioritize our work.
 
-Next blog post will detail how to extend the Debug Adapter Protocol Pharo implementation, and guide for user of the extension :rocket:
+The next blog post will detail how to extend the Debug Adapter Protocol Pharo implementation, and guide for user of the extension :rocket:
