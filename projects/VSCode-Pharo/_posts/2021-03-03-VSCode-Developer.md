@@ -29,7 +29,7 @@ The LSP implementation is done in a main package `PharoLanguageServer`.
 Then, the package is subdivided into 5 sub-packages: Uncategorized (core), Structure, Structure-Capabilities, Structure-Completion, and Structure-Signature.
 
 - The core package includes the server and the dispatched methods
-- The structure package includes the [basic json structures](https://microsoft.github.io/language-server-protocol/specifications/specification-current/#basic-json-structures) of the LSP specification.
+- The structure package includes the [basic JSON structures](https://microsoft.github.io/language-server-protocol/specifications/specification-current/#basic-json-structures) of the LSP specification.
 Those structures are used by all the LSP requests.
 - The structure capabilities package includes the structures used to declare the capabilities of LSP client and server.
 All the structures are not implemented. Only the ones supported by the Pharo Language Server.
@@ -80,7 +80,7 @@ server start.
 When started:
 
 1. The `PLSServer` looks for its methods with the pragma `jrpc` to define the method that will be accessible by the extension.
-For instance the following method is called when the client execute the method `initialize`.
+For instance, the following method is called when the client executes the method `initialize`.
 ```st
 onInitializeTrace: trace processId: processId clientInfo: clientInfo rootPath: rootPath workspaceFolders: workspaceFolders capabilities: capabilities rootUri: rootUri
     <jrpc: #initialize>
@@ -93,7 +93,7 @@ onInitializeTrace: trace processId: processId clientInfo: clientInfo rootPath: r
 ## Main loop
 
 Once the VSCode client and the Pharo server are connected, the main loop of the protocol begins.
-Here, I will detail how information is handle by the server part.
+Here, I will detail how information is handled by the server part.
 For information about the client, you should have a look at the VSCode documentation.
 
 ### Receiving request
@@ -111,7 +111,7 @@ Content-Length: ...\r\n
 \r\n
 ```
 
-The server retrieves the value of the content-lenght.
+The server retrieves the value of the content-length.
 It allows us to create a String buffer with the correct size.
 Then, it extracts into the buffer the content.
 
@@ -181,8 +181,8 @@ We created a specific engine named `PLSCompletionEngine` that extends the defaul
 
 ### How to extend and improve the project
 
-There is still a lot of work to do to improve the Pharo Language Server, implementing structure, and adding method.
+There is still a lot of work to do to improve the Pharo Language Server.
 Using the existing architecture, it is easy to improve the code.
 Please consider adding your next super feature or creates issues so we can prioritize our work.
 
-The next blog post will detail how to extend the Debug Adapter Protocol Pharo implementation, and guide for user of the extension :rocket:
+The next blog post will detail how to extend the Debug Adapter Protocol Pharo implementation, and another will present user story with the extension :rocket:
