@@ -287,3 +287,17 @@ article .article-content ul {
 mermaid.flowchartConfig {
     width: 100%
 }
+
+.profile-image-container {
+    text-align: center;
+    .profile-image {
+        width: 120px;
+        max-width: 100%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+        -webkit-transition: -webkit-box-shadow 0.3s ease;
+        transition: box-shadow 0.3s ease;
+        -webkit-box-shadow: 0px 0px 0px 8px rgba(0, 0, 0, 0.06);
+        box-shadow: 0px 0px 0px 8px rgba(0, 0, 0, 0.06);
+    }
+}
