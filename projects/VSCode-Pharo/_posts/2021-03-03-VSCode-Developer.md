@@ -8,7 +8,8 @@ categories: pharo vscode
 ---
 
 I have recently developed a [VSCode](https://code.visualstudio.com/) extension for Pharo.
-It uses the Language Server Protocol and the Debug Adapter Protocol
+It uses the Language Server Protocol and the Debug Adapter Protocol.
+You can download it from [GitHub](https://github.com/badetitou/Pharo-LanguageServer)!
 Here, I will present the Pharo implementation for the LSP part and how to extend it.
 
 I first worked on the implementation of LSP in Pharo.

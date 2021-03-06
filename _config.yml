@@ -15,7 +15,7 @@ orcid: 0000-0002-4588-2698
 
 # Google Analytics
 # To enable google analytics, uncomment below line with a valid Google Tracking ID
-# google_tracking_id: UA-112714614-1
+google_analytics: UA-112714614-2
 
 collections:
   tps:
