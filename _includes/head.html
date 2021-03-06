@@ -1,4 +1,9 @@
 <head>
+
+    {% if site.google_analytics and jekyll.environment == 'production' %}
+    {% include analytics.html %}
+    {% endif %}
+
     <!-- Validation que badetitou est l'auteur pour google -->
     <meta name="google-site-verification" content="v0CoNWgzPotXcXjDcB8Jtz_2WR-YY__FreCXk4diUOU" />
 
@@ -45,10 +50,6 @@
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-    {% if site.google_analytics and jekyll.environment == 'production' %}
-    {% include analytics.html %}
-    {% endif %}
 
     {% feed_meta %}
 
