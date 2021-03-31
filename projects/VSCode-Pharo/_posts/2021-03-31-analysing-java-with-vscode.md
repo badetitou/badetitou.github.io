@@ -65,8 +65,16 @@ Once you have download VSCode, Moose 8, and the Pharo VM, we will install the ex
 From now on, you **must** start VSCode insider with the following parameters (`--enable-proposed-api badetitou.pharo-language-server`).
 It allows VSCode to use the Notebook API.
 
+Execute the following command in a terminal:
+
 ```sh
 code-insiders --enable-proposed-api badetitou.pharo-language-server
+```
+
+Or in Windows:
+
+```sh
+code-insiders.cmd --enable-proposed-api badetitou.pharo-language-server
 ```
 
 ### Configure VSCode
