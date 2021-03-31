@@ -85,7 +85,13 @@ To do so:
 - go in the VSCode settings (`Ctrl + ,`).
 - Search Pharo settings
 - Set the field `Path To Image` with the path to the image you have downloaded
+  ```
+  D:\Users\benoit.verhaeghe\Documents\Pharo\images\LSP4\LSP4.image
+  ```
 - Set the field `Path To VM` with the path to the VM you have downloaded
+  ```
+  D:\Users\benoit.verhaeghe\Documents\Pharo\vms\80-x64\Pharo.exe
+  ```
 - Restart VSCode (to be sure the configuration is well saved)
 
 > If you use Windows, you might remove all space characters in the path.
