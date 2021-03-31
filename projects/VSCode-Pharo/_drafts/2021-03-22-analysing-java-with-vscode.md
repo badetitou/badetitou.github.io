@@ -47,9 +47,21 @@ For this blog post, we will use a Moose8 image based on Pharo 8.
 
 Once you have download VSCode, Moose 8, and the Pharo VM, we will install the extension in VSCode.
 
-- Launch VSCode
+- [Download the extension](../../../files/pharo-language-server-0.0.11.vsix)
+- Open VSCode insider
+- Open the folder in which the extension file is present
+- Right-click on the file and execute `Install Extension`
 
-In the extension panel, install [`Pharo Language Server`](https://marketplace.visualstudio.com/items?itemName=badetitou.pharo-language-server).
+![Install extension](/img/posts/analysing-java/install-extension.png){: .img-fill }
+
+- Close VSCode
+
+From now on, you **must** start VSCode insider with the following parameters (`--enable-proposed-api badetitou.pharo-language-server`).
+It allows VSCode to use the Notebook API.
+
+```sh
+code-insiders --enable-proposed-api badetitou.pharo-language-server
+```
 
 ### Configure VSCode
 
