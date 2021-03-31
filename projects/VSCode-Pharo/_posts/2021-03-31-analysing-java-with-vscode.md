@@ -30,7 +30,7 @@ As an example, I will reproduce the blog post of [Christopher Fuhrman](https://f
   - [Visualize a Java package in PlantUML](#visualize-a-java-package-in-plantuml)
   - [Perform a Moose analysis using Pharo](#perform-a-moose-analysis-using-pharo)
   - [Visualisation with Roassal](#visualisation-with-roassal)
-- [Ressources](#ressources)
+- [Resources](#resources)
 
 ## Install VSCode and the Pharo Language Server extension
 
@@ -94,7 +94,7 @@ To do so:
   ```
 - Restart VSCode (to be sure the configuration is well saved)
 
-> If you use Windows, you might remove all space characters in the path.
+> If you use Windows, you might need to remove all space characters in the path.
 
 Once the configuration is done, you can create a new file named `oo-analysis.moosebook`.
 It should open as a VSCode notebook and a Pharo image (you can reduce the Pharo image, but **do not close it**).
@@ -267,7 +267,7 @@ view
 
 Or every other Roassal visualization!
 
-## Ressources
+## Resources
 
 - [`.moosebook` file created for this blog post](/files/posts/analysing-java/oo-analysis.moosebook)
 - [The VSCode extension](/files/pharo-language-server-0.0.11.vsix)
