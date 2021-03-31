@@ -47,8 +47,6 @@ For this blog post, we will use a Moose 8 image based on Pharo 8.
 - Download the last [Moose 8 image for VSCode](https://github.com/badetitou/Pharo-LanguageServer/releases/download/continuous/Moose64-8.0-PLS.zip) and extract it.
 - Download the [corresponding Pharo VM](https://files.pharo.org/get-files/80/) and extract it.
 
-> We might install the latest VM instead of the *stable* one.
-
 > Do not take the headless version (it has not been tested)
 
 Once you have download VSCode, Moose 8, and the Pharo VM, we will install the extension in VSCode.
