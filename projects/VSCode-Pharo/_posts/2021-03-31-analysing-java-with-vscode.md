@@ -2,7 +2,7 @@
 author: Benoît "badetitou" Verhaeghe
 layout: post
 title: "Analysing Java with VSCode"
-subtitle: "How to use VSCode and Pharo to analyse Java projects"
+subtitle: "How to use VSCode and Moose to analyse Java projects?"
 date:   2021-03-31 12:00:00 +200
 categories: pharo vscode
 ---
@@ -42,12 +42,14 @@ Currently, only this version supports the [NoteBook feature](https://code.visual
 So, as a first step, install the last [VSCode insider version](https://code.visualstudio.com/insiders/).
 
 We will also need a Moose image and a Pharo VM.
-For this blog post, we will use a Moose8 image based on Pharo 8.
+For this blog post, we will use a Moose 8 image based on Pharo 8.
 
 - Download the last [Moose 8 image for VSCode](https://github.com/badetitou/Pharo-LanguageServer/releases/download/continuous/Moose64-8.0-PLS.zip) and extract it.
 - Download the [corresponding Pharo VM](https://files.pharo.org/get-files/80/) and extract it.
 
-> We might install the latest VM instead of the *stable* one
+> We might install the latest VM instead of the *stable* one.
+
+> Do not take the headless version (it has not been tested)
 
 Once you have download VSCode, Moose 8, and the Pharo VM, we will install the extension in VSCode.
 
