@@ -7,8 +7,6 @@ date:   2021-03-31 12:00:00 +200
 categories: pharo vscode
 ---
 
-![Blog post In progress](https://img.shields.io/badge/Blog%20Post-In%20Progress-red)
-
 [VSCode](https://code.visualstudio.com/) is an incredible editor tool.
 Thanks to its extensions, one can develop using plenty of programming languages.
 However, what about analyzing one software system using VSCode?
