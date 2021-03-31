@@ -3,13 +3,15 @@ author: Benoît "badetitou" Verhaeghe
 layout: post
 title: "Analysing Java with VSCode"
 subtitle: "How to use VSCode and Pharo to analyse Java projects"
-date:   2021-03-22 12:00:00 +200
+date:   2021-03-31 12:00:00 +200
 categories: pharo vscode
 ---
 
+![Blog post In progress](https://img.shields.io/badge/Blog%20Post-In%20Progress-red)
+
 [VSCode](https://code.visualstudio.com/) is an incredible editor tool.
-Thanks to its extension, one can develop using plenty of programming languages.
-However, what about analyzing one to understand a software system better?
+Thanks to its extensions, one can develop using plenty of programming languages.
+However, what about analyzing one software system using VSCode?
 
 In this blog post, I will present you how to use VSCode with [Moose](http://moosetechnology.github.io/) to analyze Java code.
 As an example, I will reproduce the blog post of [Christopher Fuhrman](https://fuhrmanator.github.io/2019/07/29/AnalyzingJavaWithMoose.html).
@@ -28,7 +30,7 @@ As an example, I will reproduce the blog post of [Christopher Fuhrman](https://f
   - [Visualize a Java package in PlantUML](#visualize-a-java-package-in-plantuml)
   - [Perform a Moose analysis using Pharo](#perform-a-moose-analysis-using-pharo)
   - [Visualisation with Roassal](#visualisation-with-roassal)
-- [Ressource](#ressource)
+- [Ressources](#ressources)
 
 ## Install VSCode and the Pharo Language Server extension
 
@@ -45,9 +47,11 @@ For this blog post, we will use a Moose8 image based on Pharo 8.
 - Download the last [Moose 8 image for VSCode](https://github.com/badetitou/Pharo-LanguageServer/releases/download/continuous/Moose64-8.0-PLS.zip) and extract it.
 - Download the [corresponding Pharo VM](https://files.pharo.org/get-files/80/) and extract it.
 
+> We might install the latest VM instead of the *stable* one
+
 Once you have download VSCode, Moose 8, and the Pharo VM, we will install the extension in VSCode.
 
-- [Download the extension](../../../files/pharo-language-server-0.0.11.vsix)
+- [Download the extension](/files/pharo-language-server-0.0.11.vsix)
 - Open VSCode insider
 - Open the folder in which the extension file is present
 - Right-click on the file and execute `Install Extension`
@@ -133,7 +137,7 @@ It includes nice fixes.
   wizard generateMSE.
   ```
 
-> `.mse` is a file format used by Moosetechnology to represent its model and meta-model
+> `.mse` is a file format used by Moosetechnology to represent its model and meta-model. [Other formats exist.](https://modularmoose.org/moose-wiki/Users/fileFormat)
 
 ### Load the model
 
@@ -230,7 +234,7 @@ String streamContents: [ :stream | classesImplementingMoreThanOneInterface do: [
 
 ### Visualisation with Roassal
 
-Finally, one can use [Roassal2](https://github.com/ObjectProfile/Roassal2) (or Roassal3 in Pharo 9) to create custom visualization.
+Finally, one can use [Roassal2](https://github.com/ObjectProfile/Roassal2) (or [Roassal3](https://github.com/ObjectProfile/Roassal3) in Pharo 9) to create custom visualization.
 
 It is possible to use pre-built visualization coming from Moose, such as the System Nesting map:
 
@@ -247,6 +251,8 @@ view
 
 Or every other Roassal visualization!
 
-## Ressource
+## Ressources
 
 - [`.moosebook` file created for this blog post](/files/posts/analysing-java/oo-analysis.moosebook)
+- [The VSCode extension](/files/pharo-language-server-0.0.11.vsix)
+- [Extension repository](https://github.com/badetitou/vscode-pharo/tree/proposed)
