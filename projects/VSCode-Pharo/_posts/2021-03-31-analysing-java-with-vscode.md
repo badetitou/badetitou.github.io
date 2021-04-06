@@ -4,6 +4,7 @@ layout: post
 title: "Analysing Java with VSCode"
 subtitle: "How to use VSCode and Moose to analyse Java projects?"
 date:   2021-03-31 12:00:00 +200
+last_modified_at: 2021-04-05 12:00:00 +200
 categories: pharo vscode
 ---
 
@@ -27,6 +28,7 @@ As an example, I will reproduce the blog post of [Christopher Fuhrman](https://f
 - [Analysis](#analysis)
   - [Visualize a Java package in PlantUML](#visualize-a-java-package-in-plantuml)
   - [Perform a Moose analysis using Pharo](#perform-a-moose-analysis-using-pharo)
+  - [Visualisation with Roassal](#visualisation-with-roassal)
 - [Resources](#resources)
 
 ## Install VSCode and the Pharo Language Server extension
@@ -242,6 +244,25 @@ String streamContents: [ :stream | classesImplementingMoreThanOneInterface do: [
 ```
 
 ![Output after cell execution](/img/posts/analysing-java/more-than-one-interface.png){: .img-fill }
+
+### Visualisation with Roassal
+
+Finally, one can use [Roassal2](https://github.com/ObjectProfile/Roassal2) (or [Roassal3](https://github.com/ObjectProfile/Roassal3) in Pharo 9) to create custom visualization.
+
+It is possible to use pre-built visualization coming from Moose, such as the System Nesting map:
+
+```st
+view := RTView new.
+FAMIXSystemNestingMap new
+  viewNamespaces: (mooseModel allNamespaces select: [ :each | each allClasses anySatisfy: [ :c | c isStub not ] ])
+  highlighting: {}
+  onRaw: view.
+view
+```
+
+![Output after cell execution nexting map](/img/posts/analysing-java/nesting-map.png){: .img-fill }
+
+Or every other Roassal visualization!
 
 ## Resources
 
