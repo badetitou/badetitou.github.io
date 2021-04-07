@@ -37,7 +37,7 @@ title: "Projects"
                 </a>
                 {% endif %}
                 {% if project.webLink %}
-                <a href="{{ project.docLink }}">
+                <a href="{{ project.webLink }}">
                     <span class="fa-stack fa-lg">
                         <i class="fa fa-circle fa-stack-2x"></i>
                         <i class="fas fa-link fa-stack-1x fa-inverse"></i>
@@ -45,7 +45,7 @@ title: "Projects"
                 </a>
                 {% endif %}                
                 {% if project.androidLink %}
-                <a href="{{ project.docLink }}">
+                <a href="{{ project.androidLink }}">
                     <span class="fa-stack fa-lg">
                         <i class="fa fa-circle fa-stack-2x"></i>
                         <i class="fab fa-android fa-stack-1x fa-inverse"></i>
