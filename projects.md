@@ -70,7 +70,7 @@ title: "Projects"
     description='Moose is a platform for software and data analysis.
 It enables humane assessment (method for solving real problems without reading code), agile visualization and moldable development for Pharo.'
     githubLink='https://github.com/moosetechnology/Moose'
-    docLink='http://moosetechnology.org/'
+    docLink='https://modularmoose.org/'
     imgSrc='/img/projectsLogo/moose-icon.png'
 %}
 
