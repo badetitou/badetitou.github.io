@@ -1,32 +1,30 @@
 ---
 author: Benoît "badetitou" Verhaeghe
 layout: project
-title:  "Documentation"
+title:  "Casino"
+subtitle: "GUI semi-automatic migration tool"
 date:   2018-12-13 11:27:00 +100
 categories: casino _ignore
 ---
 
 ## Introduction
 
-The aims of Casino is to migrate semi-automatically the front-end of applications regardless of its implementing language.
-The front-end corresponds to the widgets, theirs behaviors and how the interact with the backend.
+Casino aims to migrate semi-automatically the front-end of applications regardless of its implementing language.
+The front-end corresponds to the widgets, and their behaviors.
 
 ## Migration Strategy
 
 Here is a diagram showing the migration steps implemented by Casino.
 
-{% include image.html
-            img="../img/migrationProcess.png"
-            title="Migration process"
-%}
+![Migration process](img/migrationProcess.png)
 
 ## GUI Meta-model
 
 ### Full Widgets meta-model
 
-![Full widgets metamodel](../img/Metamodels-Widgets-full.svg)
+![Full widgets metamodel](img/Metamodels-Widgets-full.svg)
 
-[Download the metamodel](../img/Metamodels-Widgets-full.svg)
+[Download the metamodel](img/Metamodels-Widgets-full.svg)
 
 ## Current results
 
@@ -34,12 +32,12 @@ Here are some examples of the results obtained for GWT application migration to 
 
 |          Source Application (GWT)          |            Target Application (Angular)            |
 | :----------------------------------------: | :------------------------------------------------: |
-|   ![Home GWT](../img/cmp/gwt/home.png)    |    ![Home Angular](../img/cmp/angular/home.png)    |
-| ![Libelle GWT](../img/cmp/gwt/libelle.png) | ![Libelle Angular](../img/cmp/angular/libelle.png) |
-|     ![Nav GWT](../img/cmp/gwt/nav.png)     |     ![Nav Angular](../img/cmp/angular/nav.png)     |
-|    ![Nav2 GWT](../img/cmp/gwt/nav2.png)    |    ![Nav2 Angular](../img/cmp/angular/nav2.png)    |
-|  ![Onglet GWT](../img/cmp/gwt/onglet.png)  |  ![Onglet Angular](../img/cmp/angular/onglet.png)  |
-|  ![uiDesk GWT](../img/cmp/gwt/uiDesk.png)  |  ![uiDesk Angular](../img/cmp/angular/uiDesk.png)  |
+|   ![Home GWT](img/cmp/gwt/home.png)    |    ![Home Angular](img/cmp/angular/home.png)    |
+| ![Libelle GWT](img/cmp/gwt/libelle.png) | ![Libelle Angular](img/cmp/angular/libelle.png) |
+|     ![Nav GWT](img/cmp/gwt/nav.png)     |     ![Nav Angular](img/cmp/angular/nav.png)     |
+|    ![Nav2 GWT](img/cmp/gwt/nav2.png)    |    ![Nav2 Angular](img/cmp/angular/nav2.png)    |
+|  ![Onglet GWT](img/cmp/gwt/onglet.png)  |  ![Onglet Angular](img/cmp/angular/onglet.png)  |
+|  ![uiDesk GWT](img/cmp/gwt/uiDesk.png)  |  ![uiDesk Angular](img/cmp/angular/uiDesk.png)  |
 
 ## Links
 
@@ -54,8 +52,8 @@ There are also:
 |       [GWT/GXT](https://github.com/badetitou/Casino-GWT-Importer)       | [Aurelia](https://github.com/badetitou/Casino-Aurelia-Exporter) |
 | [Silverlight](https://github.com/badetitou/Casino-Silverlight-Importer) |                                                                 |
 
-
-Some importer or exporter are still in beta version. But you can help us! :smile:
+Some importers or exporters are still in beta version.
+However, you can help us! :smile:
 
 To use Casino, we must use a [Moose 8 image](https://moosetechnology.github.io/moose-wiki/Beginners/InstallMoose.html).
 
