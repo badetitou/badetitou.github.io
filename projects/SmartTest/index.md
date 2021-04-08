@@ -25,9 +25,7 @@ I supposed you have already installed Pharo. If not, please [install it](http://
 
 To install SmartTest. The easiest way is to use the catalog browser.
 
-{% include image.html
-            img="img/install_smartTest.png"
-%}
+![Install Smartest](img/install_smartTest.png)
 
 ## Utilisation - Reneraku Integration
 
@@ -36,19 +34,13 @@ Once you install SmartTest, it is auto-activated (it can take a few seconds, but
 You can disable this way of utilization in the setting.
 To do that, you only have to toggle the corresponding button in the settings.
 
-{% include image.html
-            img="img/renerakuintegration.png"
-            caption="Activate QualityAssistant Integration"
-%}
+![Activate QualityAssistant Integration](img/renerakuintegration.png)
 
 Each time you select a method or a class. Two rules can be activated.
 
 ### Should write tests
 
-{% include image.html
-            img="img/shouldWriteTest.png"
-            caption="shouldWriteTest"
-%}
+![shouldWriteTest](img/shouldWriteTest.png)
 
 This critique indicates that the plugin didn't find any test related to the method you've selected.
 Normally, it means you didn't write a test for this method.
