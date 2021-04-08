@@ -20,13 +20,21 @@ Here is a diagram showing the migration steps implemented by Casino.
             title="Migration process"
 %}
 
+## GUI Meta-model
+
+### Full Widgets meta-model
+
+![Full widgets metamodel](../img/Metamodels-Widgets-full.svg)
+
+[Download the metamodel](../img/Metamodels-Widgets-full.svg)
+
 ## Current results
 
 Here are some examples of the results obtained for GWT application migration to Angular:
 
 |          Source Application (GWT)          |            Target Application (Angular)            |
 | :----------------------------------------: | :------------------------------------------------: |
-|   ![Home GWT](../img/cmp/gwt/home.png)]    |    ![Home Angular](../img/cmp/angular/home.png)    |
+|   ![Home GWT](../img/cmp/gwt/home.png)    |    ![Home Angular](../img/cmp/angular/home.png)    |
 | ![Libelle GWT](../img/cmp/gwt/libelle.png) | ![Libelle Angular](../img/cmp/angular/libelle.png) |
 |     ![Nav GWT](../img/cmp/gwt/nav.png)     |     ![Nav Angular](../img/cmp/angular/nav.png)     |
 |    ![Nav2 GWT](../img/cmp/gwt/nav2.png)    |    ![Nav2 Angular](../img/cmp/angular/nav2.png)    |

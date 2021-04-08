@@ -273,6 +273,10 @@ a {
     background-color: var(--dark);
     color: var(--primary-text);
 
+    .table {
+      color: var(--primary-text);
+    }
+
     .card {
       background-color: var(--primary);
     }
@@ -418,6 +422,15 @@ article .article-content ul {
 
   li {
     list-style-type: initial;
+  }
+}
+
+main ul {
+  padding-left: 40px;
+  list-style-type: initial !important;
+
+  li {
+    list-style-type: initial !important;
   }
 }
 
