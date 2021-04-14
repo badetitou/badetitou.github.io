@@ -30,14 +30,22 @@ Here is a diagram showing the migration steps implemented by Casino.
 
 Here are some examples of the results obtained for GWT application migration to Angular:
 
-|          Source Application (GWT)          |            Target Application (Angular)            |
-| :----------------------------------------: | :------------------------------------------------: |
-|   ![Home GWT](img/cmp/gwt/home.png)    |    ![Home Angular](img/cmp/angular/home.png)    |
+|        Source Application (GWT)         |          Target Application (Angular)           |
+| :-------------------------------------: | :---------------------------------------------: |
+|    ![Home GWT](img/cmp/gwt/home.png)    |    ![Home Angular](img/cmp/angular/home.png)    |
 | ![Libelle GWT](img/cmp/gwt/libelle.png) | ![Libelle Angular](img/cmp/angular/libelle.png) |
 |     ![Nav GWT](img/cmp/gwt/nav.png)     |     ![Nav Angular](img/cmp/angular/nav.png)     |
 |    ![Nav2 GWT](img/cmp/gwt/nav2.png)    |    ![Nav2 Angular](img/cmp/angular/nav2.png)    |
 |  ![Onglet GWT](img/cmp/gwt/onglet.png)  |  ![Onglet Angular](img/cmp/angular/onglet.png)  |
 |  ![uiDesk GWT](img/cmp/gwt/uiDesk.png)  |  ![uiDesk Angular](img/cmp/angular/uiDesk.png)  |
+
+Here are some other examples of the results obtained for GWT application migration to Seaside ([Traccar](https://www.traccar.org/)):
+
+|              Source Application (GXT)               |                Target Application (Seaside)                 |
+| :-------------------------------------------------: | :---------------------------------------------------------: |
+|     ![Account GXT](img/traccar/gxt/account.png)     |     ![Account Angular](img/traccar/seaside/account.png)     |
+|       ![Login GXT](img/traccar/gxt/login.png)       |       ![Login Angular](img/traccar/seaside/login.png)       |
+| ![Preferences GWT](img/traccar/gxt/preferences.png) | ![Preferences Angular](img/traccar/seaside/preferences.png) |
 
 ## Links
 
