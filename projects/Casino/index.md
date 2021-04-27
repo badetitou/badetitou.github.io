@@ -49,7 +49,7 @@ Here are some other examples of the results obtained for GWT application migrati
 
 ## Links
 
-The core of the project (with the importer GWT and the exporter Angular) is available on [github](https://github.com/badetitou/Casino).
+The core of the project (with the importer GWT and the exporter Angular) is available on [GitHub](https://github.com/badetitou/Casino).
 There are also:
 
 |                                Importer                                 |                            Exporter                             |
