@@ -1,8 +1,6 @@
 $card-padding: 8pt;
 $element-top-margin: 8pt;
 $element-bottom-margin: 8pt;
-$card-link-color: $secondary;
-$card-link-color-light: $secondary-light;
 
 .card-panel {
   transition: box-shadow .25s;
@@ -171,12 +169,12 @@ $card-link-color-light: $secondary-light;
     padding: 16px $card-padding;
 
     a:not(.btn):not(.btn-large):not(.btn-floating) {
-      color: $card-link-color;
+      color: $secondary;
       margin-right: $card-padding;
       transition: color .3s ease;
       text-transform: uppercase;
 
-      &:hover { color: $card-link-color-light; }
+      &:hover { color: $secondary-light; }
     }
   }
 
