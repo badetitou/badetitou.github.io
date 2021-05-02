@@ -1,7 +1,6 @@
 $card-padding: 8pt;
 $element-top-margin: 8pt;
 $element-bottom-margin: 8pt;
-$card-bg-color: $light;
 $card-link-color: $secondary;
 $card-link-color-light: $secondary-light;
 
@@ -10,13 +9,13 @@ $card-link-color-light: $secondary-light;
   padding: $card-padding;
   margin: $element-top-margin 0 $element-bottom-margin 0;
   border-radius: 2px;
-  background-color: $card-bg-color;
+  background-color: $light;
 }
 
 .card {
   position: relative;
   margin: $element-top-margin 0 $element-bottom-margin 0;
-  background-color: $card-bg-color;
+  background-color: $light;
   transition: box-shadow .25s;
   border-radius: 2px;
   width: 100%;
@@ -135,7 +134,7 @@ $card-link-color-light: $secondary-light;
     }
 
     .card-title {
-      color: $card-bg-color;
+      color: $light;
       position: absolute;
       bottom: 0;
       left: 0;
@@ -184,7 +183,7 @@ $card-link-color-light: $secondary-light;
   .card-reveal {
     padding: $card-padding;
     position: absolute;
-    background-color: $card-bg-color;
+    background-color: $light;
     width: 100%;
     overflow-y: auto;
     left: 0;
