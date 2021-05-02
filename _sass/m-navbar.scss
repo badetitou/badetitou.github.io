@@ -213,3 +213,9 @@ nav {
     height: $navbar-height;
   }
 }
+
+@media #{$medium-and-down}{
+  .hide-on-med-and-down {
+    display: none;
+  }
+}
