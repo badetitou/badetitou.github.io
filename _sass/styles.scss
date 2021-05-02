@@ -11,13 +11,13 @@ $secondary-light: #68b1ff;
 $secondary-text: #000000;
 
 @import 'variables';
-@import 'm-card';
 @import 'm-grid';
 @import 'm-navbar';
 @import 'm-nav';
 @import 'm-sidenav';
 @import 'm-badge';
 @import 'masonry';
+@import 'm-card';
 
 html {
 
@@ -250,6 +250,7 @@ a {
   $secondary: #df4c4c;
   $secondary-light: #ff7e78;
   $secondary-text: #000000;
+  @import 'm-card';
   
   body {
     background-color: $dark;
