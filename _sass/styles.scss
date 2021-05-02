@@ -16,6 +16,8 @@ $secondary-text: #000000;
 @import 'm-navbar';
 @import 'm-nav';
 @import 'm-sidenav';
+@import 'm-badge';
+@import 'masonry';
 
 html {
 
@@ -88,12 +90,11 @@ html {
     a {
       .post-title {
         font-size: 30px;
-        margin-top: 30px;
         margin-bottom: 10px;
       }
 
       .post-subtitle {
-        font-size: 24px;
+        font-size: 18px;
         margin: 0;
         font-weight: 300;
         margin-bottom: 10px;
@@ -101,7 +102,7 @@ html {
     }
 
     .post-meta {
-      font-size: 18px;
+      font-size: 15px;
       font-style: italic;
       margin-top: 0;
     }

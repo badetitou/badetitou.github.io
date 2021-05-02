@@ -183,6 +183,9 @@
   }
 }
 
+.sidenav {
+  list-style: none;
+}
 
 .sidenav .collapsible-body > ul:not(.collapsible) > li.active,
 .sidenav.sidenav-fixed .collapsible-body > ul:not(.collapsible) > li.active {
