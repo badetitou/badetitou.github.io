@@ -14,3 +14,5 @@ end
 group :test do
   gem "rake"
 end
+
+gem "webrick", "~> 1.7"
