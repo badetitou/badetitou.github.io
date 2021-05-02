@@ -1,24 +1,30 @@
 // Import Core Clean Blog SCSS
-@import 'materialize';
-:root {
-  --dark: #bbb;
-  --primary: #eee;
-  --light: #fff;
-  --primary-text: #000000;
 
-  --secondary-dark: #0062cc;
-  --secondary: #007bff;
-  --secondary-light: #68b1ff;
-  --secondary-text: #000000;
-}
+$dark: #bbb;
+$primary: #eee;
+$light: #fff;
+$primary-text: #000000;
+
+$secondary-dark: #0062cc;
+$secondary: #007bff;
+$secondary-light: #68b1ff;
+$secondary-text: #000000;
+
+@import 'variables';
+@import 'm-card';
+@import 'm-grid';
+@import 'm-navbar';
+@import 'm-nav';
+@import 'm-sidenav';
 
 html {
 
+  font-family: sans-serif;
+  
   .img-fill {
     max-width: 100%;
   }
 
-  font-family: sans-serif;
 
   .intro-header {
     background: no-repeat center center;
@@ -100,20 +106,6 @@ html {
       margin-top: 0;
     }
   }
-
-  .card
-    .card-action
-    a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating) {
-    color: var(--secondary);
-    transition: color 0.3s ease;
-  }
-
-  .card
-    .card-action
-    a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
-    color: var(--secondary-dark);
-    transition: color 0.3s ease;
-  }
 }
 
 .image-wrapper {
@@ -145,22 +137,6 @@ p {
 
 .emoji {
   display: inline-block;
-}
-
-.my-card__title {
-  font-family: Roboto, sans-serif;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-size: 2.2rem;
-  line-height: 3rem;
-  font-weight: bold;
-  letter-spacing: 0.0125em;
-  text-decoration: bold;
-  text-transform: inherit;
-}
-
-.my-card-content {
-  padding: 16px;
 }
 
 nav {
@@ -263,38 +239,34 @@ a {
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --dark: #000000;
-    --primary: #262626;
-    --light: #4e4e4e;
-    --primary-text: #ffffff;
+  
+  $dark: #000000;
+  $primary: #262626;
+  $light: #4e4e4e;
+  $primary-text: #ffffff;
 
-    --secondary-dark: #a70f24;
-    --secondary: #df4c4c;
-    --secondary-light: #ff7e78;
-    --secondary-text: #000000;
-  }
+  $secondary-dark: #a70f24;
+  $secondary: #df4c4c;
+  $secondary-light: #ff7e78;
+  $secondary-text: #000000;
+  
   body {
-    background-color: var(--dark);
-    color: var(--primary-text);
+    background-color: $dark;
+    color: $primary-text;
 
     .table {
-      color: var(--primary-text);
-    }
-
-    .card {
-      background-color: var(--primary);
+      color: $primary-text;
     }
 
     .collection {
       .collection-item {
-        background-color: var(--primary);
+        background-color: $primary;
       }
     }
 
     .post-preview {
       a {
-        color: var(--primary-text);
+        color: $primary-text;
       }
 
       .post-meta {
@@ -303,120 +275,106 @@ a {
     }
 
     .highlight {
-      background-color: var(--dark);
-      color: var(--primary-text);
-    }
-
-    .card
-      .card-action
-      a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating) {
-      color: var(--secondary);
-      transition: color 0.3s ease;
-    }
-
-    .card
-      .card-action
-      a:not(.btn):not(.btn-small):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
-      color: var(--secondary-dark);
-      transition: color 0.3s ease;
+      background-color: $dark;
+      color: $primary-text;
     }
 
     a {
-      color: var(--secondary);
+      color: $secondary;
       transition: color 0.3s ease;
     }
 
     a:hover,
     a:focus {
-      color: var(--secondary-dark);
+      color: $secondary-dark;
       transition: color 0.3s ease;
     }
 
     .pager li > a:hover,
     .pager li > a:focus {
-      border: 1px solid var(--secondary-dark);
-      background-color: var(--secondary-dark);
+      border: 1px solid $secondary-dark;
+      background-color: $secondary-dark;
       transition: color 0.3s ease;
       transition: background-color 0.3s ease;
     }
 
     .pager li > a,
     .pager li > span {
-      border: 1px solid var(--secondary-dark);
-      background-color: var(--dark);
-      color: var(--secondary-dark);
+      border: 1px solid $secondary-dark;
+      background-color: $dark;
+      color: $secondary-dark;
       transition: color 0.3s ease;
       transition: background-color 0.3s ease;
     }
 
     .sidenav {
-      background-color: var(--primary);
+      background-color: $primary;
     }
 
     .sidenav li > a {
-      color: var(--primary-text);
+      color: $primary-text;
     }
 
     .post-preview > a:hover,
     .post-preview > a:focus {
       text-decoration: none;
-      color: var(--secondary-dark);
+      color: $secondary-dark;
     }
 
     // Chip
     .chip {
-      background-color: var(--secondary);
-      color: var(--secondary-text);
+      background-color: $secondary;
+      color: $secondary-text;
       transition: background-color 0.3s ease;
     }
 
     .chip:hover {
-      background-color: var(--secondary-dark);
+      background-color: $secondary-dark;
       transition: background-color 0.3s ease;
     }
 
     // badge
 
     span.badge {
-      background-color: var(--secondary) !important;
-      color: var(--secondary-text);
+      background-color: $secondary !important;
+      color: $secondary-text;
       transition: background-color 0.3s ease;
     }
 
     span.badge:hover {
-      background-color: var(--secondary-dark) !important;
+      background-color: $secondary-dark !important;
       transition: background-color 0.3s ease;
     }
   }
 
   .mermaid {
     .actor {
-      fill: var(--secondary-dark) !important;
+      fill: $secondary-dark !important;
     }
 
     text.actor > tspan {
-      fill: var(--primary-text) !important;
+      fill: $primary-text !important;
     }
 
     .actor-line {
-      stroke: var(--secondary-light) !important;
+      stroke: $secondary-light !important;
     }
 
     line {
-      stroke: var(--primary-text) !important;
+      stroke: $primary-text !important;
     }
 
     .messageText {
-      color: var(--primary-text) !important;
-      fill: var(--primary-text) !important;
-      stroke: var(--primary-text) !important;
+      color: $primary-text !important;
+      fill: $primary-text !important;
+      stroke: $primary-text !important;
       stroke-width: 0.5;
     }
 
     #arrowhead path {
-      color: var(--primary-text) !important;
-      fill: var(--primary-text) !important;
-      stroke: var(--primary-text) !important;
+      color: $primary-text !important;
+      fill: $primary-text !important;
+      stroke: $primary-text !important;
     }
   }
 }

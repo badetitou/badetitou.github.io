@@ -16,8 +16,6 @@
   backface-visibility: hidden;
   transform: translateX(-105%);
 
-  @extend .z-depth-1;
-
   // Right Align
   &.right-aligned {
     right: 0;
@@ -55,13 +53,8 @@
 
     &.btn,
     &.btn-large,
-    &.btn-floating { color: $button-raised-color; }
-    &.btn-flat { color: $button-flat-color; }
 
     &.btn:hover,
-    &.btn-large:hover { background-color: lighten($button-raised-background, 5%); }
-    &.btn-floating:hover { background-color: $button-raised-background; }
-
     & > i,
     & > [class^="mdi-"], li > a > [class*="mdi-"],
     & > i.material-icons {
@@ -193,7 +186,7 @@
 
 .sidenav .collapsible-body > ul:not(.collapsible) > li.active,
 .sidenav.sidenav-fixed .collapsible-body > ul:not(.collapsible) > li.active {
-  background-color: $primary-color;
+  background-color: $primary;
   a {
     color: $sidenav-bg-color;
   }

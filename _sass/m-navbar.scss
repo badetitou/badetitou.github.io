@@ -14,8 +14,6 @@ nav {
   }
 
   color: $navbar-font-color;
-  @extend .z-depth-1;
-  background-color: $primary-color;
   width: 100%;
   height: $navbar-height-mobile;
   line-height: $navbar-line-height-mobile;
@@ -110,6 +108,7 @@ nav {
   // Navbar Links
   ul {
     margin: 0;
+    list-style: none;
 
     li {
       transition: background-color .3s;
@@ -147,6 +146,14 @@ nav {
     &.left {
       float: left;
     }
+  }
+
+  .right {
+    float: right;
+  }
+
+  .left {
+    float: left;
   }
 
   // Navbar Search Form

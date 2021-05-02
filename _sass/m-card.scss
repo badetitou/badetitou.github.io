@@ -1,11 +1,15 @@
-
+$card-padding: 8pt;
+$element-top-margin: 8pt;
+$element-bottom-margin: 8pt;
+$card-bg-color: $light;
+$card-link-color: $secondary;
+$card-link-color-light: $secondary-light;
 
 .card-panel {
   transition: box-shadow .25s;
   padding: $card-padding;
   margin: $element-top-margin 0 $element-bottom-margin 0;
   border-radius: 2px;
-  @extend .z-depth-1;
   background-color: $card-bg-color;
 }
 
@@ -15,7 +19,8 @@
   background-color: $card-bg-color;
   transition: box-shadow .25s;
   border-radius: 2px;
-  @extend .z-depth-1;
+  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
 
 
   .card-title {
@@ -192,4 +197,8 @@
       display: block;
     }
   }
+}
+
+.card:hover {
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
 }
