@@ -16,13 +16,13 @@ The front-end corresponds to the widgets, and their behaviors.
 
 Here is a diagram showing the migration steps implemented by Casino.
 
-![Migration process](img/migrationProcess.png)
+![Migration process](img/migrationProcess.png){: .img-fill}
 
 ## GUI Meta-model
 
 ### Full Widgets meta-model
 
-![Full widgets metamodel](img/Metamodels-Widgets-full.svg)
+![Full widgets metamodel](img/Metamodels-Widgets-full.svg){: .img-fill }
 
 [Download the metamodel](img/Metamodels-Widgets-full.svg)
 
