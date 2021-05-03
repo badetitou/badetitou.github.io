@@ -218,6 +218,11 @@ a {
 
 .table-responsive {
   overflow-x: unset;
+  img {
+    max-width: 100%;
+    height: auto;
+
+  }
 }
 
 .pager li > a:hover,
