@@ -4,13 +4,14 @@ layout: project
 title:  "Casino"
 subtitle: "GUI semi-automatic migration tool"
 date:   2018-12-13 11:27:00 +100
+last_modified_at: 2021-05-03 12:00:00 +100
 categories: casino _ignore
 ---
 
 ## Introduction
 
 Casino aims to migrate semi-automatically the front-end of applications regardless of its implementing language.
-The front-end corresponds to the widgets, and their behaviors.
+The front-end corresponds to the widgets and their behaviors.
 
 ## Migration Strategy
 
