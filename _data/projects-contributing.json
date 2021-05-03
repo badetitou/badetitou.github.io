@@ -1,0 +1,26 @@
+[
+    {
+        "title": "Moose",
+        "githubLink": "https://github.com/moosetechnology/Moose",
+        "description": "Moose is a platform for software and data analysis. It enables humane assessment (method for solving real problems without reading code), agile visualization and moldable development for Pharo.",
+        "docLink": "https://modularmoose.org/"
+    },
+    {
+        "title": "FAST",
+        "githubLink": "https://github.com/moosetechnology/FAST",
+        "description": "FAST (Famix AST) is a metamodel to respresent AST in Famix.",
+        "docLink": "https://modularmoose.org/"
+    },
+    {
+        "title": "FAST-Java",
+        "githubLink": "https://github.com/moosetechnology/FAST-Java",
+        "description": "FAST-Java allows us to query an AST model of JAVA in the Moose Platform. It comes with a metamodel, a metamodel generator and a parser to create the model from a String.",
+        "docLink": "https://modularmoose.org/"
+    },
+    {
+        "title": "FAST-Pharo",
+        "githubLink": "https://github.com/moosetechnology/FAST-Pharo",
+        "description": "FAST-Pharo allows us to query an AST model of Pharo in the Moose Platform. It comes with a metamodel and a metamodel generator",
+        "docLink": "https://modularmoose.org/"
+    }
+]
