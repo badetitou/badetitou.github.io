@@ -12,8 +12,16 @@
 
     @media (max-width: 992px) {
         columns: 2;
+        &.masonry-2 {
+            columns: 1;
+        }
     }
-    @media (max-width: 768px) {columns: 1;}
+    @media (max-width: 768px) {
+        &.masonry-2 {
+            columns: 1;
+        }
+        columns: 1;
+    }
 
     .card {
         display: inline-block;
