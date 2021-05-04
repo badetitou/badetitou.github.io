@@ -9,6 +9,17 @@ $secondary: #007bff;
 $secondary-light: #68b1ff;
 $secondary-text: #000000;
 
+[data-theme="dark"] {
+  $dark: #000000;
+  $primary: #262626;
+  $primary-text: #ffffff;
+
+  $secondary-dark: #a70f24;
+  $secondary: #df4c4c;
+  $secondary-light: #ff7e78;
+  $secondary-text: #000000;
+}
+
 @import 'variables';
 @import 'm-grid';
 @import 'm-navbar';
@@ -17,6 +28,7 @@ $secondary-text: #000000;
 @import 'm-badge';
 @import 'masonry';
 @import 'm-card';
+@import 'm-slider';
 
 html {
 
@@ -244,7 +256,7 @@ a {
   }
 }
 
-@media (prefers-color-scheme: dark) {
+[data-theme="dark"] {
   
   $dark: #000000;
   $primary: #262626;
