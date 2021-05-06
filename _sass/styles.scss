@@ -99,20 +99,6 @@ html {
   }
 
   .post-preview {
-    a {
-      .post-title {
-        font-size: 30px;
-        margin-bottom: 10px;
-      }
-
-      .post-subtitle {
-        font-size: 18px;
-        margin: 0;
-        font-weight: 300;
-        margin-bottom: 10px;
-      }
-    }
-
     .post-meta {
       font-size: 15px;
       font-style: italic;
@@ -250,11 +236,6 @@ a {
   margin-bottom: 25px;
 }
 
-@media only screen and (max-width: 992px) {
-  .container {
-    width: 100%;
-  }
-}
 
 [data-theme="dark"] {
   

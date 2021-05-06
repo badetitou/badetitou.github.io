@@ -29,6 +29,13 @@ $element-bottom-margin: 8pt;
     }
   }
 
+  .card-subtitle {
+    font-size: 18px;
+    margin: 0;
+    font-weight: 300;
+    margin-bottom: 10px;
+  }
+
   // Card Sizes
   &.small, &.medium, &.large {
     position: relative;

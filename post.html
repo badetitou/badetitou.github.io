@@ -11,11 +11,11 @@ background: '/img/bg-post.jpg'
   <div class="card">
     <div class="card-content post-preview">
         <a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">
-          <h2 class="card-title post-title">{{ post.title }}</h2>
+          <h2 class="card-title">{{ post.title }}</h2>
           {% if post.subtitle %}
-          <h3 class="post-subtitle">{{ post.subtitle }}</h3>
+          <h3 class="card-subtitle">{{ post.subtitle }}</h3>
           {% else %}
-          <h3 class="post-subtitle">{{ post.excerpt | strip_html | truncatewords: 15 }}</h3>
+          <h3 class="card-subtitle">{{ post.excerpt | strip_html | truncatewords: 15 }}</h3>
           {% endif %}
         </a>
         <p class="post-meta">Posted by
