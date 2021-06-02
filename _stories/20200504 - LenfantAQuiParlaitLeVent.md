@@ -1,7 +1,7 @@
 ---
 author: Benoît "badetitou" Verhaeghe
 layout: story
-title:  "L'enfant a qui parlait le vent"
+title:  "L'enfant à qui parlait le vent"
 date:   2020-05-04 12:00:00 +100
 ---
 
