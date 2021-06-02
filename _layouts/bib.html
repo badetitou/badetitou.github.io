@@ -1,26 +1,5 @@
 ---
 ---
-<!-- <div>
-  {% if entry.author %}
-    {{ entry.author }},
-  {% endif %}
-  {% if entry.title %}
-    <b>{{ entry.title }}</b>,
-  {% endif %}
-  {% if entry.booktitle %}
-    <i>{{ entry.booktitle }}</i>,
-  {% endif %}
-  {% if entry.year %}
-    {{ entry.year }},
-  {% endif %}
-  {% if entry.url %}
-    <a href="{{ entry.pdf }}" >PDF</a>,
-  {% endif %}
-  {% if entry.doi %}
-    <a href="https://dx.doi.org/{{ entry.doi }}" >DOI</a>
-  {% endif %}
-
-</div> -->
 
 <div class="accordion">
   <input type="checkbox" id="{{ entry.key }}">
@@ -35,6 +14,12 @@
       <div class="bibliography-booktitle">
         {{ entry.booktitle }}
       </div>
+      {% if entry.url %}
+        <a href="{{ entry.pdf }}">PDF</a>
+      {% endif %}
+      {% if entry.doi %}
+        <a href="https://dx.doi.org/{{ entry.doi }}" >DOI</a>
+      {% endif %}
     </div>
   </label>
   <div class="accordion-content">
