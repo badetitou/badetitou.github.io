@@ -3,7 +3,7 @@
     position: relative;
     color: $secondary-text;
     margin: 8pt 4pt 8pt 4pt;
-    background-color: $secondary;
+    background-color: $secondary-light;
     transition: box-shadow .25s;
     border-radius: 20px;
     box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
@@ -14,5 +14,5 @@
 
 .badge:hover {
     box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
-    background-color: $secondary-light;
+    background-color: $secondary;
 }
