@@ -2,8 +2,8 @@
   position: relative;
   width: 100%;
   border-radius: 4px;
-  background-color: #fff;
-  box-shadow: 0 0 0 1px rgba(236, 236, 236, 1);
+  background-color: $primary;
+  box-shadow: 0 0 0 1px $primary;
   opacity: 1;
   transition: box-shadow 0.2s, opacity 0.4s;
   overflow: hidden;
@@ -36,7 +36,7 @@
   .accordion-content {
     max-height: 0;
     padding: 0 1em;
-    background: white;
+    background: $primary;
     transition: all .35s;
   }
 
