@@ -3,7 +3,7 @@
   width: 100%;
   border-radius: 4px;
   background-color: $primary;
-  box-shadow: 0 0 0 1px $primary;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.11);
   opacity: 1;
   transition: box-shadow 0.2s, opacity 0.4s;
   overflow: hidden;
