@@ -47,7 +47,9 @@ description: 'PHD Student'
               markdownify }} {% endfor %}
                     </div>
                 </div>
-
+                {% if forloop.last == false %}
+                <div class="separator"></div>
+                {% endif %}
                 {% endfor %}
             </div>
         </div>

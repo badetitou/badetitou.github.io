@@ -10,5 +10,20 @@
             "- Set up hybrid architecture",
             "- Writing research papers"
         ]
+    },
+    {
+        "company": "Inria - RMoD",
+        "link": "https://www.inria.fr/fr/rmod",
+        "job_title": "Intern",
+        "dates": "May 2017 - Sept 2017",
+        "quote": "Testing applications",
+        "description": [
+            "- Learning the Pharo programming language",
+            "- Understanding tests selection",
+            "- Developing an automatic tests selection tool",
+            "- Test the tool with the Pharo community",
+            "- Integration of the tool in the Pharo core",
+            "- Writing research paper"
+        ]
     }
 ]
