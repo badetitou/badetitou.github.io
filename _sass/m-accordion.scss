@@ -1,11 +1,11 @@
 .accordion {
   position: relative;
   width: 100%;
-  border-radius: 4px;
+  border-radius: $m-border-radius;
   background-color: $primary;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.11);
+  box-shadow: $m-box-shadow;
   opacity: 1;
-  transition: box-shadow 0.2s, opacity 0.4s;
+  transition: $m-box-shadow-transition;
   overflow: hidden;
 
   >input {

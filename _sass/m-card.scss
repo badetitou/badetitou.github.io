@@ -3,7 +3,6 @@ $element-top-margin: 8pt;
 $element-bottom-margin: 8pt;
 
 .card-panel {
-  transition: box-shadow .25s;
   padding: $card-padding;
   margin: $element-top-margin 0 $element-bottom-margin 0;
   border-radius: 2px;
@@ -14,11 +13,11 @@ $element-bottom-margin: 8pt;
   position: relative;
   margin: $element-top-margin 0 $element-bottom-margin 0;
   background-color: $primary;
-  transition: box-shadow .25s;
-  border-radius: 2px;
+  border-radius: $m-border-radius;
   width: 100%;
-  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
-  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+  box-shadow: $m-box-shadow;
+  transition: $m-box-shadow-transition;
+  border: 0px;
 
 
   .card-title {
