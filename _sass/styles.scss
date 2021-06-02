@@ -324,6 +324,7 @@ a {
     .pager li > a:focus {
       border: 1px solid $secondary-dark;
       background-color: $secondary-dark;
+      color: $primary-text;
       transition: color 0.3s ease;
       transition: background-color 0.3s ease;
     }
