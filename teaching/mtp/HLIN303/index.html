@@ -5,21 +5,20 @@ categories: _ignore
 header-img: "img/bg/keyboard.jpg"
 ---
 
-{% for tp in site.tps %}
-{% if tp.categories contains 'future' %}
-{%else%}
-{% if tp.categories contains 'HLIN303' %}
-<article class="post-preview">
-    <a href="{{ tp.url | prepend: site.baseurl | replace: '//', '/' }}">
-        <h2 class="post-title">{{ tp.title }}</h2>
-        {% if tp.subtitle %}
-        <h3 class="post-subtitle">{{ tp.subtitle }}</h3>
-        {% endif %}
-    </a>
-</article>
 
-<hr>
+<div class="masonry masonry-2">
 
-{% endif %}
-{% endif %}
-{% endfor %}
+    {% for tp in site.tps %}
+    <div class="card">
+      <div class="card-content post-preview">
+          <a href="{{ tp.url | prepend: site.baseurl | replace: '//', '/' }}">
+            <h2 class="card-title">{{ tp.title }}</h2>
+            {% if tp.subtitle %}
+            <h3 class="card-subtitle">{{ tp.subtitle }}</h3>
+            {% endif %}
+          </a>
+      </div>
+    </div>
+    {% endfor %}
+  
+  </div>
