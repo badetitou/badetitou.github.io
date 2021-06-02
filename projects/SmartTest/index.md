@@ -9,7 +9,7 @@ categories: research smalltalk _ignore
 
 ## What is SmartTest?
 
-![SmartTest innovation award](img/Medalles2017silver-small.png)
+![SmartTest innovation award](img/Medalles2017silver-small.png){: .img-fill }
 
 SmartTest is a plugin developed in [Pharo](http://pharo.org/). It is an Add-On for Quality Assistant by [Yuriy Tymchuk](http://yuriy.tymch.uk/) and provides new rules and critiques.
 But it has also its own implementation of feedback about testing
@@ -25,7 +25,7 @@ I supposed you have already installed Pharo. If not, please [install it](http://
 
 To install SmartTest. The easiest way is to use the catalog browser.
 
-![Install Smartest](img/install_smartTest.png)
+![Install Smartest](img/install_smartTest.png){: .img-fill }
 
 ## Utilisation - Reneraku Integration
 
@@ -34,32 +34,32 @@ Once you install SmartTest, it is auto-activated (it can take a few seconds, but
 You can disable this way of utilization in the setting.
 To do that, you only have to toggle the corresponding button in the settings.
 
-![Activate QualityAssistant Integration](img/renerakuintegration.png)
+![Activate QualityAssistant Integration](img/renerakuintegration.png){: .img-fill }
 
 Each time you select a method or a class. Two rules can be activated.
 
 ### Should write tests
 
-![shouldWriteTest](img/shouldWriteTest.png)
+![shouldWriteTest](img/shouldWriteTest.png){: .img-fill }
 
 This critique indicates that the plugin didn't find any test related to the method you've selected.
 Normally, it means you didn't write a test for this method.
 So it advises you to create a test (because yes... It's essential !!!).
 
-If you click on the fix button.
-The plugin offers you to create it quickly (from a template).
+If you click on the fix button, the plugin offers you to create it quickly (from a template).
 
 ### Should run tests
 
-![shouldRunTest](img/shouldRunTest.png)
+![shouldRunTest](img/shouldRunTest.png){: .img-fill }
 
 This critique indicates that the plugin has found test(s) related to the method you've selected.
 This critique offers you two new actions
+
 - By clicking on the #testNotRun icon, the plugin will execute the tests related to the method.
 If there are errors or fails, the button will turn red or yellow (but the debugger will not be displayed !!!).
 - By clicking on the #smallWindow icon, the plugin will open a new window with the test it's found.
 
-![AutoTestSelection](img/AutoTestSelection.png)
+![AutoTestSelection](img/AutoTestSelection.png){: .img-fill }
 
 This window displays the list of tests SmartTest has found.
 You're able to run each run by clicking on the #testNotRun icon.
@@ -77,13 +77,13 @@ You can extend each option and so create your own experience.
 You can enable or disable the research of tests for a method or for class only.
 To do that, you only have to toggle the corresponding button in the settings.
 
-![Method Activation](img/MethodActivated.png)
+![Method Activation](img/MethodActivated.png){: .img-fill }
 
-![Class Activation](img/ClassActivated.png)
+![Class Activation](img/ClassActivated.png){: .img-fill }
 
 ### Testing strategy
 
-![Testing strategy](img/testingStrategy.png)
+![Testing strategy](img/testingStrategy.png){: .img-fill }
 
 SmartTest provides four strategies for testing.
 
@@ -100,7 +100,7 @@ You're able to extend *SmTTestingStrategy* if you'd like to create your own test
 
 ### Finder
 
-![finder](img/finder.png)
+![finder](img/finder.png){: .img-fill }
 
 The finder contains the implementation of how SmartTest will find test relative to a method.
 The default will work as follow, for
@@ -113,7 +113,7 @@ The default will work as follow, for
 
 ### Filter
 
-![filter](img/filter.png)
+![filter](img/filter.png){: .img-fill }
 
 You can also define a filter for the finder strategy to optimize our tool.
 Currently, we are filtering test relative to the method package.
@@ -126,7 +126,7 @@ You're able to extend *SmTFilterStrategy* if you'd like to create your own strat
 
 ### Runner
 
-![runner](img/runner.png)
+![runner](img/runner.png){: .img-fill }
 
 The runner is the part of SmartTest which run the tests provided by the finder.
 By default, the SmartRunner is used.
@@ -141,14 +141,14 @@ The notice one works as the debug one but it **never** opens the debugger.
 
 You can activate the own implementation of SmartTest by enabling it in the settings menu.
 
-![Collect button](img/collectButton.png)
+![Collect button](img/collectButton.png){: .img-fill }
 
 Then the Test Button will appear.
 Each time you modify a method.
 The Button will save the tests link to this method.
 When you click on the button, those tests are run, and the button provides you a feedback.
 
-![Relative Test Button](img/relative_tests_button.png)
+![Relative Test Button](img/relative_tests_button.png){: .img-fill }
 
 ## Uninstall
 
