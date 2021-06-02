@@ -29,6 +29,7 @@ $secondary-text: #000000;
 @import 'masonry';
 @import 'm-card';
 @import 'm-slider';
+@import 'm-accordion';
 
 html {
 
@@ -236,6 +237,27 @@ a {
   margin-bottom: 25px;
 }
 
+.bibliography {
+  li {
+    list-style: none;
+    margin-bottom: 15px;
+
+    .bibliography-header {
+      .bibliography-title {
+        font-weight: bold;
+      }
+      .bibliography-author {
+        font-weight: normal;
+      }
+      .bibliography-booktitle {
+        font-weight: lighter;
+        font-size: small;
+        font-style: italic;
+      }
+    }
+
+  }
+}
 
 [data-theme="dark"] {
   

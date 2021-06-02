@@ -1,6 +1,6 @@
 ---
 ---
-<div>
+<!-- <div>
   {% if entry.author %}
     {{ entry.author }},
   {% endif %}
@@ -20,4 +20,24 @@
     <a href="https://dx.doi.org/{{ entry.doi }}" >DOI</a>
   {% endif %}
 
+</div> -->
+
+<div class="accordion">
+  <input type="checkbox" id="{{ entry.key }}">
+  <label class="accordion-header" for="{{ entry.key }}">
+    <div class="bibliography-header">
+      <div class="bibliography-title">
+        {{ entry.title }}
+      </div>
+      <div class="bibliography-author">
+        {{ entry.author }}
+      </div>
+      <div class="bibliography-booktitle">
+        {{ entry.booktitle }}
+      </div>
+    </div>
+  </label>
+  <div class="accordion-content">
+    {{ entry.abstract }}
+  </div>
 </div>
