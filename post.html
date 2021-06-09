@@ -10,6 +10,29 @@ background: '/img/bg-post.jpg'
   {% for post in site.posts %}
   <div class="card">
     <div class="card-content post-preview">
+      {% if post.external_url %}
+        <a href="{{ post.external_url | prepend: site.baseurl | replace: '//', '/' }}">
+          <div>
+            <div style="display: inline-grid;">
+              <h2 class="card-title">{{ post.title }}</h2>
+              {% if post.subtitle %}
+              <h3 class="card-subtitle">{{ post.subtitle }}</h3>
+              {% else %}
+              <h3 class="card-subtitle">{{ post.excerpt | strip_html | truncatewords: 15 }}</h3>
+              {% endif %}
+            </div>
+            <i class="fas fa-external-link-alt" style="float: right;" aria-hidden="true"></i>
+          </div>
+        </a>
+        <p class="post-meta">Posted by
+          {% if post.author %}
+          {{ post.author }}
+          {% else %}
+          {{ site.author }}
+          {% endif %}
+          on
+          {{ post.date | date: '%B %d, %Y' }}</p>
+      {% else %}
         <a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">
           <h2 class="card-title">{{ post.title }}</h2>
           {% if post.subtitle %}
@@ -26,6 +49,7 @@ background: '/img/bg-post.jpg'
           {% endif %}
           on
           {{ post.date | date: '%B %d, %Y' }} &middot; {% include read_time.html content=post.content %}</p>
+      {% endif %}
     </div>
   </div>
   {% endfor %}
