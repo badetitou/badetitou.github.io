@@ -31,5 +31,5 @@ jobs:
     - name: Jekyll Actions
       uses: helaili/jekyll-action@2.2.0
       with:
-        token: ${{ GITHUB_TOKEN }}
+        token: $GITHUB_TOKEN
         target_branch: master
