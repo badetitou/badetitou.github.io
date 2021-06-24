@@ -29,7 +29,7 @@ Here is a diagram showing the migration steps implemented by Casino.
 
 ## Current results
 
-Here are some examples of the results obtained for GWT application migration to Angular:
+### GWT application migration to Angular
 
 |        Source Application (GWT)         |          Target Application (Angular)           |
 | :-------------------------------------: | :---------------------------------------------: |
@@ -40,6 +40,8 @@ Here are some examples of the results obtained for GWT application migration to 
 |  ![Onglet GWT](img/cmp/gwt/onglet.png)  |  ![Onglet Angular](img/cmp/angular/onglet.png)  |
 |  ![uiDesk GWT](img/cmp/gwt/uiDesk.png)  |  ![uiDesk Angular](img/cmp/angular/uiDesk.png)  |
 
+### GWT to Seaside
+
 Here are some other examples of the results obtained for GWT application migration to Seaside ([Traccar](https://www.traccar.org/)):
 
 |              Source Application (GXT)               |                Target Application (Seaside)                 |
@@ -47,6 +49,14 @@ Here are some other examples of the results obtained for GWT application migrati
 |     ![Account GXT](img/traccar/gxt/account.png)     |     ![Account Angular](img/traccar/seaside/account.png)     |
 |       ![Login GXT](img/traccar/gxt/login.png)       |       ![Login Angular](img/traccar/seaside/login.png)       |
 | ![Preferences GWT](img/traccar/gxt/preferences.png) | ![Preferences Angular](img/traccar/seaside/preferences.png) |
+
+### Spec to Spec2
+
+([DBConnectionsManager](https://github.com/juliendelplanque/DBConnectionsManager)):
+
+|              Source Application (Spec)               |                Target Application (Spec2)                 |
+| :-------------------------------------------------: | :---------------------------------------------------------: |
+|     ![Account GXT](img/spec/db1.png)     |     ![Account Angular](img/spec/db2.png)     |
 
 ## Links
 
