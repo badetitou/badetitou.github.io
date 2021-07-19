@@ -1,0 +1,1238 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="http://badetitou.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="http://badetitou.github.io/" rel="alternate" type="text/html" /><updated>2021-07-19T07:50:25+00:00</updated><id>http://badetitou.github.io/feed.xml</id><title type="html">Benoît Verhaeghe</title><subtitle>Benoît Verhaeghe's blog</subtitle><entry><title type="html">Automatic meta-model documentation generation</title><link href="http://badetitou.github.io/misc/2021/07/19/automatic-metamodel-documentation-generation/" rel="alternate" type="text/html" title="Automatic meta-model documentation generation" /><published>2021-07-19T06:00:00+00:00</published><updated>2021-07-19T06:00:00+00:00</updated><id>http://badetitou.github.io/misc/2021/07/19/automatic-metamodel-documentation-generation</id><content type="html" xml:base="http://badetitou.github.io/misc/2021/07/19/automatic-metamodel-documentation-generation/"></content><author><name>Benoît &quot;badetitou&quot; Verhaeghe</name></author><category term="misc" /><summary type="html"></summary></entry><entry><title type="html">Connecting/Extending meta-models</title><link href="http://badetitou.github.io/misc/2021/05/15/connecting-meta-models/" rel="alternate" type="text/html" title="Connecting/Extending meta-models" /><published>2021-05-15T16:00:00+00:00</published><updated>2021-05-15T16:00:00+00:00</updated><id>http://badetitou.github.io/misc/2021/05/15/connecting-meta-models</id><content type="html" xml:base="http://badetitou.github.io/misc/2021/05/15/connecting-meta-models/"></content><author><name>Benoît &quot;badetitou&quot; Verhaeghe</name></author><category term="misc" /><summary type="html"></summary></entry><entry><title type="html">Using FFI to control VLC from Pharo</title><link href="http://badetitou.github.io/misc/pharo/ffi/vlc/2021/05/01/VLC-FFI/" rel="alternate" type="text/html" title="Using FFI to control VLC from Pharo" /><published>2021-05-01T10:00:00+00:00</published><updated>2021-05-01T10:00:00+00:00</updated><id>http://badetitou.github.io/misc/pharo/ffi/vlc/2021/05/01/VLC-FFI</id><content type="html" xml:base="http://badetitou.github.io/misc/pharo/ffi/vlc/2021/05/01/VLC-FFI/">&lt;p&gt;VLC is the best-known software for playing audio and video files.
+More than files, it also allows to play streams, and therefore to play, for example, the stream broadcasted by security cameras.
+We present here how to use Pharo to interface with the library developed for VLC and thus control VLC from Pharo.&lt;/p&gt;
+
+&lt;h2 id=&quot;lets-dream&quot;&gt;Let’s dream&lt;/h2&gt;
+
+&lt;p&gt;When I’m working, I often want to listen to music.
+But my music is stored in different places: locally on my laptop, on my personal server, on YouTube, and on premium online music accounts.
+While I can switch between systems easily, I was dreaming of a music manager where everything would be combined in one place.
+Let’s not lie, it was also the perfect argument to do a little of Pharo.&lt;/p&gt;
+
+&lt;h2 id=&quot;playing-song-with-pharo&quot;&gt;Playing song with Pharo&lt;/h2&gt;
+
+&lt;p&gt;Pharo already allows one to play music directly via a plugin integrated into the virtual machine (VM).
+Unfortunately, this plugin is old and does not guarantee to play the hundreds of music formats that exist today.
+On the other hand, VLC can play all these audio and video formats.
+In order to be able to play music controlled by Pharo, you just need to manipulate VLC.
+And this is what uFFI will allow us to do!
+Indeed, the VLC project is supported on the three most used platforms (Linux, Windows, and OSX) and also provides on all these platforms the shared libraries &lt;em&gt;libvlc&lt;/em&gt; and &lt;em&gt;libvlccore&lt;/em&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;A shared library is intended to be used by other programs. They define an API allowing a program to interact with another. And this is precisely what uFFI allows to do: call from Pharo the methods defined in a shared library.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;set-up-ffi&quot;&gt;Set-up FFI&lt;/h2&gt;
+
+&lt;p&gt;Setting up FFI has never been so easy.
+There are only a few pre-requisites:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Install the project you want to use (for me it’s VLC),&lt;/li&gt;
+  &lt;li&gt;Make sure that the shared libraries are in the PATH of the system,&lt;/li&gt;
+  &lt;li&gt;And that’s it for the first step!&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Once the project is installed, we move on to development.
+First of all, we create a class that serves as a link between Pharo and VLC.
+Pharo comes with a complete framework to set up FFI, so we just have to create a subclass of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;FFILibrary&lt;/code&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;VLCLibrary&lt;/code&gt;) and to indicate the name of the external libraries according to the system we use (&lt;em&gt;.so&lt;/em&gt; on Linux, &lt;em&gt;.dll&lt;/em&gt; on Windows and &lt;em&gt;.dylib&lt;/em&gt; on OSX).
+We have finished setting up FFI!&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;VLCLibrary&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;#unix64LibraryName&lt;/span&gt;
+    &lt;span class=&quot;ss&quot;&gt;#(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/usr/lib/i386-linux-gnu'&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'/usr/lib32'&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'/usr/lib'&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;OSEnvironment&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;current&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;at:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'LD_LIBRARY_PATH'&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ifAbsent:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;''&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;substrings:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;':'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;do:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; libraryPath &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;libraryPath&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;asFileReference&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'libvlc.so'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+        &lt;span class=&quot;nv&quot;&gt;libraryPath&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;exists&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ifTrue:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;^&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;libraryPath&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;fullName&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;
+    &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;error:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'Cannot locate vlc library. Please check if it installed on your system'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;functions-mapping&quot;&gt;Functions mapping&lt;/h2&gt;
+
+&lt;p&gt;Once the interfacing mechanism between Pharo and VLC is in place, we will now be able to map the VLC functions.
+To be able to use a function defined in the library, we declare in our &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;VLCLibrary&lt;/code&gt; class the methods we are going to use.
+To know the functions, we have two options, use tools that will extract the available functions from the libraries or… use the documentation!
+Fortunately for us, the &lt;a href=&quot;https://videolan.videolan.me/vlc/group__libvlc.html&quot;&gt;VLC libraries are well documented&lt;/a&gt;, which greatly simplifies the work.
+By accessing the documentation of the libraries we have access to the signature of the available functions.
+We just have to copy and paste the signature of the functions in Pharo to be able to use them. Primitive types are understood by Pharo while we will cleverly replace structures by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;void *&lt;/code&gt; in order to manipulate them as opaque objects.&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;VLCLibrary&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;#createVLCInstance&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;^&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ffiCall:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'void * libvlc_new()'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;a-first-test&quot;&gt;A first test&lt;/h2&gt;
+
+&lt;p&gt;Now we present the first methods we had to implement to use VLC.
+First of all, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;libvlc_new&lt;/code&gt; allows one to create an instance of VLC.
+We will then use this instance to script VLC.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/misc/img/2021-05-01-VLC-FFI/createVLCInstance.png&quot; alt=&quot;Call to method libvlc_new()&quot; class=&quot;img-fill&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Next, we developed the code necessary to play a music hosted on our computer.
+For this, we need three methods: creation of a media, creation of the corresponding media player and the play method of the media player.
+The three methods are described in the documentation as: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;libvlc_media_new_path&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;libvlc_media_player_new_from_media&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;libvlc_media_player_play&lt;/code&gt;.
+For their implementation, we just have to copy their signatures and create methods in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;VLCLibrary&lt;/code&gt; class as we did for the new.&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;VLCLibrary&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;#mediaNew:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;aVLCInstance&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;path:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;aStringPath&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&quot;Create a media for a certain file path.&quot;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;^&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ffiCall:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;libvlc_media_new_path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;aVLCInstance&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;aStringPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;VLCLibrary&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;#mediaPlayerPlay:&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;aMediaPlayer&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&quot;Play&quot;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;^&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ffiCall:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'int libvlc_media_player_play(void * aMediaPlayer)'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Finally, some lines in the playground allow us to script VLC to play music.&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;vlc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;VLCLibrary&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;uniqueInstance&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;createVLCInstance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&quot;do not use accentuated characters for the path&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;media&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;VLCLibrary&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;uniqueInstance&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;mediaNew:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;vlc&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;path:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'/my/file/path.mp3'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;mediaPlayer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;VLCLibrary&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;uniqueInstance&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;mediaPlayerNewFromMedia:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;media&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;VLCLibrary&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;uniqueInstance&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;mediaPlayerPlay:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mediaPlayer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;structures-mapping---lets-dev-in-pharo&quot;&gt;Structures mapping - Let’s dev in Pharo&lt;/h2&gt;
+
+&lt;p&gt;By writing all the public methods of the VLC libraries in Pharo, it is possible to script VLC completely.
+However, we get a single abstraction with lots of methods when it would be much better to create objects that represent each aspect of VLC.&lt;/p&gt;
+
+&lt;p&gt;It is thus possible to improve our mapping to a VLC library by mapping C structures to Pharo objects.
+Once again, we will be able to do this thanks to VLC.
+Structures can be divided into four categories: enums, callbacks, C structures, and opaque structures. FFI offers a solution for mapping each of them.&lt;/p&gt;
+
+&lt;p&gt;For enumerations, we need to extend the Pharo class &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;FFIExternalEnumeration&lt;/code&gt;, then we implement the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;enumDecl&lt;/code&gt; method by writing an array that will contain the name of the enumeration element followed by its value, &lt;em&gt;etc.&lt;/em&gt;
+We execute the method &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rebuildEnumAccessors&lt;/code&gt; on the class, this step will generate accessors to all the values of the enumeration.
+Finally, we initialize the class.
+It is now possible to use the enumeration by using: enumeration name + name of one of the elements of the enumeration.&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;VLCMediaType&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;class&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;#enumDecl&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&quot;self rebuildEnumAccessors&quot;&lt;/span&gt;
+    
+    &lt;span class=&quot;o&quot;&gt;^&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;#(libvlc_media_type_unknown&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;libvlc_media_type_file&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;libvlc_media_type_directory&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;libvlc_media_type_disc&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;libvlc_media_type_stream&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;libvlc_media_type_playlist&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;For callbacks, uFFI also comes with an out-of-the-box implementation.
+This time we need to extend the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;FFICallback&lt;/code&gt; class.
+We will then define the function signature to which our callback corresponds in C and the Pharo block that will be executed when the callback is called.
+For the function signature, we define two methods: the first one &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fnSpec&lt;/code&gt; which returns the function signature as we did when mapping the API, and the second one &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;on:&lt;/code&gt; which takes a block as a parameter that will be executed when the callback is called.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/misc/img/2021-05-01-VLC-FFI/callbackDefinition.png&quot; alt=&quot;Callback definition&quot; class=&quot;img-fill&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It is for opaque structures that it is easiest to define an FFI mapping.
+You just have to extend the Pharo class &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;FFIOpaqueObject&lt;/code&gt;.
+This step allows one to use this structure by considering only its methods.
+This is a strategy used in C to hide the internal functioning of the structure.&lt;/p&gt;
+
+&lt;p&gt;Finally, there remains the case of C structures.
+As for the previous cases, we extend this time the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;FFIExternalStructure&lt;/code&gt; class.
+Then, we define on the class side the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fieldsDesc&lt;/code&gt; method which returns an array containing all the variables of the structure and their types.
+By executing the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rebuildFieldAccessors&lt;/code&gt; method on the class, we also create the accessors of these attributes automatically.&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;VLCTrackDescription&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;#fieldsDesc&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&quot;self rebuildFieldAccessors&quot;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;^&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;#(int&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;i_id&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;ss&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;psz_name&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;ss&quot;&gt;VLCTrackDescription&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;p_next&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;c-structure-mapping&quot;&gt;C structure mapping&lt;/h2&gt;
+
+&lt;p&gt;That’s it!
+We can now completely use the VLC library as if it was a Pharo library.
+We will see in the next part what it allows us to do quickly.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-about-the-graphical-aspect&quot;&gt;What about the graphical aspect&lt;/h2&gt;
+
+&lt;p&gt;We will now look at how to quickly create an interface in Pharo that will allow us to control VLC.
+To do this, we will use the new version of Spec with Pharo 9.
+The final goal is to create a usable audio player interface for the user.
+More precisely, we will add an extension to the Pharo inspector in order to be able to watch and control the state of our VLC players.
+To do this, we will do two things: add an extension and create the user interface of the extension.
+To add an extension we just need to create a method with the pragma &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;inspectorPresentationOrder:title:&lt;/code&gt; which returns the interface we want to create.
+To define the user interface we use &lt;a href=&quot;https://github.com/pharo-spec/Spec&quot;&gt;Spec2&lt;/a&gt; (the reference graphical framework since Pharo 8+).
+We defined for the interface a progress bar that shows us the progress of a piece of music and two buttons &lt;em&gt;start&lt;/em&gt; and &lt;em&gt;pause&lt;/em&gt; to control the playback.
+The complete example is available on the &lt;a href=&quot;https://github.com/badetitou/pharo-libvlc&quot;&gt;GitHub repository of Pharo-LibVLC&lt;/a&gt; by loading the “inspector” group of the baseline.&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;Metacello&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;baseline:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'VLC'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;repository:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'github://badetitou/Pharo-LibVLC'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;load:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'inspector'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then it is possible to launch a music and obtain the following interface by inspecting:&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;vlc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;VLCLibrary&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;uniqueInstance&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;createVLCInstance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;media&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;vlc&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;createMediaFromPath:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'/path/to/file.mp3'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;mediaPlayer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;vlc&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;createMediaPlayerFromMedia:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;media&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;mediaPlayer&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;play&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;We have seen that it is possible to control VLC from Pharo.
+This way we can play songs from our computer, but also from other services (like YouTube) using VLC’s ability to play a remotely read audio stream.
+We have presented a first interface to control the audio player graphically.
+So, why not continue in this direction by creating a complete media center in Pharo, either as a desktop application or as a web application with the Seaside web framework.&lt;/p&gt;</content><author><name>Benoît &quot;badetitou&quot; Verhaeghe</name></author><category term="misc" /><category term="Pharo" /><category term="FFI" /><category term="VLC" /><summary type="html">VLC is the best-known software for playing audio and video files. More than files, it also allows to play streams, and therefore to play, for example, the stream broadcasted by security cameras. We present here how to use Pharo to interface with the library developed for VLC and thus control VLC from Pharo.</summary></entry><entry><title type="html">Analysing Java with VSCode</title><link href="http://badetitou.github.io/projects/vscode-pharo/pharo/vscode/2021/03/31/analysing-java-with-vscode/" rel="alternate" type="text/html" title="Analysing Java with VSCode" /><published>2021-03-31T10:00:00+00:00</published><updated>2021-04-05T10:00:00+00:00</updated><id>http://badetitou.github.io/projects/vscode-pharo/pharo/vscode/2021/03/31/analysing-java-with-vscode</id><content type="html" xml:base="http://badetitou.github.io/projects/vscode-pharo/pharo/vscode/2021/03/31/analysing-java-with-vscode/">&lt;p&gt;&lt;a href=&quot;https://code.visualstudio.com/&quot;&gt;VSCode&lt;/a&gt; is an incredible editor tool.
+Thanks to its extensions, one can develop using plenty of programming languages.
+However, what about analyzing one software system using VSCode?&lt;/p&gt;
+
+&lt;p&gt;In this blog post, I will present you how to use VSCode with &lt;a href=&quot;http://moosetechnology.github.io/&quot;&gt;Moose&lt;/a&gt; to analyze Java code.
+As an example, I will reproduce the blog post of &lt;a href=&quot;https://fuhrmanator.github.io/2019/07/29/AnalyzingJavaWithMoose.html&quot;&gt;Christopher Fuhrman&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Even if we can perform some analysis from VSCode, using the Moose tool natively gives a better user experience.
+Still, I believe it might interest people using only the VSCode tool.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#install-vscode-and-the-pharo-language-server-extension&quot;&gt;Install VSCode and the Pharo Language Server extension&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#download-and-install-the-required-tools&quot;&gt;Download and install the required tools&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#configure-vscode&quot;&gt;Configure VSCode&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#set-up-the-analysis-of-a-new-project&quot;&gt;Set up the analysis of a new project&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#clone-the-java-project-you-want-to-analyze&quot;&gt;Clone the Java project you want to analyze&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#parse-the-java-code-to-make-famix-model&quot;&gt;Parse the Java code to make FAMIX model&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#load-the-model&quot;&gt;Load the model&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#analysis&quot;&gt;Analysis&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#visualize-a-java-package-in-plantuml&quot;&gt;Visualize a Java package in PlantUML&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#perform-a-moose-analysis-using-pharo&quot;&gt;Perform a Moose analysis using Pharo&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#visualisation-with-roassal&quot;&gt;Visualisation with Roassal&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#resources&quot;&gt;Resources&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;install-vscode-and-the-pharo-language-server-extension&quot;&gt;Install VSCode and the Pharo Language Server extension&lt;/h2&gt;
+
+&lt;h3 id=&quot;download-and-install-the-required-tools&quot;&gt;Download and install the required tools&lt;/h3&gt;
+
+&lt;p&gt;To perform the analysis, we will use the insider version of VSCode.
+Currently, only this version supports the &lt;a href=&quot;https://code.visualstudio.com/api/extension-guides/notebook&quot;&gt;NoteBook feature&lt;/a&gt; we will use.&lt;/p&gt;
+
+&lt;p&gt;So, as a first step, install the last &lt;a href=&quot;https://code.visualstudio.com/insiders/&quot;&gt;VSCode insider version&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;We will also need a Moose image and a Pharo VM.
+For this blog post, we will use a Moose 8 image based on Pharo 8.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Download the last &lt;a href=&quot;https://github.com/badetitou/Pharo-LanguageServer/releases/download/continuous/Moose64-8.0-PLS.zip&quot;&gt;Moose 8 image for VSCode&lt;/a&gt; and extract it.&lt;/li&gt;
+  &lt;li&gt;Download the &lt;a href=&quot;https://files.pharo.org/get-files/80/&quot;&gt;corresponding Pharo VM&lt;/a&gt; and extract it.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Do not take the headless version (it has not been tested)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Once you have download VSCode, Moose 8, and the Pharo VM, we will install the extension in VSCode.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/files/pharo-language-server-0.0.11.vsix&quot;&gt;Download the extension&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Open VSCode insider&lt;/li&gt;
+  &lt;li&gt;Open the folder in which the extension file is present&lt;/li&gt;
+  &lt;li&gt;Right-click on the file and execute &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Install Extension&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/posts/analysing-java/install-extension.png&quot; alt=&quot;Install extension&quot; class=&quot;img-fill&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Close VSCode&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;From now on, you &lt;strong&gt;must&lt;/strong&gt; start VSCode insider with the following parameters (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--enable-proposed-api badetitou.pharo-language-server&lt;/code&gt;).
+It allows VSCode to use the Notebook API.&lt;/p&gt;
+
+&lt;p&gt;Execute the following command in a terminal:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;code-insiders &lt;span class=&quot;nt&quot;&gt;--enable-proposed-api&lt;/span&gt; badetitou.pharo-language-server
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Or in Windows:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;code-insiders.cmd &lt;span class=&quot;nt&quot;&gt;--enable-proposed-api&lt;/span&gt; badetitou.pharo-language-server
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;configure-vscode&quot;&gt;Configure VSCode&lt;/h3&gt;
+
+&lt;p&gt;We now need to configure the Pharo Language Server extension.
+To do so:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;go in the VSCode settings (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Ctrl + ,&lt;/code&gt;).&lt;/li&gt;
+  &lt;li&gt;Search Pharo settings&lt;/li&gt;
+  &lt;li&gt;Set the field &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Path To Image&lt;/code&gt; with the path to the image you have downloaded
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;D:\Users\benoit.verhaeghe\Documents\Pharo\images\LSP4\LSP4.image
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Set the field &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Path To VM&lt;/code&gt; with the path to the VM you have downloaded
+    &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;D:\Users\benoit.verhaeghe\Documents\Pharo\vms\80-x64\Pharo.exe
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Restart VSCode (to be sure the configuration is well saved)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;If you use Windows, you might need to remove all space characters in the path.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Once the configuration is done, you can create a new file named &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;oo-analysis.moosebook&lt;/code&gt;.
+It should open as a VSCode notebook and a Pharo image (you can reduce the Pharo image, but &lt;strong&gt;do not close it&lt;/strong&gt;).&lt;/p&gt;
+
+&lt;h2 id=&quot;set-up-the-analysis-of-a-new-project&quot;&gt;Set up the analysis of a new project&lt;/h2&gt;
+
+&lt;h3 id=&quot;clone-the-java-project-you-want-to-analyze&quot;&gt;Clone the Java project you want to analyze&lt;/h3&gt;
+
+&lt;p&gt;First, we are going to download the GitHub project we want to analyze.
+To do so, create a new &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;code cell&lt;/code&gt; in VSCode with the following code:&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;javaProjectFileRef&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MooseEasyUtility&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;cloneGitHubRepo:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'https://github.com/bethrobson/Head-First-Design-Patterns'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This piece of code will download the project under our Pharo image folder.
+To execute the cell, press the run arrow next to the cell.
+In case of success, a little tick appears and the path to the clone project has output of the cell.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/posts/analysing-java/clone.png&quot; alt=&quot;Cell executed after clone&quot; class=&quot;img-fill&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;parse-the-java-code-to-make-famix-model&quot;&gt;Parse the Java code to make FAMIX model&lt;/h3&gt;
+
+&lt;p&gt;As in the original blog post of Christopher, now we will parse the Java project and create a FAMIX model.
+To parse the Java project, we use VerveineJ v1.x.x (v1.x.x works with Moose 8, whereas v2.x.x is under modification to work with the future Moose 9).&lt;/p&gt;
+
+&lt;p&gt;Contrary to the original blog post, we will download VerveineJ v1.0.2 (and not v1.0.1).
+It includes nice fixes.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create a new code cell with the following piece of code to download the last VerveineJ version and extract it&lt;/p&gt;
+
+    &lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;client&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ZnClient&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+  &lt;span class=&quot;nv&quot;&gt;client&lt;/span&gt;
+      &lt;span class=&quot;nf&quot;&gt;signalProgress:&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;nf&quot;&gt;url:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'https://github.com/moosetechnology/VerveineJ/archive/v1.0.2.zip'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;nf&quot;&gt;downloadTo:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FileLocator&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;imageDirectory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+  &lt;span class=&quot;nv&quot;&gt;client&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;isSuccess&lt;/span&gt;
+      &lt;span class=&quot;nb&quot;&gt;ifTrue:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ZipArchive&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;
+              &lt;span class=&quot;nf&quot;&gt;readFrom:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;FileLocator&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;imageDirectory&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'v1.0.2.zip'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;asFileReference&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;pathString&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+              &lt;span class=&quot;nf&quot;&gt;extractAllTo:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FileLocator&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;imageDirectory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+
+          &lt;span class=&quot;c&quot;&gt;&quot;Since permissions are not preserved with ZipArchive#extractAllTo:&quot;&lt;/span&gt;
+          &lt;span class=&quot;c&quot;&gt;&quot;This line is not required in Windows system&quot;&lt;/span&gt;
+          &lt;span class=&quot;nc&quot;&gt;LibC&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;runCommand:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'chmod u+x '&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;FileLocator&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;imageDirectory&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'VerveineJ-1.0.1/verveinej.sh'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;asFileReference&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;pathString&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+      &lt;span class=&quot;nb&quot;&gt;ifFalse:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Error&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;signal:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'Download failed.'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Then, we will ask &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MooseEasyFamixMaker&lt;/code&gt; to parse the Java project using &lt;a href=&quot;https://modularmoose.org/moose-wiki/Developers/Parsers/VerveineJ&quot;&gt;VerveineJ&lt;/a&gt;, and create a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.mse&lt;/code&gt; file for us. Again, in another cell, execute the following snippet of code.&lt;/p&gt;
+
+    &lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;wizard&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MooseEasyFamixMaker&lt;/span&gt;
+   &lt;span class=&quot;nf&quot;&gt;generateMSETo:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'tmp/HFDP.mse'&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;asFileReference&lt;/span&gt;
+   &lt;span class=&quot;nf&quot;&gt;parsing:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'tmp/MooseEasyRepos/bethrobson__Head-First-Design-Patterns'&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;asFileReference&lt;/span&gt;
+   &lt;span class=&quot;nf&quot;&gt;with:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;FileLocator&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;imageDirectory&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'VerveineJ-1.0.2/verveinej.bat'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;asFileReference&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;wizard&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;generateMSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.mse&lt;/code&gt; is a file format used by Moosetechnology to represent its model and meta-model. &lt;a href=&quot;https://modularmoose.org/moose-wiki/Users/fileFormat&quot;&gt;Other formats exist.&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;load-the-model&quot;&gt;Load the model&lt;/h3&gt;
+
+&lt;p&gt;The last step is to load the model in the Moose image (the one we are controlling using VSCode).
+In a new cell, execute:&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;mseFileRef&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'tmp/HFDP.mse'&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;asFileReference&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&quot;Generated by FamixMaker&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;mseStream&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mseFileRef&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;readStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;mseStream&lt;/span&gt;
+ &lt;span class=&quot;err&quot;&gt;ifNotNil:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; 
+  &lt;span class=&quot;nv&quot;&gt;mooseModel&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MooseModel&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;importFromMSEStream:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mseStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; 
+  &lt;span class=&quot;nv&quot;&gt;mooseModel&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;rootFolder:&lt;/span&gt;
+      &lt;span class=&quot;s&quot;&gt;'tmp/MooseEasyRepos/bethrobson__Head-First-Design-Patterns'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+  &lt;span class=&quot;nv&quot;&gt;mseStream&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+ &lt;span class=&quot;nf&quot;&gt;ifNil:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;error:&lt;/span&gt; 
+    &lt;span class=&quot;s&quot;&gt;'Could not load MSE file into Moose: '&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mseFileRef&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;asString&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;mseStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;mooseModel&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;install&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The output of the cell should be &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a MooseModel #HFDP(30946)&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Congrats! You have set up everything. Now it is time to analyze the project :rocket:&lt;/p&gt;
+
+&lt;h2 id=&quot;analysis&quot;&gt;Analysis&lt;/h2&gt;
+
+&lt;h3 id=&quot;visualize-a-java-package-in-plantuml&quot;&gt;Visualize a Java package in PlantUML&lt;/h3&gt;
+
+&lt;p&gt;To visualize Java packages using PlantUML.
+We first install the PlantUML connector of Pharo (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PlantUMLPharoGizmo&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;To do so, simply create a new code cell with the installation script and execute it.&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&quot;Install PlantUMLPharo&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'master'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;Metacello&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;repository:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'github://fuhrmanator/PlantUMLPharoGizmo:'&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'/src'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;baseline:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'PUGizmo'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then, you can visualize the classes of a package by executing a Pharo Script.&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;attribute&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;method&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;inheritance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;aggregation&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;createCheckBox&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;preference&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'set namespaceSeparator ::'&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;cr&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'hide empty members'&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;cr&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'scale 1'&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;cr&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'left to right direction'&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;cr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;items&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mooseModel&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;allModelClasses&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;select:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;mooseName&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;beginsWith:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'headfirst::designpatterns::combining::decorator'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;
+
+
+&lt;span class=&quot;nv&quot;&gt;pUMLSource&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PUGizmo&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;plantUMLSourceForMooseJavaClasses:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;items&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;withPreference:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;preference&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;withRelationships:&lt;/span&gt;
+   &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;attribute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+   &lt;span class=&quot;nv&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+   &lt;span class=&quot;nv&quot;&gt;inheritance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+   &lt;span class=&quot;nv&quot;&gt;aggregation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+   &lt;span class=&quot;nv&quot;&gt;createCheckBox&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}.&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;plantKey&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;pUMLSource&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;asPlantUMLKey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;serverUrl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'https://www.plantuml.com/plantuml/img/'&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;plantKey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;  
+&lt;span class=&quot;nv&quot;&gt;imageMorph&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ZnEasy&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getPng:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;serverUrl&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;asUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In the above example, as in the original blog post, we focus on the package: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;headfirst::designpatterns::combining::decorator&lt;/code&gt; and we show the classes attributes, inheritances, and aggregation.
+Executing the code gives the following image as the output of the VSCode cell.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/posts/analysing-java/package-analysis.png&quot; alt=&quot;Output after cell execution&quot; class=&quot;img-fill&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;perform-a-moose-analysis-using-pharo&quot;&gt;Perform a Moose analysis using Pharo&lt;/h3&gt;
+
+&lt;p&gt;It is also possible to execute some classic Pharo code.
+We can request the list of classes that implement more than one interface.&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&quot;Query all classes that have more than two direct FAMIX superclasses&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;classesImplementingMoreThanOneInterface&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mooseModel&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;allModelClasses&lt;/span&gt; 
+ &lt;span class=&quot;nf&quot;&gt;select:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; 
+  &lt;span class=&quot;nv&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;directSuperclasses&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;streamContents:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;stream&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;classesImplementingMoreThanOneInterface&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;do:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;stream&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;separatedBy:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;stream&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;', '&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/posts/analysing-java/more-than-one-interface.png&quot; alt=&quot;Output after cell execution&quot; class=&quot;img-fill&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;visualisation-with-roassal&quot;&gt;Visualisation with Roassal&lt;/h3&gt;
+
+&lt;p&gt;Finally, one can use &lt;a href=&quot;https://github.com/ObjectProfile/Roassal2&quot;&gt;Roassal2&lt;/a&gt; (or &lt;a href=&quot;https://github.com/ObjectProfile/Roassal3&quot;&gt;Roassal3&lt;/a&gt; in Pharo 9) to create custom visualization.&lt;/p&gt;
+
+&lt;p&gt;It is possible to use pre-built visualization coming from Moose, such as the System Nesting map:&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;view&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RTView&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;FAMIXSystemNestingMap&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;viewNamespaces:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;mooseModel&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;allNamespaces&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;select:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;allClasses&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;anySatisfy:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;isStub&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;highlighting:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;onRaw:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;view&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/posts/analysing-java/nesting-map.png&quot; alt=&quot;Output after cell execution nexting map&quot; class=&quot;img-fill&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Or every other Roassal visualization!&lt;/p&gt;
+
+&lt;h2 id=&quot;resources&quot;&gt;Resources&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/files/posts/analysing-java/oo-analysis.moosebook&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.moosebook&lt;/code&gt; file created for this blog post&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/files/pharo-language-server-0.0.11.vsix&quot;&gt;The VSCode extension&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/badetitou/vscode-pharo/tree/proposed&quot;&gt;Extension repository&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Benoît &quot;badetitou&quot; Verhaeghe</name></author><category term="projects" /><category term="VSCode-Pharo" /><category term="pharo" /><category term="vscode" /><summary type="html">VSCode is an incredible editor tool. Thanks to its extensions, one can develop using plenty of programming languages. However, what about analyzing one software system using VSCode?</summary></entry><entry><title type="html">Dev - Pharo Language Server</title><link href="http://badetitou.github.io/projects/vscode-pharo/pharo/vscode/2021/03/03/VSCode-Developer/" rel="alternate" type="text/html" title="Dev - Pharo Language Server" /><published>2021-03-03T10:00:00+00:00</published><updated>2021-03-03T10:00:00+00:00</updated><id>http://badetitou.github.io/projects/vscode-pharo/pharo/vscode/2021/03/03/VSCode-Developer</id><content type="html" xml:base="http://badetitou.github.io/projects/vscode-pharo/pharo/vscode/2021/03/03/VSCode-Developer/">&lt;p&gt;I have recently developed a &lt;a href=&quot;https://code.visualstudio.com/&quot;&gt;VSCode&lt;/a&gt; extension for Pharo.
+It uses the Language Server Protocol and the Debug Adapter Protocol.
+You can download it from &lt;a href=&quot;https://github.com/badetitou/Pharo-LanguageServer&quot;&gt;GitHub&lt;/a&gt;!
+Here, I will present the Pharo implementation for the LSP part and how to extend it.&lt;/p&gt;
+
+&lt;p&gt;I first worked on the implementation of LSP in Pharo.
+LSP protocol is based on the JSON-RPC protocol.
+Hopefully, this protocol is &lt;a href=&quot;https://github.com/juliendelplanque/JRPC&quot;&gt;already implemented&lt;/a&gt; in Pharo thanks to the incredible work of &lt;a href=&quot;https://juliendelplanque.be/&quot;&gt;Julien Delplanque&lt;/a&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#project-package-architecture&quot;&gt;Project Package Architecture&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#project-startup&quot;&gt;Project startup&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#main-loop&quot;&gt;Main loop&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#receiving-request&quot;&gt;Receiving request&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#handling-request&quot;&gt;Handling request&lt;/a&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#example-of-code-completion&quot;&gt;Example of code completion&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#how-to-extend-and-improve-the-project&quot;&gt;How to extend and improve the project&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;project-package-architecture&quot;&gt;Project Package Architecture&lt;/h2&gt;
+
+&lt;p&gt;The LSP implementation is done in a main package &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PharoLanguageServer&lt;/code&gt;.
+Then, the package is subdivided into 5 sub-packages: Uncategorized (core), Structure, Structure-Capabilities, Structure-Completion, and Structure-Signature.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The core package includes the server and the dispatched methods&lt;/li&gt;
+  &lt;li&gt;The structure package includes the &lt;a href=&quot;https://microsoft.github.io/language-server-protocol/specifications/specification-current/#basic-json-structures&quot;&gt;basic JSON structures&lt;/a&gt; of the LSP specification.
+Those structures are used by all the LSP requests.&lt;/li&gt;
+  &lt;li&gt;The structure capabilities package includes the structures used to declare the capabilities of LSP client and server.
+All the structures are not implemented. Only the ones supported by the Pharo Language Server.&lt;/li&gt;
+  &lt;li&gt;The structure completion package includes the structures used for the text completion feature.
+It includes completion item, tag, and text format (snippet or plain text).&lt;/li&gt;
+  &lt;li&gt;The structure signature package is equivalent to the completion package but for the signature helper feature.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;project-startup&quot;&gt;Project startup&lt;/h2&gt;
+
+&lt;p&gt;Here, we will present how the project startup&lt;/p&gt;
+
+&lt;script src=&quot;/js/mermaid.min.js&quot;&gt;&lt;/script&gt;
+&lt;div class=&quot;mermaid&quot;&gt;
+sequenceDiagram
+    activate VSCode
+    VSCode-&amp;gt;&amp;gt;Pharo: Start Pharo
+    activate Pharo
+    VSCode-&amp;gt;&amp;gt;Pharo: Can you hear me?
+    Pharo--&amp;gt;&amp;gt;VSCode: Yes!
+    VSCode-&amp;gt;&amp;gt;+Pharo: Initialized?
+    Pharo-&amp;gt;&amp;gt;-VSCode: Initialized!
+    VSCode-&amp;gt;&amp;gt;+Pharo: Capabilities?
+    Pharo-&amp;gt;&amp;gt;-VSCode: Capabilities!
+    loop
+        VSCode-&amp;gt;&amp;gt;+Pharo: What about completion?
+        Pharo-&amp;gt;&amp;gt;-VSCode: Complete this text with this snippet
+    end
+    VSCode-&amp;gt;&amp;gt;Pharo: I'm done
+    Pharo-&amp;gt;&amp;gt;VSCode: OK bye!
+    deactivate VSCode
+    deactivate Pharo
+&lt;/div&gt;
+
+&lt;p&gt;When a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.st&lt;/code&gt; file is opened VSCode launch that vscode-pharo extension, which, in turn, starts the server by executing the following piece of code.&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; server &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;
+
+&lt;span class=&quot;nc&quot;&gt;Transcript&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;crShow:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'Run with vscode'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PLSServer&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&quot;In the dev version&quot;&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;debugMode:&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;yourself&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;When started:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PLSServer&lt;/code&gt; looks for its methods with the pragma &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jrpc&lt;/code&gt; to define the method that will be accessible by the extension.
+For instance, the following method is called when the client executes the method &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;initialize&lt;/code&gt;.
+    &lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nf&quot;&gt;onInitializeTrace:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;trace&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;processId:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;processId&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;clientInfo:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;clientInfo&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;rootPath:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;rootPath&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;workspaceFolders:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;workspaceFolders&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;capabilities:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;capabilities&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;rootUri:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;rootUri&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;jrpc:&lt;/span&gt; #initialize&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;^&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PLSInitializeResult&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;It creates a TCP socket that listens to port 4000 (default value).&lt;/li&gt;
+  &lt;li&gt;The VSCode client connects to the server TCP port&lt;/li&gt;
+  &lt;li&gt;Client and server exchange their capabilities&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;main-loop&quot;&gt;Main loop&lt;/h2&gt;
+
+&lt;p&gt;Once the VSCode client and the Pharo server are connected, the main loop of the protocol begins.
+Here, I will detail how information is handled by the server part.
+For information about the client, you should have a look at the VSCode documentation.&lt;/p&gt;
+
+&lt;h3 id=&quot;receiving-request&quot;&gt;Receiving request&lt;/h3&gt;
+
+&lt;p&gt;The server is always in listening mode, waiting for a request from the client.
+When it receives data, it first &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#extractRequestFrom&lt;/code&gt; the socket.&lt;/p&gt;
+
+&lt;p&gt;The extraction consists of waiting data from the client.
+A request consists of a header and content.&lt;/p&gt;
+
+&lt;p&gt;The header is first extracted by Pharo.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Content-Length: ...\r\n
+\r\n
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The server retrieves the value of the content-length.
+It allows us to create a String buffer with the correct size.
+Then, it extracts into the buffer the content.&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;jsonrpc&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;2.0&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;method&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;textDocument/didOpen&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;params&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;err&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The content consists of the JSON-RPC protocol version, an idea used to identify the request, the method called, and the params for the methods.
+Handling the request, and dispatching to the correct method in the server is made by incredible &lt;a href=&quot;https://github.com/juliendelplanque/JRPC&quot;&gt;JRPC implementation of Julien&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;handling-request&quot;&gt;Handling request&lt;/h3&gt;
+
+&lt;p&gt;When extracted, the request is dispatched to the method with the pragma corresponding to the jrpc called method with the parameter.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://microsoft.github.io/language-server-protocol/overviews/lsp/img/language-server-sequence.png&quot; alt=&quot;Example communication&quot; /&gt;.&lt;/p&gt;
+
+&lt;p&gt;The method analysis the parameter, performs some Pharo code, and then answers with the expected LSP structure.&lt;/p&gt;
+
+&lt;h4 id=&quot;example-of-code-completion&quot;&gt;Example of code completion&lt;/h4&gt;
+
+&lt;p&gt;To answer a completion request, the following implementation is used:&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nf&quot;&gt;textDocumentCompletionWithContext:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;context&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;position:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;textDocument:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;textDocument&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;jrpc:&lt;/span&gt; #'textDocument/completion'&lt;span class=&quot;p&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; completionList completionTool &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;completionTool&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PLSCompletion&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;source:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;context&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;textItem:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;textDocument&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;at:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;#uri&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;at:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;#text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;position:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;yourself&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;completionList&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PLSCompletionList&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;completionList&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;completionItems:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;completionTool&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;entries&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;asArray&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;^&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;completionList&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;First, we create a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PLSCompletion&lt;/code&gt; that has access to the source code, and the position in which a completion is required.
+Then, we create a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PLSCompletionList&lt;/code&gt;, a &lt;a href=&quot;https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_completion&quot;&gt;structure defined in the LSP&lt;/a&gt;.
+Finally, we set the list of completion items with the entries given by our completion tool.&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;PLSCompletion&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;#entries&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;completionContext&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CompletionContext&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;engine:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PLSCompletionEngine&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;class:&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;nil&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;source:&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;source&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;position:&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;position&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;^&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;completionContext&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;entries&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;collectWithIndex:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;entry&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;PLSCompletionItem&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;
+                &lt;span class=&quot;nf&quot;&gt;label:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;entry&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;nf&quot;&gt;insertTextFormat:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PLSInsertTextFormat&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;snippet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;nf&quot;&gt;insertText:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;entry&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;contents&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;toPLSSnippet&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;nf&quot;&gt;kind:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;entry&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;asPLSCompletionItemKind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;nf&quot;&gt;data:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;nf&quot;&gt;yourself&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The completion tool uses the existing Pharo tool &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CompletionContext&lt;/code&gt; for the completion.
+We created a specific engine named &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PLSCompletionEngine&lt;/code&gt; that extends the default &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CompletionEngine&lt;/code&gt; of Pharo, and defines the context as scripting.&lt;/p&gt;
+
+&lt;h3 id=&quot;how-to-extend-and-improve-the-project&quot;&gt;How to extend and improve the project&lt;/h3&gt;
+
+&lt;p&gt;There is still a lot of work to do to improve the Pharo Language Server.
+Using the existing architecture, it is easy to improve the code.
+Please consider adding your next super feature or creates issues so we can prioritize our work.&lt;/p&gt;
+
+&lt;p&gt;The next blog post will detail how to extend the Debug Adapter Protocol Pharo implementation, and another will present user story with the extension :rocket:&lt;/p&gt;</content><author><name>Benoît &quot;badetitou&quot; Verhaeghe</name></author><category term="projects" /><category term="VSCode-Pharo" /><category term="pharo" /><category term="vscode" /><summary type="html">I have recently developed a VSCode extension for Pharo. It uses the Language Server Protocol and the Debug Adapter Protocol. You can download it from GitHub! Here, I will present the Pharo implementation for the LSP part and how to extend it.</summary></entry><entry><title type="html">Coasters collection</title><link href="http://badetitou.github.io/misc/2021/02/15/Coasters/" rel="alternate" type="text/html" title="Coasters collection" /><published>2021-02-15T06:00:00+00:00</published><updated>2021-02-15T06:00:00+00:00</updated><id>http://badetitou.github.io/misc/2021/02/15/Coasters</id><content type="html" xml:base="http://badetitou.github.io/misc/2021/02/15/Coasters/"></content><author><name>Benoît &quot;badetitou&quot; Verhaeghe</name></author><category term="misc" /><summary type="html"></summary></entry><entry><title type="html">Testing and releasing Pharo with GitHub actions</title><link href="http://badetitou.github.io/misc/pharo/2020/11/30/Testing-pharo-with-github-actions/" rel="alternate" type="text/html" title="Testing and releasing Pharo with GitHub actions" /><published>2020-11-30T16:00:00+00:00</published><updated>2020-11-30T16:00:00+00:00</updated><id>http://badetitou.github.io/misc/pharo/2020/11/30/Testing%20pharo%20with%20github%20actions</id><content type="html" xml:base="http://badetitou.github.io/misc/pharo/2020/11/30/Testing-pharo-with-github-actions/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;Hi :wave:, Travis is becoming a pay to use service.
+So why not move to GitHub actions to test your Pharo project?&lt;/p&gt;
+
+&lt;p&gt;Here I’m presenting everything you need to know to test your project with GitHub Actions.&lt;/p&gt;
+
+&lt;p&gt;We’ll also see how to release your project (also continuously :sparkles:).&lt;/p&gt;
+
+&lt;h2 id=&quot;testing-with-smalltalk-ci&quot;&gt;Testing with Smalltalk CI&lt;/h2&gt;
+
+&lt;h3 id=&quot;the-simplest-case&quot;&gt;The simplest case&lt;/h3&gt;
+
+&lt;p&gt;To test a Pharo project, we will create a GitHub action.
+Upon each commit on the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;main&lt;/code&gt; branch, this action will test your project.&lt;/p&gt;
+
+&lt;p&gt;To do so, it:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;checks out your project&lt;/li&gt;
+  &lt;li&gt;runs Smalltalk CI on your project&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;To create the GitHub action, you need first to create a file under the folder &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;git root&amp;gt;/.github/workflows&lt;/code&gt;.
+Since the action is to test the project, I decided to name it &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;test.yml&lt;/code&gt;, but any other name will work.
+So in my git repository I have a file in: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;git root&amp;gt;/.github/workflows/test.yml&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;In the file write:&lt;/p&gt;
+
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;CI&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;GITHUB_TOKEN&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;${{ secrets.GITHUB_TOKEN }}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Controls when the action will run. Triggers the workflow on push or pull request&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# events but only for the development branch&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;branches&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;main&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ubuntu-latest&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v2&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;hpi-swa/setup-smalltalkCI@v1&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;smalltalkci&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;smalltalk-version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Pharo64-8.0&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;smalltalkci -s ${{ steps.smalltalkci.outputs.smalltalk-version }}&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;shell&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;bash&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;timeout-minutes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;15&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The first lines indicate when the action is triggered.
+In this simple case, it is triggered on each push on the branch &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;main&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Then, the jobs part describes the steps of the CI.
+It runs on a ubuntu image.
+There are three steps,
+    (1) it checks out the last version of the project for the current branch,
+    (2) it prepares the smalltalkCI tool, and
+    (3) it runs smalltalkCI on your project for the Pharo64-8.0 image.&lt;/p&gt;
+
+&lt;h3 id=&quot;a-more-complex-case&quot;&gt;A more complex case&lt;/h3&gt;
+
+&lt;p&gt;Indeed, you might want to test your project over several pharo versions.
+In this section, we see another example using GitHub actions matrix:&lt;/p&gt;
+
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ubuntu-latest&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;strategy&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;matrix&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;smalltalk&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Pharo64-8.0&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Pharo64-9.0&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;${{ matrix.smalltalk }}&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v2&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;hpi-swa/setup-smalltalkCI@v1&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;smalltalk-version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;${{ matrix.smalltalk }}&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;smalltalkci -s ${{ matrix.smalltalk }}&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;shell&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;bash&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;timeout-minutes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;15&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The name and the trigger part are the same as before.
+In the build part, we add a matrix strategy.
+In this strategy, we set the name of the Pharo versions compatible with our project.
+Then, in the steps, we tell SmallTalk CI to use the current smalltalk name of the matrix.&lt;/p&gt;
+
+&lt;h3 id=&quot;testing-upon-a-pull-request&quot;&gt;Testing Upon a Pull Request&lt;/h3&gt;
+
+&lt;p&gt;It is also possible to test on each Pull Request instead of commit to the main branch.
+To do so, change the trigger part by&lt;/p&gt;
+
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;pull_request&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;assigned&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;opened&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;synchronize&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;reopened&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Many other trigger options exist; you should check them on the &lt;a href=&quot;https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows&quot;&gt;GitHub action page&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;A final version of the file can be found &lt;a href=&quot;https://github.com/moosetechnology/Moose/blob/development/.github/workflows/test.yml&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;releasing&quot;&gt;Releasing&lt;/h2&gt;
+
+&lt;p&gt;Using GitHub action to test your project is nice, but we can do more.
+We will automatically release our project using GitHub Actions.
+To so, we create two other actions: one for common release, one for continuous release.&lt;/p&gt;
+
+&lt;h3 id=&quot;release&quot;&gt;Release&lt;/h3&gt;
+
+&lt;p&gt;To create a release action, we first create a new file, for example &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;git root&amp;gt;/.github/workflows/release.yml&lt;/code&gt;.
+This action is triggered upon release creation and will test the project and release an image with the project loaded.&lt;/p&gt;
+
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Release&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;release&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;types&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;created&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ubuntu-latest&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;PROJECT_NAME&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;${{ matrix.smalltalk }}-Moose&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;strategy&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;matrix&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;smalltalk&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Pharo64-9.0&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Pharo64-8.0&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;${{ matrix.smalltalk }}&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v2&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;hpi-swa/setup-smalltalkCI@v1&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;smalltalk-version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;${{ matrix.smalltalk }}&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;smalltalkci -s ${{ matrix.smalltalk }}&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;shell&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;bash&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;timeout-minutes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;15&lt;/span&gt;
+
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Package&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;mv /home/runner/.smalltalkCI/_builds/* .&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;mv TravisCI.image $PROJECT_NAME.image&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;mv TravisCI.changes $PROJECT_NAME.changes&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;zip -r $PROJECT_NAME.zip $PROJECT_NAME.image $PROJECT_NAME.changes *.sources pharo.version&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;ls&lt;/span&gt;
+
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Get release&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;get_release&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;bruceadams/get-release@v1.2.2&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;GITHUB_TOKEN&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;${{ github.token }}&lt;/span&gt;
+
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Upload Release Asset&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;upload-release-asset&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/upload-release-asset@v1&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;GITHUB_TOKEN&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;${{ secrets.GITHUB_TOKEN }}&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;upload_url&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;${{ steps.get_release.outputs.upload_url }}&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps &lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;asset_path&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;./${{ env.PROJECT_NAME }}.zip&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;asset_name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;${{ env.PROJECT_NAME }}.zip&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;asset_content_type&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;application/zip&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The above example is the one used by the &lt;a href=&quot;https://moosetechnology.github.io/moose-wiki/&quot;&gt;Moose Project&lt;/a&gt;.
+First, we define an environment variable named &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;current matrix name&amp;gt;-Moose&lt;/code&gt;.
+In addition to the testing steps, we add three steps:
+&lt;em&gt;Package&lt;/em&gt; takes the source file after testing the project (&lt;em&gt;i.e.&lt;/em&gt; .image, .changes, .sources, and pharo.version) and zips them into one zip file with the current matrix name.
+ &lt;em&gt;Get release&lt;/em&gt; allows us to access the release GitHub API.
+Thus, we can access the upload URL of the release.
+Then, &lt;em&gt;Upload Release Asset&lt;/em&gt; uploads the zip file created in the &lt;em&gt;package&lt;/em&gt; step.&lt;/p&gt;
+
+&lt;p&gt;When developers release their code, the action downloads an image for each specified Pharo version, tests it, packages it, and uploads it in the GitHub release.
+Then, users can directly download the released version of the project, with project code loaded in the image.&lt;/p&gt;
+
+&lt;h3 id=&quot;continuous-release&quot;&gt;Continuous release&lt;/h3&gt;
+
+&lt;p&gt;For the continuous release, we add a schedule to trigger the GitHub actions.
+Thus, if the Pharo image evolves, our build will evolve with it.&lt;/p&gt;
+
+&lt;p&gt;Note that we have also changed the way to update the release.
+Indeed, the &lt;em&gt;Update Release&lt;/em&gt; automatically creates a release and uploads the last version of the zip file.&lt;/p&gt;
+
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# This is a basic workflow to help you get started with Actions&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Continuous&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Controls when the action will run. Triggers the workflow on push or pull request&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# events but only for the development branch&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;branches&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;development&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;schedule&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# * is a special character in YAML so you have to quote this string&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;cron&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;  &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;*'&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ubuntu-latest&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;PROJECT_NAME&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;${{ matrix.smalltalk }}-Moose&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;strategy&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;matrix&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;smalltalk&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Pharo64-9.0&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Pharo64-8.0&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;${{ matrix.smalltalk }}&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v2&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;hpi-swa/setup-smalltalkCI@v1&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;smalltalk-version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;${{ matrix.smalltalk }}&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;smalltalkci -s ${{ matrix.smalltalk }}&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;shell&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;bash&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;timeout-minutes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;15&lt;/span&gt;
+
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;package&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;mv /home/runner/.smalltalkCI/_builds/* .&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;mv TravisCI.image $PROJECT_NAME.image&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;mv TravisCI.changes $PROJECT_NAME.changes&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;zip -r $PROJECT_NAME.zip $PROJECT_NAME.image $PROJECT_NAME.changes *.sources pharo.version&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;ls&lt;/span&gt;
+
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Update Release&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;johnwbyrd/update-release@v1.0.0&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;release&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;continuous'&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;${{ secrets.GITHUB_TOKEN }}&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;files&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;${{ env.PROJECT_NAME }}.zip&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;add-releases-to-pharo-launcher&quot;&gt;Add releases to Pharo Launcher&lt;/h3&gt;
+
+&lt;p&gt;Finally, I want to share with you a little script to add the GitHub Release into the &lt;a href=&quot;https://pharo.org&quot;&gt;Pharo Launcher&lt;/a&gt;.
+To do so:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Open the Pharo Launcher&lt;/li&gt;
+  &lt;li&gt;Open a Playground (Ctrl + O, Ctrl + W)&lt;/li&gt;
+  &lt;li&gt;Execute the following piece of code&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; sources &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;sources&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nc&quot;&gt;PhLTemplateSource&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;type:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;#HttpListing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'Moose'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;url:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'https://github.com/moosetechnology/Moose/releases'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;filterPattern:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'href=&quot;([^&quot;]*/Pharo[0-9][^&quot;]*.zip)&quot;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;templateNameFormat:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'{6} ({5})'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}.&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;PhLUserTemplateSources&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sourcesFile&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;writeStreamDo:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;STON&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;writer&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;on:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;newLine:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;lf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;prettyPrint:&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;nextPut:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;sources&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This piece of code creates a local source file for the Pharo Launcher template.
+In the source file, it specifies using an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HttpListing&lt;/code&gt; from the release page of GitHub.
+Then, with a filter pattern, it creates a beautiful list inside the Pharo Launcher.&lt;/p&gt;
+
+&lt;p&gt;To adapt the piece of code for your project, you need to change the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;name:&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;url:&lt;/code&gt; method parameters.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/misc/img-2020-11-30-GithubActions/pharo-launcher.png&quot; alt=&quot;Pharo Launcher with linkg to GitHub actions&quot; class=&quot;responsive-img&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;resources&quot;&gt;Resources&lt;/h2&gt;
+
+&lt;p&gt;The three files: &lt;em&gt;test&lt;/em&gt;, &lt;em&gt;release&lt;/em&gt;, and &lt;em&gt;continuous&lt;/em&gt; can be found in the &lt;a href=&quot;https://github.com/moosetechnology/Moose/tree/development/.github/workflows&quot;&gt;Moose project repository&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;thanks&quot;&gt;Thanks&lt;/h2&gt;
+
+&lt;p&gt;I’d like to thanks the authors of &lt;a href=&quot;https://github.com/hpi-swa/smalltalkCI&quot;&gt;smalltalkCI&lt;/a&gt; for their incredible work!&lt;/p&gt;
+
+&lt;p&gt;Thanks &lt;a href=&quot;https://github.com/fuhrmanator&quot;&gt;C. Fuhrman&lt;/a&gt; for the typos fixes. :banana:&lt;/p&gt;</content><author><name>Benoît &quot;badetitou&quot; Verhaeghe</name></author><category term="misc" /><category term="pharo" /><summary type="html">Introduction</summary></entry><entry><title type="html">Download musics from Google Play Music</title><link href="http://badetitou.github.io/misc/pharo/ffi/2020/06/19/Download-music/" rel="alternate" type="text/html" title="Download musics from Google Play Music" /><published>2020-06-19T10:00:00+00:00</published><updated>2020-06-19T10:00:00+00:00</updated><id>http://badetitou.github.io/misc/pharo/ffi/2020/06/19/Download%20music</id><content type="html" xml:base="http://badetitou.github.io/misc/pharo/ffi/2020/06/19/Download-music/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://play.google.com/music/&quot;&gt;Google Play Music (GPM)&lt;/a&gt; is a service proposed by Google to listen musics online (like Spotify, Deezer, …).
+Having a premium subscription, I can listen a lot of music by using the online service, but when I have no internet connection… I cannot :-( .
+So I wanted to download the music ^^.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;This might be illegal, so, I used this situation to explain the process to use Pharo to download musics from GPM
+but you &lt;strong&gt;must not&lt;/strong&gt; use this for real.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;approach&quot;&gt;Approach&lt;/h2&gt;
+
+&lt;p&gt;My idea is simple: if I can listen to musics from my computer, it means my computer has to download the music.
+I know that musics coming from GPM are in the mp3 format.
+So the process to download the music is simple:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Access my GPM library&lt;/li&gt;
+  &lt;li&gt;For each music download the corresponding mp3 file.&lt;/li&gt;
+  &lt;li&gt;Set the metadata of each music&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;access-my-gpm-library&quot;&gt;Access my GPM library&lt;/h3&gt;
+
+&lt;p&gt;There is no official API for GPM service, however, a the &lt;a href=&quot;https://unofficial-google-music-api.readthedocs.io/en/latest/&quot;&gt;gmusicapi&lt;/a&gt; python project has been developed to create an unofficial API.
+This API allows us to access every element of our GPM library.&lt;/p&gt;
+
+&lt;p&gt;I’m not that good in Python, but I know it is possible to control python over Pharo.
+So I decided to use the &lt;a href=&quot;https://github.com/aranega/pybridge&quot;&gt;pybridge&lt;/a&gt; project of &lt;a href=&quot;https://github.com/aranega&quot;&gt;Vincent Aranega&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;PyBridge allows us to use python language in Pharo.
+So, I’ll use it to load and use the unofficial GPM API.&lt;/p&gt;
+
+&lt;h4 id=&quot;set-up-pybridge&quot;&gt;Set up PyBridge&lt;/h4&gt;
+
+&lt;p&gt;PyBridge is currently a work in progress and consequently asks a bit of a SetUp.
+One needs to download the server project and the Pharo client project.&lt;/p&gt;
+
+&lt;p&gt;For the &lt;a href=&quot;https://github.com/aranega/pybridge&quot;&gt;Pharo client project&lt;/a&gt;, it is super easy.
+I only need to download the project from GitHub and install the baseline:&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;Metacello&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;baseline:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'PyBridge'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;repository:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'github://aranega/pybridge/src'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;load&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;For the &lt;a href=&quot;https://github.com/aranega/pybridge&quot;&gt;Server project&lt;/a&gt;, the project is inside the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;python&lt;/code&gt; branch of the git repository.
+It requires &lt;a href=&quot;https://pypi.org/project/pipenv/&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pipenv&lt;/code&gt;&lt;/a&gt; to simply setup python virtual environments.
+So clone it in another folder and create a virtualenv by doing a simple:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pipenv &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then, install the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gmusicapi&lt;/code&gt; and run the server by executing the following commands:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pipenv shell
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;pybridge&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;gmusicapi
+&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;pybridge&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;python server.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Congratulations! You have correctly set up &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PyBridge&lt;/code&gt; to use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gmusicapi&lt;/code&gt; library!&lt;/p&gt;
+
+&lt;h3 id=&quot;log-in-gpm&quot;&gt;Log in GPM&lt;/h3&gt;
+
+&lt;p&gt;Before using the library, I need to log in inside GPM.
+To do so, I will use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gmusicapi&lt;/code&gt;.
+The usage of the python library in Pharo is pretty forward as PyBridge exposes python objects in a Smalltalk fashion.&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; mobileClient api &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;&quot;Access to the API class&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;mobileClient&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PyBridge&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;load:&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'gmusicapi::Mobileclient'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&quot;Create a new instance&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;api&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mobileClient&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;&quot;Create authentification key&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;api&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;perform_oauth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&quot;This step must be done only once by GPM account to get a oauth key.&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;&quot;Login using oauth key&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;api&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;oauth_login:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'XXXXX'&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&quot;XXXXX is my private key ^-^&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Nice! I have now a full access to the GPM API using PyBridge and Pharo.&lt;/p&gt;
+
+&lt;h2 id=&quot;download-mp3-files&quot;&gt;Download mp3 files&lt;/h2&gt;
+
+&lt;p&gt;GPM does not allow the users to download music.
+However, it is possible to ask for the audio stream in a mp3 format.
+I will use this to download the files ^-^.&lt;/p&gt;
+
+&lt;p&gt;In the following, I will present an example to download the album &lt;a href=&quot;https://en.wikipedia.org/wiki/Hypnotize_(album)&quot;&gt;&lt;em&gt;Hypnotize&lt;/em&gt; of &lt;em&gt;System Of A Down&lt;/em&gt;&lt;/a&gt;.
+The album is in my GPM library so I can retrieve it in “my songs”.&lt;/p&gt;
+
+&lt;p&gt;To download the musics, I will access to all my musics libraries, select the music that belongs to the album, and then download the musics.&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&quot;access to all my songs&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;library&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;api&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get_all_songs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&quot;get_all_songs is part of the python library&quot;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;
+
+&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;to:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;library&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;do:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&quot;take care with index in python&quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; music &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;music&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;library&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;at:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;music&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;at:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;#album&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;literalValue&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;beginsWith:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'Hypnotize'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&quot;is the music at index part of the album?&quot;&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;ifTrue:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;fileRef&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;|&lt;/span&gt;
+            &lt;span class=&quot;nv&quot;&gt;fileRef&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/home/user/music'&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;asFileReference&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;music&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;at:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;#title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'.mp3'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)).&lt;/span&gt;
+            &lt;span class=&quot;nv&quot;&gt;fileRef&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;binaryWriteStreamDo:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;mp3WriteStream&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ZnEasy&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;api&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get_stream_url:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;music&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;at:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;#id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;writeOn:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;mp3WriteStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&quot;download the file&quot;&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I have now download all the music of the album.
+To summary:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Pharo asks for all songs to Python&lt;/li&gt;
+  &lt;li&gt;Then Pharo iterates on the Pyhton Map to select the correct musics.&lt;/li&gt;
+  &lt;li&gt;It asks to Python the URL stream for a Music&lt;/li&gt;
+  &lt;li&gt;And it uses Zinc to download the music and creates the mp3 file.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;set-the-metadata&quot;&gt;Set the metadata&lt;/h2&gt;
+
+&lt;p&gt;Our strategy works pretty well but the metadata of the mp3 files are not set.
+It can not be a problem but it is preferable when using a music manager (such as Clementine, Music Bee, Itunes, …).
+So, I will use VLC to set the metadata of our file.
+It is possible to use VLC through Pharo using the &lt;a href=&quot;https://github.com/badetitou/Pharo-LibVLC&quot;&gt;Pharo-LibVLC project&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;set-up-pharo-libvlc&quot;&gt;Set Up Pharo LibVLC&lt;/h3&gt;
+
+&lt;p&gt;Installing the FFI binding of VLC for Pharo is easy.
+You need to: (1) install &lt;a href=&quot;https://www.videolan.org/&quot;&gt;VLC&lt;/a&gt;, and (2) install Pharo-LibVLC.&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;Metacello&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;baseline:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'VLC'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;repository:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'github://badetitou/Pharo-LibVLC'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then, it is possible to use VLC in Pharo after initializing it.&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;vlc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;VLCLibrary&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;uniqueInstance&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;createVLCInstance&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;set-the-metadata-1&quot;&gt;Set the metadata&lt;/h3&gt;
+
+&lt;p&gt;Inside the previous script, I insert the code to set metadata using VLC.
+First, I create a reference to the mp3 file for VLC, then I set the metadata using VLC API.&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; media &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;media&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;vlc&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;createMediaFromPath:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;fileRef&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;fullName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&quot;create mp3 reference for VLC&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;media&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setMeta:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;VLCMetaT&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;libvlc_meta_Album&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;with:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;music&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;at:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;#album&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;literalValue&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;asString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;media&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setMeta:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;VLCMetaT&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;libvlc_meta_Title&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;with:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;music&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;at:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;#title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;literalValue&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;asString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;media&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;saveMeta&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;media&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;release&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In the example, I only set “album” and “title” attribute but it is possible to set &lt;a href=&quot;https://unofficial-google-music-api.readthedocs.io/en/latest/reference/mobileclient.html#songs&quot;&gt;more metadata&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;I have used Zinc, VLC, and Python with a Python library to download musics for Google Play Music service.
+It shows how easy it is to use Pharo with other programming languages
+    and I hope it will help you to create many super cool projects.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;I REMIND YOU THAT THIS WORK MIGHT NOT BE LEGAL SO CONSIDER IT ONLY AS AN EXAMPLE!&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</content><author><name>Benoît &quot;badetitou&quot; Verhaeghe</name></author><category term="misc" /><category term="pharo" /><category term="ffi" /><summary type="html">Introduction</summary></entry><entry><title type="html">Testing UFFI Binding with Travis</title><link href="http://badetitou.github.io/misc/2020/06/06/Testing-Uffi/" rel="alternate" type="text/html" title="Testing UFFI Binding with Travis" /><published>2020-06-06T06:00:00+00:00</published><updated>2020-06-06T06:00:00+00:00</updated><id>http://badetitou.github.io/misc/2020/06/06/Testing-Uffi</id><content type="html" xml:base="http://badetitou.github.io/misc/2020/06/06/Testing-Uffi/"></content><author><name>Benoît &quot;badetitou&quot; Verhaeghe</name></author><category term="misc" /><summary type="html"></summary></entry><entry><title type="html">Collect users’ data</title><link href="http://badetitou.github.io/misc/pharo/data/2019/10/17/EventCollect/" rel="alternate" type="text/html" title="Collect users’ data" /><published>2019-10-17T10:00:00+00:00</published><updated>2019-10-17T10:00:00+00:00</updated><id>http://badetitou.github.io/misc/pharo/data/2019/10/17/EventCollect</id><content type="html" xml:base="http://badetitou.github.io/misc/pharo/data/2019/10/17/EventCollect/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;Few years ago, I wanted to collect data from Pharo users (see &lt;a href=&quot;/projects/TUA/TUA&quot;&gt;Tests Usage Analyser&lt;/a&gt;).
+I was like, &lt;em&gt;Hmm, how can I do that? Do we already have such tool? :thinking:&lt;/em&gt;.
+And &lt;strong&gt;YES&lt;/strong&gt;!
+We can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GTEventCollector&lt;/code&gt;.
+You probably have used it already through the privacy settings.&lt;/p&gt;
+
+&lt;p&gt;In this post, I’ll explain how to set up your own data collector and how to use it.
+Then, we’ll see how to extract the data.&lt;/p&gt;
+
+&lt;h2 id=&quot;add-a-new-event-collector&quot;&gt;Add a new Event Collector&lt;/h2&gt;
+
+&lt;h3 id=&quot;preparation&quot;&gt;Preparation&lt;/h3&gt;
+
+&lt;p&gt;The first step to collect data is to create a new instance of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GTEventCollector&lt;/code&gt;.
+It is this instance that will be used to send new data.
+We can also use the subclass &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GTEventCollector&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Let’s create a new instance:&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;eventCollector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;GTEventCollector&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Creating a collector is not enough.
+It needs to be configured to be completely operational.
+In particular, we need to register it in the GTRecorder.
+This object has the responsibility to send the data to the server that will gather the data.&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;eventCollector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;GTEventCollector&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;register&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Once the event collector is created, we can customize it for our records.
+We can change multiple properties: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#url:&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#category:&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#occupent:&lt;/code&gt;.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#url:&lt;/code&gt; is the server website. The default one is: &lt;em&gt;http://gc.dcc.uchile.cl.:8080/gt/events&lt;/em&gt;. We may want to change it for security or privacy purpose.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#category:&lt;/code&gt; is used to group your data in a specific directory in the server. It is useful to analyse only the data of your application. In my case, I used the category &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#testsUsageAnalyserEvents&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#occupent:&lt;/code&gt; is an instance of any object. When it is removed by the GC, the recorder unregisters the collector. So, using an occupent is a good idea to keep only one instance of the recorder instead of creating a new one each time. In my case, I use an instance of &lt;a href=&quot;https://github.com/pharo-open-documentation/pharo-wiki/blob/master/PharoProjects/Announcer.md&quot;&gt;Announcer&lt;/a&gt;, so the collector exists until the ‘Announce’ instance is removed from the memory.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;At the end, we have the following code to create a collector:&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;eventCollector&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;GTEventCollector&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;occupant:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TUAAnnouncer&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;uniqueInstance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;category:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;#testsUsageAnalyserEvents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;register&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;yourself&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;collect-data&quot;&gt;Collect data&lt;/h3&gt;
+
+&lt;p&gt;Once the event collector is created, we can use it to record data and send them to a server.
+First, we need to learn how to create a data format.
+It is simple since, by default, the recorder uses &lt;a href=&quot;https://github.com/pharo-open-documentation/pharo-wiki/blob/master/ExternalProjects/Export/JSON.md&quot;&gt;Ston&lt;/a&gt; as a format to send the data.
+So we can use nearly everything.&lt;/p&gt;
+
+&lt;p&gt;To collect new data, we can use both &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#add: anEvent&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#addIfAvailable: anEvent&lt;/code&gt;.
+However, we should use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#addIfAvailable:&lt;/code&gt; because it will check users have accepted to send their data.
+Unless you don’t care about privacy :smiling_imp:?&lt;/p&gt;
+
+&lt;p&gt;So, let’s add a simple data:&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;eventCollector&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;addIfAvailable:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;42&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In my previous work, I wanted to record more complex data.
+A good way to do it is to use dictionary.
+In the following, I present an example using dictionary created from an Announcement.&lt;/p&gt;
+
+&lt;p&gt;First, I created a method in TUAAnnouncement (it is a subclass of Announcement for my project) that adds my data to a dictionary.&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;TUAAnnouncement&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;#dataForTestUsageAnalyser&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;^&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;super&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;dataForTestUsageAnalyser&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;at:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;#class&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;put:&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;at:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;#entity&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;put:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;entity&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&quot;this is the content of my announcement&quot;&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;at:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;#dataVersion&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;put:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&quot;this is the version of my data, so I can select the data from a specific version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;yourself&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The method is also understood by Object itself (to avoid bugs).&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;#dataForTestUsageAnalyser&lt;/span&gt;
+
+  &lt;span class=&quot;o&quot;&gt;^&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Dictionary&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;new&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Finally, when I want to record an announcement, I use a method &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#recordAnnouncement:&lt;/code&gt; that takes an announcement and records some entries in the dictionary and adds them to the collector.&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nf&quot;&gt;recordAnnouncement:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;anAnnouncement&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;anAnnouncement&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;respondsTo:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;#dataForTestUsageAnalyser&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ifTrue:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;eventCollector&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;addIfAvailable:&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;anAnnouncement&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;dataForTestUsageAnalyser&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&quot;get a dictionary from the announcement&quot;&lt;/span&gt;
+                &lt;span class=&quot;nf&quot;&gt;at:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;#type&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;put:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;anAnnouncement&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&quot;some meta data I used&quot;&lt;/span&gt;
+                &lt;span class=&quot;nf&quot;&gt;at:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;#timestamps&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;put:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;DateAndTime&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&quot;Useful to determine the creation date of an entry&quot;&lt;/span&gt;
+                &lt;span class=&quot;nf&quot;&gt;yourself&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+                    &lt;span class=&quot;nf&quot;&gt;on:&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Error&lt;/span&gt;
+                    &lt;span class=&quot;nf&quot;&gt;do:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;error&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&quot;blabla&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;extract-the-data&quot;&gt;Extract the data&lt;/h2&gt;
+
+&lt;p&gt;Once the data has been collected, we need to download them from the server.
+By default, all the data can be downloaded at &lt;a href=&quot;http://gc.dcc.uchile.cl/&quot;&gt;http://gc.dcc.uchile.cl/&lt;/a&gt;.
+If everything goes well, we can now see your category in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gt/events/&amp;lt;myCategory&amp;gt;&lt;/code&gt;.
+In my case, we have data in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gt/events/testsUsageAnalyserEvents&lt;/code&gt;
+The data are sort by month.&lt;/p&gt;
+
+&lt;p&gt;To analyse the data, the first step is to open a Pharo image.
+Then, we can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GTEventTool&lt;/code&gt; to unpack our data in the Pharo memory and analyse it.&lt;/p&gt;
+
+&lt;p&gt;The tool comes with methods to download and extract the data.&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;GTEventTool&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ensureLocalDirectory&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&quot;download the data and extract them (from the archive)&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;When the data is downloaded, we can load it in Pharo.&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;GTEventTool&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;unpackAll&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&quot;unpack all the data&quot;&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;GTEventTool&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;unpackAll:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'./gt/events/testsUsageAnalyserEvents'&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;asFileReference&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&quot;unpack the data in testsUsageAnalyserEvents&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;However, we already have a lot of data (~1Go).
+If you want to go faster, I’ve created some helpers.&lt;/p&gt;
+
+&lt;p&gt;The method &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unpackDirectory:&lt;/code&gt; will do the first step of unpacking and can be executed on only one directory.&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nf&quot;&gt;unpackDirectory:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;aStringPath&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;^&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;GTEventUnpacking&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;unpackDirectory:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;aStringPath&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;asFileReference&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The method &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unpackedCollectionOfGTEvent:&lt;/code&gt; will take a collection of GTEvent, which is the return of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unpackDirectory:&lt;/code&gt; and convert each entry into the real data.&lt;/p&gt;
+
+&lt;div class=&quot;language-st highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nf&quot;&gt;unpackedCollectionOfGTEvent:&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;aCollectionOfGTEvent&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;^&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;aCollectionOfGTEvent&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;flatCollect:&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;#safeUnpackedData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We can now analyze the data.&lt;/p&gt;</content><author><name>Benoît &quot;badetitou&quot; Verhaeghe</name></author><category term="misc" /><category term="pharo" /><category term="data" /><summary type="html">Introduction</summary></entry></feed>
