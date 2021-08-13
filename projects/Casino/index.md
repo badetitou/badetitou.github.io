@@ -23,9 +23,9 @@ Here is a diagram showing the migration steps implemented by Casino.
 
 ### Full Widgets meta-model
 
-![Full widgets metamodel](img/Metamodels-Widgets-full.svg){: .img-fill }
+![Full widgets metamodel](https://raw.githubusercontent.com/badetitou/Casino/v2-doc/full.svg){: .img-fill }
 
-[Download the metamodel](img/Metamodels-Widgets-full.svg)
+[Download the metamodel](https://raw.githubusercontent.com/badetitou/Casino/v2-doc/full.svg)
 
 ## Current results
 
