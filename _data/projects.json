@@ -3,6 +3,7 @@
         "title": "VSCode - Pharo",
         "githubLink": "https://github.com/badetitou/vscode-pharo",
         "description": "I am a VSCode extension to support Pharo programming language",
+        "webLink": "https://marketplace.visualstudio.com/items?itemName=badetitou.pharo-language-server",
         "docLink": "/projects/VSCode-Pharo/"
     },
     {

@@ -35,16 +35,22 @@ description: 'PHD Student'
                 {% for experience in site.data.experience %}
 
                 <div class="row">
-                    <div class="col m4 s12">
+                    <div class="col m12 s12">
                         <h4 style="margin-top: 0px">{{ experience.company }}</h4>
-                        <div>{{ experience.job_title }}</div>
-                        <a style="font-style: italic" target="_blank"
-                            href="{{ experience.link }}">{{ experience.link }}</a>
-                        <div>{{ experience.dates }}</div>
+                        <a style="font-style: italic" target="_blank" href="{{ experience.link }}">{{ experience.link }}</a>
                     </div>
-                    <div class="col m8 s12">
-                        {% for description in experience.description %} {{ description |
-              markdownify }} {% endfor %}
+                    <div class= "col m12 s12">
+                        {% for job in experience.jobs %}
+                        <div class="row">    
+                            <div class="col m4 s12">
+                                <div>{{ job.job_title }}</div>
+                                <div>{{ job.dates }}</div>
+                            </div>
+                            <div class="col m8 s12">
+                                {% for description in job.description %} {{ description | markdownify }} {% endfor %}
+                            </div>
+                        </div>
+                        {% endfor %}
                     </div>
                 </div>
                 {% if forloop.last == false %}
