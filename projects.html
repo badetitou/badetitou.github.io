@@ -52,6 +52,14 @@ title: "Projects"
                         </span>
                     </a>
                     {% endif %}
+                    {% if project.youtubeLink %}
+                    <a href="{{ project.youtubeLink }}">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fab fa-youtube fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -105,6 +113,14 @@ title: "Projects"
                         <span class="fa-stack fa-lg">
                             <i class="fa fa-circle fa-stack-2x"></i>
                             <i class="fab fa-android fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </a>
+                    {% endif %}
+                    {% if project.youtubeLink %}
+                    <a href="{{ project.youtubeLink }}">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fab fa-youtube fa-stack-1x fa-inverse"></i>
                         </span>
                     </a>
                     {% endif %}

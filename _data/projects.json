@@ -22,14 +22,15 @@
     {
         "title": "Pharo Media Center",
         "githubLink": "https://github.com/badetitou/EMM",
-        "description": "Pharo Media Center is a Media center written in Pharo using VLC as backend and Seaside/MaterialDesign as Front-end"
+        "description": "Pharo Media Center is a Media center written in Pharo using VLC as backend and Seaside/MaterialDesign as Front-end",
+        "youtubeLink": "https://youtu.be/41cP6vWnGo8"
     },
     {
         "title": "SmartTest",
         "githubLink": "https://github.com/badetitou/SmartTest",
-        "description": "SmartTest is an application written in Pharo.
-        The aim is to provide a tool that will help the developer to run the \"good\" tests during their code session.",
-        "docLink": "/projects/SmartTest/"
+        "description": "SmartTest is an application written in Pharo.The aim is to provide a tool that will help the developer to run the \"good\" tests during their code session.",
+        "docLink": "/projects/SmartTest/",
+        "youtubeLink": "https://youtu.be/jAvfdN2z5-s"
     },
     {
         "title": "Carrefour",
