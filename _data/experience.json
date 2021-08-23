@@ -30,7 +30,7 @@
                 "dates": "May 2017 - Sept 2017",
                 "quote": "Testing applications",
                 "description": [
-                    "- Learning the Pharo programming language\n- Understanding tests selection\n- Developing an automatic tests selection tool\n- Test the tool with the Pharo community\n- Integration of the tool in the Pharo core\n- Writing research paper",
+                    "- Learning the Pharo programming language\n- Understanding tests selection\n- Developing an automatic tests selection tool\n- Test the tool with the Pharo community\n- Integration of the tool in the Pharo core\n- Writing research paper"
                 ]
             }
         ]
