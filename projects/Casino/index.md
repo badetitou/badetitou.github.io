@@ -76,6 +76,25 @@ However, you can help us! :smile:
 
 To use Casino, we must use a [Moose 8 image](https://moosetechnology.github.io/moose-wiki/Beginners/InstallMoose.html).
 
+## Publications
+
+### Journal Articles
+
+<div class="masonry masonry-2">
+
+{% bibliography --query @article[project=casino] %}
+
+</div>
+
+### Conference Articles
+
+<div class="masonry masonry-2">
+
+
+{% bibliography --query @inproceedings[project=casino] %}
+
+</div>
+
 ## Contact
 
 [contact me](mailto:badetitou@gmail.com)
