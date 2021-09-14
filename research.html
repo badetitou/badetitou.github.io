@@ -6,8 +6,10 @@ header-img: "img/contact-bg.jpg"
 
 <div class="row">
   <div class="col s12 m12">
-
-    {% bibliography %}
+    
+    {% bibliography --query @article %}
+    
+    {% bibliography --query @inproceedings %}
 
   </div>
 </div>
