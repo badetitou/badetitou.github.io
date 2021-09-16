@@ -9,17 +9,6 @@ $secondary: #007bff;
 $secondary-light: #68b1ff;
 $secondary-text: #000000;
 
-[data-theme="dark"] {
-  $dark: #000000;
-  $primary: #262626;
-  $primary-text: #ffffff;
-
-  $secondary-dark: #a70f24;
-  $secondary: #df4c4c;
-  $secondary-light: #ff7e78;
-  $secondary-text: #000000;
-}
-
 @import 'variables';
 @import 'm-grid';
 @import 'm-navbar';
@@ -263,7 +252,7 @@ a {
 
 [data-theme="dark"] {
   
-  $dark: #000000;
+  $dark: #303030;
   $primary: #262626;
   $primary-text: #ffffff;
 
@@ -271,6 +260,9 @@ a {
   $secondary: #df4c4c;
   $secondary-light: #ff7e78;
   $secondary-text: #000000;
+  
+  $m-box-shadow : 0 0 0 1px #595959;
+
   @import 'variables';
   @import 'm-grid';
   @import 'm-navbar';
@@ -281,6 +273,17 @@ a {
   @import 'm-card';
   @import 'm-accordion';
   
+  .card:hover {
+    box-shadow: 0 10px 20px rgba(89,89,89,.80), 0 4px 8px rgba(89,89,89,.06);
+  }
+
+  .accordion {
+   
+    &:hover {
+      box-shadow: 0 10px 20px rgba(89,89,89,.80), 0 4px 8px rgba(89,89,89,.06);
+    }
+  }
+
   body {
     background-color: $dark;
     color: $primary-text;
