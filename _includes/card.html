@@ -5,40 +5,29 @@
                 {{ include.title }}
             </div>
             {{ include.description }}
-
-
-
             <div class="card-action">
                 {% if include.githubLink %}
                 <a href="{{ include.githubLink }}">
-                    <span class="fa-stack fa-lg">
-                        <i class="fa fa-circle fa-stack-2x"></i>
-                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                    </span>
+                    <i class="fab fa-github"></i>
+                    GitHub
                 </a>
                 {% endif %}
                 {% if include.docLink %}
                 <a href="{{ include.docLink }}">
-                    <span class="fa-stack fa-lg">
-                        <i class="fa fa-circle fa-stack-2x"></i>
-                        <i class="fas fa-book-open fa-stack-1x fa-inverse"></i>
-                    </span>
+                    <i class="fas fa-book-open"></i>
+                    Documentation
                 </a>
                 {% endif %}
                 {% if include.slides %}
-                <a href="{{ include.slides }}">
-                    <span class="fa-stack fa-lg">
-                        <i class="fa fa-circle fa-stack-2x"></i>
-                        <i class="fas fa-chalkboard fa-stack-1x fa-inverse"></i>
-                    </span>
+                <a class="m-button" href="{{ include.slides }}">
+                    <i class="fas fa-chalkboard"></i>
+                    Slides
                 </a>
                 {% endif %}
                 {% if include.tp %}
-                <a href="{{ include.tp }}">
-                    <span class="fa-stack fa-lg">
-                        <i class="fa fa-circle fa-stack-2x"></i>
-                        <i class="fas fa-terminal fa-stack-1x fa-inverse"></i>
-                    </span>
+                <a class="m-button" href="{{ include.tp }}">
+                    <i class="fas fa-terminal"></i>
+                    TP 
                 </a>
                 {% endif %}
             </div>

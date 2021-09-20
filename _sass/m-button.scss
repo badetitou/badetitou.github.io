@@ -3,6 +3,8 @@
     border-radius: $m-border-radius;
     border: 1px solid $secondary;
     padding: 7px;
+    display: inline-block;
+    margin: 3px;
 
     &:hover {
         text-decoration: none;
