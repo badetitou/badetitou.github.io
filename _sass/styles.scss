@@ -7,7 +7,7 @@ $primary-text: #000000;
 $secondary-dark: #0062cc;
 $secondary: #007bff;
 $secondary-light: #68b1ff;
-$secondary-text: #000000;
+$secondary-text: #fff;
 
 @import 'variables';
 @import 'm-grid';
@@ -19,6 +19,7 @@ $secondary-text: #000000;
 @import 'm-card';
 @import 'm-slider';
 @import 'm-accordion';
+@import 'm-button';
 
 html {
 
@@ -186,25 +187,6 @@ a {
   list-style: none;
 }
 
-.pager li > a,
-.pager li > span {
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  text-transform: uppercase;
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  padding: 10px 5px;
-  background-color: white;
-  border-radius: 50em;
-  transition: 0.4s;
-  border: 1px solid #007bff;
-
-  @media only screen and (min-width: 768px) {
-    font-size: 14px;
-    padding: 15px 25px;
-  }
-}
-
 .table-responsive {
   overflow-x: unset;
   img {
@@ -212,15 +194,6 @@ a {
     height: auto;
 
   }
-}
-
-.pager li > a:hover,
-.pager li > a:focus {
-  text-decoration: none;
-  color: white;
-  background-color: #007bff;
-  transition: color 0.3s ease;
-  transition: background-color 0.3s ease;
 }
 
 .intro-header {
@@ -272,6 +245,7 @@ a {
   @import 'masonry';
   @import 'm-card';
   @import 'm-accordion';
+  @import 'm-button';
   
   .card:hover {
     box-shadow: 0 10px 20px rgba(89,89,89,.80), 0 4px 8px rgba(89,89,89,.06);
@@ -322,24 +296,6 @@ a {
     a:focus {
       color: $secondary-dark;
       transition: color 0.3s ease;
-    }
-
-    .pager li > a:hover,
-    .pager li > a:focus {
-      border: 1px solid $secondary-dark;
-      background-color: $secondary-dark;
-      color: $primary-text;
-      transition: color 0.3s ease;
-      transition: background-color 0.3s ease;
-    }
-
-    .pager li > a,
-    .pager li > span {
-      border: 1px solid $secondary-dark;
-      background-color: $dark;
-      color: $secondary-dark;
-      transition: color 0.3s ease;
-      transition: background-color 0.3s ease;
     }
 
     .sidenav {

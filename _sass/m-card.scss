@@ -175,12 +175,7 @@ $element-bottom-margin: 8pt;
     padding: 16px $card-padding;
 
     a:not(.btn):not(.btn-large):not(.btn-floating) {
-      color: $secondary;
       margin-right: $card-padding;
-      transition: color .3s ease;
-      text-transform: uppercase;
-
-      &:hover { color: $secondary-light; }
     }
   }
 

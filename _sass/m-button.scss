@@ -1,0 +1,16 @@
+.m-button {
+    text-decoration: none;
+    border-radius: $m-border-radius;
+    border: 1px solid $secondary;
+    padding: 7px;
+
+    &:hover {
+        text-decoration: none;
+        border: 1px solid $secondary-dark;
+        background-color: $secondary-dark;
+        color: #fff;
+        transition: color 0.3s ease;
+        transition: background-color 0.3s ease;
+    }
+
+}
