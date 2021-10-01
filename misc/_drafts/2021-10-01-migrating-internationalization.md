@@ -2,6 +2,7 @@
 author: Benoît "badetitou" Verhaeghe
 layout: post
 title: "Migrating internationalization file"
+subtitle: "A nice MDE example"
 date:   2021-10-01 12:00:00 +200
 categories: Pharo Model
 ---
@@ -131,7 +132,7 @@ PP2CompositeNode << #CS18NPropertiesParser
 ```
 
 Then, I defined the parsing rules.
-Using PetitParser2, each rule correspond to a method.
+Using PetitParser2, each rule corresponds to a method.
 
 First, `start` is the entry point.
 
@@ -154,13 +155,12 @@ pairs
 The first part of this method (before `==>`) corresponds to the rule parsed.
 The second part (after `==>`), to the production.
 
-The first part try to parse one or several`comment`.
-Then, it parses one `pair`.
-Followed by list of `comment`, `newline`, and `pair`.
+The first part tries to parse one or several `comment`.
+Then, it parses one `pair` followed by a list of `comment`, `newline`, and `pair`.
 
 ![](https://mermaid.ink/svg/eyJjb2RlIjoiZmxvd2NoYXJ0IExSXG4gICAgQ29tbWVudCAtLT4gUFtcIlBhaXJcIl1cbiAgICBQIC0tPiBDW1wiQ29tbWVudC9OZXcgTGluZVwiXVxuICAgIHN1YmdyYXBoIHN0YXJcbiAgICBDIC0tPiBQYWlyXG4gICAgZW5kXG4gICAgUGFpciAtLT4gRU5EXG4gICIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In0sInVwZGF0ZUVkaXRvciI6ZmFsc2UsImF1dG9TeW5jIjp0cnVlLCJ1cGRhdGVEaWFncmFtIjpmYWxzZX0)
 
-> This parser is clearly not perfect, and would require some improvment.
+> This parser is clearly not perfect and would require some improvement.
 > Nevertheless, it does work for our context.
 
 The second part produces a collection (*i.e.* a list) of the `pair`.
@@ -171,7 +171,7 @@ Now that we can parse one file, we can build a I18N model.
 To do so, we will first parse every `.properties` file.
 For each file, we extract the `language` and the `namespace` based on the file name.
 Thus, `EditerMessages_fr.properties` is the file for the `fr` language and the `EditerMessages` namespace.
-Then, for each entry of this file, we instanciates an entry in our model inside the namescpace and with the correct language attached.
+Then, for each file entry, we instantiate an entry in our model inside the namespace and with the correct language attached.
 
 ```st
 importString: aString
@@ -201,10 +201,76 @@ importString: aString
 ```
 
 After performing the import, we get a model with, for each namespace, several entries.
-Each entry have a key, and several values.
-Each value is attached with the language.
+Each entry has a key and several values.
+Each value is attached to the language.
 
 ## JSON exporter
+
+To perform the JSON export, I used the [NeoJSON project](https://github.com/svenvc/NeoJSON).
+NeoJSON allows one to create a custom encoder.
+
+For the export, we first select a language.
+Then, we build a dictionnary with all the namespaces:
+
+```st
+rootDic := Dictionary new.
+    (model allWithType: CS18NNamespace)
+        select: [ :namespace | namespace namespace isNil ]
+        thenDo: [ :namespace | rootDic at: namespace name put: namespace ].
+```
+
+To export a namespace (*i.e.*, a `CS18NNamespace`), I define a custom encoder:
+
+```st
+writter for: CS18NNamespace customDo: [ :mapper | 
+    mapper encoder: [ :namespace | (self constructNamespace: namespace) asDictionary 
+        ] 
+    ].
+```
+
+```st
+constructNamespace: aNamespace
+    | dic |
+    dic := Dictionary new.
+    aNamespace containables do: [ :containable | 
+        (containable isKindOf: CS18NNamespace)
+            ifTrue: [ dic at: containable name put: (self constructNamespace: containable) ]
+            ifFalse: [ "should be an CS18NEntry" 
+                dic at: containable key name put: (containable values detect: [ :value | value language = language ] ifOne: [ :value | value name ] ifNone: [ '' ]) ] ].
+    ^ dic
+```
+
+The custom encoder consists on converting a `Namespace` into a dictionary of entries with the entries keys and their values in the selected language.
+
+## Perform the migration
+
+Once my importer and exporter are designed, I can perform the migration.
+To do so, I use a little script.
+It creates a model of I18N, import several `.properties` file entries in the model, and export the Arabic entries in a JSON file.
+
+```st
+"Create a model"
+i18nModel := CS18NModel new.
+
+"Create an importer"
+importer := CS18NPropertiesImporter new.
+importer model: i18nModel.
+
+"Import all entries from the <myProject> folder" 
+('D:\dev\myProject\' asFileReference allChildrenMatching: '*.properties') do: [ :fileRef | 
+    self record: fileRef absolutePath basename.
+    importer importFile: fileRef.
+].
+
+"export the arabian JSON I18N file"
+'D:/myFile-ar.json' asFileReference writeStreamDo: [ :stream |
+    CS18NPropertiesExporter new
+        model: importer model;
+        stream: stream;
+        language: ((importer model allWithType: CS18NLanguage) detect: [ :lang | lang shortName = 'ar' ]);
+        export
+]
+```
 
 ## Ressource
 
