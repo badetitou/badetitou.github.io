@@ -246,7 +246,7 @@ The custom encoder consists on converting a `Namespace` into a dictionary of ent
 
 Once my importer and exporter are designed, I can perform the migration.
 To do so, I use a little script.
-It creates a model of I18N, import several `.properties` file entries in the model, and export the Arabic entries in a JSON file.
+It creates a model of I18N, imports several `.properties` file entries in the model, and exports the Arabic entries in a JSON file.
 
 ```st
 "Create a model"
