@@ -53,7 +53,7 @@ classerPar=تصنيف حسب
 ```
 
 As a target, I need **only one JSON file** per language.
-Thus, the file for the french translation look like this:
+Thus, the file for the french translation looks like this:
 
 ```json
 {
