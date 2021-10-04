@@ -15,7 +15,7 @@ During my Ph.D. [migration project]({{ "/projects/Casino" | absolute_url }}), I 
 
 These elements are the main ones.
 When *perfectly* considered, you can migrate the front-end of any application.
-But, you are missing some other stuff :smile:
+But, we are missing some other stuff :smile:
 For example, how do you migrate i18N files?
 
 In this post, I'll present how to build a simple migration tool to migrate I18N files from `.properties` (used by Java) to `.json` format (used by Angular).
