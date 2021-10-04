@@ -210,7 +210,7 @@ To perform the JSON export, I used the [NeoJSON project](https://github.com/sven
 NeoJSON allows one to create a custom encoder.
 
 For the export, we first select a language.
-Then, we build a dictionnary with all the namespaces:
+Then, we build a dictionary with all the namespaces:
 
 ```st
 rootDic := Dictionary new.
