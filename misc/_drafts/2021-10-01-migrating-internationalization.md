@@ -7,7 +7,7 @@ date:   2021-10-01 12:00:00 +200
 categories: Pharo Model
 ---
 
-During my Ph.D. [migration project]({{ "/projects/Casino" | absolute_url }}), I consider the migration of several GUI aspects: 
+During my Ph.D. [migration project]({{ "/projects/Casino" | absolute_url }}), I considered the migration of several GUI aspects: 
 
 - visual
 - behavioral
