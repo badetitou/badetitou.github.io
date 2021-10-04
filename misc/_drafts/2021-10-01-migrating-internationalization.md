@@ -105,7 +105,7 @@ Once the meta-model is designed, we must create an importer that takes `.propert
 
 To produce a model, I first look for a `.properties` parser without much success.
 Thus, I decided to create my own parser.
-Given a correctly formated file, the parser provides me the I18N entries.
+Given a correctly formatted file, the parser provides me the I18N entries.
 Then, by iterating on this collection, I build an I18N model.
 
 ### I18N parser
