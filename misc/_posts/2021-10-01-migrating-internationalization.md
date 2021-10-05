@@ -275,3 +275,20 @@ importer model: i18nModel.
 ## Ressource
 
 The meta-model, importer, and exporter are freely available in [GitHub](https://github.com/badetitou/Casino-I18N).
+
+<div class="masonry masonry-2">
+
+    <div class="text-center">
+        <a class="m-button" href="https://www.research-bl.com/2021/10/05/migrating-internationalization-files/" target="_blank">
+            Also published at *research-bl.com*
+            <i class="fas fa-external-link-alt"></i>
+        </a>
+    </div>
+
+    <div class="text-center">
+        <a class="m-button" href="https://modularmoose.org/2021/10/01/migrating-internationalization.html" target="_blank">
+            Also published at *modularmoose.org*
+            <i class="fas fa-external-link-alt"></i>
+        </a>
+    </div>
+</div>
