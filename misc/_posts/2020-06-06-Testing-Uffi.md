@@ -9,3 +9,10 @@ external_url: https://thepharo.dev/2020/07/06/testing-uffi-binding-with-travis/
 external_site: thepharo.dev
 comments: true
 ---
+
+<div class="text-center">
+    <a class="m-button" href="https://thepharo.dev/2020/07/06/testing-uffi-binding-with-travis/" target="_blank">
+        Also published at *thepharo.dev*
+        <i class="fas fa-external-link-alt"></i>
+    </a>
+</div>
