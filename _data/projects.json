@@ -1,6 +1,6 @@
 [
     {
-        "title": "Pharo Launcher Archlinux packaghe maintainer",
+        "title": "Pharo Launcher ArchLinux package maintainer",
         "githubLink": "https://github.com/pharo-project/pharo-archlinux/",
         "description": "I maintain the pharo launcher AUR package for Archlinux user",
         "webLink": "https://aur.archlinux.org/packages/pharo-launcher/"
