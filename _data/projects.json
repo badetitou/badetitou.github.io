@@ -1,5 +1,11 @@
 [
     {
+        "title": "Pharo Launcher Archlinux packaghe maintainer",
+        "githubLink": "https://github.com/pharo-project/pharo-archlinux/",
+        "description": "I maintain the pharo launcher AUR package for Archlinux user",
+        "webLink": "https://aur.archlinux.org/packages/pharo-launcher/"
+    },
+    {
         "title": "VSCode - Pharo",
         "githubLink": "https://github.com/badetitou/vscode-pharo",
         "description": "I am a VSCode extension to support Pharo programming language",
