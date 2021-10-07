@@ -1,13 +1,13 @@
 ---
 author: Benoît "badetitou" Verhaeghe
 layout: post
-title: "Migrating internationalization file"
+title: "Migrating internationalization files"
 subtitle: "A nice MDE example"
 date:   2021-10-01 12:00:00 +200
 categories: Pharo Model
 ---
 
-During my Ph.D. [migration project]({{ "/projects/Casino" | absolute_url }}), I consider the migration of several GUI aspects: 
+During my Ph.D. [migration project]({{ "/projects/Casino" | absolute_url }}), I considered the migration of several GUI aspects: 
 
 - visual
 - behavioral
@@ -15,7 +15,7 @@ During my Ph.D. [migration project]({{ "/projects/Casino" | absolute_url }}), I 
 
 These elements are the main ones.
 When *perfectly* considered, you can migrate the front-end of any application.
-But, you are missing some other stuff :smile:
+But, we are missing some other stuff :smile:
 For example, how do you migrate i18N files?
 
 In this post, I'll present how to build a simple migration tool to migrate I18N files from `.properties` (used by Java) to `.json` format (used by Angular).
@@ -53,7 +53,7 @@ classerPar=تصنيف حسب
 ```
 
 As a target, I need **only one JSON file** per language.
-Thus, the file for the french translation look like this:
+Thus, the file for the french translation looks like this:
 
 ```json
 {
@@ -105,7 +105,7 @@ Once the meta-model is designed, we must create an importer that takes `.propert
 
 To produce a model, I first look for a `.properties` parser without much success.
 Thus, I decided to create my own parser.
-Given a correctly formated file, the parser provides me the I18N entries.
+Given a correctly formatted file, the parser provides me the I18N entries.
 Then, by iterating on this collection, I build an I18N model.
 
 ### I18N parser
@@ -210,7 +210,7 @@ To perform the JSON export, I used the [NeoJSON project](https://github.com/sven
 NeoJSON allows one to create a custom encoder.
 
 For the export, we first select a language.
-Then, we build a dictionnary with all the namespaces:
+Then, we build a dictionary with all the namespaces:
 
 ```st
 rootDic := Dictionary new.
@@ -246,7 +246,7 @@ The custom encoder consists on converting a `Namespace` into a dictionary of ent
 
 Once my importer and exporter are designed, I can perform the migration.
 To do so, I use a little script.
-It creates a model of I18N, import several `.properties` file entries in the model, and export the Arabic entries in a JSON file.
+It creates a model of I18N, imports several `.properties` file entries in the model, and exports the Arabic entries in a JSON file.
 
 ```st
 "Create a model"
@@ -275,3 +275,20 @@ importer model: i18nModel.
 ## Ressource
 
 The meta-model, importer, and exporter are freely available in [GitHub](https://github.com/badetitou/Casino-I18N).
+
+<div class="masonry masonry-2">
+
+    <div class="text-center">
+        <a class="m-button" href="https://www.research-bl.com/2021/10/05/migrating-internationalization-files/" target="_blank">
+            Also published at *research-bl.com*
+            <i class="fas fa-external-link-alt"></i>
+        </a>
+    </div>
+
+    <div class="text-center">
+        <a class="m-button" href="https://modularmoose.org/2021/10/01/migrating-internationalization.html" target="_blank">
+            Also published at *modularmoose.org*
+            <i class="fas fa-external-link-alt"></i>
+        </a>
+    </div>
+</div>
