@@ -95,6 +95,10 @@ To use Casino, we must use a [Moose 8 image](https://moosetechnology.github.io/m
 
 </div>
 
+### Thesis Defense (FR)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ZANPYfzsF0Q" frameborder="0" allowfullscreen></iframe>
+
 ## Contact
 
 [contact me](mailto:badetitou@gmail.com)

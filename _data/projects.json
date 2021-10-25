@@ -15,8 +15,9 @@
     {
         "title": "Casino",
         "githubLink": "https://github.com/badetitou/Casino",
-        "description": "This tool (in Pharo) helps developer when they want to analyze their website's source code. It gives information about the structure and the different widget of each web page. The source code could be in JAVA-GWT (but it would be easy to use the tool with another language).",
-        "docLink": "/projects/Casino/"
+        "description": "This tool (in Pharo) helps developers when they want to analyze their website's source code. It gives information about the structure and the different widget of each web page. The source code could be in JAVA-GWT (but it would be easy to use the tool with another language).",
+        "docLink": "/projects/Casino/",
+        "youtubeLink": "https://youtu.be/ZANPYfzsF0Q"
     },
     {
         "title": "Pokécard TCG",
