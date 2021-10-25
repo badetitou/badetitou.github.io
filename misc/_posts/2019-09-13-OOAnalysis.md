@@ -5,7 +5,7 @@ title:  "Analyze OO project"
 subtitle: "I present a tool that does a quick analysis of Java projects With Moose"
 header-img: "misc/img-2019-09-13-OOAnalysis/background.jpg"
 date:   2019-09-13 12:00:00 +200
-categories: moose pharo
+tags: moose pharo
 ---
 
 When I discover a new project I always do the same analysis.

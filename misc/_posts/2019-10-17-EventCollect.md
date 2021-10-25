@@ -4,7 +4,7 @@ layout: post
 title: "Collect users' data"
 subtitle: "I present how to collect data from users in Pharo"
 date:   2019-10-17 12:00:00 +200
-categories: pharo data
+tags: pharo data
 ---
 
 ## Introduction

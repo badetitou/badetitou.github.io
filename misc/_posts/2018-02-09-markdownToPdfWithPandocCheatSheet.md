@@ -5,7 +5,7 @@ title:  "Cheat sheet Pandoc Md to pdf"
 subtitle: "I present some commands I use with pandoc to create pdf file"
 date: 2018-02-09 16:42:10 +200
 last_modified_at: 2019-09-12 16:42:10 +200
-categories: misc pandoc
+tags: misc pandoc
 ---
 
 ## Write tips
