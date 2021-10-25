@@ -5,7 +5,7 @@ title: "Analysing Java with VSCode"
 subtitle: "How to use VSCode and Moose to analyse Java projects?"
 date:   2021-03-31 12:00:00 +200
 last_modified_at: 2021-04-05 12:00:00 +200
-categories: pharo vscode
+categories: pharo vscode vscode-pharo
 ---
 
 [VSCode](https://code.visualstudio.com/) is an incredible editor tool.

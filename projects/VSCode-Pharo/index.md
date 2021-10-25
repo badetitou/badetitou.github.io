@@ -124,4 +124,59 @@ With this extension, it will be possible to debug Pharo application using [sever
 
 VSCode is currently testing a [Notebook](https://code.visualstudio.com/api/extension-guides/notebook) feature (as [Jupyter](https://jupyter.org/)).
 We already have most of the required material to implement a Pharo Notebook using the VSCode API.
-This will be our priority as soon as the stable VSCode notebook API will be released. 
+This will be our priority as soon as the stable VSCode notebook API will be released.
+
+### Posts
+
+<div class="masonry masonry-2">
+
+{% for post in site.posts %}
+ {% if post.tags contains "vscode-pharo" %}
+  <div class="card">
+    <div class="card-content post-preview">
+      {% if post.external_url %}
+        <a href="{{ post.external_url }}">
+          <div>
+            <div style="display: inline-grid;">
+              <h2 class="card-title">{{ post.title }}</h2>
+              {% if post.subtitle %}
+              <h3 class="card-subtitle">{{ post.subtitle }}</h3>
+              {% else %}
+              <h3 class="card-subtitle">{{ post.excerpt | strip_html | truncatewords: 15 }}</h3>
+              {% endif %}
+            </div>
+            <i class="fas fa-external-link-alt" style="float: right;" aria-hidden="true"></i>
+          </div>
+        </a>
+        <p class="post-meta">Posted by
+          {% if post.author %}
+          {{ post.author }}
+          {% else %}
+          {{ site.author }}
+          {% endif %}
+          on
+          {{ post.date | date: '%B %d, %Y' }}</p>
+      {% else %}
+        <a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">
+          <h2 class="card-title">{{ post.title }}</h2>
+          {% if post.subtitle %}
+          <h3 class="card-subtitle">{{ post.subtitle }}</h3>
+          {% else %}
+          <h3 class="card-subtitle">{{ post.excerpt | strip_html | truncatewords: 15 }}</h3>
+          {% endif %}
+        </a>
+        <p class="post-meta">Posted by
+          {% if post.author %}
+          {{ post.author }}
+          {% else %}
+          {{ site.author }}
+          {% endif %}
+          on
+          {{ post.date | date: '%B %d, %Y' }} &middot; {% include read_time.html content=post.content %}</p>
+      {% endif %}
+    </div>
+  </div>
+   {% endif %}
+{% endfor %}
+
+</div>

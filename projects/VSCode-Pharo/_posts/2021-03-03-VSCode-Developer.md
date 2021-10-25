@@ -4,7 +4,7 @@ layout: post
 title: "Dev - Pharo Language Server"
 subtitle: "Description of the Language Server Protocol for Pharo"
 date:   2021-03-03 12:00:00 +200
-categories: pharo vscode
+categories: pharo vscode vscode-pharo
 ---
 
 I have recently developed a [VSCode](https://code.visualstudio.com/) extension for Pharo.
