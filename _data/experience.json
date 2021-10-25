@@ -4,8 +4,16 @@
         "link": "https://berger-levrault.com",
         "jobs": [
             {
+                "job_title": "R&D Engineer",
+                "dates": "November 2021 - Present",
+                "quote": "Modernizing application",
+                "description": [
+                    "- Migrating several applications\n- Manage Ph.D. Students and interns\n- Writing research papers"
+                ]
+            },
+            {
                 "job_title": "Ph.D. Student",
-                "dates": "January 2019 - Present",
+                "dates": "January 2019 - October 2021",
                 "quote": "Modernizing application",
                 "description": [
                     "- Migrating GWT application to Angular\n- Set up hybrid architecture\n- Writing research papers\n- Teaching"
