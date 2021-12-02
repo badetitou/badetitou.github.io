@@ -1,9 +1,18 @@
 .badge {
+    display: inline-block;
+    padding: .25em .4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     padding: 4pt;
     position: relative;
     color: $secondary-text;
     margin: 8pt 4pt 8pt 4pt;
-    background-color: $secondary-light;
+    background-color: $secondary;
     transition: box-shadow .25s;
     border-radius: 20px;
     box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
@@ -14,5 +23,5 @@
 
 .badge:hover {
     box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
-    background-color: $secondary;
+    background-color: $secondary-dark;
 }

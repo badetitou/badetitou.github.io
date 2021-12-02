@@ -19,8 +19,9 @@ $element-bottom-margin: 8pt;
   transition: $m-box-shadow-transition;
   border: 0px;
 
-
   .card-title {
+    margin-bottom: 0.75rem;
+    margin-top: 0;
     font-size: 24px;
     font-weight: 300;
     &.activator {
