@@ -1,6 +1,12 @@
+// make all images responsive
+$(function() {
+	$("img").addClass("img-responsive");
+});
+
 // responsive tables
 $(document).ready(function() {
-	$("table").addClass("responsive-table");
+	$("table").wrap("<div class='table-responsive'></div>");
+	$("table").addClass("table");
 });
 
 $(document).ready(function() {
