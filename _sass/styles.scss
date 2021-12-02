@@ -11,6 +11,7 @@ $secondary-text: #fff;
 
 @import 'variables';
 @import 'm-grid';
+@import 'm-blockquote';
 @import 'm-navbar';
 @import 'm-nav';
 @import 'm-sidenav';
@@ -246,6 +247,7 @@ a {
   @import 'm-card';
   @import 'm-accordion';
   @import 'm-button';
+  @import 'm-blockquote';
   
   .card:hover {
     box-shadow: 0 10px 20px rgba(89,89,89,.80), 0 4px 8px rgba(89,89,89,.06);
