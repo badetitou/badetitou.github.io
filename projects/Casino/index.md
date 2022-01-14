@@ -97,6 +97,31 @@ To use Casino, we must use a [Moose 8 image](https://moosetechnology.github.io/m
 
 ### Thesis Defense (FR)
 
+<div class="masonry masonry-2">
+
+    <div class="text-center">
+        <a class="m-button" href="files/20210712%20-%20PhD%20-%20Benoit.pdf" target="_blank">
+           Download the slides.pdf
+            <i class="fas fa-external-link-alt"></i>
+        </a>
+    </div>
+
+    <div class="text-center">
+        <a class="m-button" href="files/20210712%20-%20PhD%20-%20Benoit.pptx" target="_blank">
+            Download the slides.pptx
+            <i class="fas fa-external-link-alt"></i>
+        </a>
+    </div>
+
+    <div class="text-center">
+        <a class="m-button" href="https://tel.archives-ouvertes.fr/tel-03428543/file/main.pdf" target="_blank">
+           Download the thesis manuscript.pdf
+            <i class="fas fa-external-link-alt"></i>
+        </a>
+    </div>
+
+</div>
+
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ZANPYfzsF0Q" frameborder="0" allowfullscreen></iframe>
 
 ## Contact
