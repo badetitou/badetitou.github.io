@@ -181,6 +181,16 @@ Metacello new
   load
 ```
 
+## Publications
+
+### Conference Articles
+
+<div class="masonry masonry-2">
+
+{% bibliography --query @inproceedings[project=smarttest] %}
+
+</div>
+
 ## Some Contributors
 
 - [Anne Etien](http://www.lifl.fr/~etien/)
