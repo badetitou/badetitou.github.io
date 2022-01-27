@@ -45,21 +45,19 @@ description: 'R&D Engineer'
                 <div class="row">
                     <div class="col m12 s12">
                         <h4 style="margin-top: 0px">{{ experience.company }}</h4>
-                        <a style="font-style: italic" target="_blank" href="{{ experience.link }}">{{ experience.link
-                            }}</a>
+                        <a style="font-style: italic" target="_blank" href="{{ experience.link }}">{{ experience.link }}</a>
                     </div>
                     <div class="col m12 s12">
-                        {% for job in experience.jobs %}
-                        <div class="row">
-                            <div class="col m4 s12">
-                                <div>{{ job.job_title }}</div>
-                                <div>{{ job.dates }}</div>
-                            </div>
-                            <div class="col m8 s12">
-                                {% for description in job.description %} {{ description | markdownify }} {% endfor %}
-                            </div>
+                        <div class="timeline">
+                            {% for job in experience.jobs %}
+                                <div class="card timeline-card timeline-card-primary">
+                                    <div class="card-content">
+                                        <div class="card-title">{{ job.job_title }} — <span style="font-style: italic;">{{ job.dates }}</span></div>
+                                        {% for description in job.description %} {{ description | markdownify }} {% endfor %}
+                                    </div>
+                                </div>
+                            {% endfor %}
                         </div>
-                        {% endfor %}
                     </div>
                 </div>
                 {% if forloop.last == false %}
@@ -86,8 +84,7 @@ description: 'R&D Engineer'
                         <div>{{ education.dates }}</div>
                     </div>
                     <div class="col m8 s12">
-                        {% for description in education.description %} {{ description |
-                        markdownify }} {% endfor %}
+                        {% for description in education.description %} {{ description | markdownify }} {% endfor %}
                     </div>
                 </div>
 
