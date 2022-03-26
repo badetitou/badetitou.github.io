@@ -21,9 +21,9 @@
     },
     {
         "title": "Pokécard TCG",
-        "githubLink": "https://github.com/badetitou/pokemon-tcg",
+        "githubLink": "https://github.com/badetitou/pokecard-tcg",
         "description": "This is my first flutter project. It consists of a tool that help one building its Pokémon card collection.",
-        "webLink": "https://badetitou.github.io/pokemon-tcg/#/",
+        "webLink": "https://badetitou.github.io/pokecard-tcg/#/",
         "androidLink": "https://play.google.com/store/apps/details?id=fr.badetitou.pokecard_tcg"
     },
     {
