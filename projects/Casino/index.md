@@ -114,7 +114,7 @@ To use Casino, we must use a [Moose 8 image](https://moosetechnology.github.io/m
     </div>
 
     <div class="text-center">
-        <a class="m-button" href="https://tel.archives-ouvertes.fr/tel-03428543/file/main.pdf" target="_blank">
+        <a class="m-button" href="https://tel.archives-ouvertes.fr/tel-03539458v2/document" target="_blank">
            Download the thesis manuscript.pdf
             <i class="fas fa-external-link-alt"></i>
         </a>
