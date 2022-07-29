@@ -5,7 +5,7 @@
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-$dark: #bbb;
+$dark: #000;
 $primary: #fff;
 $primary-text: #000000;
 
@@ -249,8 +249,8 @@ a:focus {
 
 [data-theme="dark"] {
   
-  $dark: #303030;
-  $primary: #262626;
+  $dark: #000;
+  $primary: #0f1117;
   $primary-text: #ffffff;
 
   $secondary-dark: #a70f24;
