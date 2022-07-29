@@ -11,26 +11,40 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 	//identify the toggle switch HTML element
-	const toggleSwitch = document.querySelector('#theme-switch input[type="checkbox"]');
+	const toggleSwitch = document.querySelector('#theme-switch');
 
 	//function that changes the theme, and sets a localStorage variable to track the theme between page loads
 	function switchTheme(e) {
-		if (e.target.checked) {
+		if (localStorage.getItem('theme') === 'light') {
 			localStorage.setItem('theme', 'dark');
-			document.documentElement.setAttribute('data-theme', 'dark');
-			toggleSwitch.checked = true;
+		} else if (localStorage.getItem('theme') === 'dark') {
+			localStorage.removeItem('theme');
 		} else {
 			localStorage.setItem('theme', 'light');
-			document.documentElement.setAttribute('data-theme', 'light');
-			toggleSwitch.checked = false;
-		}    
+		}
+		setTheme();
 	}
 
 	//listener for changing themes
-	toggleSwitch.addEventListener('change', switchTheme, false);
+	toggleSwitch.addEventListener('click', switchTheme);
 
-	//pre-check the dark-theme checkbox if dark-theme is set
-	if (document.documentElement.getAttribute("data-theme") == "dark"){
-		toggleSwitch.checked = true;
+	function setTheme() {
+		toggleSwitch.classList.remove('fa-sun', 'fa-moon', 'fa-desktop')
+		if (localStorage.getItem('theme') === 'light') {
+			toggleSwitch.classList.add('fa-sun');
+			document.documentElement.setAttribute('data-theme', 'light');
+		} else if (localStorage.getItem('theme') === 'dark') {
+			toggleSwitch.classList.add('fa-moon');
+			document.documentElement.setAttribute('data-theme', 'dark');
+		} else {
+			toggleSwitch.classList.add('fa-desktop');
+			if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+				document.documentElement.setAttribute('data-theme', 'dark');
+			} else {
+				document.documentElement.setAttribute('data-theme', 'light');
+			}
+		}
 	}
+
+	setTheme();
 });
