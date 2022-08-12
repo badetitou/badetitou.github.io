@@ -17,6 +17,9 @@
         {{ entry.booktitle }}
         {{ entry.journal }}
       </div>
+      {% if entry.year %}
+        <i>{{entry.year}}</i>
+      {% endif %}
       {% if entry.pdf %}
         <a href="{{ entry.pdf }}">PDF</a>
       {% endif %}
