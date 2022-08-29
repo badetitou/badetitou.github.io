@@ -16,6 +16,15 @@ The project GitHub repository includes:
 
 In this documentation page, we present quickly the protocol, how one can download and install the Pharo Language Server project, its structure, and how to extends it.
 
+- [Language Server Protocol](#language-server-protocol)
+- [Pharo Language Server Installation](#pharo-language-server-installation)
+- [Pharo Language Server Structure](#pharo-language-server-structure)
+  - [Package architecture](#package-architecture)
+  - [Server class architecture](#server-class-architecture)
+  - [Starting the server](#starting-the-server)
+  - [Method of the protocol](#method-of-the-protocol)
+- [Extending the Abstract Language Server to implement a new one](#extending-the-abstract-language-server-to-implement-a-new-one)
+
 ## Language Server Protocol
 
 The language server protocol consists of enabling communication between several IDE and language servers.
