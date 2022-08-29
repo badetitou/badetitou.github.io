@@ -375,6 +375,15 @@ a:focus {
       stroke-width: 0.5;
     }
 
+    .loopText {
+      tspan {
+        color: $primary-text !important;
+        fill: $primary-text !important;
+        stroke: $primary-text !important;
+        stroke-width: 0.5;
+      }
+    }
+
     #arrowhead path {
       color: $primary-text !important;
       fill: $primary-text !important;
