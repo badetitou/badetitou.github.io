@@ -7,5 +7,25 @@ categories: vscode pharo _ignore
 description: "Pharo Language Server documentation"
 ---
 
+The project [Pharo Language Server](https://github.com/badetitou/Pharo-LanguageServer) is an implementation of the [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) proposed by Microsoft and implemented by several IDE such as emacs, eclipse, Intellij Idea, VSCode...
+The project GitHub repository includes:
 
-Developers documentation
+1. An abstract layer that can be extended to create a new dedicated language server (for example: for the Java Programming Language)
+2. A Pharo Language Server implementation that works well with the [pharo-vscode](https://marketplace.visualstudio.com/items?itemName=badetitou.pharo-language-server) plugin.
+3. A [Debug Adapted protocol](https://microsoft.github.io/debug-adapter-protocol/) implementation for Pharo (that needs another documentation page and is not discussed here).
+
+In this documentation page, we present quickly the protocol, how one can download and install the Pharo Language Server project, its structure, and how to extends it.
+
+## Language Server Protocol
+
+The language server protocol consists of enabling communication between several IDE and language servers.
+Thus, the IDE is a *client* and the language server is a *server*.
+An IDE can interact with serveral servers at the same time.
+
+
+
+## Pharo Language Server Installation
+
+## Pharo Language Server Structure
+
+## Extending the Abstract Language Server to implement a new one

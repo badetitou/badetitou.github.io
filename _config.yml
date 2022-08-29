@@ -1,15 +1,14 @@
 # Site settings
 title: Benoît Verhaeghe
 header-img: img/home-bg.jpg
-email: badetitou@gmail.com
+email: benoit@badetitou.fr
 copyright_name: badetitou
 description: "Benoît Verhaeghe's blog"
 baseurl: ""
 url: "http://badetitou.github.io"
 twitter_username: badetitou
 github_username:  badetitou
-facebook_username:  badetitou
-email_username:  badetitou@gmail.com
+email_username:  benoit@badetitou.fr
 linkedin_username: benoitverhaeghe
 orcid: 0000-0002-4588-2698
 

@@ -14,14 +14,14 @@ description: "A VSCode extension for the Pharo programming language"
 <div class="masonry masonry-2">
 
     <div class="text-center">
-        <a class="m-button" href="docs/users" target="_blank">
+        <a class="m-button" href="docs/users">
             User documentation
             <i class="fas fa-user"></i>
         </a>
     </div>
 
     <div class="text-center">
-        <a class="m-button" href="docs/developers" target="_blank">
+        <a class="m-button" href="docs/developers">
             Developers documentation
             <i class="fas fa-code"></i>
         </a>
