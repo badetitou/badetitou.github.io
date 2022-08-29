@@ -26,6 +26,8 @@ The bellow sequence diagram present the start of the project
 
 {% mermaid %}
 sequenceDiagram
+    participant VSCode as VSCode (Client IDE)
+    participant Pharo as Pharo (Language Server)
     activate VSCode
     VSCode->>Pharo: Start Pharo
     activate Pharo
