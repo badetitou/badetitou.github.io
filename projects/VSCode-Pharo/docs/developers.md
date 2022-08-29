@@ -22,6 +22,8 @@ In this documentation page, we present quickly the protocol, how one can downloa
   - [Package architecture](#package-architecture)
   - [Server class architecture](#server-class-architecture)
   - [Starting the server](#starting-the-server)
+    - [Extract request](#extract-request)
+    - [Handle request](#handle-request)
   - [Method of the protocol](#method-of-the-protocol)
 - [Extending the Abstract Language Server to implement a new one](#extending-the-abstract-language-server-to-implement-a-new-one)
 
@@ -103,6 +105,128 @@ Each class follow the same coding convention/architecture for the method protoco
 - *pls-* contains extension of the protocol (*e.g.* configuring the debug mode thought the protocol, or accessing to new specific features).
 
 ### Starting the server
+
+In this subsection we give some technical description of the starting method of the server.
+
+The server is started by calling the method `PLSAbstractServer>>start`
+
+```st
+PLSAbstractServer >> start
+    self debugMode ifFalse: [ PLSUIManager withPLSServer: self ].
+    self initializeStreams.
+    lastId := 0.
+    process := [ 
+        [ serverLoop ] whileTrue: [ 
+            | request |
+            request := self extractRequestFrom: clientInStream.
+            ('Request: ' , request) recordDebug.
+            self handleRequest: request toClient: clientOutStream ] ]
+            forkAt: Processor lowIOPriority
+            named: 'JRPC TCP connection'
+```
+
+First, if the debug mode is not activated, we update the `UIManager` of pharo to use ours instead.
+For now, it only enables opening popup in the IDEs instead of the Pharo image.
+
+Then, we initialize the stream that will be used for the communication.
+
+```st
+initializeStreams
+    | tcpServer |
+    withStdIO ifTrue: [ 
+        clientInStream := Stdio stdin.
+        clientOutStream := Stdio stdout.
+        ^ self ].
+    tcpServer := Socket newTCP.
+    tcpServer listenOn: self port backlogSize: 10.
+    Stdio stdout nextPutAll: tcpServer port asString asByteArray.
+    Stdio stdout flush.
+    serverLoop := true.
+    (tcpServer waitForAcceptFor: 60) ifNotNil: [ :clientSocket | 
+        clientInStream := SocketStream on: clientSocket.
+        clientOutStream := clientInStream.
+        self
+            logMessage: 'Client connected to Server using socket'
+            ofType: PLSMessageType info ]
+```
+
+To do so, we first check if the server ask us to be connected using STDIO or, by default, with socket.
+For instance, STDIO is used with Eclipse IDE and socket with VSCode.
+
+To configure a socket, we first create a socket with Pharo with an available port.
+Then, we send to the client IDE the port thanks to STDIO.
+When connected, we set the `clientInStream` and `clientOutStream` with the same socket (since it can be used safely to get and send data).
+
+Once the streams are set, we can perform the main loop that:
+
+1. extract the request from the *in stream* (`extractRequestFrom:`)
+2. process and send the response to the *out stream* (`handleRequest:toClient:`)
+
+```st
+ [ serverLoop ] whileTrue: [ 
+            | request |
+            request := self extractRequestFrom: clientInStream.
+            ('Request: ' , request) recordDebug.
+            self handleRequest: request toClient: clientOutStream ]
+```
+
+#### Extract request
+
+The extraction of the request is done in two steps.
+It is implemented in the method `extractRequestFrom:`.
+
+```st
+extractRequestFrom: stream
+
+    | length startingPoint endPoint result |
+    "data is the current buffer state"
+    length := -1.
+    [ length = -1 and: [ serverLoop ] ] whileTrue: [ 
+        [ data ifEmpty: [ data := (stream next: 25) asString ] ]
+            on: ConnectionTimedOut
+            do: [ self log: 'timeout but still work' ].
+        length := self extractLengthOf: data ].
+    startingPoint := data indexOf: ${.
+    endPoint := data findCloseBracesFor: startingPoint.
+    result := String new: length.
+    "three options"
+    "startingPoint and endPoint are found"
+    (startingPoint ~= 0 and: [ endPoint ~= 0 ]) ifTrue: [ 
+        result := data copyFrom: startingPoint to: endPoint.
+        data := data copyFrom: endPoint + 1 to: data size.
+        ^ result ].
+    startingPoint = 0
+        ifTrue: [ "none were found" 
+            self getDatafromPosition: 1 fromSocket: stream in: result ]
+        ifFalse: [ "only startingPoint is found"
+            (data copyFrom: startingPoint to: data size) withIndexDo: [ 
+                :each 
+                :index | result at: index put: each ].
+            self
+                getDatafromPosition: data size - startingPoint + 2
+                fromSocket: stream
+                in: result ].
+    data := ''.
+    ^ result
+```
+
+1. We extract the length of the complete request. This work is done by `extractLengthOf:` once we receive first data.
+2. Then, based on the known length of incoming data, we extract the full request.
+
+#### Handle request
+
+Handling a request is also done in several steps.
+It is implemented in the method `handleRequest:toClient:`.
+
+{% mermaid %}
+flowchart TD
+    parseJSON(Check that the JSON is Correct)
+    parseJSON --> B{Is it?}
+    B ---->|No| E(Return Error)
+    B -->|Yes| Dispatch(Dispatch to the method with the correct pragma)
+    Dispatch --> Convert(Convert returned object to JSON)
+    Convert --> Send(Send answer)
+{% endmermaid %}
 
 ### Method of the protocol
 

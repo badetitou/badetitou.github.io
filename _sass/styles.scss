@@ -348,6 +348,29 @@ a:focus {
       fill: $secondary-dark !important;
     }
 
+    .label-container {
+      fill: $secondary-dark !important;
+    }
+
+    .nodeLabel {
+      color: $primary-text !important;
+      fill: $primary-text !important;
+      stroke: $primary-text !important;
+      stroke-width: 0.5;
+    }
+
+    .flowchart-link {
+      stroke: $primary-text !important;
+    }
+
+    .edgeLabel {
+      color: $primary-text !important;
+      fill: $primary-text !important;
+      stroke: $primary-text !important;
+      stroke-width: 0.5;
+      background-color: $secondary-dark !important;
+    }
+
     text.actor > tspan {
       fill: $primary-text !important;
     }
