@@ -34,14 +34,14 @@ We present here the existing features
 {: .browser-default}
 - Code highlighting
 
-![Highlighting](https://raw.githubusercontent.com/badetitou/vscode-pharo/main/docs/img/highlighting.png){: .center-image}
+![Highlighting](https://raw.githubusercontent.com/badetitou/vscode-pharo/main/docs/img/highlighting.png){: .center-image .img-fill }
 
 ### Supported Language Server feature
 
 {: .browser-default}
 - Code formatting
 
-![Format gif](https://raw.githubusercontent.com/badetitou/vscode-pharo/main/docs/img/format.gif){: .center-image}
+![Format gif](https://raw.githubusercontent.com/badetitou/vscode-pharo/main/docs/img/format.gif){: .center-image .img-fill }
 
 {: .browser-default}
 - Hover
@@ -49,7 +49,7 @@ We present here the existing features
 When moving a cursor over a class, it shows the comment of the class.
 The hover popup supports markdown. So it can be use to print nice comment from Pharo 9.
 
-![Hover](https://raw.githubusercontent.com/badetitou/vscode-pharo/main/docs/img/hover.png){: .center-image}
+![Hover](https://raw.githubusercontent.com/badetitou/vscode-pharo/main/docs/img/hover.png){: .center-image .img-fill }
 
 {: .browser-default}
 - Auto-completion
@@ -57,7 +57,7 @@ The hover popup supports markdown. So it can be use to print nice comment from P
 We used the completion engine of Pharo to compute the entries.
 Not that for keywords with several symbols, it is possible to use the `<Tab>` key to move from one argument to another.
 
-![Auto-Completion](https://raw.githubusercontent.com/badetitou/vscode-pharo/main/docs/img/Auto-completion.gif){: .center-image}
+![Auto-Completion](https://raw.githubusercontent.com/badetitou/vscode-pharo/main/docs/img/Auto-completion.gif){: .center-image .img-fill }
 
 ### Additional feature
 
@@ -67,22 +67,22 @@ The additional feature can be access using the command palette of VSCode
 - Save the Pharo image
 - Execute and show the result
 
-![Inspect gif](https://raw.githubusercontent.com/badetitou/vscode-pharo/main/docs/img/inspectResult.gif){: .center-image}
+![Inspect gif](https://raw.githubusercontent.com/badetitou/vscode-pharo/main/docs/img/inspectResult.gif){: .center-image .img-fill }
 
 {: .browser-default}
 - Execute and print the result
 
-![Print gif](https://raw.githubusercontent.com/badetitou/vscode-pharo/main/docs/img/printResult.gif){: .center-image}
+![Print gif](https://raw.githubusercontent.com/badetitou/vscode-pharo/main/docs/img/printResult.gif){: .center-image .img-fill }
 
 {: .browser-default}
 - Keep variable state
 
-![Keep Variable state gif](https://raw.githubusercontent.com/badetitou/vscode-pharo/main/docs/img/keep-variable-state.gif){: .center-image}
+![Keep Variable state gif](https://raw.githubusercontent.com/badetitou/vscode-pharo/main/docs/img/keep-variable-state.gif){: .center-image .img-fill }
 
 {: .browser-default}
 - Show the current server version
 
-![Show version gif](https://raw.githubusercontent.com/badetitou/vscode-pharo/main/docs/img/pharo-version.gif){: .center-image}
+![Show version gif](https://raw.githubusercontent.com/badetitou/vscode-pharo/main/docs/img/pharo-version.gif){: .center-image .img-fill }
 
 {: .browser-default}
 - Saving a tonel file in VSCode, save the corresponding methods/class in the Pharo image
