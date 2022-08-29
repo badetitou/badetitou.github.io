@@ -81,4 +81,80 @@ The package is then split into tags.
 - *Handler* contains some override of JRPC Pharo implementation to ease its usage by the Pharo Language Server Protocol
 - *Structure-* contains all the structure send and received by the server. Structures are grouped depending on the protocol they are related to (*e.g.* `PLSDocumentSymbol` is linked to retriving symbols using the protocol)
 
+### Server class architecture
+
+The two main classes of interest are `PLSAbstractServer` and `PLSServer`.
+`PLSAbstractServer` contains all the logic of a server implementing the Language Server Protocol.
+`PLSServer` is the class implementing the Language Server Protocol in the case of using it for the Pharo programming language.
+
+Each class follow the same coding convention/architecture for the method protocols.
+
+- *starting* contains the main method `start` used when starting the server and the required method to resolved message that are sent and received.
+- *lsp-* contains the methods to implement the protocol
+- *pls-* contains extension of the protocol (*e.g.* configuring the debug mode thought the protocol, or accessing to new specific features).
+
+### Starting the server
+
+### Method of the protocol
+
+Every method of the protocol is implemented as a method in the server.
+Thoses methods are categorised in protocol following the Language Server Protocol specification.
+For example, the method relative to [Language Server Protocol Hover](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#textDocument_hover) are inside the protocol *lsp - hover*.
+
+The Pharo method uses as pragma the requested remote method by the protocol.
+For example, for hover, it is the method `textDocument/hover`, so the implementation uses the pragma as follow.
+
+```st
+textDocumentHoverWithPosition: position textDocument: textDocument
+    <jrpc: #'textDocument/hover'>
+    self subclassResponsibility
+```
+
+The pharo method also implement at least as many arguments as the client can send.
+In the hover example, the specification declares that the sent object is the `HoverParams`:
+
+```ts
+interface TextDocumentPositionParams {
+    /**
+     * The text document.
+     */
+    textDocument: TextDocumentIdentifier;
+
+    /**
+     * The position inside the text document.
+     */
+    position: Position;
+}
+
+
+export interface HoverParams extends TextDocumentPositionParams, WorkDoneProgressParams {
+}
+```
+
+> the current version of the server ignore the `WorkDoneProgressParams` for now
+
+So the method must at least accept attributes with the name: `textDocument` and `position`.
+If the pharo method has more available arguments, they will be filled with nil.
+If the incoming data have arguments in an incorrect order, the server will sort them first.
+If the incoming data have an unknow argument, it will be ignore.
+
+The return of the Pharo method **must be** a PLS structure that implement the method `asJRPCJSON`.
+This method will convert the pharo object to be transmitted to the client.
+
+For example, for the `PLSServer` (see snippet of code below).
+The dictionary and `PLSHover` implement `asJRPCJSON`.
+
+```st
+textDocumentHoverWithPosition: position textDocument: textDocument
+    <jrpc: #'textDocument/hover'>
+    | hover document |
+    document := (self context textItem: (textDocument at: #uri)). 
+    hover := PLSHover new
+        context: self context;
+        source: document;
+        position: position;
+        yourself.
+    ^ { #contents -> hover contents } asDictionary
+```
+
 ## Extending the Abstract Language Server to implement a new one
