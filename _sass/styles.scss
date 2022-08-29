@@ -352,6 +352,19 @@ a:focus {
       fill: $secondary-dark !important;
     }
 
+    .node {
+      polygon {
+        stroke: unset !important;
+      }
+      rect {
+        stroke: unset !important;
+      }
+    }
+
+    .marker {
+      fill: $primary-text !important;
+    }
+
     .nodeLabel {
       color: $primary-text !important;
       fill: $primary-text !important;
