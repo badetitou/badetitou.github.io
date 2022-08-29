@@ -48,8 +48,37 @@ sequenceDiagram
     deactivate Pharo
 {% endmermaid %}
 
+In short, the client (IDE) opens the server.
+Then, it creates a connection with the client, for instance using a socket.
+Finally, client and server exchanges information following the protocol.
+
 ## Pharo Language Server Installation
 
+Installing the Pharo Language server is made easy thanks to a Pharo baseline.
+After downloading a [Pharo 10](https://pharo.org) image, you can install the project using the following script:
+
+```st
+Metacello new
+  githubUser: 'badetitou' project: 'Pharo-LanguageServer' commitish: 'v3' path: 'src';
+  baseline: 'PharoLanguageServer';
+  load
+```
+
+To do so, after launching a Pharo image, open a playground with <kbd>Ctrl+O+W</kbd>, copy and paste the above code snippet, and execute it.
+
 ## Pharo Language Server Structure
+
+In the following, we describe the strcuture and the main classes of the Pharo Language Server project.
+We only describe the Pharo code and not the one that can be present in the client extension (used in the IDEs).
+
+### Package architecture
+
+The all project is included inside the package `PharoLanguageServer`.
+The package is then split into tags.
+
+- *Uncategorized* contains the core of the server
+- *Document* and *TonelUtils* contain the pharo code representation for the Pharo implementation of the Language Server Protocol (*i.e.* if you want to code in Pharo from VSCode)
+- *Handler* contains some override of JRPC Pharo implementation to ease its usage by the Pharo Language Server Protocol
+- *Structure-* contains all the structure send and received by the server. Structures are grouped depending on the protocol they are related to (*e.g.* `PLSDocumentSymbol` is linked to retriving symbols using the protocol)
 
 ## Extending the Abstract Language Server to implement a new one
