@@ -22,7 +22,29 @@ The language server protocol consists of enabling communication between several 
 Thus, the IDE is a *client* and the language server is a *server*.
 An IDE can interact with serveral servers at the same time.
 
+The bellow sequence diagram present the start of the project
 
+{% mermaid %}
+sequenceDiagram
+    activate VSCode
+    VSCode->>Pharo: Start Pharo
+    activate Pharo
+    VSCode->>Pharo: What is the port of Language Server Protocol?
+    Pharo-->>VSCode: It's 40520!
+    activate Pharo
+    VSCode->>+Pharo: Initialized?
+    Pharo->>-VSCode: Initialized!
+    VSCode->>+Pharo: This is my capabilities. What are yours?
+    Pharo->>-VSCode: Capabilities!
+    loop Client ask for feature | Example:
+        VSCode->>+Pharo: What about completion?
+        Pharo->>-VSCode: Complete this text with this snippet
+    end
+    VSCode->>Pharo: I'm done
+    Pharo->>VSCode: OK bye!
+    deactivate VSCode
+    deactivate Pharo
+{% endmermaid %}
 
 ## Pharo Language Server Installation
 
