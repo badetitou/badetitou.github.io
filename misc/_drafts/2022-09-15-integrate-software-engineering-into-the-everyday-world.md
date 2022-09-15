@@ -7,33 +7,32 @@ tags: misc moose
 ---
 
 *I have been a member of the Berger-Levrault research team for 5 years.
-And, one of our main challenges in to integrate our innovation into the day-to-day world of the company.
-There are several ways to integrate innovation: as code external library, providing schema, teaching how to use new tools, and so on.
-In this blog post, I will present you how we integrate Software Enginneering work in everyday developers tools.*
+And, one of our main challenges is integrating our innovation into the day-to-day world of the company.
+There are several ways to integrate innovation: as an external code library, providing schema, teaching how to use new tools, and so on.
+In this blog post, I will present you how we integrate Software Engineering work into everyday developers' tools.*
 
 ---
 
-Software Engineering is about helping people developing great software system.
+Software Engineering is about helping people develop great software systems.
 In Software Engineering Research, we built tools that help [migrating your application](https://www.research-bl.com/2022/05/16/casino-a-tool-to-migrate-applications/), or improve your [software architecture](https://www.research-bl.com/2022/01/27/backend-monolithic-app-to-microservices-architecture-migration-1st-part/).
+However, these kinds of innovations are not meant to be used every day.
+For instance, once the application is migrated, people do not reuse (for the same application) the migration tool.
 
-However, these kind of innovation are not meant to be used everyday.
-For instance, once the application is migrated, people do to reuse (for the same application) the migration tool.
+Other innovations are about designing [new visualizations](https://www.research-bl.com/2022/08/09/visualize-your-codebase-with-moose/), or providing *diagnostics* about the code.
+These kinds of innovations are better when updated automatically with the code.
+Indeed, when using a map, people expect the map to be updated.
+The same applies to software maps or code critics.
+Another constraint for developers is that using these innovations must be as easy and integrated with their current tools as possible.
 
-Other innovation are about designing [new visualizations](https://www.research-bl.com/2022/08/09/visualize-your-codebase-with-moose/), or providing *diagnostics* about the code.
-These kinds of innovation are better when updated automatically with the code.
-Indeed, when using a map, people expect the map to be update.
-The same applies for software maps or code critics.
-Another constraints for developers is that using these innovations must be as easy and integrated with their current tools as possible.
-
-At Berger-Levrault, we use [Moose](https://modularmoose.org/) to analyse software systems.
+At Berger-Levrault, we use [Moose](https://modularmoose.org/) to analyze software systems.
 Moose allows us to create visualization and diagnostics about the code.
-Today, we will present how one can produce a basic UML vizualisation of its code and integrate it into the GitLab wiki.
-Then, we present how to integrate Moose advanced diagnostics to the well known [SonarQube tool](https://www.sonarqube.org/).
+Today, we will present how one can produce a basic UML visualization of its code and integrate it into the GitLab wiki.
+Then, we present how to integrate Moose advanced diagnostics to the well-known [SonarQube tool](https://www.sonarqube.org/)](https://www.sonarqube.org/).
 
 ## Perform analysis in a CI
 
-The first step to perform analysis when developers are working on the code is to use the CI to perform our analysis.
-The main process is the following: developers edit code, push the code to a git repository, the CI install the code dependency, our tool analyze the code, new results are send to developers tools.
+The first step to performing analysis when developers are working on the code is to use the CI to perform our analysis.
+The main process is the following: developers edit code, push the code to a git repository, the CI installs the code dependencies, our tool analyzes the code, and new results are sent to developers' tools.
 
 {% mermaid %}
 flowchart TD
@@ -43,8 +42,8 @@ flowchart TD
     moose-- Send results -->GitLabWiki(GitLabWiki) & Sonar(SonarQube)
 {% endmermaid %}
 
-Considering the GitLab Ci, two preliminary steps are required to perform the analysis.
-The figure below present the gitlab ci file (`.gitlab-ci.yml`)
+Considering the GitLab CI, two preliminary steps are required to perform the analysis.
+The figure below presents the GitLab ci file (`.gitlab-ci.yml`)
 
 ```yml
 stages:
@@ -78,23 +77,23 @@ parse:
       - output.json
 ```
 
-The step `install` consist in using maven (in case of java code) to install de project dependency.
-This step is optional but helps getting better result in future analysis.
+The step `install` consists in using maven (in the case of java code) to install de project dependency.
+This step is optional but helps get better results in future analysis.
 
-The step `parse` uses [VerveineJ](https://modularmoose.org/moose-wiki/Developers/Parsers/VerveineJ), a tool that parses Java code and produce a model of the code that can be used for analysis.
+The step `parse` uses [VerveineJ](https://modularmoose.org/moose-wiki/Developers/Parsers/VerveineJ), a tool that parses Java code and produces a model of the code that can be used for analysis.
 
-Once we performed this preliminary steps, we have to ask to the CI to run the analysis and sending the results to the target platform.
+Once we performed these preliminary steps, we have to ask the CI to run the analysis and send the results to the target platform.
 
-## Integrate visualisation to GitLab wiki
+## Integrate visualizations to GitLab wiki
 
 To integrate schema to GitLab wiki, there are two options: use native markdown schema, or export visualization as png and integrate the png file to markdown.
 
-In this blog post, we focus in native markdown schema using [MermaidJS](https://mermaid-js.github.io/).
+In this blog post, we focus on native markdown schema using [MermaidJS](https://mermaid-js.github.io/).
 To use mermaid with Moose, we use the [MermaidPharo](https://github.com/badetitou/MermaidPharo/) project.
 
-The configuration of the CI to integrate visualisation to GitLab wiki is done in three steps:
+The configuration of the CI to integrate visualization to the GitLab wiki is done in three steps:
 
-1. we add a configuration file named `.smalltalk.ston`. This file configure the CI to install the project MermaidPharo
+1. We add a configuration file named `.smalltalk.ston`. This file configures the CI to install the project MermaidPharo
 
     ```txt
     SmalltalkCISpec {
@@ -115,7 +114,7 @@ The configuration of the CI to integrate visualisation to GitLab wiki is done in
     }
     ```
 
-2. add a [Pharo](https://pharo.org) script in the file `ci/executeCode.st` that will perform the analysis.
+2. Adds a [Pharo](https://pharo.org) script in the file `ci/executeCode.st` that will perform the analysis.
 
    ```st
     "=== Load MooseModel ==="
@@ -141,7 +140,7 @@ The configuration of the CI to integrate visualisation to GitLab wiki is done in
     Smalltalk snapshot: false andQuit: true
    ```
 
-3. Finnaly, we update the `.gitlab-ci.yml` to file execute the Moose analysis, and update the GitLab wiki project
+3. Finally, we update the `.gitlab-ci.yml` to file execute the Moose analysis, and update the GitLab wiki project
 
     ```yml
     analyze:
@@ -191,8 +190,8 @@ The configuration of the CI to integrate visualisation to GitLab wiki is done in
 ## Push advanced diagnostics to SonarQube
 
 Another possible integration is with SonarQube.
-Again, to perform the SonarQube integration, we have to modified `.smalltalk.ston`, `ci/executeCode.st`, and `.gitlab-ci.yml`.
-We also have to create a `reports/rules/rules.ston` file that contains the rules executes by Moose.
+Again, to perform the SonarQube integration, we have to modify `.smalltalk.ston`, `ci/executeCode.st`, and `.gitlab-ci.yml`.
+We also have to create a `reports/rules/rules.ston` file that contains the rules executed by Moose.
 
 1. For the `.smalltalk.ston`, this time, we load the [FamixCritics to SonarQube project](https://github.com/badetitou/Famix-Critic-SonarQube-Exporter)
 
@@ -214,7 +213,7 @@ We also have to create a `reports/rules/rules.ston` file that contains the rules
     }
     ```
 
-2. For the `reports/rules/rules.ston`, it includes the rules that Moose will execute when analysing the code. Creating this file is made easy by the Critics browser of Moose. The example below present one rule that checks that Java attributes do not begins with `_`.
+2. For the `reports/rules/rules.ston`, it includes the rules that Moose will execute when analyzing the code. Creating this file is made easy by the Critics browser of Moose. The example below presents one rule that checks that Java attributes do not begin with `_``.
 
     ```ston
     FamixCBContext {
@@ -254,7 +253,7 @@ We also have to create a `reports/rules/rules.ston` file that contains the rules
         export.
     ```
 
-4. Finnaly, we update the `.gitlab-ci.yml` to execute the analysis and send the results to SonarQube
+4. Finally, we update the `.gitlab-ci.yml` to execute the analysis and send the results to SonarQube
 
     ```yml
     analyze:
@@ -294,6 +293,6 @@ We also have to create a `reports/rules/rules.ston` file that contains the rules
             - mvn clean install sonar:sonar -Dsonar.projectKey=$PROJECT_KEY -Dsonar.host.url=$SONAR_URL -Dsonar.login=$MOOSE_SONAR_TOKEN -Dsonar.externalIssuesReportPaths=../reports/sonarGenericIssue.json --settings '../maven/settings - critics.xml' -Dmaven.test.skip=true
     ```
 
-Critics are then available using the sonarqube interface.
+Critics are then available using the SonarQube interface.
 
 ![Moose issue in SonarQube](/misc/img/2022-09-15-integrate-software-engineering-into-the-everyday-world/Moose-issue-in-sonarqube.png){: .img-fill }
