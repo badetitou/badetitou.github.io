@@ -27,7 +27,7 @@ Another constraint for developers is that using these innovations must be as eas
 At Berger-Levrault, we use [Moose](https://modularmoose.org/) to analyze software systems.
 Moose allows us to create visualization and diagnostics about the code.
 Today, we will present how one can produce a basic UML visualization of its code and integrate it into the GitLab wiki.
-Then, we present how to integrate Moose advanced diagnostics to the well-known [SonarQube tool](https://www.sonarqube.org/)](https://www.sonarqube.org/).
+Then, we present how to integrate Moose advanced diagnostics to the well-known [SonarQube tool](https://www.sonarqube.org/).
 
 ## Perform analysis in a CI
 
@@ -114,7 +114,7 @@ The configuration of the CI to integrate visualization to the GitLab wiki is don
     }
     ```
 
-2. Adds a [Pharo](https://pharo.org) script in the file `ci/executeCode.st` that will perform the analysis.
+2. Add a [Pharo](https://pharo.org) script in the file `ci/executeCode.st` that will perform the analysis.
 
    ```st
     "=== Load MooseModel ==="
