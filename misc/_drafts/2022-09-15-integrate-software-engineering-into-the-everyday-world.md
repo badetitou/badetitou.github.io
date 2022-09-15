@@ -1,7 +1,7 @@
 ---
 author: Benoît "badetitou" Verhaeghe
 layout: post
-title:  "Integrate Software Enginnering into the everyday world"
+title:  "Integrate Software Engineering into the everyday world"
 date: 2022-09-15 00:00:00 +200
 tags: misc moose 
 ---
@@ -296,4 +296,4 @@ We also have to create a `reports/rules/rules.ston` file that contains the rules
 
 Critics are then available using the sonarqube interface.
 
-![Moose issue in SonarQube](/misc/img/2022-09-15-integrate-software-enginnering-into-the-everyday-world/Moose-issue-in-sonarqube.png){: .img-fill }
+![Moose issue in SonarQube](/misc/img/2022-09-15-integrate-software-engineering-into-the-everyday-world/Moose-issue-in-sonarqube.png){: .img-fill }
