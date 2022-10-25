@@ -65,13 +65,13 @@ install:
 parse:
   stage: parse
   image:     
-    name: badetitou/verveinej:v2.0.4
+    name: badetitou/verveinej:v3.0.0
     entrypoint: [""]
   needs:
     - job: install
       artifacts: true
   script:
-    - /VerveineJ-2.0.4/verveinej.sh -format json -o output.json -alllocals -anchor assoc -autocp ./repo .
+    - /VerveineJ-3.0.0/verveinej.sh -format json -o output.json -alllocals -anchor assoc -autocp ./repo .
   artifacts:
     paths:
       - output.json
