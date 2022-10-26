@@ -12,15 +12,15 @@ I mean, *really*.
 
 But sometimes, testing is hard, because you do not know how to start (often because it was hard to start with TDD or better XtremTDD :smile:).
 
-One challenging situation is the creation of mock to *represent* real case and use them as test ressources.
-This situation is common when dealing with code modelisation and meta-modelisation.
+One challenging situation is the creation of mock to _represent_ real cases and use them as test resources.
+This situation is common when dealing with code modelization and meta-modelization.
 
-Writting manually a model to test feature on it is hard.
-Today, I'll present you how to use GitHub Actions as well as GitLab CI to create tests for the Moose platform based on real ressources.
+Writing manually a model to test features on it is hard.
+Today, I'll present you how to use GitHub Actions as well as GitLab CI to create tests for the Moose platform based on real resources.
 
 ---
 
-First of all, let's describe a simple process when working on modelisation and meta-modelisation.
+First of all, let's describe a simple process when working on modelization and meta-modelization.
 
 {% mermaid %}
 flowchart LR
@@ -29,18 +29,18 @@ flowchart LR
 
 When performing a software system analysis using MDE, everything starts with parsing the source code of the application to produce a model.
 This model can then be stored in a file.
-Then, we import the file in our analysis environment, and we use the concrete model.
+Then, we import the file into our analysis environment, and we use the concrete model.
 
-All these steps are the one performed before using a model.
+All these steps are performed before using a model.
 *However*, when we create tests for the `Use` step, we do not perform all the steps before.
 We create a mock model.
-Even if this situation is confortable, it is error-prone and makes easy unsynchronisation between tools to manipulate a model, and tools that create a model.
+Even if this situation is comfortable, it is error-prone and makes easy un-synchronization between tools to manipulate a model, and tools that create a model.
 
-One solution is thus not to create mock model, but to create mock source code files.
+One solution is thus not to create a mock model, but to create mock source code files.
 
 ## Proposed approach
 
-Using mock source code file, we can reproduce the all process for each test (or better, group of tests :wink:)
+Using mock source code file, we can reproduce the process for each test (or better, a group of tests :wink:)
 
 ```mermaid
 flowchart LR
@@ -51,13 +51,13 @@ In the following, I describe the implementation/set-up of the approach for Pharo
 It consists of the following steps:
 
 - Create mock ressources
-- Create a bridge from your Pharo image to your ressources using PharoBridge
+- Create a bridge from your Pharo image to your resources using PharoBridge
 - Create a GitLab Ci or a GitHub Action
 - Test :heart:
 
 ## Create mock ressources
 
-The first step is to create mock ressources.
+The first step is to create mock resources.
 To do so, the easiest way is to include them in your git repository.
 
 You should have:
@@ -72,7 +72,7 @@ Inside the `tests` folder, it is possible to add several sub-folders for differe
 
 ## Create a Pharo Bridge
 
-To easily use the folder of the test ressource repository from Pharo, we will use the Pharo Bridge project.
+To easily use the folder of the test resource repository from Pharo, we will use the Pharo Bridge project.
 
 The project can be added to your Pharo Baseline with the following piece of code:
 
@@ -82,7 +82,7 @@ spec
     with: [ spec repository: 'github://jecisc/GitBridge:v1.x.x/src' ].
 ```
 
-Then, to connect our Pharo project to the test-resources, we create a class in one of our package, subclass of `GitBridge`.
+Then, to connect our Pharo project to the test resources, we create a class in one of our packages, a subclass of `GitBridge``.
 
 A full example would be:
 
@@ -100,19 +100,19 @@ MyBridge class >> initialize [
 ]
 
 { #category : #'accessing' }
-MyBridge class >> testsRessources [
+MyBridge class >> testsResources [
     ^ self root / 'tests'
 ]
 ```
 
-The method `testsRessources` can then be use to access the local folder with the tests ressources.
+The method `testsResources` can then be used to access the local folder with the test resources.
 
-**Be carreful**, this set-up only works in local for now.
-To use it with GitHub and GitLab, we first have to setup our CI files.
+**Be careful**, this setup only works locally for now.
+To use it with GitHub and GitLab, we first have to set up our CI files.
 
-## SetUp CI files
+## Set up CI files
 
-To setup our CI files, we first create in the `ci` folder of our repository a `preloading.st` file that will execute Pharo code.
+To set up our CI files, we first create in the `ci` folder of our repository a `preloading.st` file that will execute Pharo code.
 
 ```st
 (IceRepositoryCreator new
@@ -122,9 +122,9 @@ To setup our CI files, we first create in the `ci` folder of our repository a `p
 ```
 
 This code will be run by the CI and register the Pharo project inside the Iceberg tool of Pharo.
-This registration is then used by GitBridge to retrieve the location of the tests ressources folder.
+This registration is then used by GitBridge to retrieve the location of the test resources folder.
 
-Then, we have to update the `.smalltalk.ston` file (used by every smalltalk ci process) and adds a reference to our `preloading.st` file
+Then, we have to update the `.smalltalk.ston` file (used by every Smalltalk ci process) and add a reference to our `preloading.st` file.
 
 ```st
 SmalltalkCISpec {
@@ -133,14 +133,14 @@ SmalltalkCISpec {
 }
 ```
 
-### SetUp GitLab CI
+### Set up GitLab CI
 
 The last step for GitLab is the creation of the `.gitlab-ci.yml`.
 
-This CI can includes several steps.
-We now present the steps dedicated to testing Java model, but the same steps applied for other programming language.
+This CI can include several steps.
+We now present the steps dedicated to testing the Java model, but the same steps apply to other programming languages.
 
-First, we have to parse the tests-ressources using the [docker version of VerveineJ]()
+First, we have to parse the tests-resources using the [docker version of VerveineJ](https://hub.docker.com/r/badetitou/verveinej)
 
 ```yml
 stages:
@@ -162,9 +162,9 @@ parse:
       - output.json
 ```
 
-The `parse` stage usees the `v3` of VerveineJ, parses the code, produces a `output.json` file including the produced model.
+The `parse` stage uses the `v3` of VerveineJ, parses the code, and produces an `output.json`` file including the produced model.
 
-Then, we add the common `tests` stage of smalltalk ci.
+Then, we add the common `tests` stage of Smalltalk ci.
 
 ```yml
 tests:
