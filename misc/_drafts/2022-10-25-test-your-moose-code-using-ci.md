@@ -137,7 +137,7 @@ SmalltalkCISpec {
 
 ### Set up GitLab CI
 
-The last step for GitLab is the creation of the `.gitlab-ci.yml`.
+The last step for GitLab is the creation of the `.gitlab-ci.yml` file.
 
 This CI can include several steps.
 We now present the steps dedicated to testing the Java model, but the same steps apply to other programming languages.
@@ -183,4 +183,34 @@ This stage creates a new `Moose64-10` image and performs the CI based on the `.s
 
 ### Setup GitHub CI
 
+The last step for GitLab is the creation of the `.github/workflows/test.yml` file.
+
+In addition to a common smalltalk-ci workflow, we have to configure differently the checkout step, and add a step that parses the code.
+
+For the checkout step, GitBridge (and more specifically Iceberg) needs the history of commits.
+Thus, we need to configure the checkout actions to fetch the all history.
+
+```yml
+- uses: actions/checkout@v3
+  with:
+    fetch-depth: '0'
+```
+
+Then, we can add a step that runs VerveineJ using its docker version.
+
+```yml
+- uses: addnab/docker-run-action@v3
+  with:
+    registry: hub.docker.io
+    image:  badetitou/verveinej:v3.0.0
+    options: -v ${{ github.workspace }}:/src
+    run: |
+      cd tests
+      /VerveineJ-3.0.0/verveinej.sh  -format json -o output.json -alllocals -anchor assoc .
+      cd ..
+```
+
+Note that, before running VerveineJ, we move (*cd*) to the tests location to better deal with sourceAnchor of Moose.
+
 ## Test
+
