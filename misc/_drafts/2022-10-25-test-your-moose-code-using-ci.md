@@ -112,7 +112,7 @@ To use it with GitHub and GitLab, we first have to set up our CI files.
 
 ## Set up CI files
 
-To set up our CI files, we first create in the `ci` folder of our repository a `preloading.st` file that will execute Pharo code.
+To set up our CI files, we first create in the `ci` folder of our repository a `pretesting.st` file that will execute Pharo code.
 
 ```st
 (IceRepositoryCreator new
@@ -124,12 +124,14 @@ To set up our CI files, we first create in the `ci` folder of our repository a `
 This code will be run by the CI and register the Pharo project inside the Iceberg tool of Pharo.
 This registration is then used by GitBridge to retrieve the location of the test resources folder.
 
-Then, we have to update the `.smalltalk.ston` file (used by every Smalltalk ci process) and add a reference to our `preloading.st` file.
+Then, we have to update the `.smalltalk.ston` file (used by every Smalltalk ci process) and add a reference to our `pretesting.st` file.
 
 ```st
 SmalltalkCISpec {
-  #preLoading : 'ci/preLoading.st',
-    ...
+  #preTesting : SCICustomScript {
+    #path : 'ci/pretesting.st'
+  }
+  ...
 }
 ```
 
