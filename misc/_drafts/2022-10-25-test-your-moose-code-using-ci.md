@@ -210,7 +210,51 @@ Then, we can add a step that runs VerveineJ using its docker version.
       cd ..
 ```
 
-Note that, before running VerveineJ, we move (*cd*) to the tests location to better deal with sourceAnchor of Moose.
+Note that, before running VerveineJ, we move (*cd) to the tests folder to better deal with source anchors of Moose.
 
 ## Test
 
+The last step is to adapt your tests to use the produced model.
+To do so, it is possible to remove the creation of the mock model, by loading the model.
+
+For example:
+
+```st
+externalFamixClass := FamixJavaClass new
+  name: 'ExternalFamixJavaClass';
+  yourself.
+externalFamixMethod := FamixJavaMethod new
+  name: 'externalFamixJavaMethod';
+  yourself.
+externalFamixClass addMethod: externalFamixMethod.
+myClass := FamixJavaClass new
+  name: 'MyClass';
+  yourself.
+externalFamixMethod declaredType: myClass.
+famixModel addAll: { 
+  externalFamixClass.
+  externalFamixMethod.
+  myClass }.
+```
+
+Can be converted into:
+
+```st
+FJMUBridge testsResources / 'output.json' readStreamDo: [ :stream | 
+    famixModel importFromJSONStream: stream ].
+famixModel rootFolder: FJMUBridge testsResources pathString.
+
+externalFamixClass := famixModel allModelClasses detect: [ :c | c name = 'ExternalFamixJavaClass' ].
+myClass := famixModel allModelClasses detect: [ :c | c name = 'MyClass' ].
+externalFamixMethod := famixModel allModelMethods detect: [ :c | c name = 'externalFamixJavaMethod' ].
+```
+
+## Congrats
+
+You can now test your code on a model generated as a real-world model!
+
+It is clear that this solution slows down tests performance, however, it also ensures that your mock model is well-created because it is created by the parser tool.
+
+A good test practice is thus a mix of both solutions, classic tests in the code, and full scenario tests based on real resources.
+
+Have fun testing your code now!
