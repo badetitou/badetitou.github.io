@@ -40,12 +40,12 @@ One solution is thus not to create a mock model, but to create mock source code 
 
 ## Proposed approach
 
-Using mock source code file, we can reproduce the process for each test (or better, a group of tests :wink:)
+Using mock source code files, we can reproduce the process for each test (or better, a group of tests :wink:)
 
-```mermaid
+{% mermaid %}
 flowchart LR
     SourceCode(Mock Source Code) --> Parse(Parse with Docker) --> modelfile(Model File) --> Import(Import with script) --> model(Model in Memory) --> Test
-```
+{% endmermaid %}
 
 In the following, I describe the implementation/set-up of the approach for Pharo and Moose.
 It consists of the following steps:
@@ -211,6 +211,8 @@ Then, we can add a step that runs VerveineJ using its docker version.
 ```
 
 Note that, before running VerveineJ, we move (*cd) to the tests folder to better deal with source anchors of Moose.
+
+You can find a [full example in the FamixJavaModelUpdater repository](https://github.com/badetitou/FamixJavaModelUpdater/blob/main/.github/workflows/test.yml)
 
 ## Test
 

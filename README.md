@@ -1,1 +1,9 @@
-Blabla this is my site web for testing some staff
+# [badetitou.fr](https://badetitou.fr)
+
+## Test locally
+
+I can build this project with
+
+```sh
+bundle exec jekyll serve --draft
+```
