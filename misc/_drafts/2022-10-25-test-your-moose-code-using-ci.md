@@ -72,7 +72,7 @@ Inside the `tests` folder, it is possible to add several sub-folders for differe
 
 ## Create a Pharo Bridge
 
-To easily use the folder of the test resource repository from Pharo, we will use the Pharo Bridge project.
+To easily use the folder of the test resource repository from Pharo, we will use the [GitBridge project](https://github.com/jecisc/GitBridge).
 
 The project can be added to your Pharo Baseline with the following piece of code:
 
