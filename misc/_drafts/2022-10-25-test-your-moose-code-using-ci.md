@@ -68,7 +68,7 @@ You should have:
 > tests // Tests ressources
 ```
 
-Inside the `tests` folder, it is possible to add several sub-folders for different tests ressources.
+Inside the `tests` folder, it is possible to add several sub-folders for different test resources.
 
 ## Create a Pharo Bridge
 
