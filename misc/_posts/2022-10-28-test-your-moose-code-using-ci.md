@@ -2,7 +2,7 @@
 author: Benoît "badetitou" Verhaeghe
 layout: post
 title:  "Test your Moose code using CIs"
-date: 2022-10-25 00:00:00 +200
+date: 2022-10-28 00:00:00 +200
 tags: misc moose 
 ---
 
@@ -263,3 +263,10 @@ A good test practice is thus a mix of both solutions, classic tests in the analy
 Have fun testing your code now!
 
 > Thanks [C. Fuhrman](https://github.com/fuhrmanator) for the typos fixes. :banana:
+
+<div class="text-center">
+    <a class="m-button" href="https://modularmoose.org/2022/10/27/test-your-moose-code-using-ci.html" target="_blank">
+        Also published at *modularmoose.org*
+        <i class="fas fa-external-link-alt"></i>
+    </a>
+</div>
