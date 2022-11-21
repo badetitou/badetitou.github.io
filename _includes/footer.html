@@ -14,6 +14,16 @@
                         </a>
                     </li>
                     {% endif %}
+                    {% if site.mastodon_url %}
+                    <li>
+                        <a rel="me" href="{{ site.mastodon_url }}">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-mastodon fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    {% endif %}
                     {% if site.facebook_username %}
                     <li>
                         <a href="https://www.facebook.com/{{ site.facebook_username }}">
@@ -64,14 +74,6 @@
                         </a>
                     </li>
                     {% endif %}
-                    <li>
-                        <a rel="me" href="https://piaille.fr/@badetitou"></a>
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fas fa-mastodon fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
                 </ul>
                 <p class="text-center">Copyright &copy; {{ site.copyright_name }} {{ site.time | date: '%Y' }}
                 </p>
