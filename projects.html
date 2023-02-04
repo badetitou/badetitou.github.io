@@ -53,6 +53,12 @@ title: "Projects"
                                 <i class="fab fa-youtube"></i>
                             </a>
                             {% endif %}
+                            {% if project.privacyLink %}
+                            <a class="m-button" href="{{ project.privacyLink }}">
+                                <i class="fas fa-user-secret"></i>
+                                Privacy
+                            </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
