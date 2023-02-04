@@ -20,6 +20,11 @@
         "youtubeLink": "https://youtu.be/ZANPYfzsF0Q"
     },
     {
+        "title": "My Home",
+        "description": "A flutter app to deal with your home management",
+        "webLink": "https://my-home.badetitou.fr"
+    },
+    {
         "title": "Pokécard TCG",
         "githubLink": "https://github.com/badetitou/pokecard-tcg",
         "description": "This is my first flutter project. It consists of a tool that help one building its Pokémon card collection.",
