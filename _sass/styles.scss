@@ -27,6 +27,7 @@ $secondary-text: #fff;
 @import 'm-accordion';
 @import 'm-button';
 @import 'm-timeline';
+@import 'syntax/syntax.scss';
 
 html {
 
@@ -263,6 +264,7 @@ a:focus {
   @import 'm-button';
   @import 'm-blockquote';
   @import 'm-timeline';
+  @import 'syntax/syntax-dark.scss';
   
   .card:hover {
     box-shadow: 0 10px 20px rgba(89,89,89,.80), 0 4px 8px rgba(89,89,89,.06);
