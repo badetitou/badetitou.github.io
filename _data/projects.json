@@ -20,6 +20,13 @@
         "youtubeLink": "https://youtu.be/ZANPYfzsF0Q"
     },
     {
+        "title": "Jackson-Js",
+        "githubLink": "https://github.com/badetitou/jackson-js",
+        "description": "JavaScript object serialization and deserialization library using decorators. It supports also advanced Object concepts such as polymorphism, Object identity and cyclic objects. ",
+        "docLink": "/jackson-js/latest/index.html",
+        "webLink": "https://www.npmjs.com/package/@badetitou/jackson-js"
+    },
+    {
         "title": "My Home",
         "description": "A flutter app to deal with your home management",
         "webLink": "https://my-home.badetitou.fr",
