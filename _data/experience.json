@@ -1,46 +1,51 @@
 [
-    {
-        "company": "Berger-Levrault",
-        "link": "https://berger-levrault.com",
-        "jobs": [
-            {
-                "job_title": "Research Engineer",
-                "dates": "November 2021 - Present",
-                "quote": "Modernizing application",
-                "description": [
-                    "- Migrating several applications\n- Manage Ph.D. Students and interns\n- Writing research papers"
-                ]
-            },
-            {
-                "job_title": "Ph.D. Student",
-                "dates": "January 2019 - October 2021",
-                "quote": "Modernizing application",
-                "description": [
-                    "- Migrating GWT application to Angular\n- Set up hybrid architecture\n- Writing research papers\n- Teaching"
-                ]
-            },
-            {
-                "job_title": "R&D Engineer",
-                "dates": "February 2018 - December 2018",
-                "quote": "Modernizing application",
-                "description": [
-                    "- Creation of tools to migrate GWT applications to Angular technology\n- Meta-modeling\n- Code analysis\n- State of the art"
-                ]
-            }
+  {
+    "company": "Berger-Levrault",
+    "link": "https://berger-levrault.com",
+    "jobs": [
+      {
+        "job_title": "Research Engineer",
+        "dates": "November 2021 - Present",
+        "quote": "Modernizing application",
+        "description": [
+          "- Migrating several applications\n- Manage Ph.D. Students and interns\n- Writing research papers"
+        ],
+        "skills": [
+          "Angular",
+          "Typescript",
+          "Pharo"
         ]
-    },
-    {
-        "company": "Inria - RMoD",
-        "link": "https://www.inria.fr/fr/rmod",
-        "jobs": [
-            {
-                "job_title": "Intern",
-                "dates": "May 2017 - Sept 2017",
-                "quote": "Testing applications",
-                "description": [
-                    "- Learning the Pharo programming language\n- Understanding tests selection\n- Developing an automatic tests selection tool\n- Test the tool with the Pharo community\n- Integration of the tool in the Pharo core\n- Writing research paper"
-                ]
-            }
+      },
+      {
+        "job_title": "Ph.D. Student",
+        "dates": "January 2019 - October 2021",
+        "quote": "Modernizing application",
+        "description": [
+          "- Migrating GWT application to Angular\n- Set up hybrid architecture\n- Writing research papers\n- Teaching"
         ]
-    }
+      },
+      {
+        "job_title": "R&D Engineer",
+        "dates": "February 2018 - December 2018",
+        "quote": "Modernizing application",
+        "description": [
+          "- Creation of tools to migrate GWT applications to Angular technology\n- Meta-modeling\n- Code analysis\n- State of the art"
+        ]
+      }
+    ]
+  },
+  {
+    "company": "Inria - RMoD",
+    "link": "https://www.inria.fr/fr/rmod",
+    "jobs": [
+      {
+        "job_title": "Intern",
+        "dates": "May 2017 - Sept 2017",
+        "quote": "Testing applications",
+        "description": [
+          "- Learning the Pharo programming language\n- Understanding tests selection\n- Developing an automatic tests selection tool\n- Test the tool with the Pharo community\n- Integration of the tool in the Pharo core\n- Writing research paper"
+        ]
+      }
+    ]
+  }
 ]

@@ -4,117 +4,129 @@ description: 'Ph.D. - R&D Engineer'
 ---
 
 <div class="row">
-    <div class="col s12 m12">
-        <div class="card">
-            <div class="card-content">
-                <div class="card-title">About me</div>
+  <div class="col s12 m12">
+    <div class="card">
+      <div class="card-content">
+        <div class="card-title">About me</div>
+        <div class="row">
+          <div class="col m9 s9">
+            My name is Benoît "badetitou" Verhaeghe. I work on migration tools and
+            on tests. You can find all my public projects on Github. I also wrote
+            some short french stories.
+          </div>
+          <div class="col m3 s3 profile-image-container">
+            <img src="https://avatars.githubusercontent.com/u/6225039" class="profile-image">
+          </div>
+        </div>
+        <div class="card-action">
+          <a class="m-button" href="/stories">
+            French Stories
+            <i class="fas fa-book-open"></i>
+          </a>
+          <a class="m-button" href="https://github.com/badetitou/cv-en/releases/download/latest/cv.pdf">
+            English CV
+            <i class="fas fa-download"></i>
+          </a>
+          <a class="m-button" href="https://github.com/badetitou/AltaCV/releases/download/latest/cv.pdf">
+            French CV
+            <i class="fas fa-download"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col s12 m12">
+    <div class="card">
+      <div class="card-content">
+        <div class="card-title">Experience</div>
+        {% for experience in site.data.experience %}
+
+        <div class="row">
+          <div class="col m12 s12">
+            <h4 style="margin-top: 0px">{{ experience.company }}</h4>
+            <a style="font-style: italic" target="_blank" href="{{ experience.link }}">{{ experience.link }}</a>
+          </div>
+          <div class="col m12 s12">
+            <div class="timeline">
+              {% for job in experience.jobs %}
+              <div class="card timeline-card timeline-card-primary">
+                <div class="card-content">
+                  <div class="card-title">{{ job.job_title }} — <span style="font-style: italic;">{{ job.dates }}</span>
+                  </div>
+                  {% for description in job.description %} {{ description | markdownify }} {% endfor %}
+                </div>
                 <div class="row">
-                    <div class="col m9 s9">
-                        My name is Benoît "badetitou" Verhaeghe. I work on migration tools and
-                        on tests. You can find all my public projects on Github. I also wrote
-                        some short french stories.
-                    </div>
-                    <div class="col m3 s3 profile-image-container">
-                        <img src="https://avatars.githubusercontent.com/u/6225039" class="profile-image">
-                    </div>
+                  <div class="col m2">
+                  </div>
+                  <div class="col m8">
+                    {% for skill in job.skills %}
+                    <span class="badge">{{ skill }}</span>
+                    {% endfor %}
+                  </div>
+                  <div class="col m2">
+                  </div>
                 </div>
-                <div class="card-action">
-                    <a class="m-button" href="/stories">
-                        French Stories
-                        <i class="fas fa-book-open"></i>
-                    </a>
-                    <a class="m-button" href="https://github.com/badetitou/cv-en/releases/download/latest/cv.pdf">
-                        English CV
-                        <i class="fas fa-download"></i>
-                    </a>
-                    <a class="m-button" href="https://github.com/badetitou/AltaCV/releases/download/latest/cv.pdf">
-                        French CV
-                        <i class="fas fa-download"></i>
-                    </a>
-                </div>
+              </div>
+              {% endfor %}
             </div>
+          </div>
         </div>
+        {% if forloop.last == false %}
+        <div class="separator"></div>
+        {% endif %}
+        {% endfor %}
+      </div>
     </div>
+  </div>
 
-    <div class="col s12 m12">
-        <div class="card">
-            <div class="card-content">
-                <div class="card-title">Experience</div>
-                {% for experience in site.data.experience %}
+  <div class="col s12 m12">
+    <div class="card">
+      <div class="card-content">
+        <div class="card-title">Education</div>
 
-                <div class="row">
-                    <div class="col m12 s12">
-                        <h4 style="margin-top: 0px">{{ experience.company }}</h4>
-                        <a style="font-style: italic" target="_blank" href="{{ experience.link }}">{{ experience.link }}</a>
-                    </div>
-                    <div class="col m12 s12">
-                        <div class="timeline">
-                            {% for job in experience.jobs %}
-                                <div class="card timeline-card timeline-card-primary">
-                                    <div class="card-content">
-                                        <div class="card-title">{{ job.job_title }} — <span style="font-style: italic;">{{ job.dates }}</span></div>
-                                        {% for description in job.description %} {{ description | markdownify }} {% endfor %}
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-                {% if forloop.last == false %}
-                <div class="separator"></div>
-                {% endif %}
-                {% endfor %}
-            </div>
+        {% for education in site.data.education %}
+
+        <div class="row">
+          <div class="col m4 s12">
+            <h4 style="margin-top: 0px">{{ education.name }}</h4>
+            <div>{{ education.qualification }}</div>
+            <a style="font-style: italic" target="_blank" href="{{ education.link }}">{{ education.link
+              }}</a>
+            <div>{{ education.dates }}</div>
+          </div>
+          <div class="col m8 s12">
+            {% for description in education.description %} {{ description | markdownify }} {% endfor %}
+          </div>
         </div>
+
+        {% if forloop.last == false %}
+        <div class="separator"></div>
+        {% endif %} {% endfor %}
+      </div>
     </div>
+  </div>
 
-    <div class="col s12 m12">
-        <div class="card">
-            <div class="card-content">
-                <div class="card-title">Education</div>
-
-                {% for education in site.data.education %}
-
-                <div class="row">
-                    <div class="col m4 s12">
-                        <h4 style="margin-top: 0px">{{ education.name }}</h4>
-                        <div>{{ education.qualification }}</div>
-                        <a style="font-style: italic" target="_blank" href="{{ education.link }}">{{ education.link
-                            }}</a>
-                        <div>{{ education.dates }}</div>
-                    </div>
-                    <div class="col m8 s12">
-                        {% for description in education.description %} {{ description | markdownify }} {% endfor %}
-                    </div>
-                </div>
-
-                {% if forloop.last == false %}
-                <div class="separator"></div>
-                {% endif %} {% endfor %}
-            </div>
-        </div>
+  <div class="col s12 m6">
+    <div class="card">
+      <div class="card-content">
+        <div class="card-title">Languages</div>
+        <ul class="collection">
+          <li class="collection-item"><span class="badge">100%</span>French: native speaker</li>
+          <li class="collection-item"><span class="badge">80%</span>English</li>
+        </ul>
+      </div>
     </div>
+  </div>
 
-    <div class="col s12 m6">
-        <div class="card">
-            <div class="card-content">
-                <div class="card-title">Languages</div>
-                <ul class="collection">
-                    <li class="collection-item"><span class="badge">100%</span>French: native speaker</li>
-                    <li class="collection-item"><span class="badge">80%</span>English</li>
-                </ul>
-            </div>
-        </div>
+  <div class="col s12 m6">
+    <div class="card">
+      <div class="card-content">
+        <div class="card-title">Skills</div>
+        {% for skill in site.data.skills %}
+        <span class="badge">{{ skill.name }}</span>
+        {% endfor %}
+      </div>
     </div>
-
-    <div class="col s12 m6">
-        <div class="card">
-            <div class="card-content">
-                <div class="card-title">Skills</div>
-                {% for skill in site.data.skills %}
-                <span class="badge">{{ skill.name }}</span>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
+  </div>
 </div>
