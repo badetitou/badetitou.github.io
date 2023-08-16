@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Benoît Verhaeghe's blog">
+    
+
+    <link rel="icon" href="/img/logo/logo.png" type="image/x-icon">
+
+
+    <title>SmartTest - Tutorial - Benoît Verhaeghe</title>
+
+    <link rel="canonical" href="http://badetitou.github.io/projects/SmartTest/">
+
+    <!-- <link rel="stylesheet" href="/assets/vendor/fontawesome-free/css/all.min.css"> -->
+    
+    <script src="https://kit.fontawesome.com/5574707d0b.js" crossorigin="anonymous"></script>
+    
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/main.css">
+    <!-- My JS -->
+    <script src="/js/my-head.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link type="application/atom+xml" rel="alternate" href="http://badetitou.github.io/feed.xml" title="Benoît Verhaeghe" />
+
+</head>
+
+
+<body>
+
+    <nav>
+    <div class="nav-wrapper">
+        <a href="#" onclick="openNav()" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        
+        <ul class="left hide-on-med-and-down"> <li>
+        <a href="/" style="margin-left: 20px;"> Benoît Verhaeghe</a></li></ul>
+
+        <ul class="right hide-on-med-and-down">
+            <li>
+                <span style="width: 30px; display: inline-block;">
+                    <i id="theme-switch" style="font-size: 20px" class="fa-solid fa-1x"></i>
+                </span>
+            </li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/post/">Posts</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+        
+        
+            <li><a href="/research/">Research</a></li>
+        
+        
+        
+        
+        
+        </ul>
+        
+    </div>
+</nav>
+
+<ul class="sidenav" id="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <li><a href="/">Home</a></li>
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/post/">Posts</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+    
+        
+            <li><a href="/research/">Research</a></li>
+        
+    
+        
+        
+    
+</ul>
+
+<div id="sidenav-overlay" onclick="closeNav()"></div>
+
+    <!-- Project Header -->
+<header class="intro-header"
+    style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="post-heading text-center">
+                <h1>SmartTest - Tutorial</h1>
+                
+                <span class="meta">Posted by Benoît "badetitou" Verhaeghe
+                    on August 21, 2017</span>
+                <span class="post-meta">
+                    
+                    (Updated: Apr 22, 2018)
+                    
+                </span>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Project Content -->
+<article class="container">
+    <div class="row">
+        <div class="col s12 m12">
+            <div class="card">
+                <div class="card-content">
+                    <h2 id="what-is-smarttest">What is SmartTest?</h2>
+
+<p><img src="img/Medalles2017silver-small.png" alt="SmartTest innovation award" class="img-fill" /></p>
+
+<p>SmartTest is a plugin developed in <a href="http://pharo.org/">Pharo</a>. It is an Add-On for Quality Assistant by <a href="http://yuriy.tymch.uk/">Yuriy Tymchuk</a> and provides new rules and critiques.
+But it has also its own implementation of feedback about testing</p>
+
+<p>The goal of SmartTest is to provide to the developers the list of tests they should run after they modify their code.
+With this plugin installed, developers will save time and will develop in a better way (hopefully).</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jAvfdN2z5-s" frameborder="0" allowfullscreen=""></iframe>
+
+<h2 id="installation">Installation</h2>
+
+<p>I supposed you have already installed Pharo. If not, please <a href="http://pharo.org/download">install it</a>.</p>
+
+<p>To install SmartTest. The easiest way is to use the catalog browser.</p>
+
+<p><img src="img/install_smartTest.png" alt="Install Smartest" class="img-fill" /></p>
+
+<h2 id="utilisation---reneraku-integration">Utilisation - Reneraku Integration</h2>
+
+<p>Once you install SmartTest, it is auto-activated (it can take a few seconds, but you will not notice them).</p>
+
+<p>You can disable this way of utilization in the setting.
+To do that, you only have to toggle the corresponding button in the settings.</p>
+
+<p><img src="img/renerakuintegration.png" alt="Activate QualityAssistant Integration" class="img-fill" /></p>
+
+<p>Each time you select a method or a class. Two rules can be activated.</p>
+
+<h3 id="should-write-tests">Should write tests</h3>
+
+<p><img src="img/shouldWriteTest.png" alt="shouldWriteTest" class="img-fill" /></p>
+
+<p>This critique indicates that the plugin didn’t find any test related to the method you’ve selected.
+Normally, it means you didn’t write a test for this method.
+So it advises you to create a test (because yes… It’s essential !!!).</p>
+
+<p>If you click on the fix button, the plugin offers you to create it quickly (from a template).</p>
+
+<h3 id="should-run-tests">Should run tests</h3>
+
+<p><img src="img/shouldRunTest.png" alt="shouldRunTest" class="img-fill" /></p>
+
+<p>This critique indicates that the plugin has found test(s) related to the method you’ve selected.
+This critique offers you two new actions</p>
+
+<ul>
+  <li>By clicking on the #testNotRun icon, the plugin will execute the tests related to the method.
+If there are errors or fails, the button will turn red or yellow (but the debugger will not be displayed !!!).</li>
+  <li>By clicking on the #smallWindow icon, the plugin will open a new window with the test it’s found.</li>
+</ul>
+
+<p><img src="img/AutoTestSelection.png" alt="AutoTestSelection" class="img-fill" /></p>
+
+<p>This window displays the list of tests SmartTest has found.
+You’re able to run each run by clicking on the #testNotRun icon.
+The tests will be run in debug mode (errors will be displayed).
+By clicking on the “Run all test” button, you will run all the tests displays in debug mode.</p>
+
+<h2 id="options">Options</h2>
+
+<p>Many options are available to custom your experience with SmartTest.
+You should read this part to use SmartTest at the maximum of its possibilities.
+You can extend each option and so create your own experience.</p>
+
+<h3 id="enabledisable-research">Enable/Disable research</h3>
+
+<p>You can enable or disable the research of tests for a method or for class only.
+To do that, you only have to toggle the corresponding button in the settings.</p>
+
+<p><img src="img/MethodActivated.png" alt="Method Activation" class="img-fill" /></p>
+
+<p><img src="img/ClassActivated.png" alt="Class Activation" class="img-fill" /></p>
+
+<h3 id="testing-strategy">Testing strategy</h3>
+
+<p><img src="img/testingStrategy.png" alt="Testing strategy" class="img-fill" /></p>
+
+<p>SmartTest provides four strategies for testing.</p>
+
+<ul>
+  <li><em>Never</em> will only display the button as described previously.</li>
+  <li><em>Always</em> will execute all the test SmartTest finds as soon as it finds the tests.
+If you change a method A then select a method B before the end of the research of relative tests, SmartTest will continue to search and run the tests as soon as it finds them.</li>
+  <li><em>Every 5 Minutes</em> will collect the tests SmartTest find during a duration of 5 minutes.
+Then SmartTest will run the tests and, if a test fails, SmartTest will display a window with the test suite it ran.</li>
+  <li><em>Each modification</em> will run the tests SmartTest find each time you modify your code.
+This is the default strategy.
+As for always strategy, if you change a method A and select a method B before the end of the research of relative tests, then SmartTest will continue to search and run the tests as soon as it finds them.</li>
+</ul>
+
+<p>You’re able to extend <em>SmTTestingStrategy</em> if you’d like to create your own testing strategy.</p>
+
+<h3 id="finder">Finder</h3>
+
+<p><img src="img/finder.png" alt="finder" class="img-fill" /></p>
+
+<p>The finder contains the implementation of how SmartTest will find test relative to a method.
+The default will work as follow, for</p>
+
+<ul>
+  <li>a method, it will use the current change impact strategy (see Change Impact strategy).</li>
+  <li>a class, it will search the method that uses the variables of the class.</li>
+  <li>a test method, it will provide the test method</li>
+  <li>a setup, it will provide all the tests concerning by this setup</li>
+  <li>a teardown, it will provide all the tests concerning by this teardown</li>
+</ul>
+
+<h3 id="filter">Filter</h3>
+
+<p><img src="img/filter.png" alt="filter" class="img-fill" /></p>
+
+<p>You can also define a filter for the finder strategy to optimize our tool.
+Currently, we are filtering test relative to the method package.
+That includes all the class in our package, the package with the same base name (“SmartTest-Patate” and “SmartTest-Frite-Poulet” are two packages with the same base name “SmartTest”).
+And the package that calls our method class (“MyClass»#hello” is in the package A. In the package B, there is at least a method that calls “MyClass”. So, the methods inside the package B are <strong>not</strong> rejected).</p>
+
+<p>(working on schema)</p>
+
+<p>You’re able to extend <em>SmTFilterStrategy</em> if you’d like to create your own strategy to filter tests.</p>
+
+<h3 id="runner">Runner</h3>
+
+<p><img src="img/runner.png" alt="runner" class="img-fill" /></p>
+
+<p>The runner is the part of SmartTest which run the tests provided by the finder.
+By default, the SmartRunner is used.</p>
+
+<ul>
+  <li>If you click on “run button” of the critique, it will run the found tests and change its color depending on the result (green, yellow or red).</li>
+  <li>On the “Run All Button” or on the method button, the test will be run in debug mode (so if they fail, or raise an error, the debugger will open).</li>
+</ul>
+
+<p>The Debug one will open the debugger if an error appears (don’t depend on the button you click on).
+The notice one works as the debug one but it <strong>never</strong> opens the debugger.</p>
+
+<h2 id="utilisation---own-implementation">Utilisation - Own implementation</h2>
+
+<p>You can activate the own implementation of SmartTest by enabling it in the settings menu.</p>
+
+<p><img src="img/collectButton.png" alt="Collect button" class="img-fill" /></p>
+
+<p>Then the Test Button will appear.
+Each time you modify a method.
+The Button will save the tests link to this method.
+When you click on the button, those tests are run, and the button provides you a feedback.</p>
+
+<p><img src="img/relative_tests_button.png" alt="Relative Test Button" class="img-fill" /></p>
+
+<h2 id="uninstall">Uninstall</h2>
+
+<p>To uninstall SmartTest, it’s a bit hard currently. You have to follow this instruction:</p>
+
+<ul>
+  <li>Unload SmartTest</li>
+  <li>Run this command in a playground <code class="language-plaintext highlighter-rouge">ReRuleManager cleanUp</code></li>
+  <li>ReLoad Kernel</li>
+  <li>Reload SUnit-Core</li>
+  <li>Reload QualityAssistant</li>
+  <li>Reload Nautilus</li>
+</ul>
+
+<h2 id="links">Links</h2>
+
+<p>The projects are present on <a href="https://github.com/badetitou/SmartTest">github</a>.
+So you can report issues (or features you want to see implemented).
+And you can do pull request too.</p>
+
+<h3 id="development-version">Development version</h3>
+
+<p><em>The best way since Pharo7 is to use iceberg !!</em></p>
+
+<p>You can also execute this script</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Metacello</span> <span class="nb">new</span>
+  <span class="nf">baseline:</span> <span class="ss">#SmartTest</span><span class="p">;</span>
+  <span class="nf">githubUser:</span> <span class="s">'badetitou'</span> <span class="nf">project:</span> <span class="s">'SmartTest'</span> <span class="nf">commitish:</span> <span class="s">'development'</span> <span class="nf">path:</span> <span class="s">'.'</span><span class="p">;</span>
+  <span class="nf">onWarningLog</span><span class="p">;</span>
+  <span class="nf">load</span>
+</code></pre></div></div>
+
+<h2 id="publications">Publications</h2>
+
+<h3 id="conference-articles">Conference Articles</h3>
+
+<div class="masonry masonry-2">
+
+<ol class="bibliography"><li><div class="accordion">
+  <input type="checkbox" id="Verh17a" />
+  <label class="accordion-header" for="Verh17a">
+    <div class="bibliography-header">
+      <div class="bibliography-title">
+        Usage of Tests in an Open-Source Community
+      </div>
+      <div class="bibliography-author">
+        
+          Benoı̂t Verhaeghe, 
+        
+          Nicolas Anquetil, 
+        
+          Stéphane Ducasse, 
+        
+          Vincent Blondeau
+        
+      </div>
+      <div class="bibliography-booktitle">
+        Proceedings of the 12th Edition of the International Workshop on Smalltalk Technologies
+        
+      </div>
+      
+        <i>2017</i>
+      
+      
+        <a href="http://rmod-files.lille.inria.fr/Team/Texts/Papers/Verh17a-IWST-TestUsage.pdf">PDF</a>
+      
+      
+        <a href="https://dx.doi.org/10.1145/3139903.3139909">DOI</a>
+      
+    </div>
+  </label>
+  <div class="accordion-content">
+    During the development, it is known that tests ensure the good behavior of applications and improve their quality. We studied developers testing behavior inside the Pharo community in the purpose to improve it. In this paper, we take inspiration from a paper of the literature to enhance our comprehension of test habits in our open source community. We report results of a field study on how often the developers use tests in their daily practice, whether they make use of tests selection and why they do. Results are strengthened by interviews with developers involved in the study. The main findings are that developers run tests every modifications of their code they did; most of the time they practice test selection (instead of launching an entire test suite); however they are not accurate in their selection; they change their selection depending on the duration of the tests and; contrary to expectation, test selection is not influenced by the size of the test suite.
+  </div>
+</div>
+</li></ol>
+
+</div>
+
+<h2 id="some-contributors">Some Contributors</h2>
+
+<ul>
+  <li><a href="http://www.lifl.fr/~etien/">Anne Etien</a></li>
+  <li><a href="http://researchers.lille.inria.fr/~nanqueti/nicolasAnquetil.html">Nicolas Anquetil</a></li>
+  <li><a href="https://www.linkedin.com/in/eleonorewald/">Eleonore Wald</a></li>
+</ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col m12">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="https://twitter.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a rel="me" href="https://piaille.fr/@badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-mastodon fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="https://orcid.org/0000-0002-4588-2698">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-orcid fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://github.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://www.linkedin.com/in/benoitverhaeghe">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="mailto:benoit@badetitou.fr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="text-center">Copyright &copy; badetitou 2023
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/my.js"></script>
+<script src="/js/my-sidenav.js"></script>
+
+<script src="/js/lightense.min.js"></script>
+
+<script>
+
+  // Init Lightense
+  window.addEventListener("load", function() {
+    Lightense("img:not(.no-lightense),.lightense", {
+      background: 'rgba(0,0,0,0.05)'
+    });
+  }, false);
+
+  // Example: Lazy Lightense
+  document.addEventListener("DOMContentLoaded", function(e) {
+    function createDom(type, cssClass) {
+      var div = document.createElement(type);
+      div.className = cssClass;
+      return div;
+    }
+
+    var thumb = document.querySelector(".lightense-lazy");
+    var original = new Image();
+
+    // Init wrapper
+    var wrap = createDom("div", "lightense-lazy-wrap");
+    thumb.parentNode.insertBefore(wrap, thumb);
+    wrap.appendChild(thumb);
+
+    // Wrap thumbnail
+    var thumbWrap = createDom("div", "lightense-lazy-thumb");
+    thumbWrap.appendChild(thumb);
+    wrap.appendChild(thumbWrap);
+
+    // Wrap original
+    var originalWrap = createDom("div", "lightense-lazy-large");
+    original.src = thumb.dataset.original;
+    originalWrap.appendChild(original);
+    wrap.appendChild(originalWrap);
+
+    // Load original image
+    original.addEventListener(
+      "load",
+      function() {
+        wrap.classList.add("on");
+      },
+      false
+    );
+  });
+</script>
+
+
+</body>
+
+</html>

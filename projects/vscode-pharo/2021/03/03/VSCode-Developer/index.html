@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Benoît Verhaeghe's blog">
+    
+
+    <link rel="icon" href="/img/logo/logo.png" type="image/x-icon">
+
+
+    <title>Dev - Pharo Language Server - Benoît Verhaeghe</title>
+
+    <link rel="canonical" href="http://badetitou.github.io/projects/vscode-pharo/2021/03/03/VSCode-Developer/">
+
+    <!-- <link rel="stylesheet" href="/assets/vendor/fontawesome-free/css/all.min.css"> -->
+    
+    <script src="https://kit.fontawesome.com/5574707d0b.js" crossorigin="anonymous"></script>
+    
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/main.css">
+    <!-- My JS -->
+    <script src="/js/my-head.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link type="application/atom+xml" rel="alternate" href="http://badetitou.github.io/feed.xml" title="Benoît Verhaeghe" />
+
+</head>
+
+
+<body>
+
+    <nav>
+    <div class="nav-wrapper">
+        <a href="#" onclick="openNav()" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        
+        <ul class="left hide-on-med-and-down"> <li>
+        <a href="/" style="margin-left: 20px;"> Benoît Verhaeghe</a>
+</li>
+</ul>
+
+        <ul class="right hide-on-med-and-down">
+            <li>
+                <span style="width: 30px; display: inline-block;">
+                    <i id="theme-switch" style="font-size: 20px" class="fa-solid fa-1x"></i>
+                </span>
+            </li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/post/">Posts</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+        
+        
+            <li><a href="/research/">Research</a></li>
+        
+        
+        
+        
+        
+        </ul>
+        
+    </div>
+</nav>
+
+<ul class="sidenav" id="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <li><a href="/">Home</a></li>
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/post/">Posts</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+    
+        
+            <li><a href="/research/">Research</a></li>
+        
+    
+        
+        
+    
+</ul>
+
+<div id="sidenav-overlay" onclick="closeNav()"></div>
+
+    <!-- Post Header -->
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div class="post-heading text-center">
+                    <h1>Dev - Pharo Language Server</h1>
+                    
+                    <h2 class="subheading">Description of the Language Server Protocol for Pharo</h2>
+                    
+                    <span class="meta">Posted by
+                        Benoît "badetitou" Verhaeghe on
+                        March 3, 2021</span>
+                    <span class="post-meta">
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article class="container">
+    <div class="row">
+        <div class="col s12 m12">
+            <div class="card">
+                <div class="card-content article-content">
+                    <p>I have recently developed a <a href="https://code.visualstudio.com/">VSCode</a> extension for Pharo.
+It uses the Language Server Protocol and the Debug Adapter Protocol.
+You can download it from <a href="https://github.com/badetitou/Pharo-LanguageServer">GitHub</a>!
+Here, I will present the Pharo implementation for the LSP part and how to extend it.</p>
+
+<p>I first worked on the implementation of LSP in Pharo.
+LSP protocol is based on the JSON-RPC protocol.
+Hopefully, this protocol is <a href="https://github.com/juliendelplanque/JRPC">already implemented</a> in Pharo thanks to the incredible work of <a href="https://juliendelplanque.be/">Julien Delplanque</a>.</p>
+
+<ul>
+  <li><a href="#project-package-architecture">Project Package Architecture</a></li>
+  <li><a href="#project-startup">Project startup</a></li>
+  <li>
+<a href="#main-loop">Main loop</a>
+    <ul>
+      <li><a href="#receiving-request">Receiving request</a></li>
+      <li>
+<a href="#handling-request">Handling request</a>
+        <ul>
+          <li><a href="#example-of-code-completion">Example of code completion</a></li>
+        </ul>
+      </li>
+      <li><a href="#how-to-extend-and-improve-the-project">How to extend and improve the project</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="project-package-architecture">Project Package Architecture</h2>
+
+<p>The LSP implementation is done in a main package <code class="language-plaintext highlighter-rouge">PharoLanguageServer</code>.
+Then, the package is subdivided into 5 sub-packages: Uncategorized (core), Structure, Structure-Capabilities, Structure-Completion, and Structure-Signature.</p>
+
+<ul>
+  <li>The core package includes the server and the dispatched methods</li>
+  <li>The structure package includes the <a href="https://microsoft.github.io/language-server-protocol/specifications/specification-current/#basic-json-structures">basic JSON structures</a> of the LSP specification.
+Those structures are used by all the LSP requests.</li>
+  <li>The structure capabilities package includes the structures used to declare the capabilities of LSP client and server.
+All the structures are not implemented. Only the ones supported by the Pharo Language Server.</li>
+  <li>The structure completion package includes the structures used for the text completion feature.
+It includes completion item, tag, and text format (snippet or plain text).</li>
+  <li>The structure signature package is equivalent to the completion package but for the signature helper feature.</li>
+</ul>
+
+<h2 id="project-startup">Project startup</h2>
+
+<p>Here, we will present how the project startup</p>
+
+<script src="/js/mermaid.min.js"></script>
+<div class="mermaid">
+sequenceDiagram
+    activate VSCode
+    VSCode-&gt;&gt;Pharo: Start Pharo
+    activate Pharo
+    VSCode-&gt;&gt;Pharo: Can you hear me?
+    Pharo--&gt;&gt;VSCode: Yes!
+    VSCode-&gt;&gt;+Pharo: Initialized?
+    Pharo-&gt;&gt;-VSCode: Initialized!
+    VSCode-&gt;&gt;+Pharo: Capabilities?
+    Pharo-&gt;&gt;-VSCode: Capabilities!
+    loop
+        VSCode-&gt;&gt;+Pharo: What about completion?
+        Pharo-&gt;&gt;-VSCode: Complete this text with this snippet
+    end
+    VSCode-&gt;&gt;Pharo: I'm done
+    Pharo-&gt;&gt;VSCode: OK bye!
+    deactivate VSCode
+    deactivate Pharo
+</div>
+
+<p>When a <code class="language-plaintext highlighter-rouge">.st</code> file is opened VSCode launch that vscode-pharo extension, which, in turn, starts the server by executing the following piece of code.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">|</span><span class="nv"> server </span><span class="p">|</span>
+
+<span class="nc">Transcript</span> <span class="nf">crShow:</span> <span class="s">'Run with vscode'</span><span class="p">.</span>
+
+<span class="nv">server</span> <span class="o">:=</span> <span class="nc">PLSServer</span> <span class="nb">new</span>
+    <span class="c">"In the dev version"</span>
+    <span class="nf">debugMode:</span> <span class="bp">true</span><span class="p">;</span>
+    <span class="nf">yourself</span><span class="p">.</span>
+
+<span class="nv">server</span> <span class="nf">start</span><span class="p">.</span>
+</code></pre></div></div>
+
+<p>When started:</p>
+
+<ol>
+  <li>The <code class="language-plaintext highlighter-rouge">PLSServer</code> looks for its methods with the pragma <code class="language-plaintext highlighter-rouge">jrpc</code> to define the method that will be accessible by the extension.
+For instance, the following method is called when the client executes the method <code class="language-plaintext highlighter-rouge">initialize</code>.
+    <div class="language-st highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nf">onInitializeTrace:</span> <span class="nv">trace</span> <span class="nf">processId:</span> <span class="nv">processId</span> <span class="nf">clientInfo:</span> <span class="nv">clientInfo</span> <span class="nf">rootPath:</span> <span class="nv">rootPath</span> <span class="nf">workspaceFolders:</span> <span class="nv">workspaceFolders</span> <span class="nf">capabilities:</span> <span class="nv">capabilities</span> <span class="nf">rootUri:</span> <span class="nv">rootUri</span>
+ <span class="p">&lt;</span><span class="k">jrpc:</span> #initialize<span class="p">&gt;</span>
+ <span class="o">^</span> <span class="nc">PLSInitializeResult</span> <span class="nb">new</span>
+</code></pre></div>    </div>
+  </li>
+  <li>It creates a TCP socket that listens to port 4000 (default value).</li>
+  <li>The VSCode client connects to the server TCP port</li>
+  <li>Client and server exchange their capabilities</li>
+</ol>
+
+<h2 id="main-loop">Main loop</h2>
+
+<p>Once the VSCode client and the Pharo server are connected, the main loop of the protocol begins.
+Here, I will detail how information is handled by the server part.
+For information about the client, you should have a look at the VSCode documentation.</p>
+
+<h3 id="receiving-request">Receiving request</h3>
+
+<p>The server is always in listening mode, waiting for a request from the client.
+When it receives data, it first <code class="language-plaintext highlighter-rouge">#extractRequestFrom</code> the socket.</p>
+
+<p>The extraction consists of waiting data from the client.
+A request consists of a header and content.</p>
+
+<p>The header is first extracted by Pharo.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Content-Length: ...\r\n
+\r\n
+</code></pre></div></div>
+
+<p>The server retrieves the value of the content-length.
+It allows us to create a String buffer with the correct size.
+Then, it extracts into the buffer the content.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"textDocument/didOpen"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>The content consists of the JSON-RPC protocol version, an idea used to identify the request, the method called, and the params for the methods.
+Handling the request, and dispatching to the correct method in the server is made by incredible <a href="https://github.com/juliendelplanque/JRPC">JRPC implementation of Julien</a>.</p>
+
+<h3 id="handling-request">Handling request</h3>
+
+<p>When extracted, the request is dispatched to the method with the pragma corresponding to the jrpc called method with the parameter.</p>
+
+<p><img src="https://microsoft.github.io/language-server-protocol/overviews/lsp/img/language-server-sequence.png" alt="Example communication">.</p>
+
+<p>The method analysis the parameter, performs some Pharo code, and then answers with the expected LSP structure.</p>
+
+<h4 id="example-of-code-completion">Example of code completion</h4>
+
+<p>To answer a completion request, the following implementation is used:</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">textDocumentCompletionWithContext:</span> <span class="nv">context</span> <span class="nf">position:</span> <span class="nv">position</span> <span class="nf">textDocument:</span> <span class="nv">textDocument</span>
+    <span class="p">&lt;</span><span class="k">jrpc:</span> #'textDocument/completion'<span class="p">&gt;</span>
+    <span class="p">|</span><span class="nv"> completionList completionTool </span><span class="p">|</span>
+    <span class="nv">completionTool</span> <span class="o">:=</span> <span class="nc">PLSCompletion</span> <span class="nb">new</span>
+        <span class="nf">source:</span> <span class="p">((</span><span class="bp">self</span> <span class="nf">context</span> <span class="nf">textItem:</span> <span class="p">(</span><span class="nv">textDocument</span> <span class="nf">at:</span> <span class="ss">#uri</span><span class="p">))</span> <span class="nf">at:</span> <span class="ss">#text</span><span class="p">);</span>
+        <span class="nf">position:</span> <span class="nv">position</span><span class="p">;</span>
+        <span class="nf">yourself</span><span class="p">.</span>
+    <span class="nv">completionList</span> <span class="o">:=</span> <span class="nc">PLSCompletionList</span> <span class="nb">new</span><span class="p">.</span>
+    <span class="nv">completionList</span> <span class="nf">completionItems:</span> <span class="nv">completionTool</span> <span class="nf">entries</span> <span class="nf">asArray</span><span class="p">.</span>
+    <span class="o">^</span> <span class="nv">completionList</span>
+</code></pre></div></div>
+
+<p>First, we create a <code class="language-plaintext highlighter-rouge">PLSCompletion</code> that has access to the source code, and the position in which a completion is required.
+Then, we create a <code class="language-plaintext highlighter-rouge">PLSCompletionList</code>, a <a href="https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_completion">structure defined in the LSP</a>.
+Finally, we set the list of completion items with the entries given by our completion tool.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">PLSCompletion</span><span class="nf">&gt;&gt;</span><span class="ss">#entries</span>
+    <span class="nf">completionContext</span> <span class="o">:=</span> <span class="nc">CompletionContext</span>
+        <span class="nf">engine:</span> <span class="nc">PLSCompletionEngine</span> <span class="nb">new</span>
+        <span class="nf">class:</span> <span class="bp">nil</span>
+        <span class="nf">source:</span> <span class="bp">self</span> <span class="nf">source</span>
+        <span class="nf">position:</span> <span class="bp">self</span> <span class="nf">position</span><span class="p">.</span>
+    <span class="o">^</span> <span class="bp">self</span> <span class="nf">completionContext</span> <span class="nf">entries</span>
+        <span class="nf">collectWithIndex:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">entry</span> <span class="o">:</span><span class="nv">index</span> <span class="p">|</span>
+            <span class="nc">PLSCompletionItem</span> <span class="nb">new</span>
+                <span class="nf">label:</span> <span class="nv">entry</span> <span class="nf">contents</span><span class="p">;</span>
+                <span class="nf">insertTextFormat:</span> <span class="nc">PLSInsertTextFormat</span> <span class="nf">snippet</span><span class="p">;</span>
+                <span class="nf">insertText:</span> <span class="nv">entry</span> <span class="nf">contents</span> <span class="nf">toPLSSnippet</span> <span class="p">;</span>
+                <span class="nf">kind:</span> <span class="nv">entry</span> <span class="nf">asPLSCompletionItemKind</span><span class="p">;</span>
+                <span class="nf">data:</span> <span class="nv">index</span><span class="p">;</span>
+                <span class="nf">yourself</span> <span class="p">]</span>
+</code></pre></div></div>
+
+<p>The completion tool uses the existing Pharo tool <code class="language-plaintext highlighter-rouge">CompletionContext</code> for the completion.
+We created a specific engine named <code class="language-plaintext highlighter-rouge">PLSCompletionEngine</code> that extends the default <code class="language-plaintext highlighter-rouge">CompletionEngine</code> of Pharo, and defines the context as scripting.</p>
+
+<h3 id="how-to-extend-and-improve-the-project">How to extend and improve the project</h3>
+
+<p>There is still a lot of work to do to improve the Pharo Language Server.
+Using the existing architecture, it is easy to improve the code.
+Please consider adding your next super feature or creates issues so we can prioritize our work.</p>
+
+<p>The next blog post will detail how to extend the Debug Adapter Protocol Pharo implementation, and another will present user story with the extension <img class="emoji" title=":rocket:" alt=":rocket:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f680.png" height="20" width="20"></p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://utteranc.es/client.js" repo="badetitou/badetitou.github.io" issue-term="pathname" label="comments" theme="boxy-light" crossorigin="anonymous" async>
+</script>
+
+    <ul class="pager list-inline">
+        
+        <li class="previous">
+            <a class="m-button" href="/misc/2021/02/15/Coasters/" data-toggle="tooltip" data-placement="top" data-tooltip="Coasters collection">←
+                Previous Post</a>
+        </li>
+        
+        
+        <li class="next">
+            <a class="m-button" href="/projects/vscode-pharo/2021/03/31/analysing-java-with-vscode/" data-toggle="tooltip" data-placement="top" data-tooltip="Analysing Java with VSCode">Next Post →</a>
+        </li>
+        
+    </ul>
+</article>
+
+
+    <!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col m12">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="https://twitter.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a rel="me" href="https://piaille.fr/@badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-mastodon fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="https://orcid.org/0000-0002-4588-2698">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-orcid fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://github.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://www.linkedin.com/in/benoitverhaeghe">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="mailto:benoit@badetitou.fr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="text-center">Copyright © badetitou 2023
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/my.js"></script>
+<script src="/js/my-sidenav.js"></script>
+
+<script src="/js/lightense.min.js"></script>
+
+<script>
+
+  // Init Lightense
+  window.addEventListener("load", function() {
+    Lightense("img:not(.no-lightense),.lightense", {
+      background: 'rgba(0,0,0,0.05)'
+    });
+  }, false);
+
+  // Example: Lazy Lightense
+  document.addEventListener("DOMContentLoaded", function(e) {
+    function createDom(type, cssClass) {
+      var div = document.createElement(type);
+      div.className = cssClass;
+      return div;
+    }
+
+    var thumb = document.querySelector(".lightense-lazy");
+    var original = new Image();
+
+    // Init wrapper
+    var wrap = createDom("div", "lightense-lazy-wrap");
+    thumb.parentNode.insertBefore(wrap, thumb);
+    wrap.appendChild(thumb);
+
+    // Wrap thumbnail
+    var thumbWrap = createDom("div", "lightense-lazy-thumb");
+    thumbWrap.appendChild(thumb);
+    wrap.appendChild(thumbWrap);
+
+    // Wrap original
+    var originalWrap = createDom("div", "lightense-lazy-large");
+    original.src = thumb.dataset.original;
+    originalWrap.appendChild(original);
+    wrap.appendChild(originalWrap);
+
+    // Load original image
+    original.addEventListener(
+      "load",
+      function() {
+        wrap.classList.add("on");
+      },
+      false
+    );
+  });
+</script>
+
+
+</body>
+
+</html>

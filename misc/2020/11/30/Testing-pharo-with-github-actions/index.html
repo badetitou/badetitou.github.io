@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Benoît Verhaeghe's blog">
+    
+
+    <link rel="icon" href="/img/logo/logo.png" type="image/x-icon">
+
+
+    <title>Testing and releasing Pharo with GitHub actions - Benoît Verhaeghe</title>
+
+    <link rel="canonical" href="http://badetitou.github.io/misc/2020/11/30/Testing-pharo-with-github-actions/">
+
+    <!-- <link rel="stylesheet" href="/assets/vendor/fontawesome-free/css/all.min.css"> -->
+    
+    <script src="https://kit.fontawesome.com/5574707d0b.js" crossorigin="anonymous"></script>
+    
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/main.css">
+    <!-- My JS -->
+    <script src="/js/my-head.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link type="application/atom+xml" rel="alternate" href="http://badetitou.github.io/feed.xml" title="Benoît Verhaeghe" />
+
+</head>
+
+
+<body>
+
+    <nav>
+    <div class="nav-wrapper">
+        <a href="#" onclick="openNav()" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        
+        <ul class="left hide-on-med-and-down"> <li>
+        <a href="/" style="margin-left: 20px;"> Benoît Verhaeghe</a>
+</li>
+</ul>
+
+        <ul class="right hide-on-med-and-down">
+            <li>
+                <span style="width: 30px; display: inline-block;">
+                    <i id="theme-switch" style="font-size: 20px" class="fa-solid fa-1x"></i>
+                </span>
+            </li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/post/">Posts</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+        
+        
+            <li><a href="/research/">Research</a></li>
+        
+        
+        
+        
+        
+        </ul>
+        
+    </div>
+</nav>
+
+<ul class="sidenav" id="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <li><a href="/">Home</a></li>
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/post/">Posts</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+    
+        
+            <li><a href="/research/">Research</a></li>
+        
+    
+        
+        
+    
+</ul>
+
+<div id="sidenav-overlay" onclick="closeNav()"></div>
+
+    <!-- Post Header -->
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div class="post-heading text-center">
+                    <h1>Testing and releasing Pharo with GitHub actions</h1>
+                    
+                    <h2 class="subheading">How to use GitHub to test my project?</h2>
+                    
+                    <span class="meta">Posted by
+                        Benoît "badetitou" Verhaeghe on
+                        November 30, 2020</span>
+                    <span class="post-meta">
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article class="container">
+    <div class="row">
+        <div class="col s12 m12">
+            <div class="card">
+                <div class="card-content article-content">
+                    <h2 id="introduction">Introduction</h2>
+
+<p>Hi <img class="emoji" title=":wave:" alt=":wave:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f44b.png" height="20" width="20">, Travis is becoming a pay to use service.
+So why not move to GitHub actions to test your Pharo project?</p>
+
+<p>Here I’m presenting everything you need to know to test your project with GitHub Actions.</p>
+
+<p>We’ll also see how to release your project (also continuously <img class="emoji" title=":sparkles:" alt=":sparkles:" src="https://github.githubassets.com/images/icons/emoji/unicode/2728.png" height="20" width="20">).</p>
+
+<h2 id="testing-with-smalltalk-ci">Testing with Smalltalk CI</h2>
+
+<h3 id="the-simplest-case">The simplest case</h3>
+
+<p>To test a Pharo project, we will create a GitHub action.
+Upon each commit on the <code class="language-plaintext highlighter-rouge">main</code> branch, this action will test your project.</p>
+
+<p>To do so, it:</p>
+
+<ol>
+  <li>checks out your project</li>
+  <li>runs Smalltalk CI on your project</li>
+</ol>
+
+<p>To create the GitHub action, you need first to create a file under the folder <code class="language-plaintext highlighter-rouge">&lt;git root&gt;/.github/workflows</code>.
+Since the action is to test the project, I decided to name it <code class="language-plaintext highlighter-rouge">test.yml</code>, but any other name will work.
+So in my git repository I have a file in: <code class="language-plaintext highlighter-rouge">&lt;git root&gt;/.github/workflows/test.yml</code></p>
+
+<p>In the file write:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">CI</span>
+
+<span class="na">env</span><span class="pi">:</span>
+  <span class="na">GITHUB_TOKEN</span><span class="pi">:</span> <span class="s">${{ secrets.GITHUB_TOKEN }}</span>
+
+<span class="c1"># Controls when the action will run. Triggers the workflow on push or pull request</span>
+<span class="c1"># events but only for the development branch</span>
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">main</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">build</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">hpi-swa/setup-smalltalkCI@v1</span>
+        <span class="na">id</span><span class="pi">:</span> <span class="s">smalltalkci</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">smalltalk-version</span><span class="pi">:</span> <span class="s">Pharo64-8.0</span>
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">smalltalkci -s ${{ steps.smalltalkci.outputs.smalltalk-version }}</span>
+        <span class="na">shell</span><span class="pi">:</span> <span class="s">bash</span>
+        <span class="na">timeout-minutes</span><span class="pi">:</span> <span class="m">15</span>
+
+</code></pre></div></div>
+
+<p>The first lines indicate when the action is triggered.
+In this simple case, it is triggered on each push on the branch <code class="language-plaintext highlighter-rouge">main</code>.</p>
+
+<p>Then, the jobs part describes the steps of the CI.
+It runs on a ubuntu image.
+There are three steps,
+    (1) it checks out the last version of the project for the current branch,
+    (2) it prepares the smalltalkCI tool, and
+    (3) it runs smalltalkCI on your project for the Pharo64-8.0 image.</p>
+
+<h3 id="a-more-complex-case">A more complex case</h3>
+
+<p>Indeed, you might want to test your project over several pharo versions.
+In this section, we see another example using GitHub actions matrix:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">build</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">strategy</span><span class="pi">:</span>
+      <span class="na">matrix</span><span class="pi">:</span>
+        <span class="na">smalltalk</span><span class="pi">:</span> <span class="pi">[</span> <span class="nv">Pharo64-8.0</span><span class="pi">,</span> <span class="nv">Pharo64-9.0</span> <span class="pi">]</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">${{ matrix.smalltalk }}</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">hpi-swa/setup-smalltalkCI@v1</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">smalltalk-version</span><span class="pi">:</span> <span class="s">${{ matrix.smalltalk }}</span>
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">smalltalkci -s ${{ matrix.smalltalk }}</span>
+        <span class="na">shell</span><span class="pi">:</span> <span class="s">bash</span>
+        <span class="na">timeout-minutes</span><span class="pi">:</span> <span class="m">15</span>
+
+</code></pre></div></div>
+
+<p>The name and the trigger part are the same as before.
+In the build part, we add a matrix strategy.
+In this strategy, we set the name of the Pharo versions compatible with our project.
+Then, in the steps, we tell SmallTalk CI to use the current smalltalk name of the matrix.</p>
+
+<h3 id="testing-upon-a-pull-request">Testing Upon a Pull Request</h3>
+
+<p>It is also possible to test on each Pull Request instead of commit to the main branch.
+To do so, change the trigger part by</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">on</span><span class="pi">:</span>
+  <span class="na">pull_request</span><span class="pi">:</span>
+    <span class="na">types</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">assigned</span><span class="pi">,</span> <span class="nv">opened</span><span class="pi">,</span> <span class="nv">synchronize</span><span class="pi">,</span> <span class="nv">reopened</span><span class="pi">]</span>
+</code></pre></div></div>
+
+<p>Many other trigger options exist; you should check them on the <a href="https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows">GitHub action page</a>.</p>
+
+<p>A final version of the file can be found <a href="https://github.com/moosetechnology/Moose/blob/development/.github/workflows/test.yml">here</a>.</p>
+
+<h2 id="releasing">Releasing</h2>
+
+<p>Using GitHub action to test your project is nice, but we can do more.
+We will automatically release our project using GitHub Actions.
+To so, we create two other actions: one for common release, one for continuous release.</p>
+
+<h3 id="release">Release</h3>
+
+<p>To create a release action, we first create a new file, for example <code class="language-plaintext highlighter-rouge">&lt;git root&gt;/.github/workflows/release.yml</code>.
+This action is triggered upon release creation and will test the project and release an image with the project loaded.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Release</span>
+
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">release</span><span class="pi">:</span>
+    <span class="na">types</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">created</span><span class="pi">]</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">build</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">env</span><span class="pi">:</span>
+      <span class="na">PROJECT_NAME</span><span class="pi">:</span> <span class="s">${{ matrix.smalltalk }}-Moose</span>
+    <span class="na">strategy</span><span class="pi">:</span>
+      <span class="na">matrix</span><span class="pi">:</span>
+        <span class="na">smalltalk</span><span class="pi">:</span> <span class="pi">[</span> <span class="nv">Pharo64-9.0</span><span class="pi">,</span> <span class="nv">Pharo64-8.0</span> <span class="pi">]</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">${{ matrix.smalltalk }}</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">hpi-swa/setup-smalltalkCI@v1</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">smalltalk-version</span><span class="pi">:</span> <span class="s">${{ matrix.smalltalk }}</span>
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">smalltalkci -s ${{ matrix.smalltalk }}</span>
+        <span class="na">shell</span><span class="pi">:</span> <span class="s">bash</span>
+        <span class="na">timeout-minutes</span><span class="pi">:</span> <span class="m">15</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Package</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">mv /home/runner/.smalltalkCI/_builds/* .</span>
+          <span class="s">mv TravisCI.image $PROJECT_NAME.image</span>
+          <span class="s">mv TravisCI.changes $PROJECT_NAME.changes</span>
+          <span class="s">zip -r $PROJECT_NAME.zip $PROJECT_NAME.image $PROJECT_NAME.changes *.sources pharo.version</span>
+          <span class="s">ls</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Get release</span>
+        <span class="na">id</span><span class="pi">:</span> <span class="s">get_release</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">bruceadams/get-release@v1.2.2</span>
+        <span class="na">env</span><span class="pi">:</span>
+          <span class="na">GITHUB_TOKEN</span><span class="pi">:</span> <span class="s">${{ github.token }}</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Upload Release Asset</span>
+        <span class="na">id</span><span class="pi">:</span> <span class="s">upload-release-asset</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/upload-release-asset@v1</span>
+        <span class="na">env</span><span class="pi">:</span>
+          <span class="na">GITHUB_TOKEN</span><span class="pi">:</span> <span class="s">${{ secrets.GITHUB_TOKEN }}</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">upload_url</span><span class="pi">:</span> <span class="s">${{ steps.get_release.outputs.upload_url }}</span> <span class="c1"># This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps </span>
+          <span class="na">asset_path</span><span class="pi">:</span> <span class="s">./${{ env.PROJECT_NAME }}.zip</span>
+          <span class="na">asset_name</span><span class="pi">:</span> <span class="s">${{ env.PROJECT_NAME }}.zip</span>
+          <span class="na">asset_content_type</span><span class="pi">:</span> <span class="s">application/zip</span>
+</code></pre></div></div>
+
+<p>The above example is the one used by the <a href="https://moosetechnology.github.io/moose-wiki/">Moose Project</a>.
+First, we define an environment variable named <code class="language-plaintext highlighter-rouge">&lt;current matrix name&gt;-Moose</code>.
+In addition to the testing steps, we add three steps:
+<em>Package</em> takes the source file after testing the project (<em>i.e.</em> .image, .changes, .sources, and pharo.version) and zips them into one zip file with the current matrix name.
+ <em>Get release</em> allows us to access the release GitHub API.
+Thus, we can access the upload URL of the release.
+Then, <em>Upload Release Asset</em> uploads the zip file created in the <em>package</em> step.</p>
+
+<p>When developers release their code, the action downloads an image for each specified Pharo version, tests it, packages it, and uploads it in the GitHub release.
+Then, users can directly download the released version of the project, with project code loaded in the image.</p>
+
+<h3 id="continuous-release">Continuous release</h3>
+
+<p>For the continuous release, we add a schedule to trigger the GitHub actions.
+Thus, if the Pharo image evolves, our build will evolve with it.</p>
+
+<p>Note that we have also changed the way to update the release.
+Indeed, the <em>Update Release</em> automatically creates a release and uploads the last version of the zip file.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># This is a basic workflow to help you get started with Actions</span>
+
+<span class="na">name</span><span class="pi">:</span> <span class="s">Continuous</span>
+
+<span class="c1"># Controls when the action will run. Triggers the workflow on push or pull request</span>
+<span class="c1"># events but only for the development branch</span>
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">development</span>
+  <span class="na">schedule</span><span class="pi">:</span>
+    <span class="c1"># * is a special character in YAML so you have to quote this string</span>
+    <span class="pi">-</span> <span class="na">cron</span><span class="pi">:</span>  <span class="s1">'</span><span class="s">0</span><span class="nv"> </span><span class="s">0</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*</span><span class="nv"> </span><span class="s">*'</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">build</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">env</span><span class="pi">:</span>
+      <span class="na">PROJECT_NAME</span><span class="pi">:</span> <span class="s">${{ matrix.smalltalk }}-Moose</span>
+    <span class="na">strategy</span><span class="pi">:</span>
+      <span class="na">matrix</span><span class="pi">:</span>
+        <span class="na">smalltalk</span><span class="pi">:</span> <span class="pi">[</span> <span class="nv">Pharo64-9.0</span><span class="pi">,</span> <span class="nv">Pharo64-8.0</span> <span class="pi">]</span>
+    <span class="na">name</span><span class="pi">:</span> <span class="s">${{ matrix.smalltalk }}</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v2</span>
+      <span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">hpi-swa/setup-smalltalkCI@v1</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">smalltalk-version</span><span class="pi">:</span> <span class="s">${{ matrix.smalltalk }}</span>
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">smalltalkci -s ${{ matrix.smalltalk }}</span>
+        <span class="na">shell</span><span class="pi">:</span> <span class="s">bash</span>
+        <span class="na">timeout-minutes</span><span class="pi">:</span> <span class="m">15</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">package</span>
+        <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+          <span class="s">mv /home/runner/.smalltalkCI/_builds/* .</span>
+          <span class="s">mv TravisCI.image $PROJECT_NAME.image</span>
+          <span class="s">mv TravisCI.changes $PROJECT_NAME.changes</span>
+          <span class="s">zip -r $PROJECT_NAME.zip $PROJECT_NAME.image $PROJECT_NAME.changes *.sources pharo.version</span>
+          <span class="s">ls</span>
+
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Update Release</span>
+        <span class="na">uses</span><span class="pi">:</span> <span class="s">johnwbyrd/update-release@v1.0.0</span>
+        <span class="na">with</span><span class="pi">:</span>
+          <span class="na">release</span><span class="pi">:</span> <span class="s1">'</span><span class="s">continuous'</span>
+          <span class="na">token</span><span class="pi">:</span> <span class="s">${{ secrets.GITHUB_TOKEN }}</span>
+          <span class="na">files</span><span class="pi">:</span> <span class="s">${{ env.PROJECT_NAME }}.zip</span>
+</code></pre></div></div>
+
+<h3 id="add-releases-to-pharo-launcher">Add releases to Pharo Launcher</h3>
+
+<p>Finally, I want to share with you a little script to add the GitHub Release into the <a href="https://pharo.org">Pharo Launcher</a>.
+To do so:</p>
+
+<ol>
+  <li>Open the Pharo Launcher</li>
+  <li>Open a Playground (Ctrl + O, Ctrl + W)</li>
+  <li>Execute the following piece of code</li>
+</ol>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">|</span><span class="nv"> sources </span><span class="p">|</span>
+<span class="nv">sources</span> <span class="o">:=</span> <span class="p">{</span>
+    <span class="nc">PhLTemplateSource</span> <span class="nb">new</span>
+        <span class="nf">type:</span> <span class="ss">#HttpListing</span><span class="p">;</span>
+        <span class="nf">name:</span> <span class="s">'Moose'</span><span class="p">;</span>
+        <span class="nf">url:</span> <span class="s">'https://github.com/moosetechnology/Moose/releases'</span><span class="p">;</span>
+        <span class="nf">filterPattern:</span> <span class="s">'href="([^"]*/Pharo[0-9][^"]*.zip)"'</span><span class="p">;</span>
+        <span class="nf">templateNameFormat:</span> <span class="s">'{6} ({5})'</span> <span class="p">}.</span>
+<span class="nc">PhLUserTemplateSources</span> <span class="nf">sourcesFile</span> <span class="nf">writeStreamDo:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">s</span> <span class="p">|</span>
+    <span class="p">(</span><span class="nc">STON</span> <span class="nf">writer</span> <span class="nf">on:</span> <span class="nv">s</span><span class="p">)</span>
+        <span class="nf">newLine:</span> <span class="nc">String</span> <span class="nf">lf</span><span class="p">;</span>
+        <span class="nf">prettyPrint:</span> <span class="bp">true</span><span class="p">;</span>
+        <span class="nf">nextPut:</span> <span class="nv">sources</span> <span class="p">]</span>
+</code></pre></div></div>
+
+<p>This piece of code creates a local source file for the Pharo Launcher template.
+In the source file, it specifies using an <code class="language-plaintext highlighter-rouge">HttpListing</code> from the release page of GitHub.
+Then, with a filter pattern, it creates a beautiful list inside the Pharo Launcher.</p>
+
+<p>To adapt the piece of code for your project, you need to change the <code class="language-plaintext highlighter-rouge">name:</code> and <code class="language-plaintext highlighter-rouge">url:</code> method parameters.</p>
+
+<p><img src="/misc/img-2020-11-30-GithubActions/pharo-launcher.png" alt="Pharo Launcher with linkg to GitHub actions" class="responsive-img"></p>
+
+<h2 id="resources">Resources</h2>
+
+<p>The three files: <em>test</em>, <em>release</em>, and <em>continuous</em> can be found in the <a href="https://github.com/moosetechnology/Moose/tree/development/.github/workflows">Moose project repository</a></p>
+
+<h2 id="thanks">Thanks</h2>
+
+<p>I’d like to thanks the authors of <a href="https://github.com/hpi-swa/smalltalkCI">smalltalkCI</a> for their incredible work!</p>
+
+<p>Thanks <a href="https://github.com/fuhrmanator">C. Fuhrman</a> for the typos fixes. <img class="emoji" title=":banana:" alt=":banana:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f34c.png" height="20" width="20"></p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://utteranc.es/client.js" repo="badetitou/badetitou.github.io" issue-term="pathname" label="comments" theme="boxy-light" crossorigin="anonymous" async>
+</script>
+
+    <ul class="pager list-inline">
+        
+        <li class="previous">
+            <a class="m-button" href="/misc/2020/06/19/Download-music/" data-toggle="tooltip" data-placement="top" data-tooltip="Download musics from Google Play Music">←
+                Previous Post</a>
+        </li>
+        
+        
+        <li class="next">
+            <a class="m-button" href="/misc/2021/02/15/Coasters/" data-toggle="tooltip" data-placement="top" data-tooltip="Coasters collection">Next Post →</a>
+        </li>
+        
+    </ul>
+</article>
+
+
+    <!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col m12">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="https://twitter.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a rel="me" href="https://piaille.fr/@badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-mastodon fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="https://orcid.org/0000-0002-4588-2698">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-orcid fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://github.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://www.linkedin.com/in/benoitverhaeghe">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="mailto:benoit@badetitou.fr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="text-center">Copyright © badetitou 2023
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/my.js"></script>
+<script src="/js/my-sidenav.js"></script>
+
+<script src="/js/lightense.min.js"></script>
+
+<script>
+
+  // Init Lightense
+  window.addEventListener("load", function() {
+    Lightense("img:not(.no-lightense),.lightense", {
+      background: 'rgba(0,0,0,0.05)'
+    });
+  }, false);
+
+  // Example: Lazy Lightense
+  document.addEventListener("DOMContentLoaded", function(e) {
+    function createDom(type, cssClass) {
+      var div = document.createElement(type);
+      div.className = cssClass;
+      return div;
+    }
+
+    var thumb = document.querySelector(".lightense-lazy");
+    var original = new Image();
+
+    // Init wrapper
+    var wrap = createDom("div", "lightense-lazy-wrap");
+    thumb.parentNode.insertBefore(wrap, thumb);
+    wrap.appendChild(thumb);
+
+    // Wrap thumbnail
+    var thumbWrap = createDom("div", "lightense-lazy-thumb");
+    thumbWrap.appendChild(thumb);
+    wrap.appendChild(thumbWrap);
+
+    // Wrap original
+    var originalWrap = createDom("div", "lightense-lazy-large");
+    original.src = thumb.dataset.original;
+    originalWrap.appendChild(original);
+    wrap.appendChild(originalWrap);
+
+    // Load original image
+    original.addEventListener(
+      "load",
+      function() {
+        wrap.classList.add("on");
+      },
+      false
+    );
+  });
+</script>
+
+
+</body>
+
+</html>

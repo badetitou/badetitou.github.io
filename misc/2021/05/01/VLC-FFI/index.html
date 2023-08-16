@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Benoît Verhaeghe's blog">
+    
+
+    <link rel="icon" href="/img/logo/logo.png" type="image/x-icon">
+
+
+    <title>Using FFI to control VLC from Pharo - Benoît Verhaeghe</title>
+
+    <link rel="canonical" href="http://badetitou.github.io/misc/2021/05/01/VLC-FFI/">
+
+    <!-- <link rel="stylesheet" href="/assets/vendor/fontawesome-free/css/all.min.css"> -->
+    
+    <script src="https://kit.fontawesome.com/5574707d0b.js" crossorigin="anonymous"></script>
+    
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/main.css">
+    <!-- My JS -->
+    <script src="/js/my-head.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link type="application/atom+xml" rel="alternate" href="http://badetitou.github.io/feed.xml" title="Benoît Verhaeghe" />
+
+</head>
+
+
+<body>
+
+    <nav>
+    <div class="nav-wrapper">
+        <a href="#" onclick="openNav()" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        
+        <ul class="left hide-on-med-and-down"> <li>
+        <a href="/" style="margin-left: 20px;"> Benoît Verhaeghe</a></li></ul>
+
+        <ul class="right hide-on-med-and-down">
+            <li>
+                <span style="width: 30px; display: inline-block;">
+                    <i id="theme-switch" style="font-size: 20px" class="fa-solid fa-1x"></i>
+                </span>
+            </li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/post/">Posts</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+        
+        
+            <li><a href="/research/">Research</a></li>
+        
+        
+        
+        
+        
+        </ul>
+        
+    </div>
+</nav>
+
+<ul class="sidenav" id="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <li><a href="/">Home</a></li>
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/post/">Posts</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+    
+        
+            <li><a href="/research/">Research</a></li>
+        
+    
+        
+        
+    
+</ul>
+
+<div id="sidenav-overlay" onclick="closeNav()"></div>
+
+    <!-- Post Header -->
+<header class="intro-header"
+    style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div class="post-heading text-center">
+                    <h1>Using FFI to control VLC from Pharo</h1>
+                    
+                    <h2 class="subheading">An introduction to the FFI library</h2>
+                    
+                    <span class="meta">Posted by
+                        Benoît "badetitou" Verhaeghe on
+                        May 1, 2021</span>
+                    <span class="post-meta">
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article class="container">
+    <div class="row">
+        <div class="col s12 m12">
+            <div class="card">
+                <div class="card-content article-content">
+                    <p>VLC is the best-known software for playing audio and video files.
+More than files, it also allows to play streams, and therefore to play, for example, the stream broadcasted by security cameras.
+We present here how to use Pharo to interface with the library developed for VLC and thus control VLC from Pharo.</p>
+
+<h2 id="lets-dream">Let’s dream</h2>
+
+<p>When I’m working, I often want to listen to music.
+But my music is stored in different places: locally on my laptop, on my personal server, on YouTube, and on premium online music accounts.
+While I can switch between systems easily, I was dreaming of a music manager where everything would be combined in one place.
+Let’s not lie, it was also the perfect argument to do a little of Pharo.</p>
+
+<h2 id="playing-song-with-pharo">Playing song with Pharo</h2>
+
+<p>Pharo already allows one to play music directly via a plugin integrated into the virtual machine (VM).
+Unfortunately, this plugin is old and does not guarantee to play the hundreds of music formats that exist today.
+On the other hand, VLC can play all these audio and video formats.
+In order to be able to play music controlled by Pharo, you just need to manipulate VLC.
+And this is what uFFI will allow us to do!
+Indeed, the VLC project is supported on the three most used platforms (Linux, Windows, and OSX) and also provides on all these platforms the shared libraries <em>libvlc</em> and <em>libvlccore</em>.</p>
+
+<blockquote>
+  <p>A shared library is intended to be used by other programs. They define an API allowing a program to interact with another. And this is precisely what uFFI allows to do: call from Pharo the methods defined in a shared library.</p>
+</blockquote>
+
+<h2 id="set-up-ffi">Set-up FFI</h2>
+
+<p>Setting up FFI has never been so easy.
+There are only a few pre-requisites:</p>
+
+<ul>
+  <li>Install the project you want to use (for me it’s VLC),</li>
+  <li>Make sure that the shared libraries are in the PATH of the system,</li>
+  <li>And that’s it for the first step!</li>
+</ul>
+
+<p>Once the project is installed, we move on to development.
+First of all, we create a class that serves as a link between Pharo and VLC.
+Pharo comes with a complete framework to set up FFI, so we just have to create a subclass of <code class="language-plaintext highlighter-rouge">FFILibrary</code> (<code class="language-plaintext highlighter-rouge">VLCLibrary</code>) and to indicate the name of the external libraries according to the system we use (<em>.so</em> on Linux, <em>.dll</em> on Windows and <em>.dylib</em> on OSX).
+We have finished setting up FFI!</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">VLCLibrary</span><span class="nf">&gt;&gt;</span><span class="ss">#unix64LibraryName</span>
+    <span class="ss">#(</span><span class="s">'/usr/lib/i386-linux-gnu'</span> <span class="s">'/usr/lib32'</span> <span class="s">'/usr/lib'</span><span class="ss">)</span> <span class="nf">,</span> <span class="p">((</span><span class="nc">OSEnvironment</span> <span class="nf">current</span> <span class="nf">at:</span> <span class="s">'LD_LIBRARY_PATH'</span> <span class="nf">ifAbsent:</span> <span class="p">[</span> <span class="s">''</span> <span class="p">])</span> <span class="nf">substrings:</span> <span class="s">':'</span><span class="p">)</span>
+    <span class="nf">do:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">path</span> <span class="p">|</span>
+        <span class="p">|</span><span class="nv"> libraryPath </span><span class="p">|</span>
+        <span class="nv">libraryPath</span> <span class="o">:=</span> <span class="nv">path</span> <span class="nf">asFileReference</span> <span class="nf">/</span> <span class="s">'libvlc.so'</span><span class="p">.</span>
+        <span class="nv">libraryPath</span> <span class="nf">exists</span> <span class="nb">ifTrue:</span> <span class="p">[</span> <span class="o">^</span> <span class="nv">libraryPath</span> <span class="nf">fullName</span> <span class="p">]</span> <span class="p">].</span>
+    <span class="bp">self</span> <span class="nf">error:</span> <span class="s">'Cannot locate vlc library. Please check if it installed on your system'</span>
+</code></pre></div></div>
+
+<h2 id="functions-mapping">Functions mapping</h2>
+
+<p>Once the interfacing mechanism between Pharo and VLC is in place, we will now be able to map the VLC functions.
+To be able to use a function defined in the library, we declare in our <code class="language-plaintext highlighter-rouge">VLCLibrary</code> class the methods we are going to use.
+To know the functions, we have two options, use tools that will extract the available functions from the libraries or… use the documentation!
+Fortunately for us, the <a href="https://videolan.videolan.me/vlc/group__libvlc.html">VLC libraries are well documented</a>, which greatly simplifies the work.
+By accessing the documentation of the libraries we have access to the signature of the available functions.
+We just have to copy and paste the signature of the functions in Pharo to be able to use them. Primitive types are understood by Pharo while we will cleverly replace structures by <code class="language-plaintext highlighter-rouge">void *</code> in order to manipulate them as opaque objects.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">VLCLibrary</span><span class="nf">&gt;&gt;</span><span class="ss">#createVLCInstance</span>
+    <span class="o">^</span> <span class="bp">self</span> <span class="nf">ffiCall:</span> <span class="s">'void * libvlc_new()'</span>
+</code></pre></div></div>
+
+<h2 id="a-first-test">A first test</h2>
+
+<p>Now we present the first methods we had to implement to use VLC.
+First of all, <code class="language-plaintext highlighter-rouge">libvlc_new</code> allows one to create an instance of VLC.
+We will then use this instance to script VLC.</p>
+
+<p><img src="/misc/img/2021-05-01-VLC-FFI/createVLCInstance.png" alt="Call to method libvlc_new()" class="img-fill" /></p>
+
+<p>Next, we developed the code necessary to play a music hosted on our computer.
+For this, we need three methods: creation of a media, creation of the corresponding media player and the play method of the media player.
+The three methods are described in the documentation as: <code class="language-plaintext highlighter-rouge">libvlc_media_new_path</code>, <code class="language-plaintext highlighter-rouge">libvlc_media_player_new_from_media</code> and <code class="language-plaintext highlighter-rouge">libvlc_media_player_play</code>.
+For their implementation, we just have to copy their signatures and create methods in the <code class="language-plaintext highlighter-rouge">VLCLibrary</code> class as we did for the new.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">VLCLibrary</span><span class="nf">&gt;&gt;</span><span class="ss">#mediaNew:</span> <span class="nf">aVLCInstance</span> <span class="nf">path:</span> <span class="nv">aStringPath</span>
+    <span class="c">"Create a media for a certain file path."</span>
+    <span class="o">^</span> <span class="bp">self</span> <span class="nf">ffiCall:</span> <span class="nv">void</span> <span class="nf">*</span> <span class="nv">libvlc_media_new_path</span><span class="p">(</span><span class="nv">void</span> <span class="nf">*</span> <span class="nv">aVLCInstance</span><span class="nf">,</span> <span class="nc">String</span> <span class="nf">aStringPath</span><span class="p">)</span><span class="err">'</span>
+</code></pre></div></div>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">VLCLibrary</span><span class="nf">&gt;&gt;</span><span class="ss">#mediaPlayerPlay:</span> <span class="nf">aMediaPlayer</span>
+    <span class="c">"Play"</span>
+    <span class="o">^</span> <span class="bp">self</span> <span class="nf">ffiCall:</span> <span class="s">'int libvlc_media_player_play(void * aMediaPlayer)'</span>
+</code></pre></div></div>
+
+<p>Finally, some lines in the playground allow us to script VLC to play music.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">vlc</span> <span class="o">:=</span> <span class="nc">VLCLibrary</span> <span class="nf">uniqueInstance</span> <span class="nf">createVLCInstance</span><span class="p">.</span>
+<span class="c">"do not use accentuated characters for the path"</span>
+<span class="nv">media</span> <span class="o">:=</span> <span class="nc">VLCLibrary</span> <span class="nf">uniqueInstance</span> <span class="nf">mediaNew:</span> <span class="nv">vlc</span> <span class="nf">path:</span> <span class="s">'/my/file/path.mp3'</span><span class="p">.</span>
+<span class="nv">mediaPlayer</span> <span class="o">:=</span> <span class="nc">VLCLibrary</span> <span class="nf">uniqueInstance</span> <span class="nf">mediaPlayerNewFromMedia:</span> <span class="nv">media</span><span class="p">.</span>
+<span class="nc">VLCLibrary</span> <span class="nf">uniqueInstance</span> <span class="nf">mediaPlayerPlay:</span> <span class="nv">mediaPlayer</span><span class="p">.</span>
+</code></pre></div></div>
+
+<h2 id="structures-mapping---lets-dev-in-pharo">Structures mapping - Let’s dev in Pharo</h2>
+
+<p>By writing all the public methods of the VLC libraries in Pharo, it is possible to script VLC completely.
+However, we get a single abstraction with lots of methods when it would be much better to create objects that represent each aspect of VLC.</p>
+
+<p>It is thus possible to improve our mapping to a VLC library by mapping C structures to Pharo objects.
+Once again, we will be able to do this thanks to VLC.
+Structures can be divided into four categories: enums, callbacks, C structures, and opaque structures. FFI offers a solution for mapping each of them.</p>
+
+<p>For enumerations, we need to extend the Pharo class <code class="language-plaintext highlighter-rouge">FFIExternalEnumeration</code>, then we implement the <code class="language-plaintext highlighter-rouge">enumDecl</code> method by writing an array that will contain the name of the enumeration element followed by its value, <em>etc.</em>
+We execute the method <code class="language-plaintext highlighter-rouge">rebuildEnumAccessors</code> on the class, this step will generate accessors to all the values of the enumeration.
+Finally, we initialize the class.
+It is now possible to use the enumeration by using: enumeration name + name of one of the elements of the enumeration.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">VLCMediaType</span> <span class="nf">class&gt;&gt;</span><span class="ss">#enumDecl</span>
+<span class="c">"self rebuildEnumAccessors"</span>
+    
+    <span class="o">^</span> <span class="ss">#(libvlc_media_type_unknown</span> <span class="m">1</span>
+<span class="nf">libvlc_media_type_file</span> <span class="m">2</span>
+<span class="nf">libvlc_media_type_directory</span> <span class="m">3</span>
+<span class="nf">libvlc_media_type_disc</span> <span class="m">4</span>
+<span class="nf">libvlc_media_type_stream</span> <span class="m">5</span>
+<span class="nf">libvlc_media_type_playlist</span> <span class="m">6</span><span class="ss">)</span>
+</code></pre></div></div>
+
+<p>For callbacks, uFFI also comes with an out-of-the-box implementation.
+This time we need to extend the <code class="language-plaintext highlighter-rouge">FFICallback</code> class.
+We will then define the function signature to which our callback corresponds in C and the Pharo block that will be executed when the callback is called.
+For the function signature, we define two methods: the first one <code class="language-plaintext highlighter-rouge">fnSpec</code> which returns the function signature as we did when mapping the API, and the second one <code class="language-plaintext highlighter-rouge">on:</code> which takes a block as a parameter that will be executed when the callback is called.</p>
+
+<p><img src="/misc/img/2021-05-01-VLC-FFI/callbackDefinition.png" alt="Callback definition" class="img-fill" /></p>
+
+<p>It is for opaque structures that it is easiest to define an FFI mapping.
+You just have to extend the Pharo class <code class="language-plaintext highlighter-rouge">FFIOpaqueObject</code>.
+This step allows one to use this structure by considering only its methods.
+This is a strategy used in C to hide the internal functioning of the structure.</p>
+
+<p>Finally, there remains the case of C structures.
+As for the previous cases, we extend this time the <code class="language-plaintext highlighter-rouge">FFIExternalStructure</code> class.
+Then, we define on the class side the <code class="language-plaintext highlighter-rouge">fieldsDesc</code> method which returns an array containing all the variables of the structure and their types.
+By executing the <code class="language-plaintext highlighter-rouge">rebuildFieldAccessors</code> method on the class, we also create the accessors of these attributes automatically.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">VLCTrackDescription</span><span class="nf">&gt;&gt;</span><span class="ss">#fieldsDesc</span>
+    <span class="c">"self rebuildFieldAccessors"</span>
+    <span class="o">^</span> <span class="ss">#(int</span> <span class="ss">i_id</span><span class="err">;</span>
+    <span class="ss">String</span> <span class="ss">psz_name</span><span class="err">;</span>
+    <span class="ss">VLCTrackDescription</span> <span class="ss">*</span> <span class="ss">p_next</span><span class="err">;</span><span class="ss">)</span>
+</code></pre></div></div>
+
+<h2 id="c-structure-mapping">C structure mapping</h2>
+
+<p>That’s it!
+We can now completely use the VLC library as if it was a Pharo library.
+We will see in the next part what it allows us to do quickly.</p>
+
+<h2 id="what-about-the-graphical-aspect">What about the graphical aspect</h2>
+
+<p>We will now look at how to quickly create an interface in Pharo that will allow us to control VLC.
+To do this, we will use the new version of Spec with Pharo 9.
+The final goal is to create a usable audio player interface for the user.
+More precisely, we will add an extension to the Pharo inspector in order to be able to watch and control the state of our VLC players.
+To do this, we will do two things: add an extension and create the user interface of the extension.
+To add an extension we just need to create a method with the pragma <code class="language-plaintext highlighter-rouge">inspectorPresentationOrder:title:</code> which returns the interface we want to create.
+To define the user interface we use <a href="https://github.com/pharo-spec/Spec">Spec2</a> (the reference graphical framework since Pharo 8+).
+We defined for the interface a progress bar that shows us the progress of a piece of music and two buttons <em>start</em> and <em>pause</em> to control the playback.
+The complete example is available on the <a href="https://github.com/badetitou/pharo-libvlc">GitHub repository of Pharo-LibVLC</a> by loading the “inspector” group of the baseline.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Metacello</span> <span class="nb">new</span>
+  <span class="nf">baseline:</span> <span class="s">'VLC'</span><span class="p">;</span>
+  <span class="nf">repository:</span> <span class="s">'github://badetitou/Pharo-LibVLC'</span><span class="p">;</span>
+  <span class="nf">load:</span> <span class="s">'inspector'</span>
+</code></pre></div></div>
+
+<p>Then it is possible to launch a music and obtain the following interface by inspecting:</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">vlc</span> <span class="o">:=</span> <span class="nc">VLCLibrary</span> <span class="nf">uniqueInstance</span> <span class="nf">createVLCInstance</span><span class="p">.</span>
+<span class="nv">media</span> <span class="o">:=</span> <span class="nv">vlc</span> <span class="nf">createMediaFromPath:</span> <span class="s">'/path/to/file.mp3'</span><span class="p">.</span>
+<span class="nv">mediaPlayer</span> <span class="o">:=</span> <span class="nv">vlc</span> <span class="nf">createMediaPlayerFromMedia:</span> <span class="nv">media</span><span class="p">.</span>
+<span class="nv">mediaPlayer</span> <span class="nf">play</span>
+</code></pre></div></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>We have seen that it is possible to control VLC from Pharo.
+This way we can play songs from our computer, but also from other services (like YouTube) using VLC’s ability to play a remotely read audio stream.
+We have presented a first interface to control the audio player graphically.
+So, why not continue in this direction by creating a complete media center in Pharo, either as a desktop application or as a web application with the Seaside web framework.</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://utteranc.es/client.js"
+        repo="badetitou/badetitou.github.io"
+        issue-term="pathname"
+        label="comments"
+        theme="boxy-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+    <ul class="pager list-inline">
+        
+        <li class="previous">
+            <a class="m-button" href="/projects/vscode-pharo/2021/03/31/analysing-java-with-vscode/" data-toggle="tooltip"
+                data-placement="top" data-tooltip="Analysing Java with VSCode">&larr;
+                Previous Post</a>
+        </li>
+        
+        
+        <li class="next">
+            <a class="m-button" href="/misc/2021/05/15/connecting-meta-models/" data-toggle="tooltip"
+                data-placement="top" data-tooltip="Connecting/Extending meta-models">Next Post &rarr;</a>
+        </li>
+        
+    </ul>
+</article>
+
+
+    <!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col m12">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="https://twitter.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a rel="me" href="https://piaille.fr/@badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-mastodon fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="https://orcid.org/0000-0002-4588-2698">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-orcid fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://github.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://www.linkedin.com/in/benoitverhaeghe">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="mailto:benoit@badetitou.fr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="text-center">Copyright &copy; badetitou 2023
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/my.js"></script>
+<script src="/js/my-sidenav.js"></script>
+
+<script src="/js/lightense.min.js"></script>
+
+<script>
+
+  // Init Lightense
+  window.addEventListener("load", function() {
+    Lightense("img:not(.no-lightense),.lightense", {
+      background: 'rgba(0,0,0,0.05)'
+    });
+  }, false);
+
+  // Example: Lazy Lightense
+  document.addEventListener("DOMContentLoaded", function(e) {
+    function createDom(type, cssClass) {
+      var div = document.createElement(type);
+      div.className = cssClass;
+      return div;
+    }
+
+    var thumb = document.querySelector(".lightense-lazy");
+    var original = new Image();
+
+    // Init wrapper
+    var wrap = createDom("div", "lightense-lazy-wrap");
+    thumb.parentNode.insertBefore(wrap, thumb);
+    wrap.appendChild(thumb);
+
+    // Wrap thumbnail
+    var thumbWrap = createDom("div", "lightense-lazy-thumb");
+    thumbWrap.appendChild(thumb);
+    wrap.appendChild(thumbWrap);
+
+    // Wrap original
+    var originalWrap = createDom("div", "lightense-lazy-large");
+    original.src = thumb.dataset.original;
+    originalWrap.appendChild(original);
+    wrap.appendChild(originalWrap);
+
+    // Load original image
+    original.addEventListener(
+      "load",
+      function() {
+        wrap.classList.add("on");
+      },
+      false
+    );
+  });
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Benoît Verhaeghe's blog">
+    
+
+    <link rel="icon" href="/img/logo/logo.png" type="image/x-icon">
+
+
+    <title>Code de Huffman - Benoît Verhaeghe</title>
+
+    <link rel="canonical" href="http://badetitou.github.io/tps/HLIN303/tp3/">
+
+    <!-- <link rel="stylesheet" href="/assets/vendor/fontawesome-free/css/all.min.css"> -->
+    
+    <script src="https://kit.fontawesome.com/5574707d0b.js" crossorigin="anonymous"></script>
+    
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/main.css">
+    <!-- My JS -->
+    <script src="/js/my-head.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link type="application/atom+xml" rel="alternate" href="http://badetitou.github.io/feed.xml" title="Benoît Verhaeghe" />
+
+</head>
+
+
+<body>
+
+    <nav>
+    <div class="nav-wrapper">
+        <a href="#" onclick="openNav()" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        
+        <ul class="left hide-on-med-and-down"> <li>
+        <a href="/" style="margin-left: 20px;"> Benoît Verhaeghe</a></li></ul>
+
+        <ul class="right hide-on-med-and-down">
+            <li>
+                <span style="width: 30px; display: inline-block;">
+                    <i id="theme-switch" style="font-size: 20px" class="fa-solid fa-1x"></i>
+                </span>
+            </li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/post/">Posts</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+        
+        
+            <li><a href="/research/">Research</a></li>
+        
+        
+        
+        
+        
+        </ul>
+        
+    </div>
+</nav>
+
+<ul class="sidenav" id="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <li><a href="/">Home</a></li>
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/post/">Posts</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+    
+        
+            <li><a href="/research/">Research</a></li>
+        
+    
+        
+        
+    
+</ul>
+
+<div id="sidenav-overlay" onclick="closeNav()"></div>
+
+    <!-- Post Header -->
+<header class="intro-header"
+    style="background-image: url('/img/bg/keyboard.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div class="post-heading  text-center">
+                    <h1>Code de Huffman</h1>
+                    
+                    <h2 class="subheading">TP3 - Correction</h2>
+                    
+                    <span class="meta">Posted by
+                        Benoît "badetitou" Verhaeghe on
+                        October 3, 2019</span>
+                    <span class="post-meta">
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<article class="container">
+    <div class="row">
+        <div class="col s12 m12">
+            <div class="card">
+                <div class="card-content article-content">
+                    <h2 id="tp3---code-de-huffman">TP3 - Code de Huffman</h2>
+
+<p>Le codage de Huffman (1952) est une technique de compression de données permettant de stocker un message
+(un fichier) ou de le transmettre grâce à un minimum de bits afin d’améliorer les performances. Ce codage à
+taille variable suppose l’indépendance des caractères du message et on doit connaître la distribution probabiliste
+de ceux-ci à une position quelconque dans ce message. Plus la probabilité d’occurrence d’un caractère dans un
+fichier est grande, plus son code doit avoir une taille réduite.</p>
+
+<p>On code chaque caractère par un mot de longueur variable de façon à ce qu’aucun mot ne soit le préfixe d’un
+autre. La propriété principale des codes de Huffman consiste en ce que la longueur moyenne du codage d’un
+caractère dans un fichier soit minimale.</p>
+
+<p>Pour calculer le code d’un alphabet et de sa distribution, on construit un arbre binaire étiqueté par des 0 et
+des 1, les feuilles de cet arbre représentant les caractères tandis que les chemins issus de la racine constituent
+les codes correspondants.</p>
+
+<h3 id="exemple-1">Exemple 1</h3>
+
+<p>Soit l’alphabet a,b,c,d,e associé à la distribution probabiliste de la table 1.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><strong>Caractère</strong></td>
+      <td>a</td>
+      <td>b</td>
+      <td>c</td>
+      <td>d</td>
+      <td>e</td>
+    </tr>
+    <tr>
+      <td><strong>Probabilité</strong></td>
+      <td>0,3</td>
+      <td>0,25</td>
+      <td>0,20</td>
+      <td>0,15</td>
+      <td>0,10</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>On obtient l’arbre binaire de Huffman de la figure 1.
+En parcourant cet arbre de la figure 1 on aboutit au code de Huffman correspondant à la table 2.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><strong>Caractère</strong></td>
+      <td>a</td>
+      <td>b</td>
+      <td>c</td>
+      <td>d</td>
+      <td>e</td>
+    </tr>
+    <tr>
+      <td><strong>Code</strong></td>
+      <td>00</td>
+      <td>01</td>
+      <td>10</td>
+      <td>110</td>
+      <td>111</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Table 2 – Code de Huffman</p>
+
+<!-- _includes/image.html -->
+<p><img class="center-image responsive-img" data-caption="Figure 1 – Arbre de Huffman" width="75%" src="/tps/img/HLIN303/tp3/fig1.png" /></p>
+
+<p>Remarquons que ce code n’est pas unique (il suffit de permuter les 0 et les 1). On calcule la longueur moyenne
+de codage comme suit :</p>
+
+<ul>
+  <li>75% des caractères nécessitent 2 bits (a,b,c) ;</li>
+  <li>25% des caractères nécessitent 3 bits (d,e) ;</li>
+  <li>Lmoy = 75% * 2 + 25% * 3 = 2.25 bits</li>
+</ul>
+
+<p>Remarquons qu’avec un code de taille fixe, chaque caractère aurait nécessité 3 bits, soit une perte de 33%.</p>
+
+<h3 id="31-algorithme-de-huffman">3.1 Algorithme de Huffman</h3>
+
+<p>L’algorithme consiste à construire l’arbre en partant des deux feuilles “les plus basses” (plus faibles probabilités
+ici d et e). On leur associe un père, sorte de noeud virtuel dont la probabilité d’apparition du préfixe associé
+est égale à la somme des probabilités de ses deux fils. On réitère le processus en choisissant à nouveau les deux
+sommets sans père de plus faible probabilité jusqu’à la construction de la racine.</p>
+
+<h3 id="exercice-14-td">Exercice 14 (TD)</h3>
+
+<p>A l’aide de l’exemple précédent, construisez l’arbre de Huffman en précisant à chaque pas les noeuds créés.</p>
+
+<h4 id="solution-14">Solution 14</h4>
+
+<p>Voir l’arbre de la figure 2.</p>
+
+<!-- _includes/image.html -->
+<p><img class="center-image responsive-img" data-caption="Figure 2 – Arbre des Probabilités" src="/tps/img/HLIN303/tp3/fig2.png" /></p>
+
+<h3 id="exercice-15-tdtp">Exercice 15 (TD/TP)</h3>
+
+<p>Soit la distribution probabiliste de la table 3 pour les dix caractères représentant les chiffres décimaux.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><strong>Caractère</strong></td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <td><strong>Probabilité</strong></td>
+      <td>0,05</td>
+      <td>0,1</td>
+      <td>0,11</td>
+      <td>0,11</td>
+      <td>0,15</td>
+      <td>0,06</td>
+      <td>0,08</td>
+      <td>0,2</td>
+      <td>0,07</td>
+      <td>0,07</td>
+    </tr>
+  </tbody>
+</table>
+
+<ol>
+  <li>Etablir manuellement un arbre de Huffman pour cette distribution en expliquant votre démarche.</li>
+  <li>En utilisant le résultat précédent, établir le code de Huffman pour cette distribution de la table 3 en
+expliquant votre démarche.</li>
+  <li>Donner la longueur moyenne de codage d’un chiffre du message.</li>
+</ol>
+
+<h4 id="solution-15">Solution 15</h4>
+
+<ol>
+  <li>
+    <p>Nous débuterons en étudiant les deux chiffres ayant les probabilités les plus faibles (0 et 5)
+et nous commencerons par construire le noeud 05 (0.11) en partant de ces deux feuilles “les plus basses”.
+Le père de 0 et de 5 constitue un noeud virtuel (référencé par 05) dont la probabilité d’apparition cumulée
+est égale à la somme des probabilités de ses deux fils, soit 0.11.
+Nous examinons maintenant les deux probabilités les plus faibles des autres chiffres et du nouveau noeud
+virtuel. De même que précédemment, nous formons un second noeud virtuel 89 dont la probabilité associée
+est de : 0.07 + 0.07 = 0.14 <br />
+Nous recommençons avec les chiffres 1 et 6 et formons le nouveau noeud virtuel 16 de probabilité 0.18.
+Puis, nous faisons de même avec 2 et 3. <br />
+Arrivé à ce stade, les deux plus faibles probabilités appartiennent aux noeuds virtuels 05 et 89. Nous
+décidons donc de leur adjoindre un père 0589 ayant une probabilité de 0.11 + 0.14 = 0.25. Puis nous
+formons le père des noeuds 4 et 16 : 146 (0.33).<br />
+Nous continuons le même processus jusqu’à ce que l’on obtienne la racine de l’arbre qui est le noeud
+virtuel 0123456789 (1.0) dont la probabilité associée est 1.</p>
+  </li>
+  <li>
+    <p>A ce moment, nous pouvons établir le code de Huffman de la table 4 associé à la distribution probabiliste
+donnée en parcourant l’arbre.</p>
+  </li>
+</ol>
+
+<table>
+  <tbody>
+    <tr>
+      <td><strong>Caractère</strong></td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <td><strong>Probabilité</strong></td>
+      <td>0,05</td>
+      <td>0,1</td>
+      <td>0,11</td>
+      <td>0,11</td>
+      <td>0,15</td>
+      <td>0,06</td>
+      <td>0,08</td>
+      <td>0,2</td>
+      <td>0,07</td>
+      <td>0,07</td>
+    </tr>
+    <tr>
+      <td><strong>Code</strong></td>
+      <td>1000</td>
+      <td>1111</td>
+      <td>010</td>
+      <td>011</td>
+      <td>110</td>
+      <td>1001</td>
+      <td>1110</td>
+      <td>00</td>
+      <td>1010</td>
+      <td>1011</td>
+    </tr>
+  </tbody>
+</table>
+
+<ol>
+  <li>On peut vérifier que les codes les plus courts correspondent bien aux chiffres les plus fréquents : 7 (2
+bits) ; 2,3,4 (3 bits).
+La longueur moyenne de codage est calculée de la façon suivante :</li>
+</ol>
+
+<ul>
+  <li>20% des chiffres nécessitent 2 bits (chiffre 7)</li>
+  <li>37% des chiffres nécessitent 3 bits (chiffres 2,3,4)</li>
+  <li>43% des chiffres nécessitent 4 bits (chiffres 0,1,5,6,8,9)</li>
+</ul>
+
+<p>On a donc une longueur moyenne de codage d’un caractère égale à : Lmoy= 2*20% + 3*37% + 4*43%=3.23 bits/caractère.</p>
+
+<h3 id="exercice-16-tdtp">Exercice 16 (TD/TP)</h3>
+
+<p>On souhaite calculer la distribution probabiliste des caractères d’un fichier passé en paramètre où les caractères
+sont stockés sur 8 bits.</p>
+
+<ol>
+  <li>Décrire une structure de données à base de tableau permettant de calculer puis de stocker la distribution
+probabiliste.</li>
+  <li>Ecrire l’algorithme pour calculer la distribution probabiliste.</li>
+  <li>Ecrire le programme C correspondant.</li>
+</ol>
+
+<h4 id="solution-16">Solution 16</h4>
+
+<p>Un tableau <code class="language-plaintext highlighter-rouge">int compte[256]</code> de 256 entiers initialisés à 0 nous parmettra de compter les
+caractères. Puis un tableau float proba[256] de 256 flottants pour contenir la fréquence d’apparition.</p>
+
+<p>Calcul des probabilités</p>
+<pre><code class="language-no">taille=0
+fic=ouvrir(argv[1])
+TantQue EOF!=c=lireCar(fic)
+    compte[c]++
+    taille++
+fermer(fic)
+Pour i=0 à 255
+    proba[i]=compte[i]/taille
+</code></pre>
+
+<p>programme proba.c</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;sys/stat.h&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span>
+<span class="cm">/** Calcule la proba d’apparition des car dans le fichier chemin et remplit
+* le tableau proba de taille 256
+* @param chemin chaîne contenant le nom du fichier
+* @param proba tableau de 256 flottants
+* @return 0 si ok sinon erreur
+*/</span>
+<span class="kt">int</span> <span class="nf">calculProba</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">chemin</span><span class="p">,</span> <span class="kt">float</span> <span class="o">*</span><span class="n">proba</span><span class="p">){</span>
+    <span class="kt">FILE</span><span class="o">*</span> <span class="n">fic</span><span class="o">=</span><span class="n">fopen</span><span class="p">(</span><span class="n">chemin</span><span class="p">,</span><span class="s">"r"</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">fic</span><span class="p">){</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="s">"Impossible d’ouvrir le fichier %s !"</span><span class="p">,</span><span class="n">chemin</span><span class="p">);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span> <span class="cm">/* impossible ouvrir fichier */</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">compte</span><span class="p">[</span><span class="mi">256</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+    <span class="kt">int</span> <span class="n">taille</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">c</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">EOF</span><span class="o">!=</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="n">fgetc</span><span class="p">(</span><span class="n">fic</span><span class="p">))){</span>
+        <span class="n">compte</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">taille</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">fclose</span><span class="p">(</span><span class="n">fic</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">taille</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="cm">/* fichier vide */</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">256</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">proba</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="n">compte</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">taille</span><span class="p">;</span> <span class="c1">// Attention un des deux doit être float!</span>
+        <span class="c1">// printf("DEBUG %f ",compte[i]/(float)taille);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="cm">/* OK */</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[],</span> <span class="kt">char</span> <span class="o">*</span><span class="n">env</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">argc</span><span class="o">!=</span><span class="mi">2</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Syntaxe : %s fichier</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span> <span class="cm">/* syntaxe */</span>
+    <span class="p">}</span>
+    <span class="kt">float</span> <span class="n">proba</span><span class="p">[</span><span class="mi">256</span><span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">calculProba</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">proba</span><span class="p">)){</span> <span class="cm">/* si O */</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">256</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">proba</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="mi">0</span><span class="p">){</span>
+                <span class="n">printf</span><span class="p">(</span><span class="s">"car : %c de code : %x de proba : %f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">proba</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="cm">/* OK */</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">2</span><span class="p">;</span> <span class="cm">/* calcul impossible */</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="exercice-17-tdtp">Exercice 17 (TD/TP)</h3>
+
+<ol>
+  <li>Décrire une structure de données à base de tableau permettant de construire l’arbre de Huffman.</li>
+  <li>Ecrire l’algorithme pour construire l’arbre ;</li>
+  <li>Ecrire l’algorithme pour calculer le code de Huffman ; Huffman associé.</li>
+  <li>On souhaite implémenter cet algorithme sur des fichiers où les caractères sont stockés sur 8 bits. Quelle
+est la taille minimale et maximale d’un code ? Comment stocker le tableau des codes dans le fichier codé ?</li>
+  <li>(Projet) Programmer l’algorithme de compression et de décompression en C.</li>
+</ol>
+
+<h4 id="solution-17">Solution 17</h4>
+
+<ul>
+  <li>Un tableau dont chaque ligne représente un noeud de l’arbre, dont les indices sont les chiffres
+(0-9), avec 4 colonnes contenant le père, le fils gauche, le fils droit, la proba du noeud. Nous utiliserons
+la structure de données schématisée dans la table 5 sous forme de tableau (fg signifie fils gauche tandis que fd signifie fils droit).</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>indice</th>
+      <th>Pere</th>
+      <th>fg</th>
+      <th>fd</th>
+      <th>proba</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>0,05</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>0,1</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>0,11</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>0,11</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>0,15</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>0,06</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>0,08</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>0,2</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>0,07</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>0,07</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+      <td>-1</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Table 5 – Structure de données</p>
+
+<ul>
+  <li>Construction de l’arbre. L’objet de cet algorithme est de construire un arbre binaire complet.
+pour nouveau_noeud=10 à 18</li>
+</ul>
+
+<ol>
+  <li>chercher i et j entre 0 et nouveau_noeud-1 tel que
+    <ol>
+      <li>i = indice du noeud n’ayant pas de père (Pere=-1) et ayant la plus faible proba</li>
+      <li>j = indice du noeud n’ayant pas de père (Pere=-1) et ayant la seconde plus faible proba</li>
+    </ol>
+  </li>
+  <li>// créer le nouveau noeud</li>
+</ol>
+
+<pre><code class="language-no">ARBRE[nouveau_noeud,fg]=i; // on crèe l’arc fils gauche
+ARBRE[nouveau_noeud,fd]=j; // on crèe l’arc fils droit
+ARBRE[nouveau_noeud,proba]=ARBRE[i,proba]+ARBRE[j,proba]; // somme probas
+ARBRE[i,pere]=nouveau_noeud; //on crèe l’arc pere
+ARBRE[j,pere]=nouveau_noeud; //on crèe l’arc pere
+end.
+</code></pre>
+
+<p>La phase 1) de cet algo. n’est pas détaillée car elle correspond à une simple recherche séquentielle des
+deux probabilités les plus faibles parmi les racines (noeuds sans père) de l’arbre en construction. La phase
+1) permet de construire les arcs reliant le nouveau noeud virtuel à ses deux fils.</p>
+
+<ul>
+  <li>Calcul du code. On va calculer le code d’un chiffre donné en parcourant l’arbre. Nous utiliserons le
+type chaîne de caractères pour former les codes des caractères. Cette version n’est pas efficace car on
+parcourt plusieurs fois les mêmes noeuds.</li>
+</ul>
+
+<pre><code class="language-no">char* code[10] // codes des chiffres
+
+Pour i=0 to 9
+    code[i]=""; // initialisation à chaîne vide
+    n=i;
+    TantQue ARBRE[n,pere] != -1 // tant que n n’est pas la racine
+    // concaténer (+) le code obtenu avec 0 ou 1
+        if ARBRE[ARBRE[n,pere], fg]=n // si n est le fils gauche de son père
+            code[i]=’0’+code[i]
+        else
+            code[i]=’1’+code[i];
+        n=ARBRE[n,pere]
+</code></pre>
+
+<p><strong>Calcul du code (efficace)</strong> On partira de la racine et on fera une descente en profondeur à gauche à
+l’aide d’une fonction récursive : calculCode</p>
+
+<pre><code class="language-no">fonction calculCode
+Globales: nbcar : entier indiquant le nb de car différents du fichier;
+    pere, fg, fd : 3 tableaux de longueur 2*nbcar-1 réalisant le chaînage;
+    code : un tableau de chaînes de longueur nbcar
+Données: noeud : indice du noeud;
+    buf : chaîne stockant le code en construction
+Résultat:
+début
+    si fg[noeud]=-1 alors // feuille
+        code[noeud]=buf
+    sinon
+        buf=buf + ’0’ // concaténation
+        calculCode(fg[noeud],buf)
+        buf=sous-chaine(buf,0,taille(buf)-2) // suppression du dernier car
+        buf=buf + ’1’ // concaténation
+        calculCode(fd[noeud],buf)
+</code></pre>
+
+<p>Cette fonction sera appelée par <code class="language-plaintext highlighter-rouge">calculCode(2*nbcar-2,"")</code></p>
+
+<ul>
+  <li>l’arbre le plus déséquilibré aura une profondeur de 255 donc la taille maxi de code sera de 255 bits tandis
+que la taille mini est de 1 bit. On peut stocker le tableau de code en en-tête du fichier.</li>
+</ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col m12">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="https://twitter.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a rel="me" href="https://piaille.fr/@badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-mastodon fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="https://orcid.org/0000-0002-4588-2698">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-orcid fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://github.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://www.linkedin.com/in/benoitverhaeghe">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="mailto:benoit@badetitou.fr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="text-center">Copyright &copy; badetitou 2023
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/my.js"></script>
+<script src="/js/my-sidenav.js"></script>
+
+<script src="/js/lightense.min.js"></script>
+
+<script>
+
+  // Init Lightense
+  window.addEventListener("load", function() {
+    Lightense("img:not(.no-lightense),.lightense", {
+      background: 'rgba(0,0,0,0.05)'
+    });
+  }, false);
+
+  // Example: Lazy Lightense
+  document.addEventListener("DOMContentLoaded", function(e) {
+    function createDom(type, cssClass) {
+      var div = document.createElement(type);
+      div.className = cssClass;
+      return div;
+    }
+
+    var thumb = document.querySelector(".lightense-lazy");
+    var original = new Image();
+
+    // Init wrapper
+    var wrap = createDom("div", "lightense-lazy-wrap");
+    thumb.parentNode.insertBefore(wrap, thumb);
+    wrap.appendChild(thumb);
+
+    // Wrap thumbnail
+    var thumbWrap = createDom("div", "lightense-lazy-thumb");
+    thumbWrap.appendChild(thumb);
+    wrap.appendChild(thumbWrap);
+
+    // Wrap original
+    var originalWrap = createDom("div", "lightense-lazy-large");
+    original.src = thumb.dataset.original;
+    originalWrap.appendChild(original);
+    wrap.appendChild(originalWrap);
+
+    // Load original image
+    original.addEventListener(
+      "load",
+      function() {
+        wrap.classList.add("on");
+      },
+      false
+    );
+  });
+</script>
+
+
+</body>
+
+</html>

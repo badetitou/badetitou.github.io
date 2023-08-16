@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Benoît Verhaeghe's blog">
+    
+
+    <link rel="icon" href="/img/logo/logo.png" type="image/x-icon">
+
+
+    <title>Compilation séparée et bibliothèque - Benoît Verhaeghe</title>
+
+    <link rel="canonical" href="http://badetitou.github.io/tps/HLIN303/tp4/">
+
+    <!-- <link rel="stylesheet" href="/assets/vendor/fontawesome-free/css/all.min.css"> -->
+    
+    <script src="https://kit.fontawesome.com/5574707d0b.js" crossorigin="anonymous"></script>
+    
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/main.css">
+    <!-- My JS -->
+    <script src="/js/my-head.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link type="application/atom+xml" rel="alternate" href="http://badetitou.github.io/feed.xml" title="Benoît Verhaeghe" />
+
+</head>
+
+
+<body>
+
+    <nav>
+    <div class="nav-wrapper">
+        <a href="#" onclick="openNav()" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        
+        <ul class="left hide-on-med-and-down"> <li>
+        <a href="/" style="margin-left: 20px;"> Benoît Verhaeghe</a></li></ul>
+
+        <ul class="right hide-on-med-and-down">
+            <li>
+                <span style="width: 30px; display: inline-block;">
+                    <i id="theme-switch" style="font-size: 20px" class="fa-solid fa-1x"></i>
+                </span>
+            </li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/post/">Posts</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+        
+        
+            <li><a href="/research/">Research</a></li>
+        
+        
+        
+        
+        
+        </ul>
+        
+    </div>
+</nav>
+
+<ul class="sidenav" id="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <li><a href="/">Home</a></li>
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/post/">Posts</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+    
+        
+            <li><a href="/research/">Research</a></li>
+        
+    
+        
+        
+    
+</ul>
+
+<div id="sidenav-overlay" onclick="closeNav()"></div>
+
+    <!-- Post Header -->
+<header class="intro-header"
+    style="background-image: url('/img/bg/keyboard.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div class="post-heading  text-center">
+                    <h1>Compilation séparée et bibliothèque</h1>
+                    
+                    <h2 class="subheading">TP4 - Correction</h2>
+                    
+                    <span class="meta">Posted by
+                        Benoît "badetitou" Verhaeghe on
+                        October 21, 2019</span>
+                    <span class="post-meta">
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<article class="container">
+    <div class="row">
+        <div class="col s12 m12">
+            <div class="card">
+                <div class="card-content article-content">
+                    <h2 id="tp4---compilation-séparée-et-bibliothèque">TP4 - Compilation séparée et bibliothèque</h2>
+
+<h3 id="exercice-18-td">Exercice 18 (TD)</h3>
+
+<p>Listez les avantages et inconvénients de la liaison statique et dynamique.</p>
+
+<h4 id="solution-18">Solution 18</h4>
+
+<h3 id="exercice-19-tp">Exercice 19 (TP)</h3>
+
+<p>En reprenant l’exercice 13, on souhaite construire une bibliothèque statique (.a) contenant les fonctions pair
+et impair à l’aide de la commande ar.</p>
+
+<ol>
+  <li>Créer les fichiers objets pair.o et impair.o. Puis éditer leurs liens avec le fichier spair.c après compilation
+en construisant l’exécutable spair2.</li>
+  <li>Créer une bibliothèque statique libpair.a contenant les deux fichiers objets pair.o et impair.o. Vérifier
+le contenu de libpair.a.</li>
+  <li>Compiler spair.c et éditer ses liens avec votre bibliothèque dans un exécutable spair3. Tester spair3.</li>
+</ol>
+
+<h4 id="solution-19">Solution 19</h4>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">gcc -c pair.c; gcc -c impair.c; gcc -o spair2 spair.c pair.o impair.o</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ar rs libpair.a pair.o impair.o;ar t libpair.a</code></li>
+  <li><code class="language-plaintext highlighter-rouge">gcc -static spair.c -o spair3 -lpair -L.;spair3 45</code></li>
+</ol>
+
+<h3 id="exercice-20-tp">Exercice 20 (TP)</h3>
+
+<p>En reprenant l’exercice 13, on souhaite construire une bibliothèque dynamique (.so) contenant les fonctions
+pair et impair à l’aide de la commande .</p>
+
+<ul>
+  <li>Créer la bibliothèque dynamique libpair.so contenant les fichiers objets pair.o et impair.o.</li>
+  <li>Compiler spair.c dans un exécutable spair4 puis tester ses liens dynamiques.</li>
+</ul>
+
+<h4 id="solution-20">Solution 20</h4>
+
+<ul>
+  <li>Position Independant Code</li>
+</ul>
+
+<pre><code class="language-no">gcc -fPIC -c pair.c impair.c
+gcc -shared -Wl,-soname,libpair.so.1 -o libpair.so.1 pair.o impair.o
+LD_LIBRARY_PATH=‘pwd‘:$LD_LIBRARY_PATH ; export LD_LIBRARY_PATH
+</code></pre>
+
+<pre><code class="language-no">gcc -o spair4 spair.c -lpair
+ldd spair4
+</code></pre>
+
+<h3 id="exercice-21-tp-bibliothèque-sd">Exercice 21 (TP bibliothèque sd)</h3>
+
+<p>Vous trouverez sur le site <a href="http://www.lirmm.fr/~meynard/">http://www.lirmm.fr/~meynard/</a> des fichiers d’en-tête et des sources C définisssant
+des conteneurs de types génériques :</p>
+
+<ul>
+  <li>liste générique : listeg</li>
+  <li>association ou dictionnaire : assog</li>
+  <li>ensemble : ensg</li>
+  <li>arbre binaire ! arbin g</li>
+  <li>types de base (entier, chaine, flottant, car) : types_base</li>
+</ul>
+
+<p>L’objectif du TP est de construire une bibliothèque statique et une bibliothèque générique contenant les
+objets définis, puis de l’utiliser en écrivant une application simple : calcul de toutes les parties d’un ensemble
+fini d’entier.</p>
+
+<h4 id="solution-21">Solution 21</h4>
+
+<ul>
+  <li>static</li>
+</ul>
+
+<pre><code class="language-no">gcc -c listeg.c types_base.c ensg.c assog.c arbing.c
+ar -rs libsd.a listeg.o types_base.o ensg.o assog.o arbing.o
+gcc -o main -static main.c -lsd -L.
+main 12 45 4 89
+</code></pre>
+
+<ul>
+  <li>dynamic - Position Independant Code</li>
+</ul>
+
+<pre><code class="language-no">gcc -fPIC -c listeg.c types_base.c ensg.c assog.c arbing.c
+gcc -shared -Wl,-soname,libsd.so.1 -o libsd.so.1 listeg.o types_base.o ensg.o
+assog.o arbing.o
+LD_LIBRARY_PATH=‘pwd‘:$LD_LIBRARY_PATH ; export LD_LIBRARY_PATH
+gcc -o dmain -fPIC dmain.c -lsd
+dmain 45 4
+</code></pre>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col m12">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="https://twitter.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a rel="me" href="https://piaille.fr/@badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-mastodon fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="https://orcid.org/0000-0002-4588-2698">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-orcid fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://github.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://www.linkedin.com/in/benoitverhaeghe">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="mailto:benoit@badetitou.fr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="text-center">Copyright &copy; badetitou 2023
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/my.js"></script>
+<script src="/js/my-sidenav.js"></script>
+
+<script src="/js/lightense.min.js"></script>
+
+<script>
+
+  // Init Lightense
+  window.addEventListener("load", function() {
+    Lightense("img:not(.no-lightense),.lightense", {
+      background: 'rgba(0,0,0,0.05)'
+    });
+  }, false);
+
+  // Example: Lazy Lightense
+  document.addEventListener("DOMContentLoaded", function(e) {
+    function createDom(type, cssClass) {
+      var div = document.createElement(type);
+      div.className = cssClass;
+      return div;
+    }
+
+    var thumb = document.querySelector(".lightense-lazy");
+    var original = new Image();
+
+    // Init wrapper
+    var wrap = createDom("div", "lightense-lazy-wrap");
+    thumb.parentNode.insertBefore(wrap, thumb);
+    wrap.appendChild(thumb);
+
+    // Wrap thumbnail
+    var thumbWrap = createDom("div", "lightense-lazy-thumb");
+    thumbWrap.appendChild(thumb);
+    wrap.appendChild(thumbWrap);
+
+    // Wrap original
+    var originalWrap = createDom("div", "lightense-lazy-large");
+    original.src = thumb.dataset.original;
+    originalWrap.appendChild(original);
+    wrap.appendChild(originalWrap);
+
+    // Load original image
+    original.addEventListener(
+      "load",
+      function() {
+        wrap.classList.add("on");
+      },
+      false
+    );
+  });
+</script>
+
+
+</body>
+
+</html>

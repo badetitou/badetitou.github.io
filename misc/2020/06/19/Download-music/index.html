@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Benoît Verhaeghe's blog">
+    
+
+    <link rel="icon" href="/img/logo/logo.png" type="image/x-icon">
+
+
+    <title>Download musics from Google Play Music - Benoît Verhaeghe</title>
+
+    <link rel="canonical" href="http://badetitou.github.io/misc/2020/06/19/Download-music/">
+
+    <!-- <link rel="stylesheet" href="/assets/vendor/fontawesome-free/css/all.min.css"> -->
+    
+    <script src="https://kit.fontawesome.com/5574707d0b.js" crossorigin="anonymous"></script>
+    
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/main.css">
+    <!-- My JS -->
+    <script src="/js/my-head.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link type="application/atom+xml" rel="alternate" href="http://badetitou.github.io/feed.xml" title="Benoît Verhaeghe" />
+
+</head>
+
+
+<body>
+
+    <nav>
+    <div class="nav-wrapper">
+        <a href="#" onclick="openNav()" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        
+        <ul class="left hide-on-med-and-down"> <li>
+        <a href="/" style="margin-left: 20px;"> Benoît Verhaeghe</a></li></ul>
+
+        <ul class="right hide-on-med-and-down">
+            <li>
+                <span style="width: 30px; display: inline-block;">
+                    <i id="theme-switch" style="font-size: 20px" class="fa-solid fa-1x"></i>
+                </span>
+            </li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/post/">Posts</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+        
+        
+            <li><a href="/research/">Research</a></li>
+        
+        
+        
+        
+        
+        </ul>
+        
+    </div>
+</nav>
+
+<ul class="sidenav" id="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <li><a href="/">Home</a></li>
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/post/">Posts</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+    
+        
+            <li><a href="/research/">Research</a></li>
+        
+    
+        
+        
+    
+</ul>
+
+<div id="sidenav-overlay" onclick="closeNav()"></div>
+
+    <!-- Post Header -->
+<header class="intro-header"
+    style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div class="post-heading text-center">
+                    <h1>Download musics from Google Play Music</h1>
+                    
+                    <h2 class="subheading">Or how to use Pharo to control Python and VLC library?</h2>
+                    
+                    <span class="meta">Posted by
+                        Benoît "badetitou" Verhaeghe on
+                        June 19, 2020</span>
+                    <span class="post-meta">
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article class="container">
+    <div class="row">
+        <div class="col s12 m12">
+            <div class="card">
+                <div class="card-content article-content">
+                    <h2 id="introduction">Introduction</h2>
+
+<p><a href="https://play.google.com/music/">Google Play Music (GPM)</a> is a service proposed by Google to listen musics online (like Spotify, Deezer, …).
+Having a premium subscription, I can listen a lot of music by using the online service, but when I have no internet connection… I cannot :-( .
+So I wanted to download the music ^^.</p>
+
+<blockquote>
+  <p>This might be illegal, so, I used this situation to explain the process to use Pharo to download musics from GPM
+but you <strong>must not</strong> use this for real.</p>
+</blockquote>
+
+<h2 id="approach">Approach</h2>
+
+<p>My idea is simple: if I can listen to musics from my computer, it means my computer has to download the music.
+I know that musics coming from GPM are in the mp3 format.
+So the process to download the music is simple:</p>
+
+<ol>
+  <li>Access my GPM library</li>
+  <li>For each music download the corresponding mp3 file.</li>
+  <li>Set the metadata of each music</li>
+</ol>
+
+<h3 id="access-my-gpm-library">Access my GPM library</h3>
+
+<p>There is no official API for GPM service, however, a the <a href="https://unofficial-google-music-api.readthedocs.io/en/latest/">gmusicapi</a> python project has been developed to create an unofficial API.
+This API allows us to access every element of our GPM library.</p>
+
+<p>I’m not that good in Python, but I know it is possible to control python over Pharo.
+So I decided to use the <a href="https://github.com/aranega/pybridge">pybridge</a> project of <a href="https://github.com/aranega">Vincent Aranega</a>.</p>
+
+<p>PyBridge allows us to use python language in Pharo.
+So, I’ll use it to load and use the unofficial GPM API.</p>
+
+<h4 id="set-up-pybridge">Set up PyBridge</h4>
+
+<p>PyBridge is currently a work in progress and consequently asks a bit of a SetUp.
+One needs to download the server project and the Pharo client project.</p>
+
+<p>For the <a href="https://github.com/aranega/pybridge">Pharo client project</a>, it is super easy.
+I only need to download the project from GitHub and install the baseline:</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Metacello</span> <span class="nb">new</span>
+    <span class="nf">baseline:</span> <span class="s">'PyBridge'</span><span class="p">;</span>
+    <span class="nf">repository:</span> <span class="s">'github://aranega/pybridge/src'</span><span class="p">;</span>
+    <span class="nf">load</span>
+</code></pre></div></div>
+
+<p>For the <a href="https://github.com/aranega/pybridge">Server project</a>, the project is inside the <code class="language-plaintext highlighter-rouge">python</code> branch of the git repository.
+It requires <a href="https://pypi.org/project/pipenv/"><code class="language-plaintext highlighter-rouge">pipenv</code></a> to simply setup python virtual environments.
+So clone it in another folder and create a virtualenv by doing a simple:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>pipenv <span class="nb">install</span>
+</code></pre></div></div>
+
+<p>Then, install the <code class="language-plaintext highlighter-rouge">gmusicapi</code> and run the server by executing the following commands:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>pipenv shell
+<span class="o">(</span>pybridge<span class="o">)</span> <span class="nv">$ </span>pip <span class="nb">install </span>gmusicapi
+<span class="o">(</span>pybridge<span class="o">)</span> <span class="nv">$ </span>python server.py
+</code></pre></div></div>
+
+<p>Congratulations! You have correctly set up <code class="language-plaintext highlighter-rouge">PyBridge</code> to use the <code class="language-plaintext highlighter-rouge">gmusicapi</code> library!</p>
+
+<h3 id="log-in-gpm">Log in GPM</h3>
+
+<p>Before using the library, I need to log in inside GPM.
+To do so, I will use <code class="language-plaintext highlighter-rouge">gmusicapi</code>.
+The usage of the python library in Pharo is pretty forward as PyBridge exposes python objects in a Smalltalk fashion.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">|</span><span class="nv"> mobileClient api </span><span class="p">|</span>
+
+<span class="c">"Access to the API class"</span>
+<span class="nv">mobileClient</span> <span class="o">:=</span> <span class="nc">PyBridge</span> <span class="nf">load:</span> <span class="err">#</span><span class="s">'gmusicapi::Mobileclient'</span><span class="p">.</span>
+<span class="c">"Create a new instance"</span>
+<span class="nv">api</span> <span class="o">:=</span> <span class="nv">mobileClient</span> <span class="nb">new</span><span class="p">.</span>
+<span class="c">"Create authentification key"</span>
+<span class="nv">api</span> <span class="nf">perform_oauth</span><span class="p">.</span> <span class="c">"This step must be done only once by GPM account to get a oauth key."</span>
+
+<span class="c">"Login using oauth key"</span>
+<span class="nv">api</span> <span class="nf">oauth_login:</span> <span class="s">'XXXXX'</span> <span class="c">"XXXXX is my private key ^-^"</span>
+</code></pre></div></div>
+
+<p>Nice! I have now a full access to the GPM API using PyBridge and Pharo.</p>
+
+<h2 id="download-mp3-files">Download mp3 files</h2>
+
+<p>GPM does not allow the users to download music.
+However, it is possible to ask for the audio stream in a mp3 format.
+I will use this to download the files ^-^.</p>
+
+<p>In the following, I will present an example to download the album <a href="https://en.wikipedia.org/wiki/Hypnotize_(album)"><em>Hypnotize</em> of <em>System Of A Down</em></a>.
+The album is in my GPM library so I can retrieve it in “my songs”.</p>
+
+<p>To download the musics, I will access to all my musics libraries, select the music that belongs to the album, and then download the musics.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">"access to all my songs"</span>
+<span class="nv">library</span> <span class="o">:=</span> <span class="nv">api</span> <span class="nf">get_all_songs</span><span class="p">.</span> <span class="c">"get_all_songs is part of the python library"</span><span class="err">.</span>
+
+<span class="m">0</span> <span class="nf">to:</span> <span class="p">(</span><span class="nv">library</span> <span class="nf">size</span> <span class="nf">-</span> <span class="m">1</span><span class="p">)</span> <span class="nf">do:</span> <span class="p">[</span><span class="o">:</span><span class="nv">index</span> <span class="p">|</span> <span class="c">"take care with index in python"</span>
+    <span class="p">|</span><span class="nv"> music </span><span class="p">|</span>
+    <span class="nv">music</span> <span class="o">:=</span> <span class="p">(</span><span class="nv">library</span> <span class="nf">at:</span> <span class="nv">index</span><span class="p">)</span>
+    <span class="p">((</span><span class="nv">music</span> <span class="nf">at:</span> <span class="ss">#album</span><span class="p">)</span> <span class="nf">literalValue</span> <span class="nf">beginsWith:</span> <span class="s">'Hypnotize'</span><span class="p">)</span> <span class="c">"is the music at index part of the album?"</span>
+        <span class="nb">ifTrue:</span> <span class="p">[</span>
+            <span class="p">|</span> <span class="nv">fileRef</span> <span class="nf">|</span>
+            <span class="nv">fileRef</span> <span class="o">:=</span> <span class="p">(</span><span class="s">'/home/user/music'</span> <span class="nf">asFileReference</span> <span class="nf">/</span> <span class="p">((</span><span class="nv">music</span> <span class="nf">at:</span> <span class="ss">#title</span><span class="p">)</span><span class="nf">,</span> <span class="s">'.mp3'</span><span class="p">)).</span>
+            <span class="nv">fileRef</span> <span class="nf">binaryWriteStreamDo:</span> <span class="p">[</span><span class="o">:</span><span class="nv">mp3WriteStream</span> <span class="p">|</span>
+                <span class="p">(</span><span class="nc">ZnEasy</span> <span class="nf">get:</span> <span class="p">(</span><span class="nv">api</span> <span class="nf">get_stream_url:</span> <span class="p">(</span><span class="nv">music</span> <span class="nf">at:</span> <span class="ss">#id</span><span class="p">)))</span> <span class="nf">writeOn:</span> <span class="nv">mp3WriteStream</span><span class="p">.</span> <span class="c">"download the file"</span>
+            <span class="p">].</span>
+        <span class="p">]</span>
+<span class="p">]</span>
+
+</code></pre></div></div>
+
+<p>I have now download all the music of the album.
+To summary:</p>
+
+<ol>
+  <li>Pharo asks for all songs to Python</li>
+  <li>Then Pharo iterates on the Pyhton Map to select the correct musics.</li>
+  <li>It asks to Python the URL stream for a Music</li>
+  <li>And it uses Zinc to download the music and creates the mp3 file.</li>
+</ol>
+
+<h2 id="set-the-metadata">Set the metadata</h2>
+
+<p>Our strategy works pretty well but the metadata of the mp3 files are not set.
+It can not be a problem but it is preferable when using a music manager (such as Clementine, Music Bee, Itunes, …).
+So, I will use VLC to set the metadata of our file.
+It is possible to use VLC through Pharo using the <a href="https://github.com/badetitou/Pharo-LibVLC">Pharo-LibVLC project</a>.</p>
+
+<h3 id="set-up-pharo-libvlc">Set Up Pharo LibVLC</h3>
+
+<p>Installing the FFI binding of VLC for Pharo is easy.
+You need to: (1) install <a href="https://www.videolan.org/">VLC</a>, and (2) install Pharo-LibVLC.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Metacello</span> <span class="nb">new</span>
+  <span class="nf">baseline:</span> <span class="s">'VLC'</span><span class="p">;</span>
+  <span class="nf">repository:</span> <span class="s">'github://badetitou/Pharo-LibVLC'</span><span class="p">;</span>
+  <span class="nf">load</span><span class="p">.</span>
+</code></pre></div></div>
+
+<p>Then, it is possible to use VLC in Pharo after initializing it.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">vlc</span> <span class="o">:=</span> <span class="nc">VLCLibrary</span> <span class="nf">uniqueInstance</span> <span class="nf">createVLCInstance</span>
+</code></pre></div></div>
+
+<h3 id="set-the-metadata-1">Set the metadata</h3>
+
+<p>Inside the previous script, I insert the code to set metadata using VLC.
+First, I create a reference to the mp3 file for VLC, then I set the metadata using VLC API.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">|</span><span class="nv"> media </span><span class="p">|</span>
+<span class="nv">media</span> <span class="o">:=</span> <span class="nv">vlc</span> <span class="nf">createMediaFromPath:</span> <span class="nv">fileRef</span> <span class="nf">fullName</span><span class="p">.</span> <span class="c">"create mp3 reference for VLC"</span>
+<span class="nv">media</span> <span class="nf">setMeta:</span> <span class="nc">VLCMetaT</span> <span class="nf">libvlc_meta_Album</span> <span class="nf">with:</span> <span class="p">(</span><span class="nv">music</span> <span class="nf">at:</span> <span class="ss">#album</span><span class="p">)</span> <span class="nf">literalValue</span> <span class="nf">asString</span><span class="p">.</span>
+<span class="nv">media</span> <span class="nf">setMeta:</span> <span class="nc">VLCMetaT</span> <span class="nf">libvlc_meta_Title</span> <span class="nf">with:</span> <span class="p">(</span><span class="nv">music</span> <span class="nf">at:</span> <span class="ss">#title</span><span class="p">)</span> <span class="nf">literalValue</span> <span class="nf">asString</span><span class="p">.</span>
+<span class="nv">media</span> <span class="nf">saveMeta</span><span class="p">.</span>
+<span class="nv">media</span> <span class="nf">release</span><span class="p">.</span>
+</code></pre></div></div>
+
+<p>In the example, I only set “album” and “title” attribute but it is possible to set <a href="https://unofficial-google-music-api.readthedocs.io/en/latest/reference/mobileclient.html#songs">more metadata</a>.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>I have used Zinc, VLC, and Python with a Python library to download musics for Google Play Music service.
+It shows how easy it is to use Pharo with other programming languages
+    and I hope it will help you to create many super cool projects.</p>
+
+<blockquote>
+  <p><strong>I REMIND YOU THAT THIS WORK MIGHT NOT BE LEGAL SO CONSIDER IT ONLY AS AN EXAMPLE!</strong></p>
+</blockquote>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://utteranc.es/client.js"
+        repo="badetitou/badetitou.github.io"
+        issue-term="pathname"
+        label="comments"
+        theme="boxy-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+    <ul class="pager list-inline">
+        
+        <li class="previous">
+            <a class="m-button" href="/misc/2020/06/06/Testing-Uffi/" data-toggle="tooltip"
+                data-placement="top" data-tooltip="Testing UFFI Binding with Travis">&larr;
+                Previous Post</a>
+        </li>
+        
+        
+        <li class="next">
+            <a class="m-button" href="/misc/2020/11/30/Testing-pharo-with-github-actions/" data-toggle="tooltip"
+                data-placement="top" data-tooltip="Testing and releasing Pharo with GitHub actions">Next Post &rarr;</a>
+        </li>
+        
+    </ul>
+</article>
+
+
+    <!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col m12">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="https://twitter.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a rel="me" href="https://piaille.fr/@badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-mastodon fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="https://orcid.org/0000-0002-4588-2698">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-orcid fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://github.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://www.linkedin.com/in/benoitverhaeghe">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="mailto:benoit@badetitou.fr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="text-center">Copyright &copy; badetitou 2023
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/my.js"></script>
+<script src="/js/my-sidenav.js"></script>
+
+<script src="/js/lightense.min.js"></script>
+
+<script>
+
+  // Init Lightense
+  window.addEventListener("load", function() {
+    Lightense("img:not(.no-lightense),.lightense", {
+      background: 'rgba(0,0,0,0.05)'
+    });
+  }, false);
+
+  // Example: Lazy Lightense
+  document.addEventListener("DOMContentLoaded", function(e) {
+    function createDom(type, cssClass) {
+      var div = document.createElement(type);
+      div.className = cssClass;
+      return div;
+    }
+
+    var thumb = document.querySelector(".lightense-lazy");
+    var original = new Image();
+
+    // Init wrapper
+    var wrap = createDom("div", "lightense-lazy-wrap");
+    thumb.parentNode.insertBefore(wrap, thumb);
+    wrap.appendChild(thumb);
+
+    // Wrap thumbnail
+    var thumbWrap = createDom("div", "lightense-lazy-thumb");
+    thumbWrap.appendChild(thumb);
+    wrap.appendChild(thumbWrap);
+
+    // Wrap original
+    var originalWrap = createDom("div", "lightense-lazy-large");
+    original.src = thumb.dataset.original;
+    originalWrap.appendChild(original);
+    wrap.appendChild(originalWrap);
+
+    // Load original image
+    original.addEventListener(
+      "load",
+      function() {
+        wrap.classList.add("on");
+      },
+      false
+    );
+  });
+</script>
+
+
+</body>
+
+</html>

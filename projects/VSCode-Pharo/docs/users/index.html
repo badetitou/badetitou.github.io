@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="A VSCode extension for the Pharo programming language">
+    
+
+    <link rel="icon" href="/img/logo/logo.png" type="image/x-icon">
+
+
+    <title>VSCode - Pharo - Benoît Verhaeghe</title>
+
+    <link rel="canonical" href="http://badetitou.github.io/projects/VSCode-Pharo/docs/users/">
+
+    <!-- <link rel="stylesheet" href="/assets/vendor/fontawesome-free/css/all.min.css"> -->
+    
+    <script src="https://kit.fontawesome.com/5574707d0b.js" crossorigin="anonymous"></script>
+    
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/main.css">
+    <!-- My JS -->
+    <script src="/js/my-head.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link type="application/atom+xml" rel="alternate" href="http://badetitou.github.io/feed.xml" title="Benoît Verhaeghe" />
+
+</head>
+
+
+<body>
+
+    <nav>
+    <div class="nav-wrapper">
+        <a href="#" onclick="openNav()" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        
+        <ul class="left hide-on-med-and-down"> <li>
+        <a href="/" style="margin-left: 20px;"> Benoît Verhaeghe</a>
+</li>
+</ul>
+
+        <ul class="right hide-on-med-and-down">
+            <li>
+                <span style="width: 30px; display: inline-block;">
+                    <i id="theme-switch" style="font-size: 20px" class="fa-solid fa-1x"></i>
+                </span>
+            </li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/post/">Posts</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+        
+        
+            <li><a href="/research/">Research</a></li>
+        
+        
+        
+        
+        
+        </ul>
+        
+    </div>
+</nav>
+
+<ul class="sidenav" id="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <li><a href="/">Home</a></li>
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/post/">Posts</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+    
+        
+            <li><a href="/research/">Research</a></li>
+        
+    
+        
+        
+    
+</ul>
+
+<div id="sidenav-overlay" onclick="closeNav()"></div>
+
+    <!-- Project Header -->
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="post-heading text-center">
+                <h1>VSCode - Pharo</h1>
+                
+                <span class="meta">Posted by Benoît "badetitou" Verhaeghe
+                    on January 7, 2021</span>
+                <span class="post-meta">
+                    
+                </span>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Project Content -->
+<article class="container">
+    <div class="row">
+        <div class="col s12 m12">
+            <div class="card">
+                <div class="card-content">
+                    <p><a href="https://marketplace.visualstudio.com/items?itemName=badetitou.pharo-language-server">VSCode Pharo</a> is an extension that enables the support of the Pharo programming language in <a href="https://code.visualstudio.com/">Visual Studio Code</a>.</p>
+
+<blockquote>
+  <p>This page is announcing the creation of the extension, it might not be up-to-date. Please see the <a href="https://github.com/badetitou/vscode-pharo">GitHub repository</a> for more information.</p>
+</blockquote>
+
+<p>Here, we are detailing how to set-up VSCode to use the extension, then we present the main features of the extension, and future features.</p>
+
+<h2 id="installation">Installation</h2>
+
+<p>Five steps are required to install the plugins.</p>
+
+<ol>
+  <li>Install <a href="https://code.visualstudio.com/">VSCode</a>
+</li>
+  <li>Install the <a href="https://marketplace.visualstudio.com/items?itemName=badetitou.pharo-language-server">Pharo extension</a>
+</li>
+  <li>Download a <a href="https://github.com/badetitou/Pharo-LanguageServer/releases">Pharo Language Server image</a> or <a href="https://github.com/badetitou/Pharo-LanguageServer#installation">install the server</a> in a pre-existing image</li>
+  <li>Download a <a href="https://files.pharo.org/vm/pharo-spur64-headless/">VM</a> (headless or not) for the image</li>
+  <li>Set up the Pharo extension property
+    <ol>
+      <li>
+<code class="language-plaintext highlighter-rouge">pharo.pathToVM</code>: is the path to the VM executable</li>
+      <li>
+<code class="language-plaintext highlighter-rouge">pharo.pathToImage</code>: is the absolute path to the image</li>
+    </ol>
+  </li>
+</ol>
+
+<h2 id="features">Features</h2>
+
+<p>We present here the existing features</p>
+
+<h3 id="generic-feature">Generic feature</h3>
+
+<ul class="browser-default">
+  <li>Code highlighting</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/badetitou/vscode-pharo/main/docs/img/highlighting.png" alt="Highlighting" class="center-image img-fill"></p>
+
+<h3 id="supported-language-server-feature">Supported Language Server feature</h3>
+
+<ul class="browser-default">
+  <li>Code formatting</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/badetitou/vscode-pharo/main/docs/img/format.gif" alt="Format gif" class="center-image img-fill"></p>
+
+<ul class="browser-default">
+  <li>Hover</li>
+</ul>
+
+<p>When moving a cursor over a class, it shows the comment of the class.
+The hover popup supports markdown. So it can be use to print nice comment from Pharo 9.</p>
+
+<p><img src="https://raw.githubusercontent.com/badetitou/vscode-pharo/main/docs/img/hover.png" alt="Hover" class="center-image img-fill"></p>
+
+<ul class="browser-default">
+  <li>Auto-completion</li>
+</ul>
+
+<p>We used the completion engine of Pharo to compute the entries.
+Not that for keywords with several symbols, it is possible to use the <code class="language-plaintext highlighter-rouge">&lt;Tab&gt;</code> key to move from one argument to another.</p>
+
+<p><img src="https://raw.githubusercontent.com/badetitou/vscode-pharo/main/docs/img/Auto-completion.gif" alt="Auto-Completion" class="center-image img-fill"></p>
+
+<h3 id="additional-feature">Additional feature</h3>
+
+<p>The additional feature can be access using the command palette of VSCode</p>
+
+<ul class="browser-default">
+  <li>Save the Pharo image</li>
+  <li>Execute and show the result</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/badetitou/vscode-pharo/main/docs/img/inspectResult.gif" alt="Inspect gif" class="center-image img-fill"></p>
+
+<ul class="browser-default">
+  <li>Execute and print the result</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/badetitou/vscode-pharo/main/docs/img/printResult.gif" alt="Print gif" class="center-image img-fill"></p>
+
+<ul class="browser-default">
+  <li>Keep variable state</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/badetitou/vscode-pharo/main/docs/img/keep-variable-state.gif" alt="Keep Variable state gif" class="center-image img-fill"></p>
+
+<ul class="browser-default">
+  <li>Show the current server version</li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/badetitou/vscode-pharo/main/docs/img/pharo-version.gif" alt="Show version gif" class="center-image img-fill"></p>
+
+<ul class="browser-default">
+  <li>Saving a tonel file in VSCode, save the corresponding methods/class in the Pharo image</li>
+</ul>
+
+<h2 id="future">Future</h2>
+
+<p>Three major features are coming (<em>and will require time</em>).</p>
+
+<ol>
+  <li>Synchronization
+    <ol>
+      <li>From Pharo to VSCode</li>
+      <li>From VSCode to Pharo</li>
+    </ol>
+  </li>
+  <li>Debug Adapter Protocol</li>
+  <li>Notebook (<a href="https://code.visualstudio.com/api/extension-guides/notebook">VSCode preview</a>)</li>
+</ol>
+
+<h3 id="synchronization">Synchronization</h3>
+
+<p>We plan to add commands to VSCode to allow synchronization between Pharo and VSCode.
+The idea is to be able to install a set of classes from the VSCode editor inside the opened Pharo Image. A typical use case is then:</p>
+
+<ol>
+  <li>Clone from git a Pharo project</li>
+  <li>Open the project in VSCode</li>
+  <li>Synchronize the project with the image</li>
+  <li>Developing <img class="emoji" title=":rocket:" alt=":rocket:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f680.png" height="20" width="20">
+</li>
+</ol>
+
+<p>Another possibility will be to synchronize a project already present in the image with a ongoing VSCode session. A typical use case is then:</p>
+
+<ol>
+  <li>Open VSCode</li>
+  <li>Install a project using Metacello with a VSCode command</li>
+  <li>Synchronize the interesting projects inside the VSCode editor</li>
+  <li>Developing <img class="emoji" title=":rocket:" alt=":rocket:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f680.png" height="20" width="20">
+</li>
+</ol>
+
+<h3 id="debug-adapter-protocol">Debug Adapter Protocol</h3>
+
+<p><a href="https://microsoft.github.io/debug-adapter-protocol/">Debug Adapter Protocol (DAP)</a> is a generic protocol that can be used to control debugger.
+We plan to add support of the DAP over our extension.
+With this extension, it will be possible to debug Pharo application using <a href="https://microsoft.github.io/debug-adapter-protocol/implementors/tools/">several editors (VSCode, Emacs, Vim, Eclipse, …)</a>.</p>
+
+<h3 id="notebook">Notebook</h3>
+
+<p>VSCode is currently testing a <a href="https://code.visualstudio.com/api/extension-guides/notebook">Notebook</a> feature (as <a href="https://jupyter.org/">Jupyter</a>).
+We already have most of the required material to implement a Pharo Notebook using the VSCode API.
+This will be our priority as soon as the stable VSCode notebook API will be released.</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col m12">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="https://twitter.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a rel="me" href="https://piaille.fr/@badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-mastodon fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="https://orcid.org/0000-0002-4588-2698">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-orcid fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://github.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://www.linkedin.com/in/benoitverhaeghe">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="mailto:benoit@badetitou.fr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="text-center">Copyright © badetitou 2023
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/my.js"></script>
+<script src="/js/my-sidenav.js"></script>
+
+<script src="/js/lightense.min.js"></script>
+
+<script>
+
+  // Init Lightense
+  window.addEventListener("load", function() {
+    Lightense("img:not(.no-lightense),.lightense", {
+      background: 'rgba(0,0,0,0.05)'
+    });
+  }, false);
+
+  // Example: Lazy Lightense
+  document.addEventListener("DOMContentLoaded", function(e) {
+    function createDom(type, cssClass) {
+      var div = document.createElement(type);
+      div.className = cssClass;
+      return div;
+    }
+
+    var thumb = document.querySelector(".lightense-lazy");
+    var original = new Image();
+
+    // Init wrapper
+    var wrap = createDom("div", "lightense-lazy-wrap");
+    thumb.parentNode.insertBefore(wrap, thumb);
+    wrap.appendChild(thumb);
+
+    // Wrap thumbnail
+    var thumbWrap = createDom("div", "lightense-lazy-thumb");
+    thumbWrap.appendChild(thumb);
+    wrap.appendChild(thumbWrap);
+
+    // Wrap original
+    var originalWrap = createDom("div", "lightense-lazy-large");
+    original.src = thumb.dataset.original;
+    originalWrap.appendChild(original);
+    wrap.appendChild(originalWrap);
+
+    // Load original image
+    original.addEventListener(
+      "load",
+      function() {
+        wrap.classList.add("on");
+      },
+      false
+    );
+  });
+</script>
+
+
+</body>
+
+</html>

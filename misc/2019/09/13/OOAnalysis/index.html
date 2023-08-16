@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Benoît Verhaeghe's blog">
+    
+
+    <link rel="icon" href="/img/logo/logo.png" type="image/x-icon">
+
+
+    <title>Analyze OO project - Benoît Verhaeghe</title>
+
+    <link rel="canonical" href="http://badetitou.github.io/misc/2019/09/13/OOAnalysis/">
+
+    <!-- <link rel="stylesheet" href="/assets/vendor/fontawesome-free/css/all.min.css"> -->
+    
+    <script src="https://kit.fontawesome.com/5574707d0b.js" crossorigin="anonymous"></script>
+    
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/main.css">
+    <!-- My JS -->
+    <script src="/js/my-head.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link type="application/atom+xml" rel="alternate" href="http://badetitou.github.io/feed.xml" title="Benoît Verhaeghe" />
+
+</head>
+
+
+<body>
+
+    <nav>
+    <div class="nav-wrapper">
+        <a href="#" onclick="openNav()" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        
+        <ul class="left hide-on-med-and-down"> <li>
+        <a href="/" style="margin-left: 20px;"> Benoît Verhaeghe</a></li></ul>
+
+        <ul class="right hide-on-med-and-down">
+            <li>
+                <span style="width: 30px; display: inline-block;">
+                    <i id="theme-switch" style="font-size: 20px" class="fa-solid fa-1x"></i>
+                </span>
+            </li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/post/">Posts</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+        
+        
+            <li><a href="/research/">Research</a></li>
+        
+        
+        
+        
+        
+        </ul>
+        
+    </div>
+</nav>
+
+<ul class="sidenav" id="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <li><a href="/">Home</a></li>
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/post/">Posts</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+    
+        
+            <li><a href="/research/">Research</a></li>
+        
+    
+        
+        
+    
+</ul>
+
+<div id="sidenav-overlay" onclick="closeNav()"></div>
+
+    <!-- Post Header -->
+<header class="intro-header"
+    style="background-image: url('/misc/img-2019-09-13-OOAnalysis/background.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div class="post-heading text-center">
+                    <h1>Analyze OO project</h1>
+                    
+                    <h2 class="subheading">I present a tool that does a quick analysis of Java projects With Moose</h2>
+                    
+                    <span class="meta">Posted by
+                        Benoît "badetitou" Verhaeghe on
+                        September 13, 2019</span>
+                    <span class="post-meta">
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article class="container">
+    <div class="row">
+        <div class="col s12 m12">
+            <div class="card">
+                <div class="card-content article-content">
+                    <p>When I discover a new project I always do the same analysis.
+So I decided to create a little project with my scripts to gather important information.
+In this post, I present how to use my scripts with a java project.</p>
+
+<h2 id="preparation">Preparation</h2>
+
+<p>In this post, we will extract information from the <a href="https://github.com/traccar/traccar-web">Traccar project</a>.
+Traccar is a Java application that used the GWT framework to create a Riche Internet Application.
+You can download Traccar.</p>
+
+<p>Once the application is downloaded, we generate a <em>.mse</em> file thanks to <a href="https://github.com/moosetechnology/VerveineJ">VerveineJ</a>.
+Please refer to the <a href="https://moosetechnology.github.io/moose-wiki/projects/parsers/VerveineJ.html">VerveineJ documentation</a> for more details.</p>
+
+<p>The analysis is done with <a href="https://moosetechnology.github.io/moose-wiki/">Moose</a>.
+First of all, we need to <a href="https://moosetechnology.github.io/moose-wiki/Beginners/InstallMoose.html">download a Moose 8 image</a>.</p>
+
+<p>Finally, we load the <em>.mse</em> file in Moose.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">"Import the model in moose"</span>
+<span class="nv">model</span> <span class="o">:=</span> <span class="nc">FAMIXMooseModel</span> <span class="nf">importFromMSEStream:</span> <span class="s">'./path/to/file.mse'</span> <span class="nf">asFileReference</span> <span class="nf">readStream</span><span class="p">.</span>
+<span class="nv">model</span> <span class="nf">rootFolder:</span> <span class="s">'/path/to/rootfolder'</span><span class="p">.</span>
+<span class="c">"Add the model in the Moose Panel and compute some metrics"</span>
+<span class="nv">model</span> <span class="nf">install</span><span class="p">.</span>
+</code></pre></div></div>
+
+<h2 id="installation">Installation</h2>
+
+<p>My scripts are available on github.
+You can easily install them by executing the following line in a playground:</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Metacello</span> <span class="nb">new</span>
+    <span class="nf">githubUser:</span> <span class="s">'badetitou'</span> <span class="nf">project:</span> <span class="s">'OOAnalysis'</span> <span class="nf">commitish:</span> <span class="s">'master'</span> <span class="nf">path:</span> <span class="s">'.'</span><span class="p">;</span>
+    <span class="nf">baseline:</span> <span class="s">'OOAnalysis'</span><span class="p">;</span>
+    <span class="nf">load</span>
+</code></pre></div></div>
+
+<h2 id="the-analysis">The analysis</h2>
+
+<p>Once the tool is installed, open the System Browser and check the class <code class="language-plaintext highlighter-rouge">OOCriticsVisu</code> with the protocol <code class="language-plaintext highlighter-rouge">software visualization</code>.
+You can execute the methods from the browser by clicking on the methods icon.
+Each method will execute a common analysis on the loaded model.</p>
+
+<p>In the following section, I describe the analysis.</p>
+
+<h3 id="queries">Queries</h3>
+
+<h4 id="main-methods">Main methods</h4>
+
+<p><code class="language-plaintext highlighter-rouge">#mainMethods</code> searches the main methods inside the Java project.
+In the case of Traccar there is none since the project is run by the GWT framework.
+In other projects, you can find several mains.
+It may be interesting to understand why.
+Probably some are used for testing.</p>
+
+<h4 id="god-classes-by-lines">God classes by lines</h4>
+
+<p><code class="language-plaintext highlighter-rouge">#godClassesByLines</code> returns the classes with more than 150 lines of code.
+In Traccar, it founds 36 classes.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">model</span> <span class="nf">allModelClasses</span> <span class="nf">select:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">each</span> <span class="p">|</span> <span class="nv">each</span> <span class="nf">numberOfLinesOfCode</span> <span class="nf">&gt;</span> <span class="m">150</span> <span class="p">]</span>
+</code></pre></div></div>
+
+<p>First, it asks the model all the model classes (the classes that are part of Traccar, excluding the classes from its dependencies).
+Then, it select classes with a number of line of code superior to 150.</p>
+
+<h4 id="god-classes-by-methods">God classes by methods</h4>
+
+<p><code class="language-plaintext highlighter-rouge">#godClassesByMethods</code> returns the classes with more than 50 methods.
+In Traccar, there are 4 god classes with more than 50 methods.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">model</span> <span class="nf">allModelClasses</span> <span class="nf">select:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">each</span> <span class="p">|</span> <span class="nv">each</span> <span class="nf">numberOfMethods</span> <span class="nf">&gt;</span> <span class="m">50</span> <span class="p">]</span>
+</code></pre></div></div>
+
+<p>First, it asks the model all the model classes (the classes that are part of Traccar, excluding the classes from its dependencies).
+Then, it selects classes with a number of methods superior to 50.</p>
+
+<h3 id="visualizations">Visualizations</h3>
+
+<h4 id="class-diagram">Class diagram</h4>
+
+<p><code class="language-plaintext highlighter-rouge">#classDiagram</code> shows the class diagram of the project.
+It uses Roassal to create the visualization.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">|</span><span class="nv"> b </span><span class="p">|</span>
+<span class="nv">b</span> <span class="o">:=</span> <span class="nc">RTMondrian</span> <span class="nb">new</span><span class="p">.</span>
+<span class="nv">b</span> <span class="nf">nodes:</span> <span class="nv">model</span> <span class="nf">allClasses</span><span class="p">.</span>
+<span class="nv">b</span> <span class="nf">edges</span> <span class="nf">connectFrom:</span> <span class="ss">#superclass</span><span class="p">.</span>
+<span class="nv">b</span> <span class="nf">layout</span> <span class="nf">tree</span><span class="p">.</span>
+<span class="nv">b</span> <span class="nf">build</span><span class="p">.</span>
+<span class="o">^</span> <span class="nv">b</span> <span class="nf">view</span>
+</code></pre></div></div>
+
+<p>First, it creates a mondrian.
+Then, it defines the nodes of the visualization, in our case, it is all the classes of the model.
+It connects the nodes by asking for the <code class="language-plaintext highlighter-rouge">#superclass</code>.
+Finally, it defines the layout as a tree.</p>
+
+<h4 id="packages-hierarchy-with-complexity">Packages hierarchy with complexity</h4>
+
+<p><code class="language-plaintext highlighter-rouge">#packagesHierarchyWithComplexity</code> shows the package hierarchy and their complexity.
+The width corresponds to the number of classes.
+The height corresponds to the number of methods.
+The color corresponds to the number of lines of code.
+In Traccar, the most important packages seems to be <em>org::traccar::web::client::view</em> and <em>org::traccar::web::server::model</em>.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">b</span> <span class="o">:=</span> <span class="nc">RTMondrian</span> <span class="nb">new</span><span class="p">.</span>
+<span class="nv">b</span> <span class="nf">shape</span> <span class="nf">rectangle</span>
+    <span class="nf">width:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">p</span> <span class="p">|</span> <span class="nv">p</span> <span class="nf">numberOfClasses</span> <span class="p">];</span>
+    <span class="nf">height:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">p</span> <span class="p">|</span> <span class="nv">p</span> <span class="nf">numberOfMethods</span> <span class="p">];</span>
+    <span class="nf">linearFillColor:</span> <span class="ss">#numberOfLinesOfCode</span> <span class="nf">within:</span> <span class="nv">model</span> <span class="nf">allModelNamespaces</span> <span class="nf">entities</span><span class="p">;</span>
+    <span class="nf">borderColor:</span> <span class="nc">Color</span> <span class="nf">lightGray</span><span class="p">.</span>
+<span class="o">^</span> <span class="nv">b</span>
+    <span class="nf">nodes:</span> <span class="nv">model</span> <span class="nf">allModelNamespaces</span><span class="p">;</span>
+    <span class="nf">edgesFrom:</span> <span class="ss">#parentScope</span><span class="p">;</span>
+    <span class="nf">treeLayout</span><span class="p">;</span>
+    <span class="nf">build</span><span class="p">;</span>
+    <span class="nf">view</span>
+</code></pre></div></div>
+
+<p>First, it defines how an element should be displayed.
+Then , it adds the namespaces (packages) as nodes and connect them with the <code class="language-plaintext highlighter-rouge">#parentScope</code> keyword.
+Finally, it defines the layout as a tree.</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://utteranc.es/client.js"
+        repo="badetitou/badetitou.github.io"
+        issue-term="pathname"
+        label="comments"
+        theme="boxy-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+    <ul class="pager list-inline">
+        
+        <li class="previous">
+            <a class="m-button" href="/misc/2018/02/09/markdownToPdfWithPandocCheatSheet/" data-toggle="tooltip"
+                data-placement="top" data-tooltip="Cheat sheet Pandoc Md to pdf">&larr;
+                Previous Post</a>
+        </li>
+        
+        
+        <li class="next">
+            <a class="m-button" href="/misc/2019/10/17/EventCollect/" data-toggle="tooltip"
+                data-placement="top" data-tooltip="Collect users' data">Next Post &rarr;</a>
+        </li>
+        
+    </ul>
+</article>
+
+
+    <!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col m12">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="https://twitter.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a rel="me" href="https://piaille.fr/@badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-mastodon fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="https://orcid.org/0000-0002-4588-2698">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-orcid fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://github.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://www.linkedin.com/in/benoitverhaeghe">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="mailto:benoit@badetitou.fr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="text-center">Copyright &copy; badetitou 2023
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/my.js"></script>
+<script src="/js/my-sidenav.js"></script>
+
+<script src="/js/lightense.min.js"></script>
+
+<script>
+
+  // Init Lightense
+  window.addEventListener("load", function() {
+    Lightense("img:not(.no-lightense),.lightense", {
+      background: 'rgba(0,0,0,0.05)'
+    });
+  }, false);
+
+  // Example: Lazy Lightense
+  document.addEventListener("DOMContentLoaded", function(e) {
+    function createDom(type, cssClass) {
+      var div = document.createElement(type);
+      div.className = cssClass;
+      return div;
+    }
+
+    var thumb = document.querySelector(".lightense-lazy");
+    var original = new Image();
+
+    // Init wrapper
+    var wrap = createDom("div", "lightense-lazy-wrap");
+    thumb.parentNode.insertBefore(wrap, thumb);
+    wrap.appendChild(thumb);
+
+    // Wrap thumbnail
+    var thumbWrap = createDom("div", "lightense-lazy-thumb");
+    thumbWrap.appendChild(thumb);
+    wrap.appendChild(thumbWrap);
+
+    // Wrap original
+    var originalWrap = createDom("div", "lightense-lazy-large");
+    original.src = thumb.dataset.original;
+    originalWrap.appendChild(original);
+    wrap.appendChild(originalWrap);
+
+    // Load original image
+    original.addEventListener(
+      "load",
+      function() {
+        wrap.classList.add("on");
+      },
+      false
+    );
+  });
+</script>
+
+
+</body>
+
+</html>

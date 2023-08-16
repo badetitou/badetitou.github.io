@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Benoît Verhaeghe's blog">
+    
+
+    <link rel="icon" href="/img/logo/logo.png" type="image/x-icon">
+
+
+    <title>Casino - Benoît Verhaeghe</title>
+
+    <link rel="canonical" href="http://badetitou.github.io/projects/Casino/">
+
+    <!-- <link rel="stylesheet" href="/assets/vendor/fontawesome-free/css/all.min.css"> -->
+    
+    <script src="https://kit.fontawesome.com/5574707d0b.js" crossorigin="anonymous"></script>
+    
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/main.css">
+    <!-- My JS -->
+    <script src="/js/my-head.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link type="application/atom+xml" rel="alternate" href="http://badetitou.github.io/feed.xml" title="Benoît Verhaeghe" />
+
+</head>
+
+
+<body>
+
+    <nav>
+    <div class="nav-wrapper">
+        <a href="#" onclick="openNav()" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        
+        <ul class="left hide-on-med-and-down"> <li>
+        <a href="/" style="margin-left: 20px;"> Benoît Verhaeghe</a>
+</li>
+</ul>
+
+        <ul class="right hide-on-med-and-down">
+            <li>
+                <span style="width: 30px; display: inline-block;">
+                    <i id="theme-switch" style="font-size: 20px" class="fa-solid fa-1x"></i>
+                </span>
+            </li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/post/">Posts</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+        
+        
+            <li><a href="/research/">Research</a></li>
+        
+        
+        
+        
+        
+        </ul>
+        
+    </div>
+</nav>
+
+<ul class="sidenav" id="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <li><a href="/">Home</a></li>
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/post/">Posts</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+    
+        
+            <li><a href="/research/">Research</a></li>
+        
+    
+        
+        
+    
+</ul>
+
+<div id="sidenav-overlay" onclick="closeNav()"></div>
+
+    <!-- Project Header -->
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="post-heading text-center">
+                <h1>Casino</h1>
+                
+                <h2 class="subheading">GUI semi-automatic migration tool</h2>
+                
+                <span class="meta">Posted by Benoît "badetitou" Verhaeghe
+                    on December 13, 2018</span>
+                <span class="post-meta">
+                    
+                    (Updated: May 3, 2021)
+                    
+                </span>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Project Content -->
+<article class="container">
+    <div class="row">
+        <div class="col s12 m12">
+            <div class="card">
+                <div class="card-content">
+                    <h2 id="introduction">Introduction</h2>
+
+<p>Casino aims to migrate semi-automatically the front-end of applications regardless of its implementing language.
+The front-end corresponds to the widgets and their behaviors.</p>
+
+<h2 id="migration-strategy">Migration Strategy</h2>
+
+<p>Here is a diagram showing the migration steps implemented by Casino.</p>
+
+<p><img src="img/migrationProcess.png" alt="Migration process" class="img-fill"></p>
+
+<h2 id="gui-meta-model">GUI Meta-model</h2>
+
+<h3 id="full-widgets-meta-model">Full Widgets meta-model</h3>
+
+<p><img src="https://raw.githubusercontent.com/badetitou/Casino/v2-doc/full.svg" alt="Full widgets metamodel" class="img-fill"></p>
+
+<p><a href="https://raw.githubusercontent.com/badetitou/Casino/v2-doc/full.svg">Download the metamodel</a></p>
+
+<h2 id="current-results">Current results</h2>
+
+<h3 id="gwt-application-migration-to-angular">GWT application migration to Angular</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Source Application (GWT)</th>
+      <th style="text-align: center">Target Application (Angular)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><img src="img/cmp/gwt/home.png" alt="Home GWT"></td>
+      <td style="text-align: center"><img src="img/cmp/angular/home.png" alt="Home Angular"></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="img/cmp/gwt/libelle.png" alt="Libelle GWT"></td>
+      <td style="text-align: center"><img src="img/cmp/angular/libelle.png" alt="Libelle Angular"></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="img/cmp/gwt/nav.png" alt="Nav GWT"></td>
+      <td style="text-align: center"><img src="img/cmp/angular/nav.png" alt="Nav Angular"></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="img/cmp/gwt/nav2.png" alt="Nav2 GWT"></td>
+      <td style="text-align: center"><img src="img/cmp/angular/nav2.png" alt="Nav2 Angular"></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="img/cmp/gwt/onglet.png" alt="Onglet GWT"></td>
+      <td style="text-align: center"><img src="img/cmp/angular/onglet.png" alt="Onglet Angular"></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="img/cmp/gwt/uiDesk.png" alt="uiDesk GWT"></td>
+      <td style="text-align: center"><img src="img/cmp/angular/uiDesk.png" alt="uiDesk Angular"></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="gwt-to-seaside">GWT to Seaside</h3>
+
+<p>Here are some other examples of the results obtained for GWT application migration to Seaside (<a href="https://www.traccar.org/">Traccar</a>):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Source Application (GXT)</th>
+      <th style="text-align: center">Target Application (Seaside)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><img src="img/traccar/gxt/account.png" alt="Account GXT"></td>
+      <td style="text-align: center"><img src="img/traccar/seaside/account.png" alt="Account Angular"></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="img/traccar/gxt/login.png" alt="Login GXT"></td>
+      <td style="text-align: center"><img src="img/traccar/seaside/login.png" alt="Login Angular"></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="img/traccar/gxt/preferences.png" alt="Preferences GWT"></td>
+      <td style="text-align: center"><img src="img/traccar/seaside/preferences.png" alt="Preferences Angular"></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="spec-to-spec2">Spec to Spec2</h3>
+
+<p>(<a href="https://github.com/juliendelplanque/DBConnectionsManager">DBConnectionsManager</a>):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Source Application (Spec)</th>
+      <th style="text-align: center">Target Application (Spec2)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><img src="img/spec/db1.png" alt="Account GXT"></td>
+      <td style="text-align: center"><img src="img/spec/db2.png" alt="Account Angular"></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="links">Links</h2>
+
+<p>The core of the project (with the importer GWT and the exporter Angular) is available on <a href="https://github.com/badetitou/Casino">GitHub</a>.
+There are also:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Importer</th>
+      <th style="text-align: center">Exporter</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="https://github.com/badetitou/Casino-Swing-Importer">Swing</a></td>
+      <td style="text-align: center"><a href="https://github.com/badetitou/Casino-Spec-Exporter">Spec</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://github.com/badetitou/Casino-Spec-Importer">Spec</a></td>
+      <td style="text-align: center"><a href="https://github.com/badetitou/Casino-Spec2-Exporter">Spec2</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://github.com/badetitou/Casino-HTML-Importer">HTML</a></td>
+      <td style="text-align: center"><a href="https://github.com/badetitou/Casino-Seaside-Exporter">Seaside</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://github.com/badetitou/Casino-GWT-Importer">GWT/GXT</a></td>
+      <td style="text-align: center"><a href="https://github.com/badetitou/Casino-Aurelia-Exporter">Aurelia</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://github.com/badetitou/Casino-Silverlight-Importer">Silverlight</a></td>
+      <td style="text-align: center"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Some importers or exporters are still in beta version.
+However, you can help us! <img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20"></p>
+
+<p>To use Casino, we must use a <a href="https://moosetechnology.github.io/moose-wiki/Beginners/InstallMoose.html">Moose 8 image</a>.</p>
+
+<h2 id="publications">Publications</h2>
+
+<h3 id="journal-articles">Journal Articles</h3>
+
+<div class="masonry masonry-2">
+
+<ol class="bibliography">
+<li>
+<div class="accordion">
+  <input type="checkbox" id="Verh21a">
+  <label class="accordion-header" for="Verh21a">
+    <div class="bibliography-header">
+      <div class="bibliography-title">
+        GUI visual aspect migration: a framework agnostic solution
+      </div>
+      <div class="bibliography-author">
+        
+          Benoît Verhaeghe, 
+        
+          Nicolas Anquetil, 
+        
+          Anne Etien, 
+        
+          Stéphane Ducasse, 
+        
+          Abderrahmane Seriai, 
+        
+          Mustapha Derras
+        
+      </div>
+      <div class="bibliography-booktitle">
+        
+        Automated Software Engineering
+      </div>
+      
+        <i>2021</i>
+      
+      
+        <a href="https://link.springer.com/epdf/10.1007/s10515-021-00284-z?sharing_token=uGynIsRRHShc3wZEPZ4uife4RwlQNchNByi7wbcMAY44F3gcxajwLgNFZBTTtvt9Ze39TcNJgfzugL2qtVGnYyexnPc5xotuhmYx5CMVHbVkuSHoHz1nFEbK1MUblQUdvNP6YXMLdLAG72djsCTEF9cI40mp7yMaWD2gWhSwNAI%3D">PDF</a>
+      
+      
+        <a href="https://dx.doi.org/10.1007/s10515-021-00284-z">DOI</a>
+      
+    </div>
+  </label>
+  <div class="accordion-content">
+    With the generalization of mobile devices and Web applications, GUI frameworks evolve at a fast pace: JavaFX replaced Swing, Angular 8 replaced Angular 1.4 which had replaced Google Web Toolkit (GWT). This situation forces organizations to migrate their applications to modern frameworks regularly so they do not become obsolete. There has been research in the past on automatic GUI migration. However, and concurrently, large organisations’ applications use many different technologies. For example, the IT company with which we are working, Berger-Levrault, wishes to migrate applications written in generic programming language (Java/GWT), proprietary "4th generation" languages (VisualBasic 6, PowerBuilder), or markup languages (Silverlight). Furthermore, one must expect that in a few years time, new frameworks will appear and new migrations will be required. Thus, there is a need for a language-agnostic migration approach allowing one to migrate various legacy GUI to the latest technologies. None of the existing solutions allow to deal with such a variety of GUI framework. They also typically focus on a subpart of the migration (i.e. how to extract a specific GUI framework) ignoring the re-engineering/forward-engineering part of the migration (which is straightforward for a single technology). This makes it difficult to adapt these solutions to other GUI frameworks. We propose an approach to migrate the GUI part of applications. It is based on meta-models to represent the visual element structure and layout. We detail how to create both the GUI extractors and generators, with guidelines to support new markup and programming languages. We evaluate our approach by implementing three extractors and generators for web-based or desktop-based user interfaces defined with generic programming languages (Java, Pharo, TypeScript) or markup languages (XML, HTML). We comment case studies on five applications, opened and closed source, of different sizes. The implementations of our generic approach detect 99% of the widgets and identify (i.e. determine the type of the widget) 97% of them. We give examples of the migrated GUIs, both successful and not.
+  </div>
+</div>
+</li>
+<li>
+<div class="accordion">
+  <input type="checkbox" id="Verh21b">
+  <label class="accordion-header" for="Verh21b">
+    <div class="bibliography-header">
+      <div class="bibliography-title">
+        From GWT to Angular: An Experiment Report on Migrating a Legacy Web Application
+      </div>
+      <div class="bibliography-author">
+        
+          Benoît Verhaeghe, 
+        
+          Anas Shatnawi, 
+        
+          Abderrahmane Seriai, 
+        
+          Anne Etien, 
+        
+          Nicolas Anquetil, 
+        
+          Mustapha Derras, 
+        
+          Stephane Ducasse
+        
+      </div>
+      <div class="bibliography-booktitle">
+        
+        IEEE Software
+      </div>
+      
+        <i>2021</i>
+      
+      
+        <a href="https://hal.archives-ouvertes.fr/hal-03313462/document">PDF</a>
+      
+      
+        <a href="https://dx.doi.org/10.1109/MS.2021.3101249">DOI</a>
+      
+    </div>
+  </label>
+  <div class="accordion-content">
+    Berger-Levrault is an international company that developed applications in GWT for more than 10 years. However, GWT is no longer actively maintained, with only one major update since 2015. To avoid being stuck with legacy technology, the company decided to migrate its applications to Angular. However, because of the size of the applications (more than 500 web pages per application), rewriting from scratch is not desirable. To ease the migration, we designed a semi-automated migration approach that helps developers migrate applications’ front-end from GWT to Angular and a tool that performs the migration. In this paper, we present our approach and tool. We validated the approach on concrete application migration and compared its benefits to redeveloping the application manually. We report that the semi-automated migration offers an effort reduction over a manual migration. Finally, we present recommendations for future migration projects.
+  </div>
+</div>
+</li>
+</ol>
+
+</div>
+
+<h3 id="conference-articles">Conference Articles</h3>
+
+<div class="masonry masonry-2">
+
+
+<ol class="bibliography">
+<li>
+<div class="accordion">
+  <input type="checkbox" id="Verh21c">
+  <label class="accordion-header" for="Verh21c">
+    <div class="bibliography-header">
+      <div class="bibliography-title">
+        Migrating GUI behavior: from GWT to Angular
+      </div>
+      <div class="bibliography-author">
+        
+          Benoît Verhaeghe, 
+        
+          Anas Shatnawi, 
+        
+          Abderrahmane Seriai, 
+        
+          Nicolas Anquetil, 
+        
+          Anne Etien, 
+        
+          Stéphane Ducasse, 
+        
+          Mustapha Derras
+        
+      </div>
+      <div class="bibliography-booktitle">
+        International Conference on Software Maintenance and Evolution
+        
+      </div>
+      
+        <i>2021</i>
+      
+      
+        <a href="https://hal.archives-ouvertes.fr/hal-03341866/file/conference_101719.pdf">PDF</a>
+      
+      
+        <a href="https://dx.doi.org/10.1109/ICSME52107.2021.00050">DOI</a>
+      
+    </div>
+  </label>
+  <div class="accordion-content">
+    In a collaboration with Berger-Levrault, a major IT company, we are working on the migration of GWT applications to Angular. We focus on the GUI aspect of this migration which requires a framework switch (GWT to Angular) and a programming language switch (Java to TypeScript). Previous work identified that the GUI can be split into the UI structure and the GUI behavioral code. GUI behavioral code is the code executed when the user interacts with the UI. Although the migration of UI structure has already been studied, the migration of the GUI behavioral code has not. To help developers during the migration of their applications, we propose a generic approach in four steps that uses a meta-model to represent the GUI behavioral code. This approach includes a separation of the GUI behavioral code into events (caller code) and the code executed when an event is fired (called code). We present the approach and its implementation for a real industrial case study. The application comprises 470 Java (GWT) classes representing 56 web pages. We give examples of the migrated code. We evaluate the quality of the generated code with standard tools (SonarQube, codelizer) and compare it to another Java to TypeScript converter. The results show that our code has 53% fewer warnings and rule violations for SonarQube, and 99% fewer for codelizer.
+  </div>
+</div>
+</li>
+<li>
+<div class="accordion">
+  <input type="checkbox" id="Brag20b">
+  <label class="accordion-header" for="Brag20b">
+    <div class="bibliography-header">
+      <div class="bibliography-title">
+        Challenges for Layout Validation: Lessons Learned
+      </div>
+      <div class="bibliography-author">
+        
+          Santiago Bragagnolo, 
+        
+          Benoı̂t Verhaeghe, 
+        
+          Abderrahmane Seriai, 
+        
+          Mustapha Derras, 
+        
+          Anne Etien
+        
+      </div>
+      <div class="bibliography-booktitle">
+        International Conference on the Quality of Information and Communications Technology, QUATIC’2020
+        
+      </div>
+      
+        <i>2020</i>
+      
+      
+        <a href="https://hal.inria.fr/hal-02914750/document">PDF</a>
+      
+      
+        <a href="https://dx.doi.org/10.1007/978-3-030-58793-2_9">DOI</a>
+      
+    </div>
+  </label>
+  <div class="accordion-content">
+    Companies are migrating their software systems. The migration process contemplates many steps, UI migration is one of them. To validate the UI migration, most existing approaches rely on visual structure (DOM) comparison. However, in previous work, we experimented such validation and reported that it is not sufficient to ensure a result that is equivalent or even identical to the visual structure of the interface to be migrated. Indeed, two similar DOM may be rendered completely differently. So, we decide to focus on the layout migration validation. We propose a first visual comparison approach for migrated layout validation and experiment it on an industrial case. Hence, from this first experiment and already existing studies on image comparison field, we highlight challenges for layout comparison. For each challenge, we propose possible solutions, and we detail the three main features we need to create a good layout validation approach.
+  </div>
+</div>
+</li>
+<li>
+<div class="accordion">
+  <input type="checkbox" id="Verh19b">
+  <label class="accordion-header" for="Verh19b">
+    <div class="bibliography-header">
+      <div class="bibliography-title">
+        Switching of GUI framework: the case from Spec to Spec 2
+      </div>
+      <div class="bibliography-author">
+        
+          Clement Dutriez, 
+        
+          Benoît Verhaeghe, 
+        
+          Mustapha Derras
+        
+      </div>
+      <div class="bibliography-booktitle">
+        Proceedings of the 14th Edition of the International Workshop on Smalltalk Technologies
+        
+      </div>
+      
+        <i>2019</i>
+      
+      
+        <a href="https://hal.archives-ouvertes.fr/hal-02297858/file/iwst19.pdf">PDF</a>
+      
+      
+    </div>
+  </label>
+  <div class="accordion-content">
+    Developers used frameworks to create their User Interface. Those frameworks are developed in a specific version of a language and can be used until the retro-compatibility is broken. In such case, developers need to migrate their software systems to a new GUI framework. We proposed a three-step approach to migrate the front-end of an application. This approach includes an importer, a GUI meta-model and an exporter. We validate our experiment on 6 projects in Pharo. We are able to migrate 5 out of 6 projects that all conserve their widgets organization.
+  </div>
+</div>
+</li>
+<li>
+<div class="accordion">
+  <input type="checkbox" id="Verh19d">
+  <label class="accordion-header" for="Verh19d">
+    <div class="bibliography-header">
+      <div class="bibliography-title">
+        Migrating GWT to Angular 6 using MDE
+      </div>
+      <div class="bibliography-author">
+        
+          Benoît Verhaeghe, 
+        
+          Nicolas Anquetil, 
+        
+          Stéphane Ducasse, 
+        
+          Abderrahmane Seriai, 
+        
+          Laurent Deruelle, 
+        
+          Mustapha Derras
+        
+      </div>
+      <div class="bibliography-booktitle">
+        12th Seminar on Advanced Techniques &amp; Tools for Software Evolution
+        
+      </div>
+      
+        <i>2019</i>
+      
+      
+        <a href="https://hal.inria.fr/hal-02304301/file/sattose2019.pdf">PDF</a>
+      
+      
+    </div>
+  </label>
+  <div class="accordion-content">
+    In the context of a collaboration with Berger-Levrault, a major IT company, we are working on the migration of a GWT application to Angular. We focus on the GUI aspect of this migration which, even if both are web frameworks, is made difficult because they use different programming languages (Java for one, Typescript for the other) and different organization schemas (e.g. different XML files). Moreover, the new application must mimic closely the visual aspect of the old one so that the users of the application are not disturbed. We propose an approach in three steps that uses a meta-model to represent the GUI at a high abstraction level. We evaluated this approach on an application comprising 470 Java (GWT) classes representing 56 screens. We are able to model all the web pages of the application and 93% of the widgets they contain, and we successfully migrated (i.e., the result is visually equal to the original) 26 out of 39 pages (66%). We give examples of the migrated pages, both successful and not.
+  </div>
+</div>
+</li>
+<li>
+<div class="accordion">
+  <input type="checkbox" id="Verh19a">
+  <label class="accordion-header" for="Verh19a">
+    <div class="bibliography-header">
+      <div class="bibliography-title">
+        GUI Migration using MDE from GWT to Angular 6: An Industrial Case
+      </div>
+      <div class="bibliography-author">
+        
+          Benoı̂t Verhaeghe, 
+        
+          Anne Etien, 
+        
+          Nicolas Anquetil, 
+        
+          Abderrahmane Seriai, 
+        
+          Laurent Deruelle, 
+        
+          Stéphane Ducasse, 
+        
+          Mustapha Derras
+        
+      </div>
+      <div class="bibliography-booktitle">
+        2019 IEEE 26th International Conference on Software Analysis, Evolution and Reengineering (SANER)
+        
+      </div>
+      
+        <i>2019</i>
+      
+      
+        <a href="https://hal.archives-ouvertes.fr/hal-02019015/document">PDF</a>
+      
+      
+        <a href="https://dx.doi.org/10.1109/SANER.2019.8667989">DOI</a>
+      
+    </div>
+  </label>
+  <div class="accordion-content">
+    During the evolution of an application, it happens that developers must change the programming language. In the context of a collaboration with Berger-Levrault, a major IT company, we are working on the migration of a GWT application to Angular. We focus on the GUI aspect of this migration which, even if both frameworks are web Graphical User Interface (GUI) frameworks, is made difficult because they use different programming languages and different organization schema. Such migration is complicated by the fact that the new application must be able to mimic closely the visual aspect of the old one so that the users of the application are not disrupted. We propose an approach in four steps that uses a meta-model to represent the GUI at a high abstraction level. We evaluated this approach on an application comprising 470 Java (GWT) classes representing 56 pages. We are able to model all the web pages of the application and 93% of the widgets they contain, and we successfully migrated 26 out of 39 pages (66%). We give examples of the migrated pages, both successful and not.
+  </div>
+</div>
+</li>
+<li>
+<div class="accordion">
+  <input type="checkbox" id="Verh19c">
+  <label class="accordion-header" for="Verh19c">
+    <div class="bibliography-header">
+      <div class="bibliography-title">
+        Migration de GWT vers Angular 6 en utilisant l’IDM
+      </div>
+      <div class="bibliography-author">
+        
+          Benoît Verhaeghe, 
+        
+          Anne Etien, 
+        
+          Stéphane Ducasse, 
+        
+          Abderrahmane Seriai, 
+        
+          Laurent Deruelle, 
+        
+          Mustapha Derras
+        
+      </div>
+      <div class="bibliography-booktitle">
+        Conférence en Ingénierie du Logiciel
+        
+      </div>
+      
+        <i>2019</i>
+      
+      
+        <a href="https://hal.inria.fr/hal-02304296/file/ciel2019.pdf">PDF</a>
+      
+      
+    </div>
+  </label>
+  <div class="accordion-content">
+    
+  </div>
+</div>
+</li>
+</ol>
+
+</div>
+
+<h3 id="thesis-defense-fr">Thesis Defense (FR)</h3>
+
+<div class="masonry masonry-2">
+
+    <div class="text-center">
+        <a class="m-button" href="files/20210712%20-%20PhD%20-%20Benoit.pdf" target="_blank">
+           Download the slides.pdf
+            <i class="fas fa-external-link-alt"></i>
+        </a>
+    </div>
+
+    <div class="text-center">
+        <a class="m-button" href="files/20210712%20-%20PhD%20-%20Benoit.pptx" target="_blank">
+            Download the slides.pptx
+            <i class="fas fa-external-link-alt"></i>
+        </a>
+    </div>
+
+    <div class="text-center">
+        <a class="m-button" href="https://tel.archives-ouvertes.fr/tel-03539458v2/document" target="_blank">
+           Download the thesis manuscript.pdf
+            <i class="fas fa-external-link-alt"></i>
+        </a>
+    </div>
+
+</div>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ZANPYfzsF0Q" frameborder="0" allowfullscreen=""></iframe>
+
+<h2 id="contact">Contact</h2>
+
+<p><a href="mailto:badetitou@gmail.com">contact me</a></p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col m12">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="https://twitter.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a rel="me" href="https://piaille.fr/@badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-mastodon fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="https://orcid.org/0000-0002-4588-2698">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-orcid fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://github.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://www.linkedin.com/in/benoitverhaeghe">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="mailto:benoit@badetitou.fr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="text-center">Copyright © badetitou 2023
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/my.js"></script>
+<script src="/js/my-sidenav.js"></script>
+
+<script src="/js/lightense.min.js"></script>
+
+<script>
+
+  // Init Lightense
+  window.addEventListener("load", function() {
+    Lightense("img:not(.no-lightense),.lightense", {
+      background: 'rgba(0,0,0,0.05)'
+    });
+  }, false);
+
+  // Example: Lazy Lightense
+  document.addEventListener("DOMContentLoaded", function(e) {
+    function createDom(type, cssClass) {
+      var div = document.createElement(type);
+      div.className = cssClass;
+      return div;
+    }
+
+    var thumb = document.querySelector(".lightense-lazy");
+    var original = new Image();
+
+    // Init wrapper
+    var wrap = createDom("div", "lightense-lazy-wrap");
+    thumb.parentNode.insertBefore(wrap, thumb);
+    wrap.appendChild(thumb);
+
+    // Wrap thumbnail
+    var thumbWrap = createDom("div", "lightense-lazy-thumb");
+    thumbWrap.appendChild(thumb);
+    wrap.appendChild(thumbWrap);
+
+    // Wrap original
+    var originalWrap = createDom("div", "lightense-lazy-large");
+    original.src = thumb.dataset.original;
+    originalWrap.appendChild(original);
+    wrap.appendChild(originalWrap);
+
+    // Load original image
+    original.addEventListener(
+      "load",
+      function() {
+        wrap.classList.add("on");
+      },
+      false
+    );
+  });
+</script>
+
+
+</body>
+
+</html>

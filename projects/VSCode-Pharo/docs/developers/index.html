@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Pharo Language Server documentation">
+    
+
+    <link rel="icon" href="/img/logo/logo.png" type="image/x-icon">
+
+
+    <title>Pharo Language Server Developers documentation - Benoît Verhaeghe</title>
+
+    <link rel="canonical" href="http://badetitou.github.io/projects/VSCode-Pharo/docs/developers/">
+
+    <!-- <link rel="stylesheet" href="/assets/vendor/fontawesome-free/css/all.min.css"> -->
+    
+    <script src="https://kit.fontawesome.com/5574707d0b.js" crossorigin="anonymous"></script>
+    
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/main.css">
+    <!-- My JS -->
+    <script src="/js/my-head.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link type="application/atom+xml" rel="alternate" href="http://badetitou.github.io/feed.xml" title="Benoît Verhaeghe" />
+
+</head>
+
+
+<body>
+
+    <nav>
+    <div class="nav-wrapper">
+        <a href="#" onclick="openNav()" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        
+        <ul class="left hide-on-med-and-down"> <li>
+        <a href="/" style="margin-left: 20px;"> Benoît Verhaeghe</a></li></ul>
+
+        <ul class="right hide-on-med-and-down">
+            <li>
+                <span style="width: 30px; display: inline-block;">
+                    <i id="theme-switch" style="font-size: 20px" class="fa-solid fa-1x"></i>
+                </span>
+            </li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/post/">Posts</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+        
+        
+            <li><a href="/research/">Research</a></li>
+        
+        
+        
+        
+        
+        </ul>
+        
+    </div>
+</nav>
+
+<ul class="sidenav" id="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <li><a href="/">Home</a></li>
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/post/">Posts</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+    
+        
+            <li><a href="/research/">Research</a></li>
+        
+    
+        
+        
+    
+</ul>
+
+<div id="sidenav-overlay" onclick="closeNav()"></div>
+
+    <!-- Project Header -->
+<header class="intro-header"
+    style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="post-heading text-center">
+                <h1>Pharo Language Server Developers documentation</h1>
+                
+                <span class="meta">Posted by Benoît "badetitou" Verhaeghe
+                    on August 29, 2022</span>
+                <span class="post-meta">
+                    
+                </span>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Project Content -->
+<article class="container">
+    <div class="row">
+        <div class="col s12 m12">
+            <div class="card">
+                <div class="card-content">
+                    <p>The project <a href="https://github.com/badetitou/Pharo-LanguageServer">Pharo Language Server</a> is an implementation of the <a href="https://microsoft.github.io/language-server-protocol/">Language Server Protocol</a> proposed by Microsoft and implemented by several IDE such as emacs, eclipse, Intellij Idea, VSCode…
+The project GitHub repository includes:</p>
+
+<ol>
+  <li>An abstract layer that can be extended to create a new dedicated language server (for example: for the Java Programming Language)</li>
+  <li>A Pharo Language Server implementation that works well with the <a href="https://marketplace.visualstudio.com/items?itemName=badetitou.pharo-language-server">pharo-vscode</a> plugin.</li>
+  <li>A <a href="https://microsoft.github.io/debug-adapter-protocol/">Debug Adapted protocol</a> implementation for Pharo (that needs another documentation page and is not discussed here).</li>
+</ol>
+
+<p>In this documentation page, we present quickly the protocol, how one can download and install the Pharo Language Server project, its structure, and how to extends it.</p>
+
+<ul>
+  <li><a href="#language-server-protocol">Language Server Protocol</a></li>
+  <li><a href="#pharo-language-server-installation">Pharo Language Server Installation</a></li>
+  <li><a href="#pharo-language-server-structure">Pharo Language Server Structure</a>
+    <ul>
+      <li><a href="#package-architecture">Package architecture</a></li>
+      <li><a href="#server-class-architecture">Server class architecture</a></li>
+      <li><a href="#starting-the-server">Starting the server</a>
+        <ul>
+          <li><a href="#extract-request">Extract request</a></li>
+          <li><a href="#handle-request">Handle request</a></li>
+        </ul>
+      </li>
+      <li><a href="#method-of-the-protocol">Method of the protocol</a></li>
+    </ul>
+  </li>
+  <li><a href="#extending-the-abstract-language-server-to-implement-a-new-one">Extending the Abstract Language Server to implement a new one</a></li>
+</ul>
+
+<h2 id="language-server-protocol">Language Server Protocol</h2>
+
+<p>The language server protocol consists of enabling communication between several IDE and language servers.
+Thus, the IDE is a <em>client</em> and the language server is a <em>server</em>.
+An IDE can interact with serveral servers at the same time.</p>
+
+<p>The bellow sequence diagram present the start of the project</p>
+
+<script src="/js/mermaid.min.js"></script>
+<div class="mermaid">
+sequenceDiagram
+    participant VSCode as VSCode (Client IDE)
+    participant Pharo as Pharo (Language Server)
+    activate VSCode
+    VSCode-&gt;&gt;Pharo: Start Pharo
+    activate Pharo
+    VSCode-&gt;&gt;Pharo: What is the port of Language Server Protocol?
+    Pharo--&gt;&gt;VSCode: It's 40520!
+    activate Pharo
+    VSCode-&gt;&gt;+Pharo: Initialized?
+    Pharo-&gt;&gt;-VSCode: Initialized!
+    VSCode-&gt;&gt;+Pharo: This is my capabilities. What are yours?
+    Pharo-&gt;&gt;-VSCode: Capabilities!
+    loop Client ask for feature | Example:
+        VSCode-&gt;&gt;+Pharo: What about completion?
+        Pharo-&gt;&gt;-VSCode: Complete this text with this snippet
+    end
+    VSCode-&gt;&gt;Pharo: I'm done
+    Pharo-&gt;&gt;VSCode: OK bye!
+    deactivate VSCode
+    deactivate Pharo
+</div>
+
+<p>In short, the client (IDE) opens the server.
+Then, it creates a connection with the client, for instance using a socket.
+Finally, client and server exchanges information following the protocol.</p>
+
+<h2 id="pharo-language-server-installation">Pharo Language Server Installation</h2>
+
+<p>Installing the Pharo Language server is made easy thanks to a Pharo baseline.
+After downloading a <a href="https://pharo.org">Pharo 10</a> image, you can install the project using the following script:</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Metacello</span> <span class="nb">new</span>
+  <span class="nf">githubUser:</span> <span class="s">'badetitou'</span> <span class="nf">project:</span> <span class="s">'Pharo-LanguageServer'</span> <span class="nf">commitish:</span> <span class="s">'v3'</span> <span class="nf">path:</span> <span class="s">'src'</span><span class="p">;</span>
+  <span class="nf">baseline:</span> <span class="s">'PharoLanguageServer'</span><span class="p">;</span>
+  <span class="nf">load</span>
+</code></pre></div></div>
+
+<p>To do so, after launching a Pharo image, open a playground with <kbd>Ctrl+O+W</kbd>, copy and paste the above code snippet, and execute it.</p>
+
+<h2 id="pharo-language-server-structure">Pharo Language Server Structure</h2>
+
+<p>In the following, we describe the strcuture and the main classes of the Pharo Language Server project.
+We only describe the Pharo code and not the one that can be present in the client extension (used in the IDEs).</p>
+
+<h3 id="package-architecture">Package architecture</h3>
+
+<p>The all project is included inside the package <code class="language-plaintext highlighter-rouge">PharoLanguageServer</code>.
+The package is then split into tags.</p>
+
+<ul>
+  <li><em>Uncategorized</em> contains the core of the server</li>
+  <li><em>Document</em> and <em>TonelUtils</em> contain the pharo code representation for the Pharo implementation of the Language Server Protocol (<em>i.e.</em> if you want to code in Pharo from VSCode)</li>
+  <li><em>Handler</em> contains some override of JRPC Pharo implementation to ease its usage by the Pharo Language Server Protocol</li>
+  <li><em>Structure-</em> contains all the structure send and received by the server. Structures are grouped depending on the protocol they are related to (<em>e.g.</em> <code class="language-plaintext highlighter-rouge">PLSDocumentSymbol</code> is linked to retriving symbols using the protocol)</li>
+</ul>
+
+<h3 id="server-class-architecture">Server class architecture</h3>
+
+<p>The two main classes of interest are <code class="language-plaintext highlighter-rouge">PLSAbstractServer</code> and <code class="language-plaintext highlighter-rouge">PLSServer</code>.
+<code class="language-plaintext highlighter-rouge">PLSAbstractServer</code> contains all the logic of a server implementing the Language Server Protocol.
+<code class="language-plaintext highlighter-rouge">PLSServer</code> is the class implementing the Language Server Protocol in the case of using it for the Pharo programming language.</p>
+
+<p>Each class follow the same coding convention/architecture for the method protocols.</p>
+
+<ul>
+  <li><em>starting</em> contains the main method <code class="language-plaintext highlighter-rouge">start</code> used when starting the server and the required method to resolved message that are sent and received.</li>
+  <li><em>lsp-</em> contains the methods to implement the protocol</li>
+  <li><em>pls-</em> contains extension of the protocol (<em>e.g.</em> configuring the debug mode thought the protocol, or accessing to new specific features).</li>
+</ul>
+
+<h3 id="starting-the-server">Starting the server</h3>
+
+<p>In this subsection we give some technical description of the starting method of the server.</p>
+
+<p>The server is started by calling the method <code class="language-plaintext highlighter-rouge">PLSAbstractServer&gt;&gt;start</code></p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">PLSAbstractServer</span> <span class="nf">&gt;&gt;</span> <span class="nv">start</span>
+    <span class="nf">self</span> <span class="nf">debugMode</span> <span class="nb">ifFalse:</span> <span class="p">[</span> <span class="nc">PLSUIManager</span> <span class="nf">withPLSServer:</span> <span class="bp">self</span> <span class="p">].</span>
+    <span class="bp">self</span> <span class="nf">initializeStreams</span><span class="p">.</span>
+    <span class="nv">lastId</span> <span class="o">:=</span> <span class="m">0</span><span class="p">.</span>
+    <span class="nv">process</span> <span class="o">:=</span> <span class="p">[</span> 
+        <span class="p">[</span> <span class="nv">serverLoop</span> <span class="p">]</span> <span class="nb">whileTrue:</span> <span class="p">[</span> 
+            <span class="p">|</span> <span class="nv">request</span> <span class="nf">|</span>
+            <span class="nv">request</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">extractRequestFrom:</span> <span class="nv">clientInStream</span><span class="p">.</span>
+            <span class="p">(</span><span class="s">'Request: '</span> <span class="nf">,</span> <span class="nv">request</span><span class="p">)</span> <span class="nf">recordDebug</span><span class="p">.</span>
+            <span class="bp">self</span> <span class="nf">handleRequest:</span> <span class="nv">request</span> <span class="nf">toClient:</span> <span class="nv">clientOutStream</span> <span class="p">]</span> <span class="p">]</span>
+            <span class="nf">forkAt:</span> <span class="nc">Processor</span> <span class="nf">lowIOPriority</span>
+            <span class="nf">named:</span> <span class="s">'JRPC TCP connection'</span>
+</code></pre></div></div>
+
+<p>First, if the debug mode is not activated, we update the <code class="language-plaintext highlighter-rouge">UIManager</code> of pharo to use ours instead.
+For now, it only enables opening popup in the IDEs instead of the Pharo image.</p>
+
+<p>Then, we initialize the stream that will be used for the communication.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">initializeStreams</span>
+    <span class="p">|</span><span class="nv"> tcpServer </span><span class="p">|</span>
+    <span class="nv">withStdIO</span> <span class="nb">ifTrue:</span> <span class="p">[</span> 
+        <span class="nv">clientInStream</span> <span class="o">:=</span> <span class="nc">Stdio</span> <span class="nf">stdin</span><span class="p">.</span>
+        <span class="nv">clientOutStream</span> <span class="o">:=</span> <span class="nc">Stdio</span> <span class="nf">stdout</span><span class="p">.</span>
+        <span class="o">^</span> <span class="bp">self</span> <span class="p">].</span>
+    <span class="nv">tcpServer</span> <span class="o">:=</span> <span class="nc">Socket</span> <span class="nf">newTCP</span><span class="p">.</span>
+    <span class="nv">tcpServer</span> <span class="nf">listenOn:</span> <span class="bp">self</span> <span class="nf">port</span> <span class="nf">backlogSize:</span> <span class="m">10</span><span class="p">.</span>
+    <span class="nc">Stdio</span> <span class="nf">stdout</span> <span class="nf">nextPutAll:</span> <span class="nv">tcpServer</span> <span class="nf">port</span> <span class="nf">asString</span> <span class="nf">asByteArray</span><span class="p">.</span>
+    <span class="nc">Stdio</span> <span class="nf">stdout</span> <span class="nf">flush</span><span class="p">.</span>
+    <span class="nv">serverLoop</span> <span class="o">:=</span> <span class="bp">true</span><span class="p">.</span>
+    <span class="p">(</span><span class="nv">tcpServer</span> <span class="nf">waitForAcceptFor:</span> <span class="m">60</span><span class="p">)</span> <span class="nf">ifNotNil:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">clientSocket</span> <span class="p">|</span> 
+        <span class="nv">clientInStream</span> <span class="o">:=</span> <span class="nc">SocketStream</span> <span class="nf">on:</span> <span class="nv">clientSocket</span><span class="p">.</span>
+        <span class="nv">clientOutStream</span> <span class="o">:=</span> <span class="nv">clientInStream</span><span class="p">.</span>
+        <span class="bp">self</span>
+            <span class="nf">logMessage:</span> <span class="s">'Client connected to Server using socket'</span>
+            <span class="nf">ofType:</span> <span class="nc">PLSMessageType</span> <span class="nf">info</span> <span class="p">]</span>
+</code></pre></div></div>
+
+<p>To do so, we first check if the server ask us to be connected using STDIO or, by default, with socket.
+For instance, STDIO is used with Eclipse IDE and socket with VSCode.</p>
+
+<p>To configure a socket, we first create a socket with Pharo with an available port.
+Then, we send to the client IDE the port thanks to STDIO.
+When connected, we set the <code class="language-plaintext highlighter-rouge">clientInStream</code> and <code class="language-plaintext highlighter-rouge">clientOutStream</code> with the same socket (since it can be used safely to get and send data).</p>
+
+<p>Once the streams are set, we can perform the main loop that:</p>
+
+<ol>
+  <li>extract the request from the <em>in stream</em> (<code class="language-plaintext highlighter-rouge">extractRequestFrom:</code>)</li>
+  <li>process and send the response to the <em>out stream</em> (<code class="language-plaintext highlighter-rouge">handleRequest:toClient:</code>)</li>
+</ol>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="p">[</span> <span class="nv">serverLoop</span> <span class="p">]</span> <span class="nb">whileTrue:</span> <span class="p">[</span> 
+            <span class="p">|</span> <span class="nv">request</span> <span class="nf">|</span>
+            <span class="nv">request</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">extractRequestFrom:</span> <span class="nv">clientInStream</span><span class="p">.</span>
+            <span class="p">(</span><span class="s">'Request: '</span> <span class="nf">,</span> <span class="nv">request</span><span class="p">)</span> <span class="nf">recordDebug</span><span class="p">.</span>
+            <span class="bp">self</span> <span class="nf">handleRequest:</span> <span class="nv">request</span> <span class="nf">toClient:</span> <span class="nv">clientOutStream</span> <span class="p">]</span>
+</code></pre></div></div>
+
+<h4 id="extract-request">Extract request</h4>
+
+<p>The extraction of the request is done in two steps.
+It is implemented in the method <code class="language-plaintext highlighter-rouge">extractRequestFrom:</code>.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">extractRequestFrom:</span> <span class="nv">stream</span>
+
+    <span class="p">|</span><span class="nv"> length startingPoint endPoint result </span><span class="p">|</span>
+    <span class="c">"data is the current buffer state"</span>
+    <span class="nv">length</span> <span class="o">:=</span> <span class="m">-1</span><span class="p">.</span>
+    <span class="p">[</span> <span class="nv">length</span> <span class="nf">=</span> <span class="m">-1</span> <span class="nf">and:</span> <span class="p">[</span> <span class="nv">serverLoop</span> <span class="p">]</span> <span class="p">]</span> <span class="nb">whileTrue:</span> <span class="p">[</span> 
+        <span class="p">[</span> <span class="nv">data</span> <span class="nf">ifEmpty:</span> <span class="p">[</span> <span class="nv">data</span> <span class="o">:=</span> <span class="p">(</span><span class="nv">stream</span> <span class="nf">next:</span> <span class="m">25</span><span class="p">)</span> <span class="nf">asString</span> <span class="p">]</span> <span class="p">]</span>
+            <span class="nf">on:</span> <span class="nc">ConnectionTimedOut</span>
+            <span class="nf">do:</span> <span class="p">[</span> <span class="bp">self</span> <span class="nf">log:</span> <span class="s">'timeout but still work'</span> <span class="p">].</span>
+        <span class="nv">length</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">extractLengthOf:</span> <span class="nv">data</span> <span class="p">].</span>
+    <span class="nv">startingPoint</span> <span class="o">:=</span> <span class="nv">data</span> <span class="nf">indexOf:</span> <span class="sc">${</span><span class="p">.</span>
+    <span class="nv">endPoint</span> <span class="o">:=</span> <span class="nv">data</span> <span class="nf">findCloseBracesFor:</span> <span class="nv">startingPoint</span><span class="p">.</span>
+    <span class="nv">result</span> <span class="o">:=</span> <span class="nc">String</span> <span class="nf">new:</span> <span class="nv">length</span><span class="p">.</span>
+    <span class="c">"three options"</span>
+    <span class="c">"startingPoint and endPoint are found"</span>
+    <span class="p">(</span><span class="nv">startingPoint</span> <span class="nf">~=</span> <span class="m">0</span> <span class="nf">and:</span> <span class="p">[</span> <span class="nv">endPoint</span> <span class="nf">~=</span> <span class="m">0</span> <span class="p">])</span> <span class="nb">ifTrue:</span> <span class="p">[</span> 
+        <span class="nv">result</span> <span class="o">:=</span> <span class="nv">data</span> <span class="nf">copyFrom:</span> <span class="nv">startingPoint</span> <span class="nf">to:</span> <span class="nv">endPoint</span><span class="p">.</span>
+        <span class="nv">data</span> <span class="o">:=</span> <span class="nv">data</span> <span class="nf">copyFrom:</span> <span class="nv">endPoint</span> <span class="nf">+</span> <span class="m">1</span> <span class="nf">to:</span> <span class="nv">data</span> <span class="nf">size</span><span class="p">.</span>
+        <span class="o">^</span> <span class="nv">result</span> <span class="p">].</span>
+    <span class="nv">startingPoint</span> <span class="nf">=</span> <span class="m">0</span>
+        <span class="nb">ifTrue:</span> <span class="p">[</span> <span class="c">"none were found"</span> 
+            <span class="bp">self</span> <span class="nf">getDatafromPosition:</span> <span class="m">1</span> <span class="nf">fromSocket:</span> <span class="nv">stream</span> <span class="nf">in:</span> <span class="nv">result</span> <span class="p">]</span>
+        <span class="nb">ifFalse:</span> <span class="p">[</span> <span class="c">"only startingPoint is found"</span>
+            <span class="p">(</span><span class="nv">data</span> <span class="nf">copyFrom:</span> <span class="nv">startingPoint</span> <span class="nf">to:</span> <span class="nv">data</span> <span class="nf">size</span><span class="p">)</span> <span class="nf">withIndexDo:</span> <span class="p">[</span> 
+                <span class="o">:</span><span class="nv">each</span> 
+                <span class="o">:</span><span class="nv">index</span> <span class="p">|</span> <span class="nv">result</span> <span class="nf">at:</span> <span class="nv">index</span> <span class="nf">put:</span> <span class="nv">each</span> <span class="p">].</span>
+            <span class="bp">self</span>
+                <span class="nf">getDatafromPosition:</span> <span class="nv">data</span> <span class="nf">size</span> <span class="nf">-</span> <span class="nv">startingPoint</span> <span class="nf">+</span> <span class="m">2</span>
+                <span class="nf">fromSocket:</span> <span class="nv">stream</span>
+                <span class="nf">in:</span> <span class="nv">result</span> <span class="p">].</span>
+    <span class="nv">data</span> <span class="o">:=</span> <span class="s">''</span><span class="p">.</span>
+    <span class="o">^</span> <span class="nv">result</span>
+</code></pre></div></div>
+
+<ol>
+  <li>We extract the length of the complete request. This work is done by <code class="language-plaintext highlighter-rouge">extractLengthOf:</code> once we receive first data.</li>
+  <li>Then, based on the known length of incoming data, we extract the full request.</li>
+</ol>
+
+<h4 id="handle-request">Handle request</h4>
+
+<p>Handling a request is also done in several steps.
+It is implemented in the method <code class="language-plaintext highlighter-rouge">handleRequest:toClient:</code>.</p>
+
+<script src="/js/mermaid.min.js"></script>
+<div class="mermaid">
+flowchart TD
+    parseJSON(Check that the JSON is Correct)
+    parseJSON --&gt; B{Is it?}
+    B ----&gt;|No| E(Return Error)
+    B --&gt;|Yes| Dispatch(Dispatch to the method with the correct pragma)
+    Dispatch --&gt; Convert(Convert returned object to JSON)
+    Convert --&gt; Send(Send answer)
+</div>
+
+<h3 id="method-of-the-protocol">Method of the protocol</h3>
+
+<p>Every method of the protocol is implemented as a method in the server.
+Thoses methods are categorised in protocol following the Language Server Protocol specification.
+For example, the method relative to <a href="https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#textDocument_hover">Language Server Protocol Hover</a> are inside the protocol <em>lsp - hover</em>.</p>
+
+<p>The Pharo method uses as pragma the requested remote method by the protocol.
+For example, for hover, it is the method <code class="language-plaintext highlighter-rouge">textDocument/hover</code>, so the implementation uses the pragma as follow.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">textDocumentHoverWithPosition:</span> <span class="nv">position</span> <span class="nf">textDocument:</span> <span class="nv">textDocument</span>
+    <span class="p">&lt;</span><span class="k">jrpc:</span> #'textDocument/hover'<span class="p">&gt;</span>
+    <span class="bp">self</span> <span class="nf">subclassResponsibility</span>
+</code></pre></div></div>
+
+<p>The pharo method also implement at least as many arguments as the client can send.
+In the hover example, the specification declares that the sent object is the <code class="language-plaintext highlighter-rouge">HoverParams</code>:</p>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">TextDocumentPositionParams</span> <span class="p">{</span>
+    <span class="cm">/**
+     * The text document.
+     */</span>
+    <span class="nl">textDocument</span><span class="p">:</span> <span class="nx">TextDocumentIdentifier</span><span class="p">;</span>
+
+    <span class="cm">/**
+     * The position inside the text document.
+     */</span>
+    <span class="nl">position</span><span class="p">:</span> <span class="nx">Position</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="k">export</span> <span class="kr">interface</span> <span class="nx">HoverParams</span> <span class="kd">extends</span> <span class="nx">TextDocumentPositionParams</span><span class="p">,</span> <span class="nx">WorkDoneProgressParams</span> <span class="p">{</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>the current version of the server ignore the <code class="language-plaintext highlighter-rouge">WorkDoneProgressParams</code> for now</p>
+</blockquote>
+
+<p>So the method must at least accept attributes with the name: <code class="language-plaintext highlighter-rouge">textDocument</code> and <code class="language-plaintext highlighter-rouge">position</code>.
+If the pharo method has more available arguments, they will be filled with nil.
+If the incoming data have arguments in an incorrect order, the server will sort them first.
+If the incoming data have an unknow argument, it will be ignore.</p>
+
+<p>The return of the Pharo method <strong>must be</strong> a PLS structure that implement the method <code class="language-plaintext highlighter-rouge">asJRPCJSON</code>.
+This method will convert the pharo object to be transmitted to the client.</p>
+
+<p>For example, for the <code class="language-plaintext highlighter-rouge">PLSServer</code> (see snippet of code below).
+The dictionary and <code class="language-plaintext highlighter-rouge">PLSHover</code> implement <code class="language-plaintext highlighter-rouge">asJRPCJSON</code>.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">textDocumentHoverWithPosition:</span> <span class="nv">position</span> <span class="nf">textDocument:</span> <span class="nv">textDocument</span>
+    <span class="p">&lt;</span><span class="k">jrpc:</span> #'textDocument/hover'<span class="p">&gt;</span>
+    <span class="p">|</span><span class="nv"> hover document </span><span class="p">|</span>
+    <span class="nv">document</span> <span class="o">:=</span> <span class="p">(</span><span class="bp">self</span> <span class="nf">context</span> <span class="nf">textItem:</span> <span class="p">(</span><span class="nv">textDocument</span> <span class="nf">at:</span> <span class="ss">#uri</span><span class="p">)).</span> 
+    <span class="nv">hover</span> <span class="o">:=</span> <span class="nc">PLSHover</span> <span class="nb">new</span>
+        <span class="nf">context:</span> <span class="bp">self</span> <span class="nf">context</span><span class="p">;</span>
+        <span class="nf">source:</span> <span class="nv">document</span><span class="p">;</span>
+        <span class="nf">position:</span> <span class="nv">position</span><span class="p">;</span>
+        <span class="nf">yourself</span><span class="p">.</span>
+    <span class="o">^</span> <span class="p">{</span> <span class="ss">#contents</span> <span class="nf">-&gt;</span> <span class="nv">hover</span> <span class="nf">contents</span> <span class="p">}</span> <span class="nf">asDictionary</span>
+</code></pre></div></div>
+
+<h2 id="extending-the-abstract-language-server-to-implement-a-new-one">Extending the Abstract Language Server to implement a new one</h2>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col m12">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="https://twitter.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a rel="me" href="https://piaille.fr/@badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-mastodon fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="https://orcid.org/0000-0002-4588-2698">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-orcid fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://github.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://www.linkedin.com/in/benoitverhaeghe">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="mailto:benoit@badetitou.fr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="text-center">Copyright &copy; badetitou 2023
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/my.js"></script>
+<script src="/js/my-sidenav.js"></script>
+
+<script src="/js/lightense.min.js"></script>
+
+<script>
+
+  // Init Lightense
+  window.addEventListener("load", function() {
+    Lightense("img:not(.no-lightense),.lightense", {
+      background: 'rgba(0,0,0,0.05)'
+    });
+  }, false);
+
+  // Example: Lazy Lightense
+  document.addEventListener("DOMContentLoaded", function(e) {
+    function createDom(type, cssClass) {
+      var div = document.createElement(type);
+      div.className = cssClass;
+      return div;
+    }
+
+    var thumb = document.querySelector(".lightense-lazy");
+    var original = new Image();
+
+    // Init wrapper
+    var wrap = createDom("div", "lightense-lazy-wrap");
+    thumb.parentNode.insertBefore(wrap, thumb);
+    wrap.appendChild(thumb);
+
+    // Wrap thumbnail
+    var thumbWrap = createDom("div", "lightense-lazy-thumb");
+    thumbWrap.appendChild(thumb);
+    wrap.appendChild(thumbWrap);
+
+    // Wrap original
+    var originalWrap = createDom("div", "lightense-lazy-large");
+    original.src = thumb.dataset.original;
+    originalWrap.appendChild(original);
+    wrap.appendChild(originalWrap);
+
+    // Load original image
+    original.addEventListener(
+      "load",
+      function() {
+        wrap.classList.add("on");
+      },
+      false
+    );
+  });
+</script>
+
+
+</body>
+
+</html>

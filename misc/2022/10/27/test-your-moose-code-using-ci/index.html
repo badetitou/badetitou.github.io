@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Benoît Verhaeghe's blog">
+    
+
+    <link rel="icon" href="/img/logo/logo.png" type="image/x-icon">
+
+
+    <title>Test your Moose code using CIs - Benoît Verhaeghe</title>
+
+    <link rel="canonical" href="http://badetitou.github.io/misc/2022/10/27/test-your-moose-code-using-ci/">
+
+    <!-- <link rel="stylesheet" href="/assets/vendor/fontawesome-free/css/all.min.css"> -->
+    
+    <script src="https://kit.fontawesome.com/5574707d0b.js" crossorigin="anonymous"></script>
+    
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/main.css">
+    <!-- My JS -->
+    <script src="/js/my-head.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link type="application/atom+xml" rel="alternate" href="http://badetitou.github.io/feed.xml" title="Benoît Verhaeghe" />
+
+</head>
+
+
+<body>
+
+    <nav>
+    <div class="nav-wrapper">
+        <a href="#" onclick="openNav()" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        
+        <ul class="left hide-on-med-and-down"> <li>
+        <a href="/" style="margin-left: 20px;"> Benoît Verhaeghe</a>
+</li>
+</ul>
+
+        <ul class="right hide-on-med-and-down">
+            <li>
+                <span style="width: 30px; display: inline-block;">
+                    <i id="theme-switch" style="font-size: 20px" class="fa-solid fa-1x"></i>
+                </span>
+            </li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/post/">Posts</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+        
+        
+            <li><a href="/research/">Research</a></li>
+        
+        
+        
+        
+        
+        </ul>
+        
+    </div>
+</nav>
+
+<ul class="sidenav" id="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <li><a href="/">Home</a></li>
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/post/">Posts</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+    
+        
+            <li><a href="/research/">Research</a></li>
+        
+    
+        
+        
+    
+</ul>
+
+<div id="sidenav-overlay" onclick="closeNav()"></div>
+
+    <!-- Post Header -->
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div class="post-heading text-center">
+                    <h1>Test your Moose code using CIs</h1>
+                    
+                    <span class="meta">Posted by
+                        Benoît "badetitou" Verhaeghe on
+                        October 27, 2022</span>
+                    <span class="post-meta">
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article class="container">
+    <div class="row">
+        <div class="col s12 m12">
+            <div class="card">
+                <div class="card-content article-content">
+                    <p>You have to test your code!</p>
+
+<p>I mean, <em>really</em>.</p>
+
+<p>But sometimes, testing is hard, because you do not know how to start (often because it was hard to start with TDD or better XtremTDD <img class="emoji" title=":smile:" alt=":smile:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" height="20" width="20">).</p>
+
+<p>One challenging situation is the creation of mocks to <em>represent</em> real cases and use them as test resources.
+This situation is common when dealing with code modeling and meta-modeling.</p>
+
+<p>Writing a model manually to test features on it is hard.
+Today, I’ll show you how to use GitHub Actions as well as GitLab CI to create tests for the Moose platform based on real resources.</p>
+
+<hr>
+
+<p>First of all, let’s describe a simple process when working on modeling and meta-modeling.</p>
+
+<script src="/js/mermaid.min.js"></script>
+<div class="mermaid">
+flowchart LR
+    SourceCode(Source Code) --&gt; Parse --&gt; modelfile(Model File) --&gt; Import --&gt; model(Model in Memory) --&gt; Use
+</div>
+
+<p>When analyzing a software system using MDE, everything starts with parsing the source code of the application to produce a model.
+This model can then be stored in a file.
+Then, we import the file into our analysis environment, and we use the concrete model.</p>
+
+<p>All these steps are performed before using the model.
+<em>However</em>, when we create tests for the <code class="language-plaintext highlighter-rouge">Use</code> step, we do not perform all the steps before.
+We likely just create a mock model.
+Even if this situation is acceptable<!-- comfortable -->, it is troublesome<!-- why? --> because it disconnects the test from the tools (which can have bugs) that create the model. <!-- makes easy un-synchronization between tools to manipulate a model, and tools that create a model. -->
+<!-- Even if this situation seems  --></p>
+
+<p>One solution is thus not to create a mock model, but to create mock source code files.</p>
+
+<h2 id="proposed-approach">Proposed approach</h2>
+
+<p>Using mock source code files, we can reproduce the process for each test (or better, a group of tests <img class="emoji" title=":wink:" alt=":wink:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f609.png" height="20" width="20">)</p>
+
+<script src="/js/mermaid.min.js"></script>
+<div class="mermaid">
+flowchart LR
+    SourceCode(Mock Source Code) --&gt; Parse(Parse with Docker) --&gt; modelfile(Model File) --&gt; Import(Import with script) --&gt; model(Model in Memory) --&gt; Test
+</div>
+
+<p>In the following, I describe the implementation and set-up of the approach for analyzing Java code, using Pharo with Moose.
+It consists of the following steps:</p>
+
+<ul>
+  <li>Create mock resources</li>
+  <li>Create a bridge from your Pharo image to your resources using PharoBridge</li>
+  <li>Create a GitLab CI or a GitHub Action</li>
+  <li>Test <img class="emoji" title=":heart:" alt=":heart:" src="https://github.githubassets.com/images/icons/emoji/unicode/2764.png" height="20" width="20">
+</li>
+</ul>
+
+<h2 id="create-mock-resources">Create mock resources</h2>
+
+<p>The first step is to create mock resources.
+To do so, the easiest way is to include them in your git repository.</p>
+
+<p>You should have the following:</p>
+
+<pre><code class="language-raw">&gt; ci // Code executed by the CI
+&gt; src // Source code files
+&gt; tests // Tests ressources
+</code></pre>
+
+<p>Inside the <code class="language-plaintext highlighter-rouge">tests</code> folder, it is possible to add several subfolders for different test resources.</p>
+
+<h2 id="create-a-pharo-bridge">Create a Pharo Bridge</h2>
+
+<p>To easily use the folder of the test resource repository from Pharo, we will use the <a href="https://github.com/jecisc/GitBridge">GitBridge project</a>.</p>
+
+<p>The project can be added to your Pharo Baseline with the following code fragment:</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">spec</span>
+    <span class="err">baseline:</span> <span class="s">'GitBridge'</span>
+    <span class="nf">with:</span> <span class="p">[</span> <span class="nv">spec</span> <span class="nf">repository:</span> <span class="s">'github://jecisc/GitBridge:v1.x.x/src'</span> <span class="p">].</span>
+</code></pre></div></div>
+
+<p>Then, to connect our Pharo project to the test resources, we create a class in one of our packages, a subclass of <code class="language-plaintext highlighter-rouge">GitBridge</code>`.</p>
+
+<p>A full example would be as follows:</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Class</span> <span class="p">{</span>
+    <span class="ss">#name</span> <span class="err">:</span> <span class="ss">#MyBridge</span><span class="nf">,</span>
+    <span class="ss">#superclass</span> <span class="err">:</span> <span class="ss">#GitBridge</span><span class="nf">,</span>
+    <span class="ss">#category</span> <span class="err">:</span> <span class="err">#</span><span class="s">'MyPackage-Bridge'</span>
+<span class="p">}</span>
+
+<span class="p">{</span> <span class="ss">#category</span> <span class="err">:</span> <span class="ss">#initialization</span> <span class="p">}</span>
+<span class="nf">MyBridge</span> <span class="nf">class</span> <span class="nf">&gt;&gt;</span> <span class="nv">initialize</span> <span class="p">[</span>
+
+    <span class="nc">SessionManager</span> <span class="nf">default</span> <span class="nf">registerSystemClassNamed:</span> <span class="bp">self</span> <span class="nf">name</span>
+<span class="p">]</span>
+
+<span class="p">{</span> <span class="ss">#category</span> <span class="err">:</span> <span class="err">#</span><span class="s">'accessing'</span> <span class="p">}</span>
+<span class="nf">MyBridge</span> <span class="nf">class</span> <span class="nf">&gt;&gt;</span> <span class="nv">testsResources</span> <span class="p">[</span>
+    <span class="o">^</span> <span class="bp">self</span> <span class="nf">root</span> <span class="nf">/</span> <span class="s">'tests'</span>
+<span class="p">]</span>
+</code></pre></div></div>
+
+<p>The method <code class="language-plaintext highlighter-rouge">testsResources</code> can then be used to access the local folder with the test resources.</p>
+
+<p><strong>Warning</strong>: this setup only works locally.
+To use it with GitHub and GitLab, we first have to set up our CI files.</p>
+
+<h2 id="set-up-ci-files">Set up CI files</h2>
+
+<p>To set up our CI files, we first create in the <code class="language-plaintext highlighter-rouge">ci</code> folder of our repository a <code class="language-plaintext highlighter-rouge">pretesting.st</code> file that will execute Pharo code.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nc">IceRepositoryCreator</span> <span class="nb">new</span>
+    <span class="nf">location:</span> <span class="s">'.'</span> <span class="nf">asFileReference</span><span class="p">;</span>
+    <span class="nf">subdirectory:</span> <span class="s">'src'</span><span class="p">;</span>
+    <span class="nf">createRepository</span><span class="p">)</span> <span class="nf">register</span>
+</code></pre></div></div>
+
+<p>This code will be run by the CI and register the Pharo project inside the Iceberg tool of Pharo.
+This registration is then used by GitBridge to retrieve the location of the test resources folder.</p>
+
+<p>Then, we have to update the <code class="language-plaintext highlighter-rouge">.smalltalk.ston</code> file (used by every Smalltalk CI process) and add a reference to our <code class="language-plaintext highlighter-rouge">pretesting.st</code> file.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">SmalltalkCISpec</span> <span class="p">{</span>
+  <span class="ss">#preTesting</span> <span class="err">:</span> <span class="nc">SCICustomScript</span> <span class="p">{</span>
+    <span class="ss">#path</span> <span class="err">:</span> <span class="s">'ci/pretesting.st'</span>
+  <span class="p">}</span>
+  <span class="p">.</span><span class="err">..</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="set-up-gitlab-ci">Set up GitLab CI</h3>
+
+<p>The last step for GitLab is the creation of the <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code> file.</p>
+
+<p>This CI can include several steps.
+We now present the steps dedicated to testing the Java model, but the same steps apply to other programming languages.</p>
+
+<p>First, we have to parse the tests-resources using the <a href="https://hub.docker.com/r/badetitou/verveinej">docker version of VerveineJ</a></p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">stages</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">parse</span>
+  <span class="pi">-</span> <span class="s">tests</span>
+
+<span class="na">parse</span><span class="pi">:</span>
+  <span class="na">stage</span><span class="pi">:</span> <span class="s">parse</span>
+  <span class="na">image</span><span class="pi">:</span>     
+    <span class="na">name</span><span class="pi">:</span> <span class="s">badetitou/verveinej:v3.0.0</span>
+    <span class="na">entrypoint</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">"</span><span class="pi">]</span>
+  <span class="na">needs</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">job</span><span class="pi">:</span> <span class="s">install</span>
+      <span class="na">artifacts</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">script</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">/VerveineJ-3.0.0/verveinej.sh -Xmx8g -Xms8g -- -format json -o output.json -alllocals -anchor assoc -autocp ./tests/lib ./tests/src</span> 
+  <span class="na">artifacts</span><span class="pi">:</span>
+    <span class="na">paths</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">output.json</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">parse</code> stage uses the <code class="language-plaintext highlighter-rouge">v3</code> of VerveineJ, parses the code, and produces an <code class="language-plaintext highlighter-rouge">output.json</code> file including the produced model.</p>
+
+<p>Then, we add the common <code class="language-plaintext highlighter-rouge">tests</code> stage of Smalltalk ci.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">tests</span><span class="pi">:</span>
+  <span class="na">stage</span><span class="pi">:</span> <span class="s">tests</span>
+  <span class="na">image</span><span class="pi">:</span> <span class="s">hpiswa/smalltalkci</span>
+  <span class="na">needs</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">job</span><span class="pi">:</span> <span class="s">parse</span>
+      <span class="na">artifacts</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">script</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">smalltalkci -s "Moose64-10"</span>
+</code></pre></div></div>
+
+<p>This stage creates a new <code class="language-plaintext highlighter-rouge">Moose64-10</code> image and performs the CI based on the <code class="language-plaintext highlighter-rouge">.smalltalk.ston</code> configuration file.</p>
+
+<h3 id="setup-github-ci">Setup GitHub CI</h3>
+
+<p>The last step for GitLab is the creation of the <code class="language-plaintext highlighter-rouge">.github/workflows/test.yml</code> file.</p>
+
+<p>In addition to a common smalltalk-ci workflow, we have to configure differently the checkout step, and add a step that parses the code.</p>
+
+<p>For the checkout step, GitBridge (and more specifically Iceberg) needs the history of commits.
+Thus, we need to configure the checkout actions to fetch the all history.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v3</span>
+  <span class="na">with</span><span class="pi">:</span>
+    <span class="na">fetch-depth</span><span class="pi">:</span> <span class="s1">'</span><span class="s">0'</span>
+</code></pre></div></div>
+
+<p>Then, we can add a step that runs VerveineJ using its docker version.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">addnab/docker-run-action@v3</span>
+  <span class="na">with</span><span class="pi">:</span>
+    <span class="na">registry</span><span class="pi">:</span> <span class="s">hub.docker.io</span>
+    <span class="na">image</span><span class="pi">:</span>  <span class="s">badetitou/verveinej:v3.0.0</span>
+    <span class="na">options</span><span class="pi">:</span> <span class="s">-v $:/src</span>
+    <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+      <span class="s">cd tests</span>
+      <span class="s">/VerveineJ-3.0.0/verveinej.sh  -format json -o output.json -alllocals -anchor assoc .</span>
+      <span class="s">cd ..</span>
+</code></pre></div></div>
+
+<p>Note that before running VerveineJ, we change the working directory to the tests folder to better deal with source anchors of Moose.</p>
+
+<p>You can find a <a href="https://github.com/badetitou/FamixJavaModelUpdater/blob/main/.github/workflows/test.yml">full example in the FamixJavaModelUpdater repository</a></p>
+
+<h2 id="test">Test</h2>
+
+<p>The last step is to adapt your tests to use the model produced from the mock source.
+To do so, it is possible to remove the creation of the mock model by loading the model.</p>
+
+<p>Here’s an example:</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">externalFamixClass</span> <span class="o">:=</span> <span class="nc">FamixJavaClass</span> <span class="nb">new</span>
+  <span class="nf">name:</span> <span class="s">'ExternalFamixJavaClass'</span><span class="p">;</span>
+  <span class="nf">yourself</span><span class="p">.</span>
+<span class="nv">externalFamixMethod</span> <span class="o">:=</span> <span class="nc">FamixJavaMethod</span> <span class="nb">new</span>
+  <span class="nf">name:</span> <span class="s">'externalFamixJavaMethod'</span><span class="p">;</span>
+  <span class="nf">yourself</span><span class="p">.</span>
+<span class="nv">externalFamixClass</span> <span class="nf">addMethod:</span> <span class="nv">externalFamixMethod</span><span class="p">.</span>
+<span class="nv">myClass</span> <span class="o">:=</span> <span class="nc">FamixJavaClass</span> <span class="nb">new</span>
+  <span class="nf">name:</span> <span class="s">'MyClass'</span><span class="p">;</span>
+  <span class="nf">yourself</span><span class="p">.</span>
+<span class="nv">externalFamixMethod</span> <span class="nf">declaredType:</span> <span class="nv">myClass</span><span class="p">.</span>
+<span class="nv">famixModel</span> <span class="nf">addAll:</span> <span class="p">{</span> 
+  <span class="nv">externalFamixClass</span><span class="p">.</span>
+  <span class="nv">externalFamixMethod</span><span class="p">.</span>
+  <span class="nv">myClass</span> <span class="p">}.</span>
+</code></pre></div></div>
+
+<p>The above can be converted into the following:</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">FJMUBridge</span> <span class="nf">testsResources</span> <span class="nf">/</span> <span class="s">'output.json'</span> <span class="nf">readStreamDo:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">stream</span> <span class="p">|</span> 
+    <span class="nv">famixModel</span> <span class="nf">importFromJSONStream:</span> <span class="nv">stream</span> <span class="p">].</span>
+<span class="nv">famixModel</span> <span class="nf">rootFolder:</span> <span class="nc">FJMUBridge</span> <span class="nf">testsResources</span> <span class="nf">pathString</span><span class="p">.</span>
+
+<span class="nv">externalFamixClass</span> <span class="o">:=</span> <span class="nv">famixModel</span> <span class="nf">allModelClasses</span> <span class="nf">detect:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">c</span> <span class="p">|</span> <span class="nv">c</span> <span class="nf">name</span> <span class="nf">=</span> <span class="s">'ExternalFamixJavaClass'</span> <span class="p">].</span>
+<span class="nv">myClass</span> <span class="o">:=</span> <span class="nv">famixModel</span> <span class="nf">allModelClasses</span> <span class="nf">detect:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">c</span> <span class="p">|</span> <span class="nv">c</span> <span class="nf">name</span> <span class="nf">=</span> <span class="s">'MyClass'</span> <span class="p">].</span>
+<span class="nv">externalFamixMethod</span> <span class="o">:=</span> <span class="nv">famixModel</span> <span class="nf">allModelMethods</span> <span class="nf">detect:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">c</span> <span class="p">|</span> <span class="nv">c</span> <span class="nf">name</span> <span class="nf">=</span> <span class="s">'externalFamixJavaMethod'</span> <span class="p">].</span>
+</code></pre></div></div>
+
+<h2 id="congrats">Congrats</h2>
+
+<p>You can now test your code on a model generated as a real-world model!</p>
+
+<p>It is clear that this solution slows down tests performance, however. But it ensures that your mock model is well created, because it is created by the parser tool (importer).</p>
+
+<p>A good test practice is thus a mix of both solutions, classic tests in the analysis code, and full scenario tests based on real resources.</p>
+
+<p>Have fun testing your code now!</p>
+
+<blockquote>
+  <p>Thanks <a href="https://github.com/fuhrmanator">C. Fuhrman</a> for the typos fixes. <img class="emoji" title=":banana:" alt=":banana:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f34c.png" height="20" width="20"></p>
+</blockquote>
+
+<div class="text-center">
+    <a class="m-button" href="https://modularmoose.org/2022/10/27/test-your-moose-code-using-ci.html" target="_blank">
+        Also published at *modularmoose.org*
+        <i class="fas fa-external-link-alt"></i>
+    </a>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://utteranc.es/client.js" repo="badetitou/badetitou.github.io" issue-term="pathname" label="comments" theme="boxy-light" crossorigin="anonymous" async>
+</script>
+
+    <ul class="pager list-inline">
+        
+        <li class="previous">
+            <a class="m-button" href="/misc/2022/08/11/visualize-your-codebase-with-moose/" data-toggle="tooltip" data-placement="top" data-tooltip="Visualize your codebase with Moose">←
+                Previous Post</a>
+        </li>
+        
+        
+        <li class="next">
+            <a class="m-button" href="/misc/2023/05/01/pharo-baselines-in-5mins/" data-toggle="tooltip" data-placement="top" data-tooltip="Pharo baselines in 5min">Next Post →</a>
+        </li>
+        
+    </ul>
+</article>
+
+
+    <!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col m12">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="https://twitter.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a rel="me" href="https://piaille.fr/@badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-mastodon fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="https://orcid.org/0000-0002-4588-2698">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-orcid fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://github.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://www.linkedin.com/in/benoitverhaeghe">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="mailto:benoit@badetitou.fr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="text-center">Copyright © badetitou 2023
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/my.js"></script>
+<script src="/js/my-sidenav.js"></script>
+
+<script src="/js/lightense.min.js"></script>
+
+<script>
+
+  // Init Lightense
+  window.addEventListener("load", function() {
+    Lightense("img:not(.no-lightense),.lightense", {
+      background: 'rgba(0,0,0,0.05)'
+    });
+  }, false);
+
+  // Example: Lazy Lightense
+  document.addEventListener("DOMContentLoaded", function(e) {
+    function createDom(type, cssClass) {
+      var div = document.createElement(type);
+      div.className = cssClass;
+      return div;
+    }
+
+    var thumb = document.querySelector(".lightense-lazy");
+    var original = new Image();
+
+    // Init wrapper
+    var wrap = createDom("div", "lightense-lazy-wrap");
+    thumb.parentNode.insertBefore(wrap, thumb);
+    wrap.appendChild(thumb);
+
+    // Wrap thumbnail
+    var thumbWrap = createDom("div", "lightense-lazy-thumb");
+    thumbWrap.appendChild(thumb);
+    wrap.appendChild(thumbWrap);
+
+    // Wrap original
+    var originalWrap = createDom("div", "lightense-lazy-large");
+    original.src = thumb.dataset.original;
+    originalWrap.appendChild(original);
+    wrap.appendChild(originalWrap);
+
+    // Load original image
+    original.addEventListener(
+      "load",
+      function() {
+        wrap.classList.add("on");
+      },
+      false
+    );
+  });
+</script>
+
+
+</body>
+
+</html>

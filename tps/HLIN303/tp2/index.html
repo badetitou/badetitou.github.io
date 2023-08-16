@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Benoît Verhaeghe's blog">
+    
+
+    <link rel="icon" href="/img/logo/logo.png" type="image/x-icon">
+
+
+    <title>Types de données, compilation séparée - Benoît Verhaeghe</title>
+
+    <link rel="canonical" href="http://badetitou.github.io/tps/HLIN303/tp2/">
+
+    <!-- <link rel="stylesheet" href="/assets/vendor/fontawesome-free/css/all.min.css"> -->
+    
+    <script src="https://kit.fontawesome.com/5574707d0b.js" crossorigin="anonymous"></script>
+    
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/main.css">
+    <!-- My JS -->
+    <script src="/js/my-head.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link type="application/atom+xml" rel="alternate" href="http://badetitou.github.io/feed.xml" title="Benoît Verhaeghe" />
+
+</head>
+
+
+<body>
+
+    <nav>
+    <div class="nav-wrapper">
+        <a href="#" onclick="openNav()" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        
+        <ul class="left hide-on-med-and-down"> <li>
+        <a href="/" style="margin-left: 20px;"> Benoît Verhaeghe</a></li></ul>
+
+        <ul class="right hide-on-med-and-down">
+            <li>
+                <span style="width: 30px; display: inline-block;">
+                    <i id="theme-switch" style="font-size: 20px" class="fa-solid fa-1x"></i>
+                </span>
+            </li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/post/">Posts</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+        
+        
+            <li><a href="/research/">Research</a></li>
+        
+        
+        
+        
+        
+        </ul>
+        
+    </div>
+</nav>
+
+<ul class="sidenav" id="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <li><a href="/">Home</a></li>
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/post/">Posts</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+    
+        
+            <li><a href="/research/">Research</a></li>
+        
+    
+        
+        
+    
+</ul>
+
+<div id="sidenav-overlay" onclick="closeNav()"></div>
+
+    <!-- Post Header -->
+<header class="intro-header"
+    style="background-image: url('/img/bg/keyboard.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div class="post-heading  text-center">
+                    <h1>Types de données, compilation séparée</h1>
+                    
+                    <h2 class="subheading">TP2 - Correction</h2>
+                    
+                    <span class="meta">Posted by
+                        Benoît "badetitou" Verhaeghe on
+                        October 3, 2019</span>
+                    <span class="post-meta">
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<article class="container">
+    <div class="row">
+        <div class="col s12 m12">
+            <div class="card">
+                <div class="card-content article-content">
+                    <h2 id="tp2---types-de-données-compilation-séparée">TP2 - Types de données, compilation séparée</h2>
+
+<h3 id="exercice-10-tdtp">Exercice 10 (TD/TP)</h3>
+
+<p>Soit une chaîne de caractères C contenant un nombre entier positif en représentation décimale. On veut écrire une fonction convertissant cette chaîne en un entier.</p>
+
+<ol>
+  <li>Ecrire un algorithme itératif de conversion.</li>
+  <li>Ecrire la fonction C correspondante.</li>
+</ol>
+
+<h3 id="solution-10---algorithme-itératif-de-conversion">Solution 10 - algorithme itératif de conversion</h3>
+
+<pre><code class="language-no">Données : chaîne s
+Résultat : entier
+cumul=0
+    Tq s[i]&gt;= '0' et s[i]&lt;= '9'
+        cumul=cumul*10 + conversion(s[i])
+        i++
+    finTq
+ret cumul
+</code></pre>
+
+<h3 id="solution-10---programme-atoic">Solution 10 - programme atoi.c</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span>
+
+<span class="kt">int</span> <span class="nf">monatoi</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">cumul</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="o">==</span><span class="nb">NULL</span><span class="p">)</span> 
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="sc">'\0'</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;=</span><span class="sc">'0'</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;=</span><span class="sc">'9'</span><span class="p">){</span>
+        <span class="n">cumul</span><span class="o">=</span><span class="n">cumul</span><span class="o">*</span><span class="mi">10</span><span class="o">+</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="sc">'0'</span><span class="p">;</span>
+        <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">cumul</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[],</span> <span class="kt">char</span><span class="o">*</span> <span class="n">env</span><span class="p">[]){</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">argc</span><span class="o">!=</span><span class="mi">2</span><span class="p">){</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span><span class="s">"Erreur de Syntaxe : %s 123</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"%s --&gt; %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">monatoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]));</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>La fonction atoi existe dans la bibliothèque standard !</strong></p>
+
+<h3 id="exercice-11-tdtp">Exercice 11 (TD/TP)</h3>
+
+<p>On veut réaliser la conversion inverse de l’exercice précédent. Soit un nombre entier positif que l’on veut convertir en une chaîne de caractères C contenant sa représentation décimale.</p>
+
+<ol>
+  <li>Ecrire un algorithme de conversion.</li>
+  <li>Ecrire la fonction C correspondante.</li>
+</ol>
+
+<h4 id="solution-11---algorithme-de-conversion">Solution 11 - algorithme de conversion</h4>
+
+<p>Soit mod l’opérateur modulo et div la division entière :</p>
+
+<pre><code class="language-no">chaine itoa(int i){
+    si i&lt;10
+        retourne carToChaine('0'+i)
+    sinon
+        retourne itoa(i div 10) concat carToChaine('0'+(i mod 10))
+}
+</code></pre>
+
+<h4 id="solution-11---programme-itoac">Solution 11 - programme itoa.c</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span>
+<span class="cm">/** convertit un entier en chaîne de char le représentant en base 10
+*@param i une entier positif
+*@param s un ptr sur un tableau de char suffisament grand
+*@return NULL si i est négatif, s sinon
+*/</span>
+<span class="kt">char</span><span class="o">*</span> <span class="nf">itoa</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">){</span> <span class="cm">/* s : un ptr sur une zone suffisament grande */</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">){</span>
+        <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">){</span>
+        <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="sc">'0'</span><span class="p">;</span>
+        <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="sc">'\0'</span><span class="p">;</span>
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+        <span class="kt">char</span> <span class="n">unite</span><span class="o">=</span><span class="n">i</span><span class="o">%</span><span class="mi">10</span><span class="o">+</span><span class="sc">'0'</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">l</span><span class="o">=</span><span class="n">strlen</span><span class="p">(</span><span class="n">itoa</span><span class="p">(</span><span class="n">i</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="n">s</span><span class="p">));</span>
+        <span class="n">s</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">=</span><span class="n">unite</span><span class="p">;</span>
+        <span class="n">s</span><span class="p">[</span><span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="sc">'\0'</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[],</span> <span class="kt">char</span> <span class="o">*</span><span class="n">env</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="kt">char</span> <span class="n">s</span><span class="p">[</span><span class="mi">256</span><span class="p">];</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">3000</span><span class="p">;</span><span class="n">i</span><span class="o">+=</span><span class="mi">485</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"L'entier %i est convertie en la chaine %s !</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span><span class="n">itoa</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">s</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="cm">/* OK */</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>La fonction sprintf existe dans la bibliothèque standard et permet de réaliser cette conversion !</strong></p>
+
+<h3 id="exercice-12-td">Exercice 12 (TD)</h3>
+
+<p>Ces algorithmes de conversion (entier vers chaîne, chaîne vers flottant, . . .) sont-ils fréquemment employés ?</p>
+
+<p>Précisez à quelles occasions.</p>
+
+<h4 id="solution-12">Solution 12</h4>
+
+<p>Dès qu’il y a une entrée/sortie d’un nombre vers un média lisible par l’homme, il y a conversion du format lisible (chaîne) vers un format binaire (Complément à 2, virgule flottante, …).</p>
+
+<h3 id="exercice-13-tdtp">Exercice 13 (TD/TP)</h3>
+
+<p>Soit la définition des fonctions suivantes :</p>
+
+<ul>
+  <li>fonction pair</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">pair</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span><span class="p">){</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">else</span>
+        <span class="k">return</span> <span class="n">impair</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>fonction impair</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">impair</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span><span class="p">){</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">else</span>
+        <span class="k">return</span> <span class="n">pair</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ol>
+  <li>Créer un fichier pair.c (resp. impair.c) qui contienne la définition de la fonction pair (resp. impair).</li>
+  <li>Créer un fichier pair.h (resp. impair.h) qui contienne la déclaration (prototype) de la fonction pair (resp. impair).</li>
+  <li>Créer un programme principal spair.c qui réalise l’algorithme suivant :</li>
+</ol>
+
+<pre><code class="language-no">lire l'entier positif n passé à la ligne de commande
+si pair(n) alors
+    afficher : n est pair !
+sinon
+    afficher : n est impair !
+</code></pre>
+
+<p>Bien entendu, il faut réfléchir au différentes inclusions à réaliser dans les différents fichiers puis compiler les 3 sources .c et lier avec le nom spair et enfin tester ce programme.</p>
+
+<ul>
+  <li>Ecrire un fichier ppair.c contenant les trois fonctions pair(), impair() et main(). Compiler et lier cet unique fichier en un exécutable ppair. Tester ppair.</li>
+</ul>
+
+<h3 id="solution-13---1">Solution 13 - 1</h3>
+
+<ul>
+  <li>pair.h</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">pair</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span><span class="p">);</span>
+</code></pre></div></div>
+
+<ul>
+  <li>pair.c</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">"impair.h"</span><span class="cp">
+</span>
+
+<span class="kt">int</span> <span class="nf">pair</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">){</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">else</span>
+        <span class="k">return</span> <span class="n">impair</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>impair.h</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">impair</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span><span class="p">);</span>
+</code></pre></div></div>
+
+<ul>
+  <li>impair.c</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">"pair.h"</span><span class="cp">
+</span>
+
+<span class="kt">int</span> <span class="nf">impair</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span><span class="p">){</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">else</span>
+        <span class="k">return</span> <span class="n">pair</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>spair.c</li>
+</ul>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">"pair.h"</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[],</span> <span class="kt">char</span> <span class="o">*</span><span class="n">env</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">argc</span><span class="o">!=</span><span class="mi">2</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Syntaxe : %s fichier</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span> <span class="cm">/* syntaxe */</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="o">=</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">pair</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"%i est pair !</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+    <span class="k">else</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"%i est impair !</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="cm">/* OK */</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Compilation : <code class="language-plaintext highlighter-rouge">gcc -o spair spair.c pair.c impair.c; spair 22</code></p>
+
+<h3 id="solution-13---2">Solution 13 - 2</h3>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">impair</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span><span class="p">);</span>
+
+<span class="kt">int</span> <span class="nf">pair</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">){</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">else</span>
+        <span class="k">return</span> <span class="n">impair</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">impair</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span><span class="p">){</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">else</span>
+        <span class="k">return</span> <span class="n">pair</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[],</span> <span class="kt">char</span> <span class="o">*</span><span class="n">env</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">argc</span><span class="o">!=</span><span class="mi">2</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Syntaxe : %s fichier</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span> <span class="cm">/* syntaxe */</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="o">=</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">pair</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"%i est pair !</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+    <span class="k">else</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"%i est impair !</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="cm">/* OK */</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Compilation : <code class="language-plaintext highlighter-rouge">gcc -o ppair ppair.c; ppair 25</code></p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col m12">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="https://twitter.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a rel="me" href="https://piaille.fr/@badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-mastodon fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="https://orcid.org/0000-0002-4588-2698">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-orcid fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://github.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://www.linkedin.com/in/benoitverhaeghe">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="mailto:benoit@badetitou.fr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="text-center">Copyright &copy; badetitou 2023
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/my.js"></script>
+<script src="/js/my-sidenav.js"></script>
+
+<script src="/js/lightense.min.js"></script>
+
+<script>
+
+  // Init Lightense
+  window.addEventListener("load", function() {
+    Lightense("img:not(.no-lightense),.lightense", {
+      background: 'rgba(0,0,0,0.05)'
+    });
+  }, false);
+
+  // Example: Lazy Lightense
+  document.addEventListener("DOMContentLoaded", function(e) {
+    function createDom(type, cssClass) {
+      var div = document.createElement(type);
+      div.className = cssClass;
+      return div;
+    }
+
+    var thumb = document.querySelector(".lightense-lazy");
+    var original = new Image();
+
+    // Init wrapper
+    var wrap = createDom("div", "lightense-lazy-wrap");
+    thumb.parentNode.insertBefore(wrap, thumb);
+    wrap.appendChild(thumb);
+
+    // Wrap thumbnail
+    var thumbWrap = createDom("div", "lightense-lazy-thumb");
+    thumbWrap.appendChild(thumb);
+    wrap.appendChild(thumbWrap);
+
+    // Wrap original
+    var originalWrap = createDom("div", "lightense-lazy-large");
+    original.src = thumb.dataset.original;
+    originalWrap.appendChild(original);
+    wrap.appendChild(originalWrap);
+
+    // Load original image
+    original.addEventListener(
+      "load",
+      function() {
+        wrap.classList.add("on");
+      },
+      false
+    );
+  });
+</script>
+
+
+</body>
+
+</html>

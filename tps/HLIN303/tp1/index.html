@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Benoît Verhaeghe's blog">
+    
+
+    <link rel="icon" href="/img/logo/logo.png" type="image/x-icon">
+
+
+    <title>Introduction, source, objet, compilation - Benoît Verhaeghe</title>
+
+    <link rel="canonical" href="http://badetitou.github.io/tps/HLIN303/tp1/">
+
+    <!-- <link rel="stylesheet" href="/assets/vendor/fontawesome-free/css/all.min.css"> -->
+    
+    <script src="https://kit.fontawesome.com/5574707d0b.js" crossorigin="anonymous"></script>
+    
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/main.css">
+    <!-- My JS -->
+    <script src="/js/my-head.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link type="application/atom+xml" rel="alternate" href="http://badetitou.github.io/feed.xml" title="Benoît Verhaeghe" />
+
+</head>
+
+
+<body>
+
+    <nav>
+    <div class="nav-wrapper">
+        <a href="#" onclick="openNav()" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        
+        <ul class="left hide-on-med-and-down"> <li>
+        <a href="/" style="margin-left: 20px;"> Benoît Verhaeghe</a></li></ul>
+
+        <ul class="right hide-on-med-and-down">
+            <li>
+                <span style="width: 30px; display: inline-block;">
+                    <i id="theme-switch" style="font-size: 20px" class="fa-solid fa-1x"></i>
+                </span>
+            </li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/post/">Posts</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+        
+        
+            <li><a href="/research/">Research</a></li>
+        
+        
+        
+        
+        
+        </ul>
+        
+    </div>
+</nav>
+
+<ul class="sidenav" id="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <li><a href="/">Home</a></li>
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/post/">Posts</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+    
+        
+            <li><a href="/research/">Research</a></li>
+        
+    
+        
+        
+    
+</ul>
+
+<div id="sidenav-overlay" onclick="closeNav()"></div>
+
+    <!-- Post Header -->
+<header class="intro-header"
+    style="background-image: url('/img/bg/keyboard.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div class="post-heading  text-center">
+                    <h1>Introduction, source, objet, compilation</h1>
+                    
+                    <h2 class="subheading">TP1 - Correction</h2>
+                    
+                    <span class="meta">Posted by
+                        Benoît "badetitou" Verhaeghe on
+                        October 3, 2019</span>
+                    <span class="post-meta">
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<article class="container">
+    <div class="row">
+        <div class="col s12 m12">
+            <div class="card">
+                <div class="card-content article-content">
+                    <h2 id="tp1---introduction-source-objet-compilation">TP1 - Introduction, source, objet, compilation</h2>
+
+<h3 id="exercice-1-td">Exercice 1 (TD)</h3>
+
+<p>Quelle différence existe-t-il entre un interpréteur et un compilateur ? Citez deux exemples pour chacun d’entre
+eux.</p>
+
+<h4 id="solution-1">Solution 1</h4>
+
+<p>Un interpréteur (ou interprète) lit les instructions du fichier source ligne par ligne, les analyse puis
+les exécute tandis qu’un compilateur traduit le fichier source en fichier objet. Interprète (bash, java) ; compilateur
+(gcc, javac).</p>
+
+<h3 id="exercice-2-td">Exercice 2 (TD)</h3>
+
+<p>Quelles similitudes et quelles différences existe-t-il entre un fichier d’en-tête (toto.h) et une bibliothèque ? Quand
+les utilise-t-on dans le processus de compilation ? Citez deux exemples pour chacun d’entre eux.</p>
+
+<h4 id="solution-2">Solution 2</h4>
+
+<p>Les fichiers d’en-têtes sont nécessaires afin de déclarer les fonctions de bibliothèques utilisés par les
+programmes.</p>
+
+<ol>
+  <li>Un fichier d’en-tête est un fichier source contenant des déclarations et/ou définitions de fonctions, de
+variables, de définitions de type. Il doit être inclus (<code class="language-plaintext highlighter-rouge">#include</code>) par le préprocesseur avant compilation.</li>
+  <li>Une bibliothèque est un fichier binaire archivant différents fichiers objets (.o) compilés. Une bibliothèque
+est utilisée par l’éditeur de liens à la fin du processus de compilation pour construire la fichier binaire
+exécutable.</li>
+  <li>exemples : stdio.h est le fichier d’en-tête de la librairie standard (libc.a) concernant les entrées-sorties ;
+math.h est le fichier d’en-tête correspondant à la bibliothèque libm.a.</li>
+</ol>
+
+<h3 id="exercice-3-td">Exercice 3 (TD)</h3>
+
+<p>Quelle différence entre l’inclusion d’un fichier d’entête standard tel que stdio.h, stdlib.h, ctype.h et un
+fichier d’entête personnel monprog.h ?</p>
+
+<h4 id="solution-3">Solution 3</h4>
+
+<p>Les fichiers d’entêtes standards sont inclus entre chevrons tandis que les fichiers d’entête personnels
+sont inclus entre guillemets. Le préprocesseur va chercher ces fichiers dans des répertoires différents :</p>
+
+<ul>
+  <li>les entêtes standards sont généralement cherchés dans l’arborescence <code class="language-plaintext highlighter-rouge">/usr/include</code> ;</li>
+  <li>les entête personnels sont dans le réperoire courant ou dans le répertoire spécifié par l’option <code class="language-plaintext highlighter-rouge">-I</code>.
+Le contenu des fichiers d’entêtes standards ou personnels est le même.</li>
+</ul>
+
+<h3 id="exercice-4-td">Exercice 4 (TD)</h3>
+
+<p>Comment les paramètres de la ligne de commande sont-ils passés à un programme C ? Comment l’environnement
+du processus (variables d’environnement telles que PATH, HOME, …) est-il atteignable par un programme C ?</p>
+
+<h4 id="solution-4">Solution 4</h4>
+
+<p>Le prototype de la fonction principale (main) d’un programme C est le suivant :
+<code class="language-plaintext highlighter-rouge">int main(int argc, char *argv[], char *env[]) { body... }</code></p>
+
+<ul>
+  <li><strong>argc</strong> (argument count) nombre d’arguments (paramètres), c’est-à-dire le nombre de mots sur la ligne de
+commande. Par exemple, <code class="language-plaintext highlighter-rouge">monprog toto</code> a un argc à 2 ;</li>
+  <li><strong>argv</strong> (argument values) tableau des mots de la ligne de commande y compris le nom de la commande. Par
+exemple, <code class="language-plaintext highlighter-rouge">monprog toto</code> donne le tableau ci-dessous</li>
+  <li><strong>env</strong> tableau des variables d’environnement ou chaque case contient une chaîne de la forme nom=valeur et
+dont la dernière case contient un pointeur nul.</li>
+</ul>
+
+<table>
+  <tbody>
+    <tr>
+      <td>argv[0]</td>
+      <td>monprog</td>
+    </tr>
+    <tr>
+      <td>argv[1]</td>
+      <td>toto</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="exercice-5-tdtp">Exercice 5 (TD/TP)</h3>
+
+<p>On souhaite écrire un programme affichant le nombre de paramètres passés à la ligne de commande, ces paramètres, ainsi que les variables d’environnement.</p>
+
+<ol>
+  <li>Ecrire l’algorithme de ce programme.</li>
+  <li>Ecrire le programme C correspondant.</li>
+</ol>
+
+<h4 id="solution-5---algorithme">Solution 5 - Algorithme</h4>
+
+<pre><code class="language-no">afficher argc
+    pour (i=0; i&lt;argc; i++)
+        afficher argv[i]
+    fpour
+    i=0
+    tq (env[i] != NULL)
+        afficher env[i]
+        i=i+1
+    ftq
+</code></pre>
+
+<h4 id="solution-5---programme-argenvc">Solution 5 - programme argenv.c</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[],</span> <span class="kt">char</span> <span class="o">*</span><span class="n">env</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Nombre d’arguments : %i</span><span class="se">\n\n</span><span class="s">Liste des arguments :</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">argc</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">argc</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">argv</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">Liste des variables d’environnement :</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">env</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="nb">NULL</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">env</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+        <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="exercice-6-tp">Exercice 6 (TP)</h3>
+
+<p>A l’aide du programme précédent, testez les possibilités du compilateur gcc en produisant :</p>
+
+<ul>
+  <li>le fichier prétraité ;</li>
+  <li>le fichier assembleur ;</li>
+  <li>le fichier objet ;</li>
+</ul>
+
+<p>Observez ces différents fichiers.</p>
+
+<h4 id="solution-6">Solution 6</h4>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">gcc argenv.c -E</code></li>
+  <li><code class="language-plaintext highlighter-rouge">gcc argenv.c -S</code></li>
+  <li><code class="language-plaintext highlighter-rouge">gcc argenv.c -c</code></li>
+</ul>
+
+<h3 id="exercice-7-tdtp">Exercice 7 (TD/TP)</h3>
+
+<p>On souhaite réaliser le calcul de la moyenne d’une suite de 5 nombres flottants saisis au clavier.</p>
+
+<ol>
+  <li>Ecrire l’algorithme de ce programme.</li>
+  <li>Ecrire le programme C correspondant.</li>
+</ol>
+
+<h4 id="solution-7---algorithme">Solution 7 - Algorithme</h4>
+
+<pre><code class="language-no">afficher "saisir 5 nombres"
+m=0
+pour (i=0 à 4)
+    m=m+lireFlottant()
+fpour
+afficher m/5
+</code></pre>
+
+<h4 id="solution-7---programme-moyennec">Solution 7 - programme moyenne.c</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[],</span> <span class="kt">char</span> <span class="o">*</span><span class="n">env</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"Saisir 5 nombres S.V.P. :</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+    <span class="kt">float</span> <span class="n">f</span><span class="p">;</span>
+    <span class="kt">float</span> <span class="n">m</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">5</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"%d : "</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">scanf</span><span class="p">(</span><span class="s">"%f"</span><span class="p">,</span><span class="o">&amp;</span><span class="n">f</span><span class="p">);</span>
+        <span class="n">m</span><span class="o">+=</span><span class="n">f</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">Moyenne des 5 nombres : %f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">m</span><span class="o">/</span><span class="mi">5</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="exercice-8-tdtp">Exercice 8 (TD/TP)</h3>
+
+<p>En utilisant la fonction <code class="language-plaintext highlighter-rouge">atoi</code> qui convertit une chaîne en entier, réaliser le calcul de la moyenne de la suite des
+paramètres passés à la ligne de commande : <code class="language-plaintext highlighter-rouge">moy 5 8 12 3</code>.</p>
+
+<ol>
+  <li>Ecrire l’algorithme de ce programme.</li>
+  <li>Ecrire le programme C correspondant.</li>
+</ol>
+
+<h4 id="solution-8---algorithme">Solution 8 - Algorithme</h4>
+
+<pre><code class="language-no">m=0
+Pour i=1 à argc-1
+    m=m+atoi(argv[i])
+fpour
+afficher m/(argc-1)
+</code></pre>
+
+<h4 id="solution-8---programme-moyc">Solution 8 - programme moy.c</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[],</span> <span class="kt">char</span> <span class="o">*</span><span class="n">env</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="kt">float</span> <span class="n">m</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">argc</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">m</span><span class="o">+=</span><span class="n">atoi</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">Moyenne des %d nombres : %.2f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">argc</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">m</span><span class="o">/</span><span class="p">(</span><span class="n">argc</span><span class="o">-</span><span class="mi">1</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="exercice-9-tdtp-strsplit">Exercice 9 (TD/TP strsplit)</h3>
+
+<p>Dans certains fichiers structurés, les articles sont représentés sur une ligne dont les champs sont séparés par un caractère séparateur (fichiers .csv).
+On souhaite écrire une fonction qui découpe une chaîne de caractères correspondant à une ligne csv en un tableau de chaînes dynamiques.
+Par exemple, l’appel <code class="language-plaintext highlighter-rouge">strsplit("/bin:/usr/bin:/usr/local/bin",’:’)</code> doit générer le tableau suivant :</p>
+
+<pre>
+0 --&gt; /bin
+1 --&gt; /usr/bin
+2 --&gt; /usr/local/bin
+3 NULL
+</pre>
+
+<ol>
+  <li>Ecrire l’algorithme de ce programme.</li>
+  <li>Ecrire le programme C correspondant.</li>
+</ol>
+
+<h4 id="solution-9---algorithme">Solution 9 - Algorithme</h4>
+
+<pre><code class="language-no">char **strsplit(const char *s, const char sep)
+    nbsep=0
+    pour i=0;s[i]!=’\0’;i++
+        if s[i]==sep
+            nbsep++
+        res=malloc(nbsep+2)
+        n=0
+        i=0
+    Répéter
+        int l=0 // lng de la sous-chaîne
+        TantQue s[i]!=’\0’ et s[i]!=sep
+            l++
+            i++
+        res[n]=malloc(l+1)
+        res[n][l]=’\0’
+        strncpy(res[n],s+i-l,l)
+        n++
+        APRESSEP=FAUX;
+        Si s[i]==sep
+            i++
+            APRESSEP=VRAI
+    Tq s[i]!=’\0’
+    Si (APRESSEP){ /* sep suivi de fin de chaîne */
+        res[n]=malloc(1);
+        res[n][0]=’\0’;
+        n++;
+    res[n]=NULL
+    return res
+</code></pre>
+
+<h4 id="solution-9----strsplitc">Solution 9 -  strsplit.c</h4>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span>
+
+<span class="kt">char</span> <span class="o">**</span><span class="nf">strsplit</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="n">sep</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="o">==</span><span class="nb">NULL</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">nbsep</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="cm">/* nb de séparateurs */</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="sc">'\0'</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="n">sep</span><span class="p">)</span>
+            <span class="n">nbsep</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">//printf("nbsep = %d\n",nbsep);</span>
+    <span class="kt">char</span> <span class="o">**</span><span class="n">res</span><span class="o">=</span><span class="n">malloc</span><span class="p">((</span><span class="n">nbsep</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">));</span> <span class="cm">/* allocation du résultat */</span>
+    <span class="kt">int</span> <span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">APRESSEP</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="cm">/* faux */</span>
+    <span class="k">do</span><span class="p">{</span>
+        <span class="kt">int</span> <span class="n">l</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="c1">// lng de la sous-chaîne</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="sc">'\0'</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="n">sep</span><span class="p">){</span>
+            <span class="n">l</span><span class="o">++</span><span class="p">;</span>
+            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">res</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">=</span><span class="n">malloc</span><span class="p">(</span><span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">strncpy</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">s</span><span class="o">+</span><span class="n">i</span><span class="o">-</span><span class="n">l</span><span class="p">,</span> <span class="n">l</span><span class="p">);</span>
+        <span class="n">res</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">l</span><span class="p">]</span><span class="o">=</span><span class="sc">'\0'</span><span class="p">;</span>
+        <span class="n">n</span><span class="o">++</span><span class="p">;</span>
+        <span class="n">APRESSEP</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="n">sep</span><span class="p">){</span>
+            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+            <span class="n">APRESSEP</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span><span class="k">while</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">!=</span><span class="sc">'\0'</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">APRESSEP</span><span class="p">){</span> <span class="cm">/* sep suivi de fin de chaîne */</span>
+        <span class="c1">//printf("n=%d ; i=%d\n",n,i);</span>
+        <span class="n">res</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">=</span><span class="n">malloc</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">res</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="sc">'\0'</span><span class="p">;</span>
+        <span class="n">n</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">res</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">=</span><span class="nb">NULL</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[],</span> <span class="kt">char</span> <span class="o">*</span><span class="n">env</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">argc</span><span class="o">!=</span><span class="mi">3</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"Syntaxe incorrecte : %s abc:12:yyyy :</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">char</span> <span class="o">**</span><span class="n">r</span><span class="o">=</span><span class="n">strsplit</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="k">while</span><span class="p">(</span><span class="o">*</span><span class="n">r</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">){</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="o">*</span><span class="n">r</span><span class="p">);</span>
+        <span class="n">r</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col m12">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="https://twitter.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a rel="me" href="https://piaille.fr/@badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-mastodon fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="https://orcid.org/0000-0002-4588-2698">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-orcid fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://github.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://www.linkedin.com/in/benoitverhaeghe">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="mailto:benoit@badetitou.fr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="text-center">Copyright &copy; badetitou 2023
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/my.js"></script>
+<script src="/js/my-sidenav.js"></script>
+
+<script src="/js/lightense.min.js"></script>
+
+<script>
+
+  // Init Lightense
+  window.addEventListener("load", function() {
+    Lightense("img:not(.no-lightense),.lightense", {
+      background: 'rgba(0,0,0,0.05)'
+    });
+  }, false);
+
+  // Example: Lazy Lightense
+  document.addEventListener("DOMContentLoaded", function(e) {
+    function createDom(type, cssClass) {
+      var div = document.createElement(type);
+      div.className = cssClass;
+      return div;
+    }
+
+    var thumb = document.querySelector(".lightense-lazy");
+    var original = new Image();
+
+    // Init wrapper
+    var wrap = createDom("div", "lightense-lazy-wrap");
+    thumb.parentNode.insertBefore(wrap, thumb);
+    wrap.appendChild(thumb);
+
+    // Wrap thumbnail
+    var thumbWrap = createDom("div", "lightense-lazy-thumb");
+    thumbWrap.appendChild(thumb);
+    wrap.appendChild(thumbWrap);
+
+    // Wrap original
+    var originalWrap = createDom("div", "lightense-lazy-large");
+    original.src = thumb.dataset.original;
+    originalWrap.appendChild(original);
+    wrap.appendChild(originalWrap);
+
+    // Load original image
+    original.addEventListener(
+      "load",
+      function() {
+        wrap.classList.add("on");
+      },
+      false
+    );
+  });
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Benoît Verhaeghe's blog">
+    
+
+    <link rel="icon" href="/img/logo/logo.png" type="image/x-icon">
+
+
+    <title>Analysing Java with VSCode - Benoît Verhaeghe</title>
+
+    <link rel="canonical" href="http://badetitou.github.io/projects/vscode-pharo/2021/03/31/analysing-java-with-vscode/">
+
+    <!-- <link rel="stylesheet" href="/assets/vendor/fontawesome-free/css/all.min.css"> -->
+    
+    <script src="https://kit.fontawesome.com/5574707d0b.js" crossorigin="anonymous"></script>
+    
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/main.css">
+    <!-- My JS -->
+    <script src="/js/my-head.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link type="application/atom+xml" rel="alternate" href="http://badetitou.github.io/feed.xml" title="Benoît Verhaeghe" />
+
+</head>
+
+
+<body>
+
+    <nav>
+    <div class="nav-wrapper">
+        <a href="#" onclick="openNav()" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        
+        <ul class="left hide-on-med-and-down"> <li>
+        <a href="/" style="margin-left: 20px;"> Benoît Verhaeghe</a>
+</li>
+</ul>
+
+        <ul class="right hide-on-med-and-down">
+            <li>
+                <span style="width: 30px; display: inline-block;">
+                    <i id="theme-switch" style="font-size: 20px" class="fa-solid fa-1x"></i>
+                </span>
+            </li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/post/">Posts</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+        
+        
+            <li><a href="/research/">Research</a></li>
+        
+        
+        
+        
+        
+        </ul>
+        
+    </div>
+</nav>
+
+<ul class="sidenav" id="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <li><a href="/">Home</a></li>
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/post/">Posts</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+    
+        
+            <li><a href="/research/">Research</a></li>
+        
+    
+        
+        
+    
+</ul>
+
+<div id="sidenav-overlay" onclick="closeNav()"></div>
+
+    <!-- Post Header -->
+<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div class="post-heading text-center">
+                    <h1>Analysing Java with VSCode</h1>
+                    
+                    <h2 class="subheading">How to use VSCode and Moose to analyse Java projects?</h2>
+                    
+                    <span class="meta">Posted by
+                        Benoît "badetitou" Verhaeghe on
+                        March 31, 2021</span>
+                    <span class="post-meta">
+                        
+                        (Updated: Apr 5, 2021)
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article class="container">
+    <div class="row">
+        <div class="col s12 m12">
+            <div class="card">
+                <div class="card-content article-content">
+                    <p><a href="https://code.visualstudio.com/">VSCode</a> is an incredible editor tool.
+Thanks to its extensions, one can develop using plenty of programming languages.
+However, what about analyzing one software system using VSCode?</p>
+
+<p>In this blog post, I will present you how to use VSCode with <a href="http://moosetechnology.github.io/">Moose</a> to analyze Java code.
+As an example, I will reproduce the blog post of <a href="https://fuhrmanator.github.io/2019/07/29/AnalyzingJavaWithMoose.html">Christopher Fuhrman</a>.</p>
+
+<blockquote>
+  <p>Even if we can perform some analysis from VSCode, using the Moose tool natively gives a better user experience.
+Still, I believe it might interest people using only the VSCode tool.</p>
+</blockquote>
+
+<ul>
+  <li>
+<a href="#install-vscode-and-the-pharo-language-server-extension">Install VSCode and the Pharo Language Server extension</a>
+    <ul>
+      <li><a href="#download-and-install-the-required-tools">Download and install the required tools</a></li>
+      <li><a href="#configure-vscode">Configure VSCode</a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#set-up-the-analysis-of-a-new-project">Set up the analysis of a new project</a>
+    <ul>
+      <li><a href="#clone-the-java-project-you-want-to-analyze">Clone the Java project you want to analyze</a></li>
+      <li><a href="#parse-the-java-code-to-make-famix-model">Parse the Java code to make FAMIX model</a></li>
+      <li><a href="#load-the-model">Load the model</a></li>
+    </ul>
+  </li>
+  <li>
+<a href="#analysis">Analysis</a>
+    <ul>
+      <li><a href="#visualize-a-java-package-in-plantuml">Visualize a Java package in PlantUML</a></li>
+      <li><a href="#perform-a-moose-analysis-using-pharo">Perform a Moose analysis using Pharo</a></li>
+      <li><a href="#visualisation-with-roassal">Visualisation with Roassal</a></li>
+    </ul>
+  </li>
+  <li><a href="#resources">Resources</a></li>
+</ul>
+
+<h2 id="install-vscode-and-the-pharo-language-server-extension">Install VSCode and the Pharo Language Server extension</h2>
+
+<h3 id="download-and-install-the-required-tools">Download and install the required tools</h3>
+
+<p>To perform the analysis, we will use the insider version of VSCode.
+Currently, only this version supports the <a href="https://code.visualstudio.com/api/extension-guides/notebook">NoteBook feature</a> we will use.</p>
+
+<p>So, as a first step, install the last <a href="https://code.visualstudio.com/insiders/">VSCode insider version</a>.</p>
+
+<p>We will also need a Moose image and a Pharo VM.
+For this blog post, we will use a Moose 8 image based on Pharo 8.</p>
+
+<ul>
+  <li>Download the last <a href="https://github.com/badetitou/Pharo-LanguageServer/releases/download/continuous/Moose64-8.0-PLS.zip">Moose 8 image for VSCode</a> and extract it.</li>
+  <li>Download the <a href="https://files.pharo.org/get-files/80/">corresponding Pharo VM</a> and extract it.</li>
+</ul>
+
+<blockquote>
+  <p>Do not take the headless version (it has not been tested)</p>
+</blockquote>
+
+<p>Once you have download VSCode, Moose 8, and the Pharo VM, we will install the extension in VSCode.</p>
+
+<ul>
+  <li><a href="/files/pharo-language-server-0.0.11.vsix">Download the extension</a></li>
+  <li>Open VSCode insider</li>
+  <li>Open the folder in which the extension file is present</li>
+  <li>Right-click on the file and execute <code class="language-plaintext highlighter-rouge">Install Extension</code>
+</li>
+</ul>
+
+<p><img src="/img/posts/analysing-java/install-extension.png" alt="Install extension" class="img-fill"></p>
+
+<ul>
+  <li>Close VSCode</li>
+</ul>
+
+<p>From now on, you <strong>must</strong> start VSCode insider with the following parameters (<code class="language-plaintext highlighter-rouge">--enable-proposed-api badetitou.pharo-language-server</code>).
+It allows VSCode to use the Notebook API.</p>
+
+<p>Execute the following command in a terminal:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>code-insiders <span class="nt">--enable-proposed-api</span> badetitou.pharo-language-server
+</code></pre></div></div>
+
+<p>Or in Windows:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>code-insiders.cmd <span class="nt">--enable-proposed-api</span> badetitou.pharo-language-server
+</code></pre></div></div>
+
+<h3 id="configure-vscode">Configure VSCode</h3>
+
+<p>We now need to configure the Pharo Language Server extension.
+To do so:</p>
+
+<ul>
+  <li>go in the VSCode settings (<code class="language-plaintext highlighter-rouge">Ctrl + ,</code>).</li>
+  <li>Search Pharo settings</li>
+  <li>Set the field <code class="language-plaintext highlighter-rouge">Path To Image</code> with the path to the image you have downloaded
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>D:\Users\benoit.verhaeghe\Documents\Pharo\images\LSP4\LSP4.image
+</code></pre></div>    </div>
+  </li>
+  <li>Set the field <code class="language-plaintext highlighter-rouge">Path To VM</code> with the path to the VM you have downloaded
+    <div class="language-plaintext highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code>D:\Users\benoit.verhaeghe\Documents\Pharo\vms\80-x64\Pharo.exe
+</code></pre></div>    </div>
+  </li>
+  <li>Restart VSCode (to be sure the configuration is well saved)</li>
+</ul>
+
+<blockquote>
+  <p>If you use Windows, you might need to remove all space characters in the path.</p>
+</blockquote>
+
+<p>Once the configuration is done, you can create a new file named <code class="language-plaintext highlighter-rouge">oo-analysis.moosebook</code>.
+It should open as a VSCode notebook and a Pharo image (you can reduce the Pharo image, but <strong>do not close it</strong>).</p>
+
+<h2 id="set-up-the-analysis-of-a-new-project">Set up the analysis of a new project</h2>
+
+<h3 id="clone-the-java-project-you-want-to-analyze">Clone the Java project you want to analyze</h3>
+
+<p>First, we are going to download the GitHub project we want to analyze.
+To do so, create a new <code class="language-plaintext highlighter-rouge">code cell</code> in VSCode with the following code:</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">javaProjectFileRef</span> <span class="o">:=</span> <span class="nc">MooseEasyUtility</span> <span class="nf">cloneGitHubRepo:</span> <span class="s">'https://github.com/bethrobson/Head-First-Design-Patterns'</span><span class="p">.</span>
+</code></pre></div></div>
+
+<p>This piece of code will download the project under our Pharo image folder.
+To execute the cell, press the run arrow next to the cell.
+In case of success, a little tick appears and the path to the clone project has output of the cell.</p>
+
+<p><img src="/img/posts/analysing-java/clone.png" alt="Cell executed after clone" class="img-fill"></p>
+
+<h3 id="parse-the-java-code-to-make-famix-model">Parse the Java code to make FAMIX model</h3>
+
+<p>As in the original blog post of Christopher, now we will parse the Java project and create a FAMIX model.
+To parse the Java project, we use VerveineJ v1.x.x (v1.x.x works with Moose 8, whereas v2.x.x is under modification to work with the future Moose 9).</p>
+
+<p>Contrary to the original blog post, we will download VerveineJ v1.0.2 (and not v1.0.1).
+It includes nice fixes.</p>
+
+<ul>
+  <li>
+    <p>Create a new code cell with the following piece of code to download the last VerveineJ version and extract it</p>
+
+    <div class="language-st highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nv">client</span> <span class="o">:=</span> <span class="nc">ZnClient</span> <span class="nb">new</span><span class="p">.</span>
+  <span class="nv">client</span>
+      <span class="nf">signalProgress:</span> <span class="bp">false</span><span class="p">;</span>
+      <span class="nf">url:</span> <span class="s">'https://github.com/moosetechnology/VerveineJ/archive/v1.0.2.zip'</span><span class="p">;</span>
+      <span class="nf">downloadTo:</span> <span class="nc">FileLocator</span> <span class="nf">imageDirectory</span><span class="p">.</span>
+  <span class="nv">client</span> <span class="nf">isSuccess</span>
+      <span class="nb">ifTrue:</span> <span class="p">[</span> <span class="nc">ZipArchive</span> <span class="nb">new</span>
+              <span class="nf">readFrom:</span> <span class="p">(</span><span class="nc">FileLocator</span> <span class="nf">imageDirectory</span> <span class="nf">/</span> <span class="s">'v1.0.2.zip'</span><span class="p">)</span> <span class="nf">asFileReference</span> <span class="nf">pathString</span> <span class="p">;</span>
+              <span class="nf">extractAllTo:</span> <span class="nc">FileLocator</span> <span class="nf">imageDirectory</span><span class="p">.</span>
+
+          <span class="c">"Since permissions are not preserved with ZipArchive#extractAllTo:"</span>
+          <span class="c">"This line is not required in Windows system"</span>
+          <span class="nc">LibC</span> <span class="nf">runCommand:</span> <span class="s">'chmod u+x '</span><span class="nf">,</span> <span class="p">(</span><span class="nc">FileLocator</span> <span class="nf">imageDirectory</span> <span class="nf">/</span> <span class="s">'VerveineJ-1.0.1/verveinej.sh'</span><span class="p">)</span> <span class="nf">asFileReference</span> <span class="nf">pathString</span> <span class="p">]</span>
+      <span class="nb">ifFalse:</span> <span class="p">[</span> <span class="nc">Error</span> <span class="nf">signal:</span> <span class="s">'Download failed.'</span> <span class="p">]</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Then, we will ask <code class="language-plaintext highlighter-rouge">MooseEasyFamixMaker</code> to parse the Java project using <a href="https://modularmoose.org/moose-wiki/Developers/Parsers/VerveineJ">VerveineJ</a>, and create a <code class="language-plaintext highlighter-rouge">.mse</code> file for us. Again, in another cell, execute the following snippet of code.</p>
+
+    <div class="language-st highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nv">wizard</span> <span class="o">:=</span> <span class="nc">MooseEasyFamixMaker</span>
+   <span class="nf">generateMSETo:</span> <span class="s">'tmp/HFDP.mse'</span> <span class="nf">asFileReference</span>
+   <span class="nf">parsing:</span> <span class="s">'tmp/MooseEasyRepos/bethrobson__Head-First-Design-Patterns'</span> <span class="nf">asFileReference</span>
+   <span class="nf">with:</span> <span class="p">(</span><span class="nc">FileLocator</span> <span class="nf">imageDirectory</span> <span class="nf">/</span> <span class="s">'VerveineJ-1.0.2/verveinej.bat'</span><span class="p">)</span> <span class="nf">asFileReference</span><span class="p">.</span>
+<span class="nv">wizard</span> <span class="nf">generateMSE</span><span class="p">.</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">.mse</code> is a file format used by Moosetechnology to represent its model and meta-model. <a href="https://modularmoose.org/moose-wiki/Users/fileFormat">Other formats exist.</a></p>
+</blockquote>
+
+<h3 id="load-the-model">Load the model</h3>
+
+<p>The last step is to load the model in the Moose image (the one we are controlling using VSCode).
+In a new cell, execute:</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">mseFileRef</span> <span class="o">:=</span> <span class="s">'tmp/HFDP.mse'</span> <span class="nf">asFileReference</span><span class="p">.</span> <span class="c">"Generated by FamixMaker"</span>
+<span class="nv">mseStream</span> <span class="o">:=</span> <span class="nv">mseFileRef</span> <span class="nf">readStream</span><span class="p">.</span>
+<span class="nf">mseStream</span>
+ <span class="err">ifNotNil:</span> <span class="p">[</span> 
+  <span class="nv">mooseModel</span> <span class="o">:=</span> <span class="nc">MooseModel</span> <span class="nf">importFromMSEStream:</span> <span class="nv">mseStream</span><span class="p">.</span> 
+  <span class="nv">mooseModel</span> <span class="nf">rootFolder:</span>
+      <span class="s">'tmp/MooseEasyRepos/bethrobson__Head-First-Design-Patterns'</span><span class="p">.</span>
+  <span class="nv">mseStream</span> <span class="nf">close</span><span class="p">.</span> <span class="p">]</span>
+ <span class="nf">ifNil:</span> <span class="p">[</span> <span class="bp">self</span> <span class="nf">error:</span> 
+    <span class="s">'Could not load MSE file into Moose: '</span> <span class="nf">,</span> <span class="nv">mseFileRef</span> <span class="nf">asString</span> <span class="p">].</span>
+<span class="nv">mseStream</span><span class="p">.</span>
+<span class="nv">mooseModel</span> <span class="nf">install</span>
+</code></pre></div></div>
+
+<p>The output of the cell should be <code class="language-plaintext highlighter-rouge">a MooseModel #HFDP(30946)</code>.</p>
+
+<p>Congrats! You have set up everything. Now it is time to analyze the project <img class="emoji" title=":rocket:" alt=":rocket:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f680.png" height="20" width="20"></p>
+
+<h2 id="analysis">Analysis</h2>
+
+<h3 id="visualize-a-java-package-in-plantuml">Visualize a Java package in PlantUML</h3>
+
+<p>To visualize Java packages using PlantUML.
+We first install the PlantUML connector of Pharo (<code class="language-plaintext highlighter-rouge">PlantUMLPharoGizmo</code>).</p>
+
+<p>To do so, simply create a new code cell with the installation script and execute it.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">"Install PlantUMLPharo"</span>
+<span class="nv">version</span> <span class="o">:=</span> <span class="s">'master'</span><span class="p">.</span>
+<span class="nc">Metacello</span> <span class="nb">new</span>
+  <span class="nf">repository:</span> <span class="s">'github://fuhrmanator/PlantUMLPharoGizmo:'</span> <span class="nf">,</span> <span class="nv">version</span><span class="nf">,</span> <span class="s">'/src'</span><span class="p">;</span>
+  <span class="nf">baseline:</span> <span class="s">'PUGizmo'</span><span class="p">;</span>
+  <span class="nf">load</span><span class="p">.</span>
+</code></pre></div></div>
+
+<p>Then, you can visualize the classes of a package by executing a Pharo Script.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">attribute</span> <span class="o">:=</span> <span class="bp">true</span><span class="p">.</span>
+<span class="nv">method</span> <span class="o">:=</span> <span class="bp">false</span><span class="p">.</span>
+<span class="nv">inheritance</span> <span class="o">:=</span> <span class="bp">true</span><span class="p">.</span>
+<span class="nv">aggregation</span> <span class="o">:=</span> <span class="bp">true</span><span class="p">.</span>
+<span class="nv">createCheckBox</span> <span class="o">:=</span> <span class="bp">false</span><span class="p">.</span>
+
+<span class="nv">preference</span> <span class="o">:=</span> <span class="s">'set namespaceSeparator ::'</span> <span class="nf">,</span> <span class="nc">String</span> <span class="nf">cr</span>
+  <span class="nf">,</span> <span class="s">'hide empty members'</span> <span class="nf">,</span> <span class="nc">String</span> <span class="nf">cr</span> <span class="nf">,</span> <span class="s">'scale 1'</span> <span class="nf">,</span> <span class="nc">String</span> <span class="nf">cr</span>
+  <span class="nf">,</span> <span class="s">'left to right direction'</span> <span class="nf">,</span> <span class="nc">String</span> <span class="nf">cr</span><span class="p">.</span>
+
+<span class="nv">items</span> <span class="o">:=</span> <span class="nv">mooseModel</span> <span class="nf">allModelClasses</span> <span class="nf">select:</span> <span class="p">[</span><span class="o">:</span><span class="nv">each</span> <span class="p">|</span> <span class="nv">each</span> <span class="nf">mooseName</span> <span class="nf">beginsWith:</span> <span class="s">'headfirst::designpatterns::combining::decorator'</span> <span class="p">].</span>
+
+
+<span class="nv">pUMLSource</span> <span class="o">:=</span> <span class="nc">PUGizmo</span>
+  <span class="nf">plantUMLSourceForMooseJavaClasses:</span> <span class="nv">items</span>
+  <span class="nf">withPreference:</span> <span class="nv">preference</span>
+  <span class="nf">withRelationships:</span>
+   <span class="p">{</span><span class="nv">attribute</span><span class="p">.</span>
+   <span class="nv">method</span><span class="p">.</span>
+   <span class="nv">inheritance</span><span class="p">.</span>
+   <span class="nv">aggregation</span><span class="p">.</span>
+   <span class="nv">createCheckBox</span><span class="p">}.</span>
+
+<span class="nv">plantKey</span> <span class="o">:=</span> <span class="nv">pUMLSource</span> <span class="nf">asPlantUMLKey</span><span class="p">.</span>
+<span class="nv">serverUrl</span> <span class="o">:=</span> <span class="s">'https://www.plantuml.com/plantuml/img/'</span><span class="nf">,</span> <span class="nv">plantKey</span><span class="p">.</span>  
+<span class="nv">imageMorph</span> <span class="o">:=</span> <span class="p">(</span><span class="nc">ZnEasy</span> <span class="nf">getPng:</span> <span class="nv">serverUrl</span> <span class="nf">asUrl</span><span class="p">).</span>
+</code></pre></div></div>
+
+<p>In the above example, as in the original blog post, we focus on the package: <code class="language-plaintext highlighter-rouge">headfirst::designpatterns::combining::decorator</code> and we show the classes attributes, inheritances, and aggregation.
+Executing the code gives the following image as the output of the VSCode cell.</p>
+
+<p><img src="/img/posts/analysing-java/package-analysis.png" alt="Output after cell execution" class="img-fill"></p>
+
+<h3 id="perform-a-moose-analysis-using-pharo">Perform a Moose analysis using Pharo</h3>
+
+<p>It is also possible to execute some classic Pharo code.
+We can request the list of classes that implement more than one interface.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">"Query all classes that have more than two direct FAMIX superclasses"</span>
+<span class="nv">classesImplementingMoreThanOneInterface</span> <span class="o">:=</span> <span class="nv">mooseModel</span> <span class="nf">allModelClasses</span> 
+ <span class="nf">select:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">each</span> <span class="p">|</span> 
+  <span class="nv">each</span> <span class="nf">directSuperclasses</span> <span class="nf">size</span> <span class="nf">&gt;</span> <span class="m">2</span> <span class="p">].</span>
+<span class="nc">String</span> <span class="nf">streamContents:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">stream</span> <span class="p">|</span> <span class="nv">classesImplementingMoreThanOneInterface</span> <span class="nf">do:</span> <span class="p">[</span><span class="o">:</span><span class="nv">class</span> <span class="p">|</span> <span class="nv">stream</span> <span class="nf">&lt;&lt;</span> <span class="nv">class</span> <span class="nf">name</span> <span class="p">]</span> <span class="nf">separatedBy:</span> <span class="p">[</span><span class="nv">stream</span> <span class="nf">&lt;&lt;</span> <span class="s">', '</span> <span class="p">]</span> <span class="p">]</span>
+</code></pre></div></div>
+
+<p><img src="/img/posts/analysing-java/more-than-one-interface.png" alt="Output after cell execution" class="img-fill"></p>
+
+<h3 id="visualisation-with-roassal">Visualisation with Roassal</h3>
+
+<p>Finally, one can use <a href="https://github.com/ObjectProfile/Roassal2">Roassal2</a> (or <a href="https://github.com/ObjectProfile/Roassal3">Roassal3</a> in Pharo 9) to create custom visualization.</p>
+
+<p>It is possible to use pre-built visualization coming from Moose, such as the System Nesting map:</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">view</span> <span class="o">:=</span> <span class="nc">RTView</span> <span class="nb">new</span><span class="p">.</span>
+<span class="nc">FAMIXSystemNestingMap</span> <span class="nb">new</span>
+  <span class="nf">viewNamespaces:</span> <span class="p">(</span><span class="nv">mooseModel</span> <span class="nf">allNamespaces</span> <span class="nf">select:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">each</span> <span class="p">|</span> <span class="nv">each</span> <span class="nf">allClasses</span> <span class="nf">anySatisfy:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">c</span> <span class="p">|</span> <span class="nv">c</span> <span class="nf">isStub</span> <span class="nf">not</span> <span class="p">]</span> <span class="p">])</span>
+  <span class="nf">highlighting:</span> <span class="p">{}</span>
+  <span class="nf">onRaw:</span> <span class="nv">view</span><span class="p">.</span>
+<span class="nf">view</span>
+</code></pre></div></div>
+
+<p><img src="/img/posts/analysing-java/nesting-map.png" alt="Output after cell execution nexting map" class="img-fill"></p>
+
+<p>Or every other Roassal visualization!</p>
+
+<h2 id="resources">Resources</h2>
+
+<ul>
+  <li><a href="/files/posts/analysing-java/oo-analysis.moosebook"><code class="language-plaintext highlighter-rouge">.moosebook</code> file created for this blog post</a></li>
+  <li><a href="/files/pharo-language-server-0.0.11.vsix">The VSCode extension</a></li>
+  <li><a href="https://github.com/badetitou/vscode-pharo/tree/proposed">Extension repository</a></li>
+</ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://utteranc.es/client.js" repo="badetitou/badetitou.github.io" issue-term="pathname" label="comments" theme="boxy-light" crossorigin="anonymous" async>
+</script>
+
+    <ul class="pager list-inline">
+        
+        <li class="previous">
+            <a class="m-button" href="/projects/vscode-pharo/2021/03/03/VSCode-Developer/" data-toggle="tooltip" data-placement="top" data-tooltip="Dev - Pharo Language Server">←
+                Previous Post</a>
+        </li>
+        
+        
+        <li class="next">
+            <a class="m-button" href="/misc/2021/05/01/VLC-FFI/" data-toggle="tooltip" data-placement="top" data-tooltip="Using FFI to control VLC from Pharo">Next Post →</a>
+        </li>
+        
+    </ul>
+</article>
+
+
+    <!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col m12">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="https://twitter.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a rel="me" href="https://piaille.fr/@badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-mastodon fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="https://orcid.org/0000-0002-4588-2698">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-orcid fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://github.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://www.linkedin.com/in/benoitverhaeghe">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="mailto:benoit@badetitou.fr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="text-center">Copyright © badetitou 2023
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/my.js"></script>
+<script src="/js/my-sidenav.js"></script>
+
+<script src="/js/lightense.min.js"></script>
+
+<script>
+
+  // Init Lightense
+  window.addEventListener("load", function() {
+    Lightense("img:not(.no-lightense),.lightense", {
+      background: 'rgba(0,0,0,0.05)'
+    });
+  }, false);
+
+  // Example: Lazy Lightense
+  document.addEventListener("DOMContentLoaded", function(e) {
+    function createDom(type, cssClass) {
+      var div = document.createElement(type);
+      div.className = cssClass;
+      return div;
+    }
+
+    var thumb = document.querySelector(".lightense-lazy");
+    var original = new Image();
+
+    // Init wrapper
+    var wrap = createDom("div", "lightense-lazy-wrap");
+    thumb.parentNode.insertBefore(wrap, thumb);
+    wrap.appendChild(thumb);
+
+    // Wrap thumbnail
+    var thumbWrap = createDom("div", "lightense-lazy-thumb");
+    thumbWrap.appendChild(thumb);
+    wrap.appendChild(thumbWrap);
+
+    // Wrap original
+    var originalWrap = createDom("div", "lightense-lazy-large");
+    original.src = thumb.dataset.original;
+    originalWrap.appendChild(original);
+    wrap.appendChild(originalWrap);
+
+    // Load original image
+    original.addEventListener(
+      "load",
+      function() {
+        wrap.classList.add("on");
+      },
+      false
+    );
+  });
+</script>
+
+
+</body>
+
+</html>

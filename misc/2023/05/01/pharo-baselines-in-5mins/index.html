@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Benoît Verhaeghe's blog">
+    
+
+    <link rel="icon" href="/img/logo/logo.png" type="image/x-icon">
+
+
+    <title>Pharo baselines in 5min - Benoît Verhaeghe</title>
+
+    <link rel="canonical" href="http://badetitou.github.io/misc/2023/05/01/pharo-baselines-in-5mins/">
+
+    <!-- <link rel="stylesheet" href="/assets/vendor/fontawesome-free/css/all.min.css"> -->
+    
+    <script src="https://kit.fontawesome.com/5574707d0b.js" crossorigin="anonymous"></script>
+    
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/main.css">
+    <!-- My JS -->
+    <script src="/js/my-head.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link type="application/atom+xml" rel="alternate" href="http://badetitou.github.io/feed.xml" title="Benoît Verhaeghe" />
+
+</head>
+
+
+<body>
+
+    <nav>
+    <div class="nav-wrapper">
+        <a href="#" onclick="openNav()" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        
+        <ul class="left hide-on-med-and-down"> <li>
+        <a href="/" style="margin-left: 20px;"> Benoît Verhaeghe</a></li></ul>
+
+        <ul class="right hide-on-med-and-down">
+            <li>
+                <span style="width: 30px; display: inline-block;">
+                    <i id="theme-switch" style="font-size: 20px" class="fa-solid fa-1x"></i>
+                </span>
+            </li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/post/">Posts</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+        
+        
+            <li><a href="/research/">Research</a></li>
+        
+        
+        
+        
+        
+        </ul>
+        
+    </div>
+</nav>
+
+<ul class="sidenav" id="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <li><a href="/">Home</a></li>
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/post/">Posts</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+    
+        
+            <li><a href="/research/">Research</a></li>
+        
+    
+        
+        
+    
+</ul>
+
+<div id="sidenav-overlay" onclick="closeNav()"></div>
+
+    <!-- Post Header -->
+<header class="intro-header"
+    style="background-image: url('/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div class="post-heading text-center">
+                    <h1>Pharo baselines in 5min</h1>
+                    
+                    <span class="meta">Posted by
+                        Benoît "badetitou" Verhaeghe on
+                        May 1, 2023</span>
+                    <span class="post-meta">
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article class="container">
+    <div class="row">
+        <div class="col s12 m12">
+            <div class="card">
+                <div class="card-content article-content">
+                    <p>I am working with Pharo for 7 years now.
+And all my project starts the same way: create a test, create a class, create a Baseline, and commit and push.
+Even if most of these tasks are easy for everyone.
+Dealing with baseline seems to be the hardest for people.
+Probably because we do not do it in our day-to-day development.</p>
+
+<p>I have created a simple, and efficient, way to deal with baseline.
+This solution does <strong>not</strong> enable all the features baselines can offer, but it allows one to create a simple baseline, make its project available for everyone, and not require one to dig into documentation all the time.</p>
+
+<p>So, let’s have a look at how to create a baseline in 5min.</p>
+
+<h2 id="create-a-baseline-in-5min">Create a baseline in 5min</h2>
+
+<p>First, create a package with as name: <code class="language-plaintext highlighter-rouge">BaselineOf</code> + the name of your project (better, the name of the git repository).
+Considering a project named <em>“Cointreau”</em>, I create a package <code class="language-plaintext highlighter-rouge">BaselineOfCointreau</code>.</p>
+
+<p>Then, inside this package, I create a class with the same name.
+The class must be a subclass of <code class="language-plaintext highlighter-rouge">BaselineOf</code></p>
+
+<blockquote>
+  <p>It is not mandatory to have the same name, but again, here I present a simple solution.</p>
+</blockquote>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">BaselineOf</span> <span class="nf">&lt;&lt;</span> <span class="ss">#BaselineOfCointreau</span>
+    <span class="nf">slots:</span> <span class="p">{};</span>
+    <span class="nf">package:</span> <span class="s">'BaselineOfCointreau'</span>
+</code></pre></div></div>
+
+<p>In the Baseline class, we will create 4 methods: <code class="language-plaintext highlighter-rouge">baseline:</code>, <code class="language-plaintext highlighter-rouge">definePackages: spec</code>, <code class="language-plaintext highlighter-rouge">defineDependencies: spec</code>, <code class="language-plaintext highlighter-rouge">defineGroups: spec</code>.</p>
+
+<p>The first method is always the same, so you can copy-paste it.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">baseline:</span> <span class="nv">spec</span>
+    <span class="err">&lt;</span><span class="nv">baseline</span><span class="nf">&gt;</span>
+    <span class="nv">spec</span>
+    <span class="nf">for:</span> <span class="ss">#common</span>
+    <span class="nf">do:</span> <span class="p">[</span> 
+        <span class="bp">self</span> <span class="nf">defineDependencies:</span> <span class="nv">spec</span><span class="p">.</span>
+        <span class="bp">self</span> <span class="nf">definePackages:</span> <span class="nv">spec</span><span class="p">.</span>
+        <span class="bp">self</span> <span class="nf">defineGroups:</span> <span class="nv">spec</span> <span class="p">]</span>
+</code></pre></div></div>
+
+<p>The second method is the one in which you declare the packages of your project and their dependencies.
+These packages are the ones you push to your git repository.</p>
+
+<p>In our example, there are three packages: <code class="language-plaintext highlighter-rouge">Cointreau</code>, <code class="language-plaintext highlighter-rouge">Cointreau-Tests</code>, and <code class="language-plaintext highlighter-rouge">Cointreau-Bottle</code>.
+The <code class="language-plaintext highlighter-rouge">Cointreau-Tests</code> package requires the <code class="language-plaintext highlighter-rouge">Cointreau</code> package to be loaded first.
+The <code class="language-plaintext highlighter-rouge">Cointreau-Bottle</code> package requires something named <code class="language-plaintext highlighter-rouge">BottleFactory</code>.
+We will declare it in the <code class="language-plaintext highlighter-rouge">defineDependencies:</code> method.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">definePackages:</span> <span class="nv">spec</span>
+    <span class="nv">spec</span>
+        <span class="nf">package:</span> <span class="s">'Cointreau'</span><span class="p">;</span>
+        <span class="nf">package:</span> <span class="s">'Cointreau-Tests'</span> <span class="nf">with:</span> <span class="p">[</span> <span class="nv">spec</span> <span class="nf">requires:</span> <span class="ss">#(</span> <span class="s">'Cointreau'</span> <span class="ss">)</span> <span class="p">];</span>
+        <span class="nf">package:</span> <span class="s">'Cointreau-Bottle'</span> <span class="nf">with:</span> <span class="p">[</span> <span class="nv">spec</span> <span class="nf">requires:</span> <span class="ss">#(</span> <span class="s">'BottleFactory'</span> <span class="ss">)</span> <span class="p">]</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">defineDependencies:</code> method allows one to declare dependencies to other baselines.</p>
+
+<p>In our example, the <code class="language-plaintext highlighter-rouge">Cointreau-Bottle</code> package needs that the project <code class="language-plaintext highlighter-rouge">BottleFactory</code> to be loaded.
+The project is hosted in GitHub, under the user <em>badetitou</em>.
+The project has several branches, and we decided to select branch <code class="language-plaintext highlighter-rouge">v2</code>.
+The Pharo code is under the directory <code class="language-plaintext highlighter-rouge">src</code>.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">defineDependencies:</span> <span class="nv">spec</span>
+    <span class="nv">spec</span>
+        <span class="nf">baseline:</span> <span class="s">'BottleFactory'</span>
+        <span class="nf">with:</span> <span class="p">[</span> <span class="nv">spec</span>
+            <span class="nf">repository:</span> <span class="s">'github://badetitou/BottleFactory:v2/src'</span> <span class="p">].</span>
+</code></pre></div></div>
+
+<p>The final method is <code class="language-plaintext highlighter-rouge">defineGroups: spec</code>.
+Groups are already an advanced feature if it is your first baseline.
+It allows one to load only part of a project.
+By default, a group named <code class="language-plaintext highlighter-rouge">default</code> exists and loads all packages.
+For our example, we will create a group named <code class="language-plaintext highlighter-rouge">core</code> that will not load <code class="language-plaintext highlighter-rouge">Cointreau-Bottle</code>.</p>
+
+<blockquote>
+  <p>You can also let the method empty if you do not want to create group at first.
+However, I believe already having this method is good to have a complete setup.</p>
+</blockquote>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">defineGroups:</span> <span class="nv">spec</span>
+    
+    <span class="nv">spec</span> <span class="nf">group:</span> <span class="s">'core'</span>
+        <span class="nf">with:</span> <span class="ss">#(</span> <span class="s">'Cointreau'</span> <span class="s">'Cointreau-Tests'</span> <span class="ss">)</span>
+</code></pre></div></div>
+
+<p><strong>Congrats!</strong> You have created your first baseline.</p>
+
+<h2 id="load-the-baseline">Load the baseline</h2>
+
+<p>Once you have created a baseline, you might want to use it to load your project in Pharo.
+Based on this template, you can load any of your projects if the same Pharo code.</p>
+
+<p>The GitHub user is the name of the organization or GitHub user.
+The project is the name of the project in GitHub.
+The commitish is the branch or the tag/release you want to load.
+The path is the location in the repository that contains your Pharo code.
+Finally, the baseline is the name of your Baseline (without the prefix <code class="language-plaintext highlighter-rouge">BaselineOf</code>).</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Metacello</span> <span class="nb">new</span>
+    <span class="nf">githubUser:</span> <span class="s">'badetitou'</span> <span class="nf">project:</span> <span class="s">'Cointreau'</span> <span class="nf">commitish:</span> <span class="s">'main'</span> <span class="nf">path:</span> <span class="s">'src'</span><span class="p">;</span>
+    <span class="nf">baseline:</span> <span class="s">'Cointreau'</span><span class="p">;</span>
+    <span class="nf">load</span>
+</code></pre></div></div>
+
+<h2 id="more-documentation">More documentation</h2>
+
+<p>You will find more complete documentation in the <a href="https://github.com/pharo-open-documentation/pharo-wiki/blob/master/General/Baselines.md">Pharo Open Documentation</a>.</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://utteranc.es/client.js"
+        repo="badetitou/badetitou.github.io"
+        issue-term="pathname"
+        label="comments"
+        theme="boxy-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+    <ul class="pager list-inline">
+        
+        <li class="previous">
+            <a class="m-button" href="/misc/2022/10/27/test-your-moose-code-using-ci/" data-toggle="tooltip"
+                data-placement="top" data-tooltip="Test your Moose code using CIs">&larr;
+                Previous Post</a>
+        </li>
+        
+        
+    </ul>
+</article>
+
+
+    <!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col m12">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="https://twitter.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a rel="me" href="https://piaille.fr/@badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-mastodon fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="https://orcid.org/0000-0002-4588-2698">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-orcid fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://github.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://www.linkedin.com/in/benoitverhaeghe">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="mailto:benoit@badetitou.fr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="text-center">Copyright &copy; badetitou 2023
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/my.js"></script>
+<script src="/js/my-sidenav.js"></script>
+
+<script src="/js/lightense.min.js"></script>
+
+<script>
+
+  // Init Lightense
+  window.addEventListener("load", function() {
+    Lightense("img:not(.no-lightense),.lightense", {
+      background: 'rgba(0,0,0,0.05)'
+    });
+  }, false);
+
+  // Example: Lazy Lightense
+  document.addEventListener("DOMContentLoaded", function(e) {
+    function createDom(type, cssClass) {
+      var div = document.createElement(type);
+      div.className = cssClass;
+      return div;
+    }
+
+    var thumb = document.querySelector(".lightense-lazy");
+    var original = new Image();
+
+    // Init wrapper
+    var wrap = createDom("div", "lightense-lazy-wrap");
+    thumb.parentNode.insertBefore(wrap, thumb);
+    wrap.appendChild(thumb);
+
+    // Wrap thumbnail
+    var thumbWrap = createDom("div", "lightense-lazy-thumb");
+    thumbWrap.appendChild(thumb);
+    wrap.appendChild(thumbWrap);
+
+    // Wrap original
+    var originalWrap = createDom("div", "lightense-lazy-large");
+    original.src = thumb.dataset.original;
+    originalWrap.appendChild(original);
+    wrap.appendChild(originalWrap);
+
+    // Load original image
+    original.addEventListener(
+      "load",
+      function() {
+        wrap.classList.add("on");
+      },
+      false
+    );
+  });
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta name="description" content="Benoît Verhaeghe's blog">
+    
+
+    <link rel="icon" href="/img/logo/logo.png" type="image/x-icon">
+
+
+    <title>Quizz capitales - Benoît Verhaeghe</title>
+
+    <link rel="canonical" href="http://badetitou.github.io/tps/HLIN303/tp7_py2/">
+
+    <!-- <link rel="stylesheet" href="/assets/vendor/fontawesome-free/css/all.min.css"> -->
+    
+    <script src="https://kit.fontawesome.com/5574707d0b.js" crossorigin="anonymous"></script>
+    
+    <!-- My CSS -->
+    <link rel="stylesheet" href="/assets/main.css">
+    <!-- My JS -->
+    <script src="/js/my-head.js"></script>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link type="application/atom+xml" rel="alternate" href="http://badetitou.github.io/feed.xml" title="Benoît Verhaeghe" />
+
+</head>
+
+
+<body>
+
+    <nav>
+    <div class="nav-wrapper">
+        <a href="#" onclick="openNav()" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        
+        <ul class="left hide-on-med-and-down"> <li>
+        <a href="/" style="margin-left: 20px;"> Benoît Verhaeghe</a></li></ul>
+
+        <ul class="right hide-on-med-and-down">
+            <li>
+                <span style="width: 30px; display: inline-block;">
+                    <i id="theme-switch" style="font-size: 20px" class="fa-solid fa-1x"></i>
+                </span>
+            </li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/post/">Posts</a></li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+        
+        
+            <li><a href="/research/">Research</a></li>
+        
+        
+        
+        
+        
+        </ul>
+        
+    </div>
+</nav>
+
+<ul class="sidenav" id="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <li><a href="/">Home</a></li>
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/teaching/">Teaching</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/post/">Posts</a></li>
+        
+    
+        
+        
+    
+        
+        
+    
+        
+            <li><a href="/projects/">Projects</a></li>
+        
+    
+        
+            <li><a href="/research/">Research</a></li>
+        
+    
+        
+        
+    
+</ul>
+
+<div id="sidenav-overlay" onclick="closeNav()"></div>
+
+    <!-- Post Header -->
+<header class="intro-header"
+    style="background-image: url('/img/bg/keyboard.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div class="post-heading  text-center">
+                    <h1>Quizz capitales</h1>
+                    
+                    <h2 class="subheading">Python - TP2</h2>
+                    
+                    <span class="meta">Posted by
+                        Benoît "badetitou" Verhaeghe on
+                        November 19, 2019</span>
+                    <span class="post-meta">
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<article class="container">
+    <div class="row">
+        <div class="col s12 m12">
+            <div class="card">
+                <div class="card-content article-content">
+                    <h2 id="quizz-capitales">Quizz capitales</h2>
+
+<h3 id="ecrivez-un-script-python-qui-crée-un-quizz-sur-les-capitales">Ecrivez un script Python qui crée un quizz sur les capitales</h3>
+
+<p>Voici les spécifications du script :</p>
+
+<ul>
+  <li>le nombre de questions doit être donné en paramètre au script</li>
+  <li>le fichier nommé <em>capitales.csv</em> des pays/capitales est à récupérer sur le Moodle
+en voici un fragment :</li>
+</ul>
+
+<pre><code class="language-no">Afghanistan (l'),Kaboul
+Afrique du Sud (l'),Prétoria
+Albanie (l'),Tirana
+</code></pre>
+
+<ul>
+  <li>les noms des pays et des capitales doivent être initialement recopiés dans deux listes (pour ne pas être obligé de relire constamment le fichier)</li>
+  <li>chaque pays doit être choisi aléatoirement :
+pour cela utilisez la fonction <em>randint()</em> du module <em>random</em> :
+<code class="language-plaintext highlighter-rouge">random.randint(m, n)</code> renvoie un entier compris entre m et n</li>
+  <li>le score de l’internaute doit être affiché :
+    <ul>
+      <li>en nombre de bonnes réponses</li>
+      <li>en pourcentage de bonnes réponses</li>
+    </ul>
+  </li>
+  <li>et si vous avez le temps, améliorez le script pour :
+    <ul>
+      <li>qu’une question ne soit pas reposée lors d’une même session de test</li>
+      <li>que l’on puisse aussi choisir de trouver les noms de pays à partir de leurs capitales : dans ce cas-là, un menu demanderait à l’utilisateur la modalité du jeu.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="solution">Solution</h4>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python3
+</span>
+<span class="c1"># -*- coding : utf-8 -*-
+</span>
+<span class="kn">import</span> <span class="nn">sys</span><span class="p">,</span> <span class="n">os</span><span class="p">,</span> <span class="n">re</span><span class="p">,</span> <span class="n">random</span>
+<span class="n">os</span><span class="p">.</span><span class="n">system</span><span class="p">(</span><span class="s">"clear"</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">isdigit</span><span class="p">()</span> <span class="p">:</span>
+    <span class="n">nbQuestions</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">fd</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">"capitales.csv"</span><span class="p">,</span> <span class="s">"r"</span><span class="p">)</span>
+    <span class="n">pays</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">capitales</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">fd</span> <span class="p">:</span> <span class="c1"># on peut utiliser split() ou une regexp
+</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">ligne</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">","</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="p">:</span>
+            <span class="n">pays</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">capitales</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="c1"># resultat = re.search("^([^(]+).*,([^(]+)", ligne)
+</span>
+        <span class="c1"># if resultat :
+</span>
+        <span class="c1"># pays.append(resultat.group(1))
+</span>
+        <span class="c1"># capitales.append(resultat.group(2)[:-1])
+</span>
+
+    <span class="n">score</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">numQuestion</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">numQuestion</span> <span class="o">&lt;</span> <span class="n">nbQuestions</span> <span class="p">:</span>
+        <span class="n">numPays</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pays</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">reponse</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">Capitale de "</span><span class="o">+</span><span class="n">pays</span><span class="p">[</span><span class="n">numPays</span><span class="p">]</span><span class="o">+</span><span class="s">" ? "</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">reponse</span> <span class="o">==</span> <span class="n">capitales</span><span class="p">[</span><span class="n">numPays</span><span class="p">]</span> <span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"Bonne réponse ("</span><span class="o">+</span><span class="n">capitales</span><span class="p">[</span><span class="n">numPays</span><span class="p">]</span><span class="o">+</span><span class="s">")"</span><span class="p">)</span>
+            <span class="n">score</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span> <span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"La bonne réponse était"</span><span class="p">,</span> <span class="n">capitales</span><span class="p">[</span><span class="n">numPays</span><span class="p">])</span>
+    <span class="n">numQuestion</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">del</span> <span class="n">pays</span><span class="p">[</span><span class="n">numPays</span><span class="p">];</span>
+    <span class="k">del</span> <span class="n">capitales</span><span class="p">[</span><span class="n">numPays</span><span class="p">];</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">Votre score est"</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="s">"soit"</span><span class="p">,</span> <span class="n">score</span><span class="o">/</span><span class="n">nbQuestions</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="s">"%"</span><span class="p">)</span>
+<span class="k">else</span> <span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Mauvais usage du script : un nombre de questions doit être donné en parametre !"</span><span class="p">)</span>
+</code></pre></div></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col m12">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="https://twitter.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a rel="me" href="https://piaille.fr/@badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-mastodon fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="https://orcid.org/0000-0002-4588-2698">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-orcid fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://github.com/badetitou">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="https://www.linkedin.com/in/benoitverhaeghe">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li>
+                        <a href="mailto:benoit@badetitou.fr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="text-center">Copyright &copy; badetitou 2023
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/my.js"></script>
+<script src="/js/my-sidenav.js"></script>
+
+<script src="/js/lightense.min.js"></script>
+
+<script>
+
+  // Init Lightense
+  window.addEventListener("load", function() {
+    Lightense("img:not(.no-lightense),.lightense", {
+      background: 'rgba(0,0,0,0.05)'
+    });
+  }, false);
+
+  // Example: Lazy Lightense
+  document.addEventListener("DOMContentLoaded", function(e) {
+    function createDom(type, cssClass) {
+      var div = document.createElement(type);
+      div.className = cssClass;
+      return div;
+    }
+
+    var thumb = document.querySelector(".lightense-lazy");
+    var original = new Image();
+
+    // Init wrapper
+    var wrap = createDom("div", "lightense-lazy-wrap");
+    thumb.parentNode.insertBefore(wrap, thumb);
+    wrap.appendChild(thumb);
+
+    // Wrap thumbnail
+    var thumbWrap = createDom("div", "lightense-lazy-thumb");
+    thumbWrap.appendChild(thumb);
+    wrap.appendChild(thumbWrap);
+
+    // Wrap original
+    var originalWrap = createDom("div", "lightense-lazy-large");
+    original.src = thumb.dataset.original;
+    originalWrap.appendChild(original);
+    wrap.appendChild(originalWrap);
+
+    // Load original image
+    original.addEventListener(
+      "load",
+      function() {
+        wrap.classList.add("on");
+      },
+      false
+    );
+  });
+</script>
+
+
+</body>
+
+</html>

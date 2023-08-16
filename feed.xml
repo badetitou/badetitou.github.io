@@ -1,0 +1,1209 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://badetitou.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="http://badetitou.github.io/" rel="alternate" type="text/html" /><updated>2023-08-16T06:57:30+00:00</updated><id>http://badetitou.github.io/feed.xml</id><title type="html">Benoît Verhaeghe</title><subtitle>Benoît Verhaeghe's blog</subtitle><entry><title type="html">Pharo baselines in 5min</title><link href="http://badetitou.github.io/misc/2023/05/01/pharo-baselines-in-5mins/" rel="alternate" type="text/html" title="Pharo baselines in 5min" /><published>2023-05-01T22:00:00+00:00</published><updated>2023-05-01T22:00:00+00:00</updated><id>http://badetitou.github.io/misc/2023/05/01/pharo-baselines-in-5mins</id><content type="html" xml:base="http://badetitou.github.io/misc/2023/05/01/pharo-baselines-in-5mins/"><![CDATA[<p>I am working with Pharo for 7 years now.
+And all my project starts the same way: create a test, create a class, create a Baseline, and commit and push.
+Even if most of these tasks are easy for everyone.
+Dealing with baseline seems to be the hardest for people.
+Probably because we do not do it in our day-to-day development.</p>
+
+<p>I have created a simple, and efficient, way to deal with baseline.
+This solution does <strong>not</strong> enable all the features baselines can offer, but it allows one to create a simple baseline, make its project available for everyone, and not require one to dig into documentation all the time.</p>
+
+<p>So, let’s have a look at how to create a baseline in 5min.</p>
+
+<h2 id="create-a-baseline-in-5min">Create a baseline in 5min</h2>
+
+<p>First, create a package with as name: <code class="language-plaintext highlighter-rouge">BaselineOf</code> + the name of your project (better, the name of the git repository).
+Considering a project named <em>“Cointreau”</em>, I create a package <code class="language-plaintext highlighter-rouge">BaselineOfCointreau</code>.</p>
+
+<p>Then, inside this package, I create a class with the same name.
+The class must be a subclass of <code class="language-plaintext highlighter-rouge">BaselineOf</code></p>
+
+<blockquote>
+  <p>It is not mandatory to have the same name, but again, here I present a simple solution.</p>
+</blockquote>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">BaselineOf</span> <span class="nf">&lt;&lt;</span> <span class="ss">#BaselineOfCointreau</span>
+    <span class="nf">slots:</span> <span class="p">{};</span>
+    <span class="nf">package:</span> <span class="s">'BaselineOfCointreau'</span>
+</code></pre></div></div>
+
+<p>In the Baseline class, we will create 4 methods: <code class="language-plaintext highlighter-rouge">baseline:</code>, <code class="language-plaintext highlighter-rouge">definePackages: spec</code>, <code class="language-plaintext highlighter-rouge">defineDependencies: spec</code>, <code class="language-plaintext highlighter-rouge">defineGroups: spec</code>.</p>
+
+<p>The first method is always the same, so you can copy-paste it.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">baseline:</span> <span class="nv">spec</span>
+    <span class="err">&lt;</span><span class="nv">baseline</span><span class="nf">&gt;</span>
+    <span class="nv">spec</span>
+    <span class="nf">for:</span> <span class="ss">#common</span>
+    <span class="nf">do:</span> <span class="p">[</span> 
+        <span class="bp">self</span> <span class="nf">defineDependencies:</span> <span class="nv">spec</span><span class="p">.</span>
+        <span class="bp">self</span> <span class="nf">definePackages:</span> <span class="nv">spec</span><span class="p">.</span>
+        <span class="bp">self</span> <span class="nf">defineGroups:</span> <span class="nv">spec</span> <span class="p">]</span>
+</code></pre></div></div>
+
+<p>The second method is the one in which you declare the packages of your project and their dependencies.
+These packages are the ones you push to your git repository.</p>
+
+<p>In our example, there are three packages: <code class="language-plaintext highlighter-rouge">Cointreau</code>, <code class="language-plaintext highlighter-rouge">Cointreau-Tests</code>, and <code class="language-plaintext highlighter-rouge">Cointreau-Bottle</code>.
+The <code class="language-plaintext highlighter-rouge">Cointreau-Tests</code> package requires the <code class="language-plaintext highlighter-rouge">Cointreau</code> package to be loaded first.
+The <code class="language-plaintext highlighter-rouge">Cointreau-Bottle</code> package requires something named <code class="language-plaintext highlighter-rouge">BottleFactory</code>.
+We will declare it in the <code class="language-plaintext highlighter-rouge">defineDependencies:</code> method.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">definePackages:</span> <span class="nv">spec</span>
+    <span class="nv">spec</span>
+        <span class="nf">package:</span> <span class="s">'Cointreau'</span><span class="p">;</span>
+        <span class="nf">package:</span> <span class="s">'Cointreau-Tests'</span> <span class="nf">with:</span> <span class="p">[</span> <span class="nv">spec</span> <span class="nf">requires:</span> <span class="ss">#(</span> <span class="s">'Cointreau'</span> <span class="ss">)</span> <span class="p">];</span>
+        <span class="nf">package:</span> <span class="s">'Cointreau-Bottle'</span> <span class="nf">with:</span> <span class="p">[</span> <span class="nv">spec</span> <span class="nf">requires:</span> <span class="ss">#(</span> <span class="s">'BottleFactory'</span> <span class="ss">)</span> <span class="p">]</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">defineDependencies:</code> method allows one to declare dependencies to other baselines.</p>
+
+<p>In our example, the <code class="language-plaintext highlighter-rouge">Cointreau-Bottle</code> package needs that the project <code class="language-plaintext highlighter-rouge">BottleFactory</code> to be loaded.
+The project is hosted in GitHub, under the user <em>badetitou</em>.
+The project has several branches, and we decided to select branch <code class="language-plaintext highlighter-rouge">v2</code>.
+The Pharo code is under the directory <code class="language-plaintext highlighter-rouge">src</code>.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">defineDependencies:</span> <span class="nv">spec</span>
+    <span class="nv">spec</span>
+        <span class="nf">baseline:</span> <span class="s">'BottleFactory'</span>
+        <span class="nf">with:</span> <span class="p">[</span> <span class="nv">spec</span>
+            <span class="nf">repository:</span> <span class="s">'github://badetitou/BottleFactory:v2/src'</span> <span class="p">].</span>
+</code></pre></div></div>
+
+<p>The final method is <code class="language-plaintext highlighter-rouge">defineGroups: spec</code>.
+Groups are already an advanced feature if it is your first baseline.
+It allows one to load only part of a project.
+By default, a group named <code class="language-plaintext highlighter-rouge">default</code> exists and loads all packages.
+For our example, we will create a group named <code class="language-plaintext highlighter-rouge">core</code> that will not load <code class="language-plaintext highlighter-rouge">Cointreau-Bottle</code>.</p>
+
+<blockquote>
+  <p>You can also let the method empty if you do not want to create group at first.
+However, I believe already having this method is good to have a complete setup.</p>
+</blockquote>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">defineGroups:</span> <span class="nv">spec</span>
+    
+    <span class="nv">spec</span> <span class="nf">group:</span> <span class="s">'core'</span>
+        <span class="nf">with:</span> <span class="ss">#(</span> <span class="s">'Cointreau'</span> <span class="s">'Cointreau-Tests'</span> <span class="ss">)</span>
+</code></pre></div></div>
+
+<p><strong>Congrats!</strong> You have created your first baseline.</p>
+
+<h2 id="load-the-baseline">Load the baseline</h2>
+
+<p>Once you have created a baseline, you might want to use it to load your project in Pharo.
+Based on this template, you can load any of your projects if the same Pharo code.</p>
+
+<p>The GitHub user is the name of the organization or GitHub user.
+The project is the name of the project in GitHub.
+The commitish is the branch or the tag/release you want to load.
+The path is the location in the repository that contains your Pharo code.
+Finally, the baseline is the name of your Baseline (without the prefix <code class="language-plaintext highlighter-rouge">BaselineOf</code>).</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Metacello</span> <span class="nb">new</span>
+    <span class="nf">githubUser:</span> <span class="s">'badetitou'</span> <span class="nf">project:</span> <span class="s">'Cointreau'</span> <span class="nf">commitish:</span> <span class="s">'main'</span> <span class="nf">path:</span> <span class="s">'src'</span><span class="p">;</span>
+    <span class="nf">baseline:</span> <span class="s">'Cointreau'</span><span class="p">;</span>
+    <span class="nf">load</span>
+</code></pre></div></div>
+
+<h2 id="more-documentation">More documentation</h2>
+
+<p>You will find more complete documentation in the <a href="https://github.com/pharo-open-documentation/pharo-wiki/blob/master/General/Baselines.md">Pharo Open Documentation</a>.</p>]]></content><author><name>Benoît &quot;badetitou&quot; Verhaeghe</name></author><category term="misc" /><category term="misc" /><category term="pharo" /><summary type="html"><![CDATA[I am working with Pharo for 7 years now. And all my project starts the same way: create a test, create a class, create a Baseline, and commit and push. Even if most of these tasks are easy for everyone. Dealing with baseline seems to be the hardest for people. Probably because we do not do it in our day-to-day development.]]></summary></entry><entry><title type="html">Test your Moose code using CIs</title><link href="http://badetitou.github.io/misc/2022/10/27/test-your-moose-code-using-ci/" rel="alternate" type="text/html" title="Test your Moose code using CIs" /><published>2022-10-27T22:00:00+00:00</published><updated>2022-10-27T22:00:00+00:00</updated><id>http://badetitou.github.io/misc/2022/10/27/test-your-moose-code-using-ci</id><content type="html" xml:base="http://badetitou.github.io/misc/2022/10/27/test-your-moose-code-using-ci/"><![CDATA[<p>You have to test your code!</p>
+
+<p>I mean, <em>really</em>.</p>
+
+<p>But sometimes, testing is hard, because you do not know how to start (often because it was hard to start with TDD or better XtremTDD :smile:).</p>
+
+<p>One challenging situation is the creation of mocks to <em>represent</em> real cases and use them as test resources.
+This situation is common when dealing with code modeling and meta-modeling.</p>
+
+<p>Writing a model manually to test features on it is hard.
+Today, I’ll show you how to use GitHub Actions as well as GitLab CI to create tests for the Moose platform based on real resources.</p>
+
+<hr />
+
+<p>First of all, let’s describe a simple process when working on modeling and meta-modeling.</p>
+
+<script src="/js/mermaid.min.js"></script>
+<div class="mermaid">
+flowchart LR
+    SourceCode(Source Code) --&gt; Parse --&gt; modelfile(Model File) --&gt; Import --&gt; model(Model in Memory) --&gt; Use
+</div>
+
+<p>When analyzing a software system using MDE, everything starts with parsing the source code of the application to produce a model.
+This model can then be stored in a file.
+Then, we import the file into our analysis environment, and we use the concrete model.</p>
+
+<p>All these steps are performed before using the model.
+<em>However</em>, when we create tests for the <code class="language-plaintext highlighter-rouge">Use</code> step, we do not perform all the steps before.
+We likely just create a mock model.
+Even if this situation is acceptable<!-- comfortable -->, it is troublesome<!-- why? --> because it disconnects the test from the tools (which can have bugs) that create the model. <!-- makes easy un-synchronization between tools to manipulate a model, and tools that create a model. -->
+<!-- Even if this situation seems  --></p>
+
+<p>One solution is thus not to create a mock model, but to create mock source code files.</p>
+
+<h2 id="proposed-approach">Proposed approach</h2>
+
+<p>Using mock source code files, we can reproduce the process for each test (or better, a group of tests :wink:)</p>
+
+<script src="/js/mermaid.min.js"></script>
+<div class="mermaid">
+flowchart LR
+    SourceCode(Mock Source Code) --&gt; Parse(Parse with Docker) --&gt; modelfile(Model File) --&gt; Import(Import with script) --&gt; model(Model in Memory) --&gt; Test
+</div>
+
+<p>In the following, I describe the implementation and set-up of the approach for analyzing Java code, using Pharo with Moose.
+It consists of the following steps:</p>
+
+<ul>
+  <li>Create mock resources</li>
+  <li>Create a bridge from your Pharo image to your resources using PharoBridge</li>
+  <li>Create a GitLab CI or a GitHub Action</li>
+  <li>Test :heart:</li>
+</ul>
+
+<h2 id="create-mock-resources">Create mock resources</h2>
+
+<p>The first step is to create mock resources.
+To do so, the easiest way is to include them in your git repository.</p>
+
+<p>You should have the following:</p>
+
+<pre><code class="language-raw">&gt; ci // Code executed by the CI
+&gt; src // Source code files
+&gt; tests // Tests ressources
+</code></pre>
+
+<p>Inside the <code class="language-plaintext highlighter-rouge">tests</code> folder, it is possible to add several subfolders for different test resources.</p>
+
+<h2 id="create-a-pharo-bridge">Create a Pharo Bridge</h2>
+
+<p>To easily use the folder of the test resource repository from Pharo, we will use the <a href="https://github.com/jecisc/GitBridge">GitBridge project</a>.</p>
+
+<p>The project can be added to your Pharo Baseline with the following code fragment:</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">spec</span>
+    <span class="err">baseline:</span> <span class="s">'GitBridge'</span>
+    <span class="nf">with:</span> <span class="p">[</span> <span class="nv">spec</span> <span class="nf">repository:</span> <span class="s">'github://jecisc/GitBridge:v1.x.x/src'</span> <span class="p">].</span>
+</code></pre></div></div>
+
+<p>Then, to connect our Pharo project to the test resources, we create a class in one of our packages, a subclass of <code class="language-plaintext highlighter-rouge">GitBridge</code>`.</p>
+
+<p>A full example would be as follows:</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Class</span> <span class="p">{</span>
+    <span class="ss">#name</span> <span class="err">:</span> <span class="ss">#MyBridge</span><span class="nf">,</span>
+    <span class="ss">#superclass</span> <span class="err">:</span> <span class="ss">#GitBridge</span><span class="nf">,</span>
+    <span class="ss">#category</span> <span class="err">:</span> <span class="err">#</span><span class="s">'MyPackage-Bridge'</span>
+<span class="p">}</span>
+
+<span class="p">{</span> <span class="ss">#category</span> <span class="err">:</span> <span class="ss">#initialization</span> <span class="p">}</span>
+<span class="nf">MyBridge</span> <span class="nf">class</span> <span class="nf">&gt;&gt;</span> <span class="nv">initialize</span> <span class="p">[</span>
+
+    <span class="nc">SessionManager</span> <span class="nf">default</span> <span class="nf">registerSystemClassNamed:</span> <span class="bp">self</span> <span class="nf">name</span>
+<span class="p">]</span>
+
+<span class="p">{</span> <span class="ss">#category</span> <span class="err">:</span> <span class="err">#</span><span class="s">'accessing'</span> <span class="p">}</span>
+<span class="nf">MyBridge</span> <span class="nf">class</span> <span class="nf">&gt;&gt;</span> <span class="nv">testsResources</span> <span class="p">[</span>
+    <span class="o">^</span> <span class="bp">self</span> <span class="nf">root</span> <span class="nf">/</span> <span class="s">'tests'</span>
+<span class="p">]</span>
+</code></pre></div></div>
+
+<p>The method <code class="language-plaintext highlighter-rouge">testsResources</code> can then be used to access the local folder with the test resources.</p>
+
+<p><strong>Warning</strong>: this setup only works locally.
+To use it with GitHub and GitLab, we first have to set up our CI files.</p>
+
+<h2 id="set-up-ci-files">Set up CI files</h2>
+
+<p>To set up our CI files, we first create in the <code class="language-plaintext highlighter-rouge">ci</code> folder of our repository a <code class="language-plaintext highlighter-rouge">pretesting.st</code> file that will execute Pharo code.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nc">IceRepositoryCreator</span> <span class="nb">new</span>
+    <span class="nf">location:</span> <span class="s">'.'</span> <span class="nf">asFileReference</span><span class="p">;</span>
+    <span class="nf">subdirectory:</span> <span class="s">'src'</span><span class="p">;</span>
+    <span class="nf">createRepository</span><span class="p">)</span> <span class="nf">register</span>
+</code></pre></div></div>
+
+<p>This code will be run by the CI and register the Pharo project inside the Iceberg tool of Pharo.
+This registration is then used by GitBridge to retrieve the location of the test resources folder.</p>
+
+<p>Then, we have to update the <code class="language-plaintext highlighter-rouge">.smalltalk.ston</code> file (used by every Smalltalk CI process) and add a reference to our <code class="language-plaintext highlighter-rouge">pretesting.st</code> file.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">SmalltalkCISpec</span> <span class="p">{</span>
+  <span class="ss">#preTesting</span> <span class="err">:</span> <span class="nc">SCICustomScript</span> <span class="p">{</span>
+    <span class="ss">#path</span> <span class="err">:</span> <span class="s">'ci/pretesting.st'</span>
+  <span class="p">}</span>
+  <span class="p">.</span><span class="err">..</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="set-up-gitlab-ci">Set up GitLab CI</h3>
+
+<p>The last step for GitLab is the creation of the <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code> file.</p>
+
+<p>This CI can include several steps.
+We now present the steps dedicated to testing the Java model, but the same steps apply to other programming languages.</p>
+
+<p>First, we have to parse the tests-resources using the <a href="https://hub.docker.com/r/badetitou/verveinej">docker version of VerveineJ</a></p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">stages</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">parse</span>
+  <span class="pi">-</span> <span class="s">tests</span>
+
+<span class="na">parse</span><span class="pi">:</span>
+  <span class="na">stage</span><span class="pi">:</span> <span class="s">parse</span>
+  <span class="na">image</span><span class="pi">:</span>     
+    <span class="na">name</span><span class="pi">:</span> <span class="s">badetitou/verveinej:v3.0.0</span>
+    <span class="na">entrypoint</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">"</span><span class="pi">]</span>
+  <span class="na">needs</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">job</span><span class="pi">:</span> <span class="s">install</span>
+      <span class="na">artifacts</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">script</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">/VerveineJ-3.0.0/verveinej.sh -Xmx8g -Xms8g -- -format json -o output.json -alllocals -anchor assoc -autocp ./tests/lib ./tests/src</span> 
+  <span class="na">artifacts</span><span class="pi">:</span>
+    <span class="na">paths</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">output.json</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">parse</code> stage uses the <code class="language-plaintext highlighter-rouge">v3</code> of VerveineJ, parses the code, and produces an <code class="language-plaintext highlighter-rouge">output.json</code> file including the produced model.</p>
+
+<p>Then, we add the common <code class="language-plaintext highlighter-rouge">tests</code> stage of Smalltalk ci.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">tests</span><span class="pi">:</span>
+  <span class="na">stage</span><span class="pi">:</span> <span class="s">tests</span>
+  <span class="na">image</span><span class="pi">:</span> <span class="s">hpiswa/smalltalkci</span>
+  <span class="na">needs</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">job</span><span class="pi">:</span> <span class="s">parse</span>
+      <span class="na">artifacts</span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">script</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">smalltalkci -s "Moose64-10"</span>
+</code></pre></div></div>
+
+<p>This stage creates a new <code class="language-plaintext highlighter-rouge">Moose64-10</code> image and performs the CI based on the <code class="language-plaintext highlighter-rouge">.smalltalk.ston</code> configuration file.</p>
+
+<h3 id="setup-github-ci">Setup GitHub CI</h3>
+
+<p>The last step for GitLab is the creation of the <code class="language-plaintext highlighter-rouge">.github/workflows/test.yml</code> file.</p>
+
+<p>In addition to a common smalltalk-ci workflow, we have to configure differently the checkout step, and add a step that parses the code.</p>
+
+<p>For the checkout step, GitBridge (and more specifically Iceberg) needs the history of commits.
+Thus, we need to configure the checkout actions to fetch the all history.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">actions/checkout@v3</span>
+  <span class="na">with</span><span class="pi">:</span>
+    <span class="na">fetch-depth</span><span class="pi">:</span> <span class="s1">'</span><span class="s">0'</span>
+</code></pre></div></div>
+
+<p>Then, we can add a step that runs VerveineJ using its docker version.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">uses</span><span class="pi">:</span> <span class="s">addnab/docker-run-action@v3</span>
+  <span class="na">with</span><span class="pi">:</span>
+    <span class="na">registry</span><span class="pi">:</span> <span class="s">hub.docker.io</span>
+    <span class="na">image</span><span class="pi">:</span>  <span class="s">badetitou/verveinej:v3.0.0</span>
+    <span class="na">options</span><span class="pi">:</span> <span class="s">-v $:/src</span>
+    <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+      <span class="s">cd tests</span>
+      <span class="s">/VerveineJ-3.0.0/verveinej.sh  -format json -o output.json -alllocals -anchor assoc .</span>
+      <span class="s">cd ..</span>
+</code></pre></div></div>
+
+<p>Note that before running VerveineJ, we change the working directory to the tests folder to better deal with source anchors of Moose.</p>
+
+<p>You can find a <a href="https://github.com/badetitou/FamixJavaModelUpdater/blob/main/.github/workflows/test.yml">full example in the FamixJavaModelUpdater repository</a></p>
+
+<h2 id="test">Test</h2>
+
+<p>The last step is to adapt your tests to use the model produced from the mock source.
+To do so, it is possible to remove the creation of the mock model by loading the model.</p>
+
+<p>Here’s an example:</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">externalFamixClass</span> <span class="o">:=</span> <span class="nc">FamixJavaClass</span> <span class="nb">new</span>
+  <span class="nf">name:</span> <span class="s">'ExternalFamixJavaClass'</span><span class="p">;</span>
+  <span class="nf">yourself</span><span class="p">.</span>
+<span class="nv">externalFamixMethod</span> <span class="o">:=</span> <span class="nc">FamixJavaMethod</span> <span class="nb">new</span>
+  <span class="nf">name:</span> <span class="s">'externalFamixJavaMethod'</span><span class="p">;</span>
+  <span class="nf">yourself</span><span class="p">.</span>
+<span class="nv">externalFamixClass</span> <span class="nf">addMethod:</span> <span class="nv">externalFamixMethod</span><span class="p">.</span>
+<span class="nv">myClass</span> <span class="o">:=</span> <span class="nc">FamixJavaClass</span> <span class="nb">new</span>
+  <span class="nf">name:</span> <span class="s">'MyClass'</span><span class="p">;</span>
+  <span class="nf">yourself</span><span class="p">.</span>
+<span class="nv">externalFamixMethod</span> <span class="nf">declaredType:</span> <span class="nv">myClass</span><span class="p">.</span>
+<span class="nv">famixModel</span> <span class="nf">addAll:</span> <span class="p">{</span> 
+  <span class="nv">externalFamixClass</span><span class="p">.</span>
+  <span class="nv">externalFamixMethod</span><span class="p">.</span>
+  <span class="nv">myClass</span> <span class="p">}.</span>
+</code></pre></div></div>
+
+<p>The above can be converted into the following:</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">FJMUBridge</span> <span class="nf">testsResources</span> <span class="nf">/</span> <span class="s">'output.json'</span> <span class="nf">readStreamDo:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">stream</span> <span class="p">|</span> 
+    <span class="nv">famixModel</span> <span class="nf">importFromJSONStream:</span> <span class="nv">stream</span> <span class="p">].</span>
+<span class="nv">famixModel</span> <span class="nf">rootFolder:</span> <span class="nc">FJMUBridge</span> <span class="nf">testsResources</span> <span class="nf">pathString</span><span class="p">.</span>
+
+<span class="nv">externalFamixClass</span> <span class="o">:=</span> <span class="nv">famixModel</span> <span class="nf">allModelClasses</span> <span class="nf">detect:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">c</span> <span class="p">|</span> <span class="nv">c</span> <span class="nf">name</span> <span class="nf">=</span> <span class="s">'ExternalFamixJavaClass'</span> <span class="p">].</span>
+<span class="nv">myClass</span> <span class="o">:=</span> <span class="nv">famixModel</span> <span class="nf">allModelClasses</span> <span class="nf">detect:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">c</span> <span class="p">|</span> <span class="nv">c</span> <span class="nf">name</span> <span class="nf">=</span> <span class="s">'MyClass'</span> <span class="p">].</span>
+<span class="nv">externalFamixMethod</span> <span class="o">:=</span> <span class="nv">famixModel</span> <span class="nf">allModelMethods</span> <span class="nf">detect:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">c</span> <span class="p">|</span> <span class="nv">c</span> <span class="nf">name</span> <span class="nf">=</span> <span class="s">'externalFamixJavaMethod'</span> <span class="p">].</span>
+</code></pre></div></div>
+
+<h2 id="congrats">Congrats</h2>
+
+<p>You can now test your code on a model generated as a real-world model!</p>
+
+<p>It is clear that this solution slows down tests performance, however. But it ensures that your mock model is well created, because it is created by the parser tool (importer).</p>
+
+<p>A good test practice is thus a mix of both solutions, classic tests in the analysis code, and full scenario tests based on real resources.</p>
+
+<p>Have fun testing your code now!</p>
+
+<blockquote>
+  <p>Thanks <a href="https://github.com/fuhrmanator">C. Fuhrman</a> for the typos fixes. :banana:</p>
+</blockquote>
+
+<div class="text-center">
+    <a class="m-button" href="https://modularmoose.org/2022/10/27/test-your-moose-code-using-ci.html" target="_blank">
+        Also published at *modularmoose.org*
+        <i class="fas fa-external-link-alt"></i>
+    </a>
+</div>]]></content><author><name>Benoît &quot;badetitou&quot; Verhaeghe</name></author><category term="misc" /><category term="misc" /><category term="moose" /><summary type="html"><![CDATA[You have to test your code!]]></summary></entry><entry><title type="html">Visualize your codebase with Moose</title><link href="http://badetitou.github.io/misc/2022/08/11/visualize-your-codebase-with-moose/" rel="alternate" type="text/html" title="Visualize your codebase with Moose" /><published>2022-08-11T06:00:00+00:00</published><updated>2022-08-11T06:00:00+00:00</updated><id>http://badetitou.github.io/misc/2022/08/11/visualize-your-codebase-with-moose</id><content type="html" xml:base="http://badetitou.github.io/misc/2022/08/11/visualize-your-codebase-with-moose/"><![CDATA[<div class="text-center">
+    <a class="m-button" href="https://www.research-bl.com/2022/08/09/visualize-your-codebase-with-moose/" target="_blank">
+        Also published at *www.research-bl.com*
+        <i class="fas fa-external-link-alt"></i>
+    </a>
+</div>]]></content><author><name>Benoît &quot;badetitou&quot; Verhaeghe</name></author><category term="misc" /><summary type="html"><![CDATA[Also published at *www.research-bl.com*]]></summary></entry><entry><title type="html">Casino, a tool to migrate applications</title><link href="http://badetitou.github.io/misc/2022/05/16/Casino-a-tool-to-migrate-application/" rel="alternate" type="text/html" title="Casino, a tool to migrate applications" /><published>2022-05-16T06:00:00+00:00</published><updated>2022-05-16T06:00:00+00:00</updated><id>http://badetitou.github.io/misc/2022/05/16/Casino-a-tool-to-migrate-application</id><content type="html" xml:base="http://badetitou.github.io/misc/2022/05/16/Casino-a-tool-to-migrate-application/"><![CDATA[<div class="text-center">
+    <a class="m-button" href="https://www.research-bl.com/2022/05/16/casino-a-tool-to-migrate-applications/" target="_blank">
+        Also published at *www.research-bl.com*
+        <i class="fas fa-external-link-alt"></i>
+    </a>
+</div>]]></content><author><name>Benoît &quot;badetitou&quot; Verhaeghe</name></author><category term="misc" /><summary type="html"><![CDATA[Also published at *www.research-bl.com*]]></summary></entry><entry><title type="html">VSCode-Pharo with GTK support</title><link href="http://badetitou.github.io/projects/vscode-pharo/2021/12/02/with-gtk/" rel="alternate" type="text/html" title="VSCode-Pharo with GTK support" /><published>2021-12-02T06:00:00+00:00</published><updated>2021-12-02T06:00:00+00:00</updated><id>http://badetitou.github.io/projects/vscode-pharo/2021/12/02/with-gtk</id><content type="html" xml:base="http://badetitou.github.io/projects/vscode-pharo/2021/12/02/with-gtk/"><![CDATA[<p>I spent this year writing my Ph.D., obtaining it, migrating several applications <a href="https://berger-levrault.com">@Berger-Levrault</a>, and… Playing with VSCode and Pharo :joy:</p>
+
+<p>When I started the project of connecting VSCode with Pharo, I wanted language support and basic debugging functions.
+Then, I talked to friends, and I decided to implement the support of <a href="https://code.visualstudio.com/api/extension-guides/notebook">Notebook</a>.</p>
+
+<p>Ok… We did more than expected… So, what is the next step?
+Why not use the UI of Pharo for specific actions I need when developing an app from VSCode?</p>
+
+<ul>
+  <li><a href="#for-users">For Users</a>
+    <ul>
+      <li><a href="#install-pharo-language-plugin">Install Pharo Language Plugin</a></li>
+      <li><a href="#configure-the-plugin">Configure the plugin</a></li>
+      <li><a href="#analyse-with-moosebook">Analyse with Moosebook</a></li>
+    </ul>
+  </li>
+  <li><a href="#for-developers">For developers</a></li>
+</ul>
+
+<h2 id="for-users">For Users</h2>
+
+<h3 id="install-pharo-language-plugin">Install Pharo Language Plugin</h3>
+
+<p>The installation of the Pharo Language plugin is straightforward.
+Once you have installed <a href="https://code.visualstudio.com/">VSCode</a>, go to the extension panel, search for Pharo, select <code class="language-plaintext highlighter-rouge">Pharo Language Support</code>, and install the extension.</p>
+
+<h3 id="configure-the-plugin">Configure the plugin</h3>
+
+<p>Three steps are required to set up the plugin.</p>
+
+<ol>
+  <li>Install a Pharo Image with the Pharo LanguageServer project installed. You can find a pre-built image in my <a href="https://github.com/badetitou/Pharo-LanguageServer/releases">GitHub repository</a>.</li>
+  <li>Download a corresponding VM.
+    <blockquote>
+      <p>Since we are going to use GTK backend. The VM installation requires more steps in Windows. Please, refer to the GTK backend project to download a VM <a href="https://github.com/pharo-spec/Spec-Gtk#on-windows">in window</a></p>
+    </blockquote>
+  </li>
+  <li>In VSCode settings, update the <code class="language-plaintext highlighter-rouge">path to image</code> and <code class="language-plaintext highlighter-rouge">path to vm</code> according to the downloaded files.</li>
+</ol>
+
+<h3 id="analyse-with-moosebook">Analyse with Moosebook</h3>
+
+<p>Once everything is configured, it is possible to use VSCode to perform any analysis within a notebook.
+To do so, first, create a new file in VSCode that ends with the <code class="language-plaintext highlighter-rouge">.moosebook</code> extension.</p>
+
+<blockquote>
+  <p>I use <code class="language-plaintext highlighter-rouge">moosebook</code> as an extension because I am first a <a href="https://modularmoose.org">Moose developer</a>, and I use this plugin to analyze software systems from VSCode.</p>
+</blockquote>
+
+<p>A notebook appears in which you can add markdown and Pharo cells.
+Write some Pharo code (for example, <code class="language-plaintext highlighter-rouge">1+1</code>) and execute it.
+Pharo executes the code in the backend server, and the result is displayed in the result part of the notebook cell.</p>
+
+<p><em>OK, it is nice, but I want a GTK backend…</em></p>
+
+<p>Using the GTK backend to visualize the result is super easy, you have to select the code you want to execute, then right-click, and you can perform <code class="language-plaintext highlighter-rouge">Show the result of selected lines</code>.
+The result will be shown in a GTK window containing the Pharo Inspector.
+From this window, you can explore the object, have a look at Roassal visualization, <em>etc.</em></p>
+
+<p>Several <a href="https://github.com/ObjectProfile/Roassal3#quick-examples">demo visualisations exist for Roassal</a>.
+You only have to remove the <code class="language-plaintext highlighter-rouge">open</code> keyword at the end of each example.</p>
+
+<h2 id="for-developers">For developers</h2>
+
+<p>I created the VSCode extension using the <a href="https://microsoft.github.io/language-server-protocol/">Language Server Protocol (LSP)</a>.
+It allows one to add support for its language across several tools such as VSCode, Vim, Eclipse, <em>etc.</em></p>
+
+<p>I wanted to add other nice features to improve the external tools with super cool Pharo features such as the Inspector.
+But… How to benefit from most of the greatest Pharo features without the UI already existing in Pharo.
+I mean… I do not want to redevelop an inspector in VSCode and other IDEs, but I still want to see if it is possible to offer it to my plugin.</p>
+
+<p>So, instead of redeveloping the UI, I decided to bring the Pharo UI as an extension of the developers’ IDE.
+Since embedding the Pharo Image UI inside the editor looks bad to me, I decided to use the <a href="https://github.com/pharo-spec/Spec-Gtk">Spec-Gtk backend project</a>.</p>
+
+<p>This project allows one to run Spec UI using the GTK binding.
+To use it, I needed to load the project when loading the Pharo Language Server (PLS) project.
+So I added GTK binding project in the PLS baseline.</p>
+
+<p>Then, I added to the default LSP a new command that takes as a parameter a string (the selected lines of code), executes it, and inspects it using the GTK backend.</p>
+
+<p>Thus, when a user performs <code class="language-plaintext highlighter-rouge">Show the result of selected lines</code>, the PLS plugin sends a specific command to the pharo language server backend, that in turn executes the code and opens the GTK backend.</p>]]></content><author><name>Benoît &quot;badetitou&quot; Verhaeghe</name></author><category term="projects" /><category term="VSCode-Pharo" /><category term="pharo" /><category term="vscode" /><category term="vscode-pharo" /><category term="gtk" /><summary type="html"><![CDATA[I spent this year writing my Ph.D., obtaining it, migrating several applications @Berger-Levrault, and… Playing with VSCode and Pharo :joy:]]></summary></entry><entry><title type="html">Migrating internationalization files</title><link href="http://badetitou.github.io/misc/2021/10/01/migrating-internationalization/" rel="alternate" type="text/html" title="Migrating internationalization files" /><published>2021-10-01T10:00:00+00:00</published><updated>2021-10-01T10:00:00+00:00</updated><id>http://badetitou.github.io/misc/2021/10/01/migrating-internationalization</id><content type="html" xml:base="http://badetitou.github.io/misc/2021/10/01/migrating-internationalization/"><![CDATA[<p>During my Ph.D. <a href="http://badetitou.github.io/projects/Casino">migration project</a>, I considered the migration of several GUI aspects:</p>
+
+<ul>
+  <li>visual</li>
+  <li>behavioral</li>
+  <li>business</li>
+</ul>
+
+<p>These elements are the main ones.
+When <em>perfectly</em> considered, you can migrate the front-end of any application.
+But, we are missing some other stuff :smile:
+For example, how do you migrate i18N files?</p>
+
+<p>In this post, I’ll present how to build a simple migration tool to migrate I18N files from <code class="language-plaintext highlighter-rouge">.properties</code> (used by Java) to <code class="language-plaintext highlighter-rouge">.json</code> format (used by Angular).</p>
+
+<h2 id="i18n-files">I18N files</h2>
+
+<p>First, let’s see our source and target.</p>
+
+<p>As a source, I have several <code class="language-plaintext highlighter-rouge">.properties</code> files, including I18N for a Java project.
+Each file has a set of <em>key/value</em> and comments.
+For example, the <code class="language-plaintext highlighter-rouge">EditerMessages_fr.properties</code> is as follow:</p>
+
+<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">##########
+#    Page : Edit
+##########
+</span>
+<span class="py">pageTitle</span><span class="p">=</span><span class="s">Editer</span>
+<span class="py">classerDemande</span><span class="p">=</span><span class="s">Demande</span>
+<span class="py">classerDiffusion</span><span class="p">=</span><span class="s">Diffusion</span>
+<span class="py">classerPar</span><span class="p">=</span><span class="s">Classer Par</span>
+</code></pre></div></div>
+
+<p>And it’s Arabic version <code class="language-plaintext highlighter-rouge">EditerMessages_ar.properties</code></p>
+
+<div class="language-properties highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#########
+#    Page : Editer
+#########
+</span>
+<span class="py">pageTitle</span><span class="p">=</span><span class="s">تحرير</span>
+<span class="py">classerDemande</span><span class="p">=</span><span class="s">طلب</span>
+<span class="py">classerDiffusion</span><span class="p">=</span><span class="s">بث</span>
+<span class="py">classerPar</span><span class="p">=</span><span class="s">تصنيف حسب</span>
+</code></pre></div></div>
+
+<p>As a target, I need <strong>only one JSON file</strong> per language.
+Thus, the file for the french translation looks like this:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"EditerMessages"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"classerDemande"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Demande"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"classerDiffusion"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Diffusion"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"classerPar"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Classer Par"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"pageTitle"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Editer"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>And the Arabic version:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"EditerMessages"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"classerDemande"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"طلب"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"classerDiffusion"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"بث"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"classerPar"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"تصنيف حسب"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"pageTitle"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"تحرير"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>To perform the transformation from the <code class="language-plaintext highlighter-rouge">.properties</code> file to <code class="language-plaintext highlighter-rouge">json</code>, we will use MDE.
+The approach is divided into three main steps:</p>
+
+<ol>
+  <li>Designing a meta-model representing internationalization</li>
+  <li>Creating an importer of properties files</li>
+  <li>Creating a JSON exporter</li>
+</ol>
+
+<h2 id="internationalization-meta-model">Internationalization Meta-model</h2>
+
+<p>I18N files are simple.
+They consist of a set of <em>key/values</em>.
+Each value is associated with a language.
+And each file can be associated with a namespace.</p>
+
+<p>For example, in the introduction example, the namespace of all entries is <em>“EditerMessages”</em>.</p>
+
+<p>I designed a meta-model to represent all those concepts:</p>
+
+<p><img src="/misc/img-2021-10-01-internationalization/I18N-metamodel.png" alt="meta-model" /></p>
+
+<p>Once the meta-model is designed, we must create an importer that takes <code class="language-plaintext highlighter-rouge">.properties</code> files as input and produces a model.</p>
+
+<h2 id="properties-importer">Properties Importer</h2>
+
+<p>To produce a model, I first look for a <code class="language-plaintext highlighter-rouge">.properties</code> parser without much success.
+Thus, I decided to create my own parser.
+Given a correctly formatted file, the parser provides me the I18N entries.
+Then, by iterating on this collection, I build an I18N model.</p>
+
+<h3 id="i18n-parser">I18N parser</h3>
+
+<p>To implement the parser, I used the <a href="https://github.com/kursjan/petitparser2">PetitParser2 project</a>.
+This project aims to ease the creation of new parsers.</p>
+
+<p>First, I downloaded the last version of <a href="https://modularmoose.org/moose-wiki/Beginners/InstallMoose">Moose</a>, and I installed PetitParser using the command provided in the repository Readme:</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Metacello</span> <span class="nb">new</span>
+    <span class="nf">baseline:</span> <span class="s">'PetitParser2'</span><span class="p">;</span>
+    <span class="nf">repository:</span> <span class="s">'github://kursjan/petitparser2'</span><span class="p">;</span>
+    <span class="nf">load</span><span class="p">.</span>
+</code></pre></div></div>
+
+<p>In my Moose Image, I created a new parser.
+To do so, I extended the <code class="language-plaintext highlighter-rouge">PP2CompositeNode</code> class.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">PP2CompositeNode</span> <span class="nf">&lt;&lt;</span> <span class="ss">#CS18NPropertiesParser</span>
+    <span class="nf">slots:</span> <span class="p">{</span> <span class="p">};</span>
+    <span class="nf">package:</span> <span class="s">'Casino-18N-Model-PropertyImporter'</span>
+</code></pre></div></div>
+
+<p>Then, I defined the parsing rules.
+Using PetitParser2, each rule corresponds to a method.</p>
+
+<p>First, <code class="language-plaintext highlighter-rouge">start</code> is the entry point.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">start</span>
+    <span class="o">^</span> <span class="nv">pairs</span> <span class="nf">end</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">pairs</code> parses the entries of the <code class="language-plaintext highlighter-rouge">.properties</code> files.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">pairs</span>
+
+    <span class="o">^</span> <span class="nv">comment</span> <span class="nf">optional</span> <span class="nf">starLazy,</span> <span class="nv">pair</span> <span class="nf">,</span> <span class="p">((</span><span class="nv">newline</span> <span class="nf">/</span> <span class="nv">comment</span><span class="p">)</span> <span class="nf">star</span> <span class="nf">,</span> <span class="nv">pair</span> <span class="nf">==&gt;</span> <span class="p">[</span> <span class="o">:</span><span class="nv">token</span> <span class="p">|</span> <span class="nv">token</span> <span class="nf">second</span> <span class="p">])</span> <span class="nf">star</span> <span class="nf">,</span> <span class="p">(</span><span class="nv">newline</span><span class="nf">/</span><span class="nv">comment</span><span class="p">)</span> <span class="nf">star</span> <span class="nf">==&gt;</span> <span class="p">[</span> <span class="o">:</span><span class="nv">token</span> <span class="p">|</span> 
+      <span class="p">((</span><span class="nc">OrderedCollection</span> <span class="nf">with:</span> <span class="nv">token</span> <span class="nf">second</span><span class="p">)</span>
+           <span class="nf">addAll:</span> <span class="nv">token</span> <span class="nf">third</span><span class="p">;</span>
+           <span class="nf">yourself</span><span class="p">)</span> <span class="nf">asArray</span> <span class="p">]</span>
+</code></pre></div></div>
+
+<p>The first part of this method (before <code class="language-plaintext highlighter-rouge">==&gt;</code>) corresponds to the rule parsed.
+The second part (after <code class="language-plaintext highlighter-rouge">==&gt;</code>), to the production.</p>
+
+<p>The first part tries to parse one or several <code class="language-plaintext highlighter-rouge">comment</code>.
+Then, it parses one <code class="language-plaintext highlighter-rouge">pair</code> followed by a list of <code class="language-plaintext highlighter-rouge">comment</code>, <code class="language-plaintext highlighter-rouge">newline</code>, and <code class="language-plaintext highlighter-rouge">pair</code>.</p>
+
+<p><img src="https://mermaid.ink/svg/eyJjb2RlIjoiZmxvd2NoYXJ0IExSXG4gICAgQ29tbWVudCAtLT4gUFtcIlBhaXJcIl1cbiAgICBQIC0tPiBDW1wiQ29tbWVudC9OZXcgTGluZVwiXVxuICAgIHN1YmdyYXBoIHN0YXJcbiAgICBDIC0tPiBQYWlyXG4gICAgZW5kXG4gICAgUGFpciAtLT4gRU5EXG4gICIsIm1lcm1haWQiOnsidGhlbWUiOiJkZWZhdWx0In0sInVwZGF0ZUVkaXRvciI6ZmFsc2UsImF1dG9TeW5jIjp0cnVlLCJ1cGRhdGVEaWFncmFtIjpmYWxzZX0" alt="" /></p>
+
+<blockquote>
+  <p>This parser is clearly not perfect and would require some improvement.
+Nevertheless, it does work for our context.</p>
+</blockquote>
+
+<p>The second part produces a collection (<em>i.e.</em> a list) of the <code class="language-plaintext highlighter-rouge">pair</code>.</p>
+
+<h3 id="building-the-i18n-model">Building the I18N model</h3>
+
+<p>Now that we can parse one file, we can build a I18N model.
+To do so, we will first parse every <code class="language-plaintext highlighter-rouge">.properties</code> file.
+For each file, we extract the <code class="language-plaintext highlighter-rouge">language</code> and the <code class="language-plaintext highlighter-rouge">namespace</code> based on the file name.
+Thus, <code class="language-plaintext highlighter-rouge">EditerMessages_fr.properties</code> is the file for the <code class="language-plaintext highlighter-rouge">fr</code> language and the <code class="language-plaintext highlighter-rouge">EditerMessages</code> namespace.
+Then, for each file entry, we instantiate an entry in our model inside the namespace and with the correct language attached.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">importString:</span> <span class="nv">aString</span>
+    <span class="p">(</span><span class="nv">parser</span> <span class="nf">parse:</span> <span class="nv">aString</span><span class="p">)</span> <span class="nf">do:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">keyValue</span> <span class="p">|</span> 
+        <span class="p">(</span><span class="bp">self</span> <span class="nf">model</span> <span class="nf">allWithType:</span> <span class="nc">CS18NEntry</span><span class="p">)</span> <span class="nf">asOrderedCollection</span>
+            <span class="nf">detect:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">entry</span> <span class="p">|</span> 
+                <span class="c">"search for existing key in the file"</span>
+                <span class="nv">entry</span> <span class="nf">key</span> <span class="nf">name</span> <span class="nf">=</span> <span class="nv">keyValue</span> <span class="nf">key</span> <span class="p">]</span>
+            <span class="nf">ifOne:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">entry</span> <span class="p">|</span>
+                <span class="c">"If an entry already exists (in another language for instance)"</span>
+                <span class="nv">entry</span> <span class="nf">addValue:</span> <span class="p">((</span><span class="bp">self</span> <span class="nf">createInModel:</span> <span class="nc">CS18NValue</span><span class="p">)</span>
+                    <span class="nf">name:</span> <span class="nv">keyValue</span> <span class="nf">value</span><span class="p">;</span>
+                    <span class="nf">language:</span> <span class="nv">currentLanguage</span><span class="p">;</span>
+                    <span class="nf">yourself</span><span class="p">)</span> <span class="p">]</span>
+            <span class="nf">ifNone:</span> <span class="p">[</span>
+                <span class="c">"If no entry exist"</span>
+                <span class="p">(</span><span class="bp">self</span> <span class="nf">createInModel:</span> <span class="nc">CS18NEntry</span><span class="p">)</span>
+                    <span class="nf">namespace:</span> <span class="nv">currentNamespace</span><span class="p">;</span>
+                    <span class="nf">key:</span> <span class="p">((</span><span class="bp">self</span> <span class="nf">createInModel:</span> <span class="nc">CS18NKey</span><span class="p">)</span>
+                        <span class="nf">name:</span> <span class="nv">keyValue</span> <span class="nf">key</span><span class="p">;</span>
+                        <span class="nf">yourself</span><span class="p">);</span>
+                    <span class="nf">addValue:</span> <span class="p">((</span><span class="bp">self</span> <span class="nf">createInModel:</span> <span class="nc">CS18NValue</span><span class="p">)</span>
+                        <span class="nf">name:</span> <span class="nv">keyValue</span> <span class="nf">value</span><span class="p">;</span>
+                        <span class="nf">language:</span> <span class="nv">currentLanguage</span><span class="p">;</span>
+                        <span class="nf">yourself</span><span class="p">);</span>
+                    <span class="nf">yourself</span> <span class="p">]</span> <span class="p">]</span>
+</code></pre></div></div>
+
+<p>After performing the import, we get a model with, for each namespace, several entries.
+Each entry has a key and several values.
+Each value is attached to the language.</p>
+
+<h2 id="json-exporter">JSON exporter</h2>
+
+<p>To perform the JSON export, I used the <a href="https://github.com/svenvc/NeoJSON">NeoJSON project</a>.
+NeoJSON allows one to create a custom encoder.</p>
+
+<p>For the export, we first select a language.
+Then, we build a dictionary with all the namespaces:</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">rootDic</span> <span class="o">:=</span> <span class="nc">Dictionary</span> <span class="nb">new</span><span class="p">.</span>
+    <span class="p">(</span><span class="nv">model</span> <span class="nf">allWithType:</span> <span class="nc">CS18NNamespace</span><span class="p">)</span>
+        <span class="nf">select:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">namespace</span> <span class="p">|</span> <span class="nv">namespace</span> <span class="nf">namespace</span> <span class="nf">isNil</span> <span class="p">]</span>
+        <span class="nf">thenDo:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">namespace</span> <span class="p">|</span> <span class="nv">rootDic</span> <span class="nf">at:</span> <span class="nv">namespace</span> <span class="nf">name</span> <span class="nf">put:</span> <span class="nv">namespace</span> <span class="p">].</span>
+</code></pre></div></div>
+
+<p>To export a namespace (<em>i.e.</em>, a <code class="language-plaintext highlighter-rouge">CS18NNamespace</code>), I define a custom encoder:</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">writter</span> <span class="nf">for:</span> <span class="nc">CS18NNamespace</span> <span class="nf">customDo:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">mapper</span> <span class="p">|</span> 
+    <span class="nv">mapper</span> <span class="nf">encoder:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">namespace</span> <span class="p">|</span> <span class="p">(</span><span class="bp">self</span> <span class="nf">constructNamespace:</span> <span class="nv">namespace</span><span class="p">)</span> <span class="nf">asDictionary</span> 
+        <span class="p">]</span> 
+    <span class="p">].</span>
+</code></pre></div></div>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">constructNamespace:</span> <span class="nv">aNamespace</span>
+    <span class="p">|</span><span class="nv"> dic </span><span class="p">|</span>
+    <span class="nv">dic</span> <span class="o">:=</span> <span class="nc">Dictionary</span> <span class="nb">new</span><span class="p">.</span>
+    <span class="nv">aNamespace</span> <span class="nf">containables</span> <span class="nf">do:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">containable</span> <span class="p">|</span> 
+        <span class="p">(</span><span class="nv">containable</span> <span class="nf">isKindOf:</span> <span class="nc">CS18NNamespace</span><span class="p">)</span>
+            <span class="nb">ifTrue:</span> <span class="p">[</span> <span class="nv">dic</span> <span class="nf">at:</span> <span class="nv">containable</span> <span class="nf">name</span> <span class="nf">put:</span> <span class="p">(</span><span class="bp">self</span> <span class="nf">constructNamespace:</span> <span class="nv">containable</span><span class="p">)</span> <span class="p">]</span>
+            <span class="nb">ifFalse:</span> <span class="p">[</span> <span class="c">"should be an CS18NEntry"</span> 
+                <span class="nv">dic</span> <span class="nf">at:</span> <span class="nv">containable</span> <span class="nf">key</span> <span class="nf">name</span> <span class="nf">put:</span> <span class="p">(</span><span class="nv">containable</span> <span class="nf">values</span> <span class="nf">detect:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">value</span> <span class="p">|</span> <span class="nv">value</span> <span class="nf">language</span> <span class="nf">=</span> <span class="nv">language</span> <span class="p">]</span> <span class="nf">ifOne:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">value</span> <span class="p">|</span> <span class="nv">value</span> <span class="nf">name</span> <span class="p">]</span> <span class="nf">ifNone:</span> <span class="p">[</span> <span class="s">''</span> <span class="p">])</span> <span class="p">]</span> <span class="p">].</span>
+    <span class="o">^</span> <span class="nv">dic</span>
+</code></pre></div></div>
+
+<p>The custom encoder consists on converting a <code class="language-plaintext highlighter-rouge">Namespace</code> into a dictionary of entries with the entries keys and their values in the selected language.</p>
+
+<h2 id="perform-the-migration">Perform the migration</h2>
+
+<p>Once my importer and exporter are designed, I can perform the migration.
+To do so, I use a little script.
+It creates a model of I18N, imports several <code class="language-plaintext highlighter-rouge">.properties</code> file entries in the model, and exports the Arabic entries in a JSON file.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">"Create a model"</span>
+<span class="nv">i18nModel</span> <span class="o">:=</span> <span class="nc">CS18NModel</span> <span class="nb">new</span><span class="p">.</span>
+
+<span class="c">"Create an importer"</span>
+<span class="nv">importer</span> <span class="o">:=</span> <span class="nc">CS18NPropertiesImporter</span> <span class="nb">new</span><span class="p">.</span>
+<span class="nv">importer</span> <span class="nf">model:</span> <span class="nv">i18nModel</span><span class="p">.</span>
+
+<span class="c">"Import all entries from the &lt;myProject&gt; folder"</span> 
+<span class="p">(</span><span class="s">'D:\dev\myProject\'</span> <span class="nf">asFileReference</span> <span class="nf">allChildrenMatching:</span> <span class="s">'*.properties'</span><span class="p">)</span> <span class="nf">do:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">fileRef</span> <span class="p">|</span> 
+    <span class="bp">self</span> <span class="nf">record:</span> <span class="nv">fileRef</span> <span class="nf">absolutePath</span> <span class="nf">basename</span><span class="p">.</span>
+    <span class="nv">importer</span> <span class="nf">importFile:</span> <span class="nv">fileRef</span><span class="p">.</span>
+<span class="p">].</span>
+
+<span class="c">"export the arabian JSON I18N file"</span>
+<span class="s">'D:/myFile-ar.json'</span> <span class="nf">asFileReference</span> <span class="nf">writeStreamDo:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">stream</span> <span class="p">|</span>
+    <span class="nc">CS18NPropertiesExporter</span> <span class="nb">new</span>
+        <span class="nf">model:</span> <span class="nv">importer</span> <span class="nf">model</span><span class="p">;</span>
+        <span class="nf">stream:</span> <span class="nv">stream</span><span class="p">;</span>
+        <span class="nf">language:</span> <span class="p">((</span><span class="nv">importer</span> <span class="nf">model</span> <span class="nf">allWithType:</span> <span class="nc">CS18NLanguage</span><span class="p">)</span> <span class="nf">detect:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">lang</span> <span class="p">|</span> <span class="nv">lang</span> <span class="nf">shortName</span> <span class="nf">=</span> <span class="s">'ar'</span> <span class="p">]);</span>
+        <span class="nf">export</span>
+<span class="p">]</span>
+</code></pre></div></div>
+
+<h2 id="ressource">Ressource</h2>
+
+<p>The meta-model, importer, and exporter are freely available in <a href="https://github.com/badetitou/Casino-I18N">GitHub</a>.</p>
+
+<div class="masonry masonry-2">
+
+    <div class="text-center">
+        <a class="m-button" href="https://www.research-bl.com/2021/10/05/migrating-internationalization-files/" target="_blank">
+            Also published at *research-bl.com*
+            <i class="fas fa-external-link-alt"></i>
+        </a>
+    </div>
+
+    <div class="text-center">
+        <a class="m-button" href="https://modularmoose.org/2021/10/01/migrating-internationalization.html" target="_blank">
+            Also published at *modularmoose.org*
+            <i class="fas fa-external-link-alt"></i>
+        </a>
+    </div>
+</div>]]></content><author><name>Benoît &quot;badetitou&quot; Verhaeghe</name></author><category term="misc" /><category term="pharo" /><category term="model" /><summary type="html"><![CDATA[During my Ph.D. migration project, I considered the migration of several GUI aspects:]]></summary></entry><entry><title type="html">Automatic meta-model documentation generation</title><link href="http://badetitou.github.io/misc/2021/07/19/automatic-metamodel-documentation-generation/" rel="alternate" type="text/html" title="Automatic meta-model documentation generation" /><published>2021-07-19T06:00:00+00:00</published><updated>2021-07-19T06:00:00+00:00</updated><id>http://badetitou.github.io/misc/2021/07/19/automatic-metamodel-documentation-generation</id><content type="html" xml:base="http://badetitou.github.io/misc/2021/07/19/automatic-metamodel-documentation-generation/"><![CDATA[<div class="text-center">
+    <a class="m-button" href="https://modularmoose.org/2021/07/19/automatic-metamodel-documentation-generation.html" target="_blank">
+        Also published at *modularmoose.org*
+        <i class="fas fa-external-link-alt"></i>
+    </a>
+</div>]]></content><author><name>Benoît &quot;badetitou&quot; Verhaeghe</name></author><category term="misc" /><summary type="html"><![CDATA[Also published at *modularmoose.org*]]></summary></entry><entry><title type="html">Connecting/Extending meta-models</title><link href="http://badetitou.github.io/misc/2021/05/15/connecting-meta-models/" rel="alternate" type="text/html" title="Connecting/Extending meta-models" /><published>2021-05-15T16:00:00+00:00</published><updated>2021-05-15T16:00:00+00:00</updated><id>http://badetitou.github.io/misc/2021/05/15/connecting-meta-models</id><content type="html" xml:base="http://badetitou.github.io/misc/2021/05/15/connecting-meta-models/"><![CDATA[<div class="text-center">
+    <a class="m-button" href="https://modularmoose.org/2021/05/15/connecting-meta-models.html" target="_blank">
+        Also published at *modularmoose.org*
+        <i class="fas fa-external-link-alt"></i>
+    </a>
+</div>]]></content><author><name>Benoît &quot;badetitou&quot; Verhaeghe</name></author><category term="misc" /><summary type="html"><![CDATA[Also published at *modularmoose.org*]]></summary></entry><entry><title type="html">Using FFI to control VLC from Pharo</title><link href="http://badetitou.github.io/misc/2021/05/01/VLC-FFI/" rel="alternate" type="text/html" title="Using FFI to control VLC from Pharo" /><published>2021-05-01T10:00:00+00:00</published><updated>2021-05-01T10:00:00+00:00</updated><id>http://badetitou.github.io/misc/2021/05/01/VLC-FFI</id><content type="html" xml:base="http://badetitou.github.io/misc/2021/05/01/VLC-FFI/"><![CDATA[<p>VLC is the best-known software for playing audio and video files.
+More than files, it also allows to play streams, and therefore to play, for example, the stream broadcasted by security cameras.
+We present here how to use Pharo to interface with the library developed for VLC and thus control VLC from Pharo.</p>
+
+<h2 id="lets-dream">Let’s dream</h2>
+
+<p>When I’m working, I often want to listen to music.
+But my music is stored in different places: locally on my laptop, on my personal server, on YouTube, and on premium online music accounts.
+While I can switch between systems easily, I was dreaming of a music manager where everything would be combined in one place.
+Let’s not lie, it was also the perfect argument to do a little of Pharo.</p>
+
+<h2 id="playing-song-with-pharo">Playing song with Pharo</h2>
+
+<p>Pharo already allows one to play music directly via a plugin integrated into the virtual machine (VM).
+Unfortunately, this plugin is old and does not guarantee to play the hundreds of music formats that exist today.
+On the other hand, VLC can play all these audio and video formats.
+In order to be able to play music controlled by Pharo, you just need to manipulate VLC.
+And this is what uFFI will allow us to do!
+Indeed, the VLC project is supported on the three most used platforms (Linux, Windows, and OSX) and also provides on all these platforms the shared libraries <em>libvlc</em> and <em>libvlccore</em>.</p>
+
+<blockquote>
+  <p>A shared library is intended to be used by other programs. They define an API allowing a program to interact with another. And this is precisely what uFFI allows to do: call from Pharo the methods defined in a shared library.</p>
+</blockquote>
+
+<h2 id="set-up-ffi">Set-up FFI</h2>
+
+<p>Setting up FFI has never been so easy.
+There are only a few pre-requisites:</p>
+
+<ul>
+  <li>Install the project you want to use (for me it’s VLC),</li>
+  <li>Make sure that the shared libraries are in the PATH of the system,</li>
+  <li>And that’s it for the first step!</li>
+</ul>
+
+<p>Once the project is installed, we move on to development.
+First of all, we create a class that serves as a link between Pharo and VLC.
+Pharo comes with a complete framework to set up FFI, so we just have to create a subclass of <code class="language-plaintext highlighter-rouge">FFILibrary</code> (<code class="language-plaintext highlighter-rouge">VLCLibrary</code>) and to indicate the name of the external libraries according to the system we use (<em>.so</em> on Linux, <em>.dll</em> on Windows and <em>.dylib</em> on OSX).
+We have finished setting up FFI!</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">VLCLibrary</span><span class="nf">&gt;&gt;</span><span class="ss">#unix64LibraryName</span>
+    <span class="ss">#(</span><span class="s">'/usr/lib/i386-linux-gnu'</span> <span class="s">'/usr/lib32'</span> <span class="s">'/usr/lib'</span><span class="ss">)</span> <span class="nf">,</span> <span class="p">((</span><span class="nc">OSEnvironment</span> <span class="nf">current</span> <span class="nf">at:</span> <span class="s">'LD_LIBRARY_PATH'</span> <span class="nf">ifAbsent:</span> <span class="p">[</span> <span class="s">''</span> <span class="p">])</span> <span class="nf">substrings:</span> <span class="s">':'</span><span class="p">)</span>
+    <span class="nf">do:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">path</span> <span class="p">|</span>
+        <span class="p">|</span><span class="nv"> libraryPath </span><span class="p">|</span>
+        <span class="nv">libraryPath</span> <span class="o">:=</span> <span class="nv">path</span> <span class="nf">asFileReference</span> <span class="nf">/</span> <span class="s">'libvlc.so'</span><span class="p">.</span>
+        <span class="nv">libraryPath</span> <span class="nf">exists</span> <span class="nb">ifTrue:</span> <span class="p">[</span> <span class="o">^</span> <span class="nv">libraryPath</span> <span class="nf">fullName</span> <span class="p">]</span> <span class="p">].</span>
+    <span class="bp">self</span> <span class="nf">error:</span> <span class="s">'Cannot locate vlc library. Please check if it installed on your system'</span>
+</code></pre></div></div>
+
+<h2 id="functions-mapping">Functions mapping</h2>
+
+<p>Once the interfacing mechanism between Pharo and VLC is in place, we will now be able to map the VLC functions.
+To be able to use a function defined in the library, we declare in our <code class="language-plaintext highlighter-rouge">VLCLibrary</code> class the methods we are going to use.
+To know the functions, we have two options, use tools that will extract the available functions from the libraries or… use the documentation!
+Fortunately for us, the <a href="https://videolan.videolan.me/vlc/group__libvlc.html">VLC libraries are well documented</a>, which greatly simplifies the work.
+By accessing the documentation of the libraries we have access to the signature of the available functions.
+We just have to copy and paste the signature of the functions in Pharo to be able to use them. Primitive types are understood by Pharo while we will cleverly replace structures by <code class="language-plaintext highlighter-rouge">void *</code> in order to manipulate them as opaque objects.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">VLCLibrary</span><span class="nf">&gt;&gt;</span><span class="ss">#createVLCInstance</span>
+    <span class="o">^</span> <span class="bp">self</span> <span class="nf">ffiCall:</span> <span class="s">'void * libvlc_new()'</span>
+</code></pre></div></div>
+
+<h2 id="a-first-test">A first test</h2>
+
+<p>Now we present the first methods we had to implement to use VLC.
+First of all, <code class="language-plaintext highlighter-rouge">libvlc_new</code> allows one to create an instance of VLC.
+We will then use this instance to script VLC.</p>
+
+<p><img src="/misc/img/2021-05-01-VLC-FFI/createVLCInstance.png" alt="Call to method libvlc_new()" class="img-fill" /></p>
+
+<p>Next, we developed the code necessary to play a music hosted on our computer.
+For this, we need three methods: creation of a media, creation of the corresponding media player and the play method of the media player.
+The three methods are described in the documentation as: <code class="language-plaintext highlighter-rouge">libvlc_media_new_path</code>, <code class="language-plaintext highlighter-rouge">libvlc_media_player_new_from_media</code> and <code class="language-plaintext highlighter-rouge">libvlc_media_player_play</code>.
+For their implementation, we just have to copy their signatures and create methods in the <code class="language-plaintext highlighter-rouge">VLCLibrary</code> class as we did for the new.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">VLCLibrary</span><span class="nf">&gt;&gt;</span><span class="ss">#mediaNew:</span> <span class="nf">aVLCInstance</span> <span class="nf">path:</span> <span class="nv">aStringPath</span>
+    <span class="c">"Create a media for a certain file path."</span>
+    <span class="o">^</span> <span class="bp">self</span> <span class="nf">ffiCall:</span> <span class="nv">void</span> <span class="nf">*</span> <span class="nv">libvlc_media_new_path</span><span class="p">(</span><span class="nv">void</span> <span class="nf">*</span> <span class="nv">aVLCInstance</span><span class="nf">,</span> <span class="nc">String</span> <span class="nf">aStringPath</span><span class="p">)</span><span class="err">'</span>
+</code></pre></div></div>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">VLCLibrary</span><span class="nf">&gt;&gt;</span><span class="ss">#mediaPlayerPlay:</span> <span class="nf">aMediaPlayer</span>
+    <span class="c">"Play"</span>
+    <span class="o">^</span> <span class="bp">self</span> <span class="nf">ffiCall:</span> <span class="s">'int libvlc_media_player_play(void * aMediaPlayer)'</span>
+</code></pre></div></div>
+
+<p>Finally, some lines in the playground allow us to script VLC to play music.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">vlc</span> <span class="o">:=</span> <span class="nc">VLCLibrary</span> <span class="nf">uniqueInstance</span> <span class="nf">createVLCInstance</span><span class="p">.</span>
+<span class="c">"do not use accentuated characters for the path"</span>
+<span class="nv">media</span> <span class="o">:=</span> <span class="nc">VLCLibrary</span> <span class="nf">uniqueInstance</span> <span class="nf">mediaNew:</span> <span class="nv">vlc</span> <span class="nf">path:</span> <span class="s">'/my/file/path.mp3'</span><span class="p">.</span>
+<span class="nv">mediaPlayer</span> <span class="o">:=</span> <span class="nc">VLCLibrary</span> <span class="nf">uniqueInstance</span> <span class="nf">mediaPlayerNewFromMedia:</span> <span class="nv">media</span><span class="p">.</span>
+<span class="nc">VLCLibrary</span> <span class="nf">uniqueInstance</span> <span class="nf">mediaPlayerPlay:</span> <span class="nv">mediaPlayer</span><span class="p">.</span>
+</code></pre></div></div>
+
+<h2 id="structures-mapping---lets-dev-in-pharo">Structures mapping - Let’s dev in Pharo</h2>
+
+<p>By writing all the public methods of the VLC libraries in Pharo, it is possible to script VLC completely.
+However, we get a single abstraction with lots of methods when it would be much better to create objects that represent each aspect of VLC.</p>
+
+<p>It is thus possible to improve our mapping to a VLC library by mapping C structures to Pharo objects.
+Once again, we will be able to do this thanks to VLC.
+Structures can be divided into four categories: enums, callbacks, C structures, and opaque structures. FFI offers a solution for mapping each of them.</p>
+
+<p>For enumerations, we need to extend the Pharo class <code class="language-plaintext highlighter-rouge">FFIExternalEnumeration</code>, then we implement the <code class="language-plaintext highlighter-rouge">enumDecl</code> method by writing an array that will contain the name of the enumeration element followed by its value, <em>etc.</em>
+We execute the method <code class="language-plaintext highlighter-rouge">rebuildEnumAccessors</code> on the class, this step will generate accessors to all the values of the enumeration.
+Finally, we initialize the class.
+It is now possible to use the enumeration by using: enumeration name + name of one of the elements of the enumeration.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">VLCMediaType</span> <span class="nf">class&gt;&gt;</span><span class="ss">#enumDecl</span>
+<span class="c">"self rebuildEnumAccessors"</span>
+    
+    <span class="o">^</span> <span class="ss">#(libvlc_media_type_unknown</span> <span class="m">1</span>
+<span class="nf">libvlc_media_type_file</span> <span class="m">2</span>
+<span class="nf">libvlc_media_type_directory</span> <span class="m">3</span>
+<span class="nf">libvlc_media_type_disc</span> <span class="m">4</span>
+<span class="nf">libvlc_media_type_stream</span> <span class="m">5</span>
+<span class="nf">libvlc_media_type_playlist</span> <span class="m">6</span><span class="ss">)</span>
+</code></pre></div></div>
+
+<p>For callbacks, uFFI also comes with an out-of-the-box implementation.
+This time we need to extend the <code class="language-plaintext highlighter-rouge">FFICallback</code> class.
+We will then define the function signature to which our callback corresponds in C and the Pharo block that will be executed when the callback is called.
+For the function signature, we define two methods: the first one <code class="language-plaintext highlighter-rouge">fnSpec</code> which returns the function signature as we did when mapping the API, and the second one <code class="language-plaintext highlighter-rouge">on:</code> which takes a block as a parameter that will be executed when the callback is called.</p>
+
+<p><img src="/misc/img/2021-05-01-VLC-FFI/callbackDefinition.png" alt="Callback definition" class="img-fill" /></p>
+
+<p>It is for opaque structures that it is easiest to define an FFI mapping.
+You just have to extend the Pharo class <code class="language-plaintext highlighter-rouge">FFIOpaqueObject</code>.
+This step allows one to use this structure by considering only its methods.
+This is a strategy used in C to hide the internal functioning of the structure.</p>
+
+<p>Finally, there remains the case of C structures.
+As for the previous cases, we extend this time the <code class="language-plaintext highlighter-rouge">FFIExternalStructure</code> class.
+Then, we define on the class side the <code class="language-plaintext highlighter-rouge">fieldsDesc</code> method which returns an array containing all the variables of the structure and their types.
+By executing the <code class="language-plaintext highlighter-rouge">rebuildFieldAccessors</code> method on the class, we also create the accessors of these attributes automatically.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">VLCTrackDescription</span><span class="nf">&gt;&gt;</span><span class="ss">#fieldsDesc</span>
+    <span class="c">"self rebuildFieldAccessors"</span>
+    <span class="o">^</span> <span class="ss">#(int</span> <span class="ss">i_id</span><span class="err">;</span>
+    <span class="ss">String</span> <span class="ss">psz_name</span><span class="err">;</span>
+    <span class="ss">VLCTrackDescription</span> <span class="ss">*</span> <span class="ss">p_next</span><span class="err">;</span><span class="ss">)</span>
+</code></pre></div></div>
+
+<h2 id="c-structure-mapping">C structure mapping</h2>
+
+<p>That’s it!
+We can now completely use the VLC library as if it was a Pharo library.
+We will see in the next part what it allows us to do quickly.</p>
+
+<h2 id="what-about-the-graphical-aspect">What about the graphical aspect</h2>
+
+<p>We will now look at how to quickly create an interface in Pharo that will allow us to control VLC.
+To do this, we will use the new version of Spec with Pharo 9.
+The final goal is to create a usable audio player interface for the user.
+More precisely, we will add an extension to the Pharo inspector in order to be able to watch and control the state of our VLC players.
+To do this, we will do two things: add an extension and create the user interface of the extension.
+To add an extension we just need to create a method with the pragma <code class="language-plaintext highlighter-rouge">inspectorPresentationOrder:title:</code> which returns the interface we want to create.
+To define the user interface we use <a href="https://github.com/pharo-spec/Spec">Spec2</a> (the reference graphical framework since Pharo 8+).
+We defined for the interface a progress bar that shows us the progress of a piece of music and two buttons <em>start</em> and <em>pause</em> to control the playback.
+The complete example is available on the <a href="https://github.com/badetitou/pharo-libvlc">GitHub repository of Pharo-LibVLC</a> by loading the “inspector” group of the baseline.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Metacello</span> <span class="nb">new</span>
+  <span class="nf">baseline:</span> <span class="s">'VLC'</span><span class="p">;</span>
+  <span class="nf">repository:</span> <span class="s">'github://badetitou/Pharo-LibVLC'</span><span class="p">;</span>
+  <span class="nf">load:</span> <span class="s">'inspector'</span>
+</code></pre></div></div>
+
+<p>Then it is possible to launch a music and obtain the following interface by inspecting:</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">vlc</span> <span class="o">:=</span> <span class="nc">VLCLibrary</span> <span class="nf">uniqueInstance</span> <span class="nf">createVLCInstance</span><span class="p">.</span>
+<span class="nv">media</span> <span class="o">:=</span> <span class="nv">vlc</span> <span class="nf">createMediaFromPath:</span> <span class="s">'/path/to/file.mp3'</span><span class="p">.</span>
+<span class="nv">mediaPlayer</span> <span class="o">:=</span> <span class="nv">vlc</span> <span class="nf">createMediaPlayerFromMedia:</span> <span class="nv">media</span><span class="p">.</span>
+<span class="nv">mediaPlayer</span> <span class="nf">play</span>
+</code></pre></div></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>We have seen that it is possible to control VLC from Pharo.
+This way we can play songs from our computer, but also from other services (like YouTube) using VLC’s ability to play a remotely read audio stream.
+We have presented a first interface to control the audio player graphically.
+So, why not continue in this direction by creating a complete media center in Pharo, either as a desktop application or as a web application with the Seaside web framework.</p>]]></content><author><name>Benoît &quot;badetitou&quot; Verhaeghe</name></author><category term="misc" /><category term="pharo" /><category term="ffi" /><category term="vlc" /><summary type="html"><![CDATA[VLC is the best-known software for playing audio and video files. More than files, it also allows to play streams, and therefore to play, for example, the stream broadcasted by security cameras. We present here how to use Pharo to interface with the library developed for VLC and thus control VLC from Pharo.]]></summary></entry><entry><title type="html">Analysing Java with VSCode</title><link href="http://badetitou.github.io/projects/vscode-pharo/2021/03/31/analysing-java-with-vscode/" rel="alternate" type="text/html" title="Analysing Java with VSCode" /><published>2021-03-31T10:00:00+00:00</published><updated>2021-04-05T10:00:00+00:00</updated><id>http://badetitou.github.io/projects/vscode-pharo/2021/03/31/analysing-java-with-vscode</id><content type="html" xml:base="http://badetitou.github.io/projects/vscode-pharo/2021/03/31/analysing-java-with-vscode/"><![CDATA[<p><a href="https://code.visualstudio.com/">VSCode</a> is an incredible editor tool.
+Thanks to its extensions, one can develop using plenty of programming languages.
+However, what about analyzing one software system using VSCode?</p>
+
+<p>In this blog post, I will present you how to use VSCode with <a href="http://moosetechnology.github.io/">Moose</a> to analyze Java code.
+As an example, I will reproduce the blog post of <a href="https://fuhrmanator.github.io/2019/07/29/AnalyzingJavaWithMoose.html">Christopher Fuhrman</a>.</p>
+
+<blockquote>
+  <p>Even if we can perform some analysis from VSCode, using the Moose tool natively gives a better user experience.
+Still, I believe it might interest people using only the VSCode tool.</p>
+</blockquote>
+
+<ul>
+  <li><a href="#install-vscode-and-the-pharo-language-server-extension">Install VSCode and the Pharo Language Server extension</a>
+    <ul>
+      <li><a href="#download-and-install-the-required-tools">Download and install the required tools</a></li>
+      <li><a href="#configure-vscode">Configure VSCode</a></li>
+    </ul>
+  </li>
+  <li><a href="#set-up-the-analysis-of-a-new-project">Set up the analysis of a new project</a>
+    <ul>
+      <li><a href="#clone-the-java-project-you-want-to-analyze">Clone the Java project you want to analyze</a></li>
+      <li><a href="#parse-the-java-code-to-make-famix-model">Parse the Java code to make FAMIX model</a></li>
+      <li><a href="#load-the-model">Load the model</a></li>
+    </ul>
+  </li>
+  <li><a href="#analysis">Analysis</a>
+    <ul>
+      <li><a href="#visualize-a-java-package-in-plantuml">Visualize a Java package in PlantUML</a></li>
+      <li><a href="#perform-a-moose-analysis-using-pharo">Perform a Moose analysis using Pharo</a></li>
+      <li><a href="#visualisation-with-roassal">Visualisation with Roassal</a></li>
+    </ul>
+  </li>
+  <li><a href="#resources">Resources</a></li>
+</ul>
+
+<h2 id="install-vscode-and-the-pharo-language-server-extension">Install VSCode and the Pharo Language Server extension</h2>
+
+<h3 id="download-and-install-the-required-tools">Download and install the required tools</h3>
+
+<p>To perform the analysis, we will use the insider version of VSCode.
+Currently, only this version supports the <a href="https://code.visualstudio.com/api/extension-guides/notebook">NoteBook feature</a> we will use.</p>
+
+<p>So, as a first step, install the last <a href="https://code.visualstudio.com/insiders/">VSCode insider version</a>.</p>
+
+<p>We will also need a Moose image and a Pharo VM.
+For this blog post, we will use a Moose 8 image based on Pharo 8.</p>
+
+<ul>
+  <li>Download the last <a href="https://github.com/badetitou/Pharo-LanguageServer/releases/download/continuous/Moose64-8.0-PLS.zip">Moose 8 image for VSCode</a> and extract it.</li>
+  <li>Download the <a href="https://files.pharo.org/get-files/80/">corresponding Pharo VM</a> and extract it.</li>
+</ul>
+
+<blockquote>
+  <p>Do not take the headless version (it has not been tested)</p>
+</blockquote>
+
+<p>Once you have download VSCode, Moose 8, and the Pharo VM, we will install the extension in VSCode.</p>
+
+<ul>
+  <li><a href="/files/pharo-language-server-0.0.11.vsix">Download the extension</a></li>
+  <li>Open VSCode insider</li>
+  <li>Open the folder in which the extension file is present</li>
+  <li>Right-click on the file and execute <code class="language-plaintext highlighter-rouge">Install Extension</code></li>
+</ul>
+
+<p><img src="/img/posts/analysing-java/install-extension.png" alt="Install extension" class="img-fill" /></p>
+
+<ul>
+  <li>Close VSCode</li>
+</ul>
+
+<p>From now on, you <strong>must</strong> start VSCode insider with the following parameters (<code class="language-plaintext highlighter-rouge">--enable-proposed-api badetitou.pharo-language-server</code>).
+It allows VSCode to use the Notebook API.</p>
+
+<p>Execute the following command in a terminal:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>code-insiders <span class="nt">--enable-proposed-api</span> badetitou.pharo-language-server
+</code></pre></div></div>
+
+<p>Or in Windows:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>code-insiders.cmd <span class="nt">--enable-proposed-api</span> badetitou.pharo-language-server
+</code></pre></div></div>
+
+<h3 id="configure-vscode">Configure VSCode</h3>
+
+<p>We now need to configure the Pharo Language Server extension.
+To do so:</p>
+
+<ul>
+  <li>go in the VSCode settings (<code class="language-plaintext highlighter-rouge">Ctrl + ,</code>).</li>
+  <li>Search Pharo settings</li>
+  <li>Set the field <code class="language-plaintext highlighter-rouge">Path To Image</code> with the path to the image you have downloaded
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>D:\Users\benoit.verhaeghe\Documents\Pharo\images\LSP4\LSP4.image
+</code></pre></div>    </div>
+  </li>
+  <li>Set the field <code class="language-plaintext highlighter-rouge">Path To VM</code> with the path to the VM you have downloaded
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>D:\Users\benoit.verhaeghe\Documents\Pharo\vms\80-x64\Pharo.exe
+</code></pre></div>    </div>
+  </li>
+  <li>Restart VSCode (to be sure the configuration is well saved)</li>
+</ul>
+
+<blockquote>
+  <p>If you use Windows, you might need to remove all space characters in the path.</p>
+</blockquote>
+
+<p>Once the configuration is done, you can create a new file named <code class="language-plaintext highlighter-rouge">oo-analysis.moosebook</code>.
+It should open as a VSCode notebook and a Pharo image (you can reduce the Pharo image, but <strong>do not close it</strong>).</p>
+
+<h2 id="set-up-the-analysis-of-a-new-project">Set up the analysis of a new project</h2>
+
+<h3 id="clone-the-java-project-you-want-to-analyze">Clone the Java project you want to analyze</h3>
+
+<p>First, we are going to download the GitHub project we want to analyze.
+To do so, create a new <code class="language-plaintext highlighter-rouge">code cell</code> in VSCode with the following code:</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">javaProjectFileRef</span> <span class="o">:=</span> <span class="nc">MooseEasyUtility</span> <span class="nf">cloneGitHubRepo:</span> <span class="s">'https://github.com/bethrobson/Head-First-Design-Patterns'</span><span class="p">.</span>
+</code></pre></div></div>
+
+<p>This piece of code will download the project under our Pharo image folder.
+To execute the cell, press the run arrow next to the cell.
+In case of success, a little tick appears and the path to the clone project has output of the cell.</p>
+
+<p><img src="/img/posts/analysing-java/clone.png" alt="Cell executed after clone" class="img-fill" /></p>
+
+<h3 id="parse-the-java-code-to-make-famix-model">Parse the Java code to make FAMIX model</h3>
+
+<p>As in the original blog post of Christopher, now we will parse the Java project and create a FAMIX model.
+To parse the Java project, we use VerveineJ v1.x.x (v1.x.x works with Moose 8, whereas v2.x.x is under modification to work with the future Moose 9).</p>
+
+<p>Contrary to the original blog post, we will download VerveineJ v1.0.2 (and not v1.0.1).
+It includes nice fixes.</p>
+
+<ul>
+  <li>
+    <p>Create a new code cell with the following piece of code to download the last VerveineJ version and extract it</p>
+
+    <div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">client</span> <span class="o">:=</span> <span class="nc">ZnClient</span> <span class="nb">new</span><span class="p">.</span>
+  <span class="nv">client</span>
+      <span class="nf">signalProgress:</span> <span class="bp">false</span><span class="p">;</span>
+      <span class="nf">url:</span> <span class="s">'https://github.com/moosetechnology/VerveineJ/archive/v1.0.2.zip'</span><span class="p">;</span>
+      <span class="nf">downloadTo:</span> <span class="nc">FileLocator</span> <span class="nf">imageDirectory</span><span class="p">.</span>
+  <span class="nv">client</span> <span class="nf">isSuccess</span>
+      <span class="nb">ifTrue:</span> <span class="p">[</span> <span class="nc">ZipArchive</span> <span class="nb">new</span>
+              <span class="nf">readFrom:</span> <span class="p">(</span><span class="nc">FileLocator</span> <span class="nf">imageDirectory</span> <span class="nf">/</span> <span class="s">'v1.0.2.zip'</span><span class="p">)</span> <span class="nf">asFileReference</span> <span class="nf">pathString</span> <span class="p">;</span>
+              <span class="nf">extractAllTo:</span> <span class="nc">FileLocator</span> <span class="nf">imageDirectory</span><span class="p">.</span>
+
+          <span class="c">"Since permissions are not preserved with ZipArchive#extractAllTo:"</span>
+          <span class="c">"This line is not required in Windows system"</span>
+          <span class="nc">LibC</span> <span class="nf">runCommand:</span> <span class="s">'chmod u+x '</span><span class="nf">,</span> <span class="p">(</span><span class="nc">FileLocator</span> <span class="nf">imageDirectory</span> <span class="nf">/</span> <span class="s">'VerveineJ-1.0.1/verveinej.sh'</span><span class="p">)</span> <span class="nf">asFileReference</span> <span class="nf">pathString</span> <span class="p">]</span>
+      <span class="nb">ifFalse:</span> <span class="p">[</span> <span class="nc">Error</span> <span class="nf">signal:</span> <span class="s">'Download failed.'</span> <span class="p">]</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Then, we will ask <code class="language-plaintext highlighter-rouge">MooseEasyFamixMaker</code> to parse the Java project using <a href="https://modularmoose.org/moose-wiki/Developers/Parsers/VerveineJ">VerveineJ</a>, and create a <code class="language-plaintext highlighter-rouge">.mse</code> file for us. Again, in another cell, execute the following snippet of code.</p>
+
+    <div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">wizard</span> <span class="o">:=</span> <span class="nc">MooseEasyFamixMaker</span>
+   <span class="nf">generateMSETo:</span> <span class="s">'tmp/HFDP.mse'</span> <span class="nf">asFileReference</span>
+   <span class="nf">parsing:</span> <span class="s">'tmp/MooseEasyRepos/bethrobson__Head-First-Design-Patterns'</span> <span class="nf">asFileReference</span>
+   <span class="nf">with:</span> <span class="p">(</span><span class="nc">FileLocator</span> <span class="nf">imageDirectory</span> <span class="nf">/</span> <span class="s">'VerveineJ-1.0.2/verveinej.bat'</span><span class="p">)</span> <span class="nf">asFileReference</span><span class="p">.</span>
+<span class="nv">wizard</span> <span class="nf">generateMSE</span><span class="p">.</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">.mse</code> is a file format used by Moosetechnology to represent its model and meta-model. <a href="https://modularmoose.org/moose-wiki/Users/fileFormat">Other formats exist.</a></p>
+</blockquote>
+
+<h3 id="load-the-model">Load the model</h3>
+
+<p>The last step is to load the model in the Moose image (the one we are controlling using VSCode).
+In a new cell, execute:</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">mseFileRef</span> <span class="o">:=</span> <span class="s">'tmp/HFDP.mse'</span> <span class="nf">asFileReference</span><span class="p">.</span> <span class="c">"Generated by FamixMaker"</span>
+<span class="nv">mseStream</span> <span class="o">:=</span> <span class="nv">mseFileRef</span> <span class="nf">readStream</span><span class="p">.</span>
+<span class="nf">mseStream</span>
+ <span class="err">ifNotNil:</span> <span class="p">[</span> 
+  <span class="nv">mooseModel</span> <span class="o">:=</span> <span class="nc">MooseModel</span> <span class="nf">importFromMSEStream:</span> <span class="nv">mseStream</span><span class="p">.</span> 
+  <span class="nv">mooseModel</span> <span class="nf">rootFolder:</span>
+      <span class="s">'tmp/MooseEasyRepos/bethrobson__Head-First-Design-Patterns'</span><span class="p">.</span>
+  <span class="nv">mseStream</span> <span class="nf">close</span><span class="p">.</span> <span class="p">]</span>
+ <span class="nf">ifNil:</span> <span class="p">[</span> <span class="bp">self</span> <span class="nf">error:</span> 
+    <span class="s">'Could not load MSE file into Moose: '</span> <span class="nf">,</span> <span class="nv">mseFileRef</span> <span class="nf">asString</span> <span class="p">].</span>
+<span class="nv">mseStream</span><span class="p">.</span>
+<span class="nv">mooseModel</span> <span class="nf">install</span>
+</code></pre></div></div>
+
+<p>The output of the cell should be <code class="language-plaintext highlighter-rouge">a MooseModel #HFDP(30946)</code>.</p>
+
+<p>Congrats! You have set up everything. Now it is time to analyze the project :rocket:</p>
+
+<h2 id="analysis">Analysis</h2>
+
+<h3 id="visualize-a-java-package-in-plantuml">Visualize a Java package in PlantUML</h3>
+
+<p>To visualize Java packages using PlantUML.
+We first install the PlantUML connector of Pharo (<code class="language-plaintext highlighter-rouge">PlantUMLPharoGizmo</code>).</p>
+
+<p>To do so, simply create a new code cell with the installation script and execute it.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">"Install PlantUMLPharo"</span>
+<span class="nv">version</span> <span class="o">:=</span> <span class="s">'master'</span><span class="p">.</span>
+<span class="nc">Metacello</span> <span class="nb">new</span>
+  <span class="nf">repository:</span> <span class="s">'github://fuhrmanator/PlantUMLPharoGizmo:'</span> <span class="nf">,</span> <span class="nv">version</span><span class="nf">,</span> <span class="s">'/src'</span><span class="p">;</span>
+  <span class="nf">baseline:</span> <span class="s">'PUGizmo'</span><span class="p">;</span>
+  <span class="nf">load</span><span class="p">.</span>
+</code></pre></div></div>
+
+<p>Then, you can visualize the classes of a package by executing a Pharo Script.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">attribute</span> <span class="o">:=</span> <span class="bp">true</span><span class="p">.</span>
+<span class="nv">method</span> <span class="o">:=</span> <span class="bp">false</span><span class="p">.</span>
+<span class="nv">inheritance</span> <span class="o">:=</span> <span class="bp">true</span><span class="p">.</span>
+<span class="nv">aggregation</span> <span class="o">:=</span> <span class="bp">true</span><span class="p">.</span>
+<span class="nv">createCheckBox</span> <span class="o">:=</span> <span class="bp">false</span><span class="p">.</span>
+
+<span class="nv">preference</span> <span class="o">:=</span> <span class="s">'set namespaceSeparator ::'</span> <span class="nf">,</span> <span class="nc">String</span> <span class="nf">cr</span>
+  <span class="nf">,</span> <span class="s">'hide empty members'</span> <span class="nf">,</span> <span class="nc">String</span> <span class="nf">cr</span> <span class="nf">,</span> <span class="s">'scale 1'</span> <span class="nf">,</span> <span class="nc">String</span> <span class="nf">cr</span>
+  <span class="nf">,</span> <span class="s">'left to right direction'</span> <span class="nf">,</span> <span class="nc">String</span> <span class="nf">cr</span><span class="p">.</span>
+
+<span class="nv">items</span> <span class="o">:=</span> <span class="nv">mooseModel</span> <span class="nf">allModelClasses</span> <span class="nf">select:</span> <span class="p">[</span><span class="o">:</span><span class="nv">each</span> <span class="p">|</span> <span class="nv">each</span> <span class="nf">mooseName</span> <span class="nf">beginsWith:</span> <span class="s">'headfirst::designpatterns::combining::decorator'</span> <span class="p">].</span>
+
+
+<span class="nv">pUMLSource</span> <span class="o">:=</span> <span class="nc">PUGizmo</span>
+  <span class="nf">plantUMLSourceForMooseJavaClasses:</span> <span class="nv">items</span>
+  <span class="nf">withPreference:</span> <span class="nv">preference</span>
+  <span class="nf">withRelationships:</span>
+   <span class="p">{</span><span class="nv">attribute</span><span class="p">.</span>
+   <span class="nv">method</span><span class="p">.</span>
+   <span class="nv">inheritance</span><span class="p">.</span>
+   <span class="nv">aggregation</span><span class="p">.</span>
+   <span class="nv">createCheckBox</span><span class="p">}.</span>
+
+<span class="nv">plantKey</span> <span class="o">:=</span> <span class="nv">pUMLSource</span> <span class="nf">asPlantUMLKey</span><span class="p">.</span>
+<span class="nv">serverUrl</span> <span class="o">:=</span> <span class="s">'https://www.plantuml.com/plantuml/img/'</span><span class="nf">,</span> <span class="nv">plantKey</span><span class="p">.</span>  
+<span class="nv">imageMorph</span> <span class="o">:=</span> <span class="p">(</span><span class="nc">ZnEasy</span> <span class="nf">getPng:</span> <span class="nv">serverUrl</span> <span class="nf">asUrl</span><span class="p">).</span>
+</code></pre></div></div>
+
+<p>In the above example, as in the original blog post, we focus on the package: <code class="language-plaintext highlighter-rouge">headfirst::designpatterns::combining::decorator</code> and we show the classes attributes, inheritances, and aggregation.
+Executing the code gives the following image as the output of the VSCode cell.</p>
+
+<p><img src="/img/posts/analysing-java/package-analysis.png" alt="Output after cell execution" class="img-fill" /></p>
+
+<h3 id="perform-a-moose-analysis-using-pharo">Perform a Moose analysis using Pharo</h3>
+
+<p>It is also possible to execute some classic Pharo code.
+We can request the list of classes that implement more than one interface.</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">"Query all classes that have more than two direct FAMIX superclasses"</span>
+<span class="nv">classesImplementingMoreThanOneInterface</span> <span class="o">:=</span> <span class="nv">mooseModel</span> <span class="nf">allModelClasses</span> 
+ <span class="nf">select:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">each</span> <span class="p">|</span> 
+  <span class="nv">each</span> <span class="nf">directSuperclasses</span> <span class="nf">size</span> <span class="nf">&gt;</span> <span class="m">2</span> <span class="p">].</span>
+<span class="nc">String</span> <span class="nf">streamContents:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">stream</span> <span class="p">|</span> <span class="nv">classesImplementingMoreThanOneInterface</span> <span class="nf">do:</span> <span class="p">[</span><span class="o">:</span><span class="nv">class</span> <span class="p">|</span> <span class="nv">stream</span> <span class="nf">&lt;&lt;</span> <span class="nv">class</span> <span class="nf">name</span> <span class="p">]</span> <span class="nf">separatedBy:</span> <span class="p">[</span><span class="nv">stream</span> <span class="nf">&lt;&lt;</span> <span class="s">', '</span> <span class="p">]</span> <span class="p">]</span>
+</code></pre></div></div>
+
+<p><img src="/img/posts/analysing-java/more-than-one-interface.png" alt="Output after cell execution" class="img-fill" /></p>
+
+<h3 id="visualisation-with-roassal">Visualisation with Roassal</h3>
+
+<p>Finally, one can use <a href="https://github.com/ObjectProfile/Roassal2">Roassal2</a> (or <a href="https://github.com/ObjectProfile/Roassal3">Roassal3</a> in Pharo 9) to create custom visualization.</p>
+
+<p>It is possible to use pre-built visualization coming from Moose, such as the System Nesting map:</p>
+
+<div class="language-st highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">view</span> <span class="o">:=</span> <span class="nc">RTView</span> <span class="nb">new</span><span class="p">.</span>
+<span class="nc">FAMIXSystemNestingMap</span> <span class="nb">new</span>
+  <span class="nf">viewNamespaces:</span> <span class="p">(</span><span class="nv">mooseModel</span> <span class="nf">allNamespaces</span> <span class="nf">select:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">each</span> <span class="p">|</span> <span class="nv">each</span> <span class="nf">allClasses</span> <span class="nf">anySatisfy:</span> <span class="p">[</span> <span class="o">:</span><span class="nv">c</span> <span class="p">|</span> <span class="nv">c</span> <span class="nf">isStub</span> <span class="nf">not</span> <span class="p">]</span> <span class="p">])</span>
+  <span class="nf">highlighting:</span> <span class="p">{}</span>
+  <span class="nf">onRaw:</span> <span class="nv">view</span><span class="p">.</span>
+<span class="nf">view</span>
+</code></pre></div></div>
+
+<p><img src="/img/posts/analysing-java/nesting-map.png" alt="Output after cell execution nexting map" class="img-fill" /></p>
+
+<p>Or every other Roassal visualization!</p>
+
+<h2 id="resources">Resources</h2>
+
+<ul>
+  <li><a href="/files/posts/analysing-java/oo-analysis.moosebook"><code class="language-plaintext highlighter-rouge">.moosebook</code> file created for this blog post</a></li>
+  <li><a href="/files/pharo-language-server-0.0.11.vsix">The VSCode extension</a></li>
+  <li><a href="https://github.com/badetitou/vscode-pharo/tree/proposed">Extension repository</a></li>
+</ul>]]></content><author><name>Benoît &quot;badetitou&quot; Verhaeghe</name></author><category term="projects" /><category term="VSCode-Pharo" /><category term="pharo" /><category term="vscode" /><category term="vscode-pharo" /><summary type="html"><![CDATA[VSCode is an incredible editor tool. Thanks to its extensions, one can develop using plenty of programming languages. However, what about analyzing one software system using VSCode?]]></summary></entry></feed>
